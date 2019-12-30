@@ -1,4 +1,4 @@
-package controller;
+package com.shapeshop.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Bazz;
-
-
-
+import com.shapeshop.model.Bazz;
 
 @RestController
-public class CrudExampleController {
+public class BazzController {
     
     @GetMapping("/crud/{id}")
     public ResponseEntity<?> getBazz(@PathVariable String id){
@@ -39,8 +36,4 @@ public class CrudExampleController {
     public ResponseEntity<?> deleteBazz(@PathVariable String id){
         return new ResponseEntity<>(new Bazz(id), HttpStatus.OK);
     }
-    
-
 }
-
-

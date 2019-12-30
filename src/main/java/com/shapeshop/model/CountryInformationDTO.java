@@ -1,4 +1,4 @@
-package model;
+package com.shapeshop.model;
 
 import java.util.List;
 

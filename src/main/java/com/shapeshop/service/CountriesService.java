@@ -1,4 +1,4 @@
-package service;
+package com.shapeshop.service;
 //package model;
 //
 //import java.util.HashMap;
