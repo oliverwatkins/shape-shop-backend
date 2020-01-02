@@ -2,6 +2,7 @@ package com.shapeshop.controller;
 //package hello;
 
 import java.awt.Color;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shapeshop.model.Bazz;
 import com.shapeshop.model.Shape;
+import com.shapeshop.model.Shape2;
 import com.shapeshop.service.ShapeService;
 
 
@@ -38,6 +40,21 @@ public class ShapeController {
 		return shapeService.getAllShapes();
 	}
 
+	@RequestMapping(value = "/shapes2", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Shape2[] shapes2() {
+		
+//		shapeService.getAllShapes2()
+		
+		List<Shape2> itemList = shapeService.getAllShapes2();
+		
+		Shape2[] shapes2 = new Shape2[itemList.size()];
+		
+		return shapeService.getAllShapes2().toArray(shapes2);
+		
+		
+	}
+	
+	
 	@RequestMapping(value = "/shapes/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Shape shapes2(@PathVariable("id") int id) {
 		
@@ -53,6 +70,8 @@ public class ShapeController {
 
 		return sArray[id];
 	}
+	
+	
 
 	@RequestMapping(value = "/ex/foos/{id}", method = RequestMethod.GET)
 	@ResponseBody
