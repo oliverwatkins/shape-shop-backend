@@ -1,5 +1,4 @@
 package com.shapeshop.controller;
-//package hello;
 
 import java.awt.Color;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shapeshop.model.Bazz;
 import com.shapeshop.model.Shape;
-import com.shapeshop.model.Shape2;
 import com.shapeshop.service.ShapeService;
 
 
@@ -35,43 +33,15 @@ public class ShapeController {
 		return "Greetings from Spring Boot!";
 	}
 
-	@RequestMapping(value = "/shapes", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Shape[] shapes() {
-		return shapeService.getAllShapes();
-	}
-
 	@RequestMapping(value = "/shapes2", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Shape2[] shapes2() {
+	public Shape[] shapes2() {
 		
-//		shapeService.getAllShapes2()
+		List<Shape> itemList = shapeService.getAllShapes();
 		
-		List<Shape2> itemList = shapeService.getAllShapes2();
+		Shape[] shapes2 = new Shape[itemList.size()];
 		
-		Shape2[] shapes2 = new Shape2[itemList.size()];
-		
-		return shapeService.getAllShapes2().toArray(shapes2);
-		
-		
+		return shapeService.getAllShapes().toArray(shapes2);
 	}
-	
-	
-	@RequestMapping(value = "/shapes/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Shape shapes2(@PathVariable("id") int id) {
-		
-		Shape shape1 = new Shape(1, 3, Color.DARK_GRAY);
-		Shape shape2 = new Shape(2, 4, Color.GREEN);
-		Shape shape3 = new Shape(3, 5, Color.BLUE);
-
-		Shape[] sArray = new Shape[3];
-		sArray[0] = shape1;
-		sArray[1] = shape2;
-		sArray[2] = shape3;
-
-
-		return sArray[id];
-	}
-	
-	
 
 	@RequestMapping(value = "/ex/foos/{id}", method = RequestMethod.GET)
 	@ResponseBody

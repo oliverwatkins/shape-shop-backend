@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Service
 @NoArgsConstructor
 public class BazzService {
-	public Bazz[] getAllShapes() {
+	public Bazz[] getAllBazz() {
 	
 		Bazz shape1 = new Bazz("1");
 		Bazz shape2 = new Bazz("2");

@@ -2,22 +2,31 @@ package com.shapeshop.model;
 
 import java.awt.Color;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Shape {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id = -1;
 	private int sides = 0;
 	private Color color;
 	
+	protected Shape() {}
+	
+	
 	public Shape(long id, int sides, Color color) {
-		super();
-		this.id = id;
+//		this.id = id;
 		this.sides = sides;
 		this.color = color;
 	}
 
 	public Shape(long id, int sides) {
-		super();
-		this.id = id;
+//		this.id = id;
 		this.sides = sides;
 	}
 	

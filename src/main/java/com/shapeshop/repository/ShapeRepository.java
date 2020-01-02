@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.shapeshop.model.Shape2;
+import com.shapeshop.model.Shape;
 
-public interface ShapeRepository extends CrudRepository<Shape2, Long>{
+public interface ShapeRepository extends CrudRepository<Shape, Long>{
 
-	List<Shape2> findBySides(int sides);
+	List<Shape> findBySides(int sides);
 	
-	Shape2 findById(long id);
-	
+	Shape findById(long id);
 	
 }
