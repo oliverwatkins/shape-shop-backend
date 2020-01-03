@@ -1,6 +1,5 @@
 package com.shapeshop;
 
-
 import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
@@ -15,44 +14,45 @@ import com.shapeshop.repository.ShapeRepository;
 @SpringBootApplication
 public class App {
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(App.class, args);
+	}
 
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-        return args -> {
+	@Bean
+	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+		return args -> {
 
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
+//            System.out.println("Let's inspect the beans provided by Spring Boot:");
+//
+//            String[] beanNames = ctx.getBeanDefinitionNames();
+//            Arrays.sort(beanNames);
+//            for (String beanName : beanNames) {
+//                System.out.println(beanName);
+//            }
+		};
+	}
 
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
-        };
-    }
-    
+	@Bean
+	public CommandLineRunner loadShapes(ShapeRepository repository) {
+		return (args) -> {
 
-    @Bean
-    public CommandLineRunner loadShapes(ShapeRepository repository) {
-      return (args) -> {
-    	  
-        // save a few shapes
-        repository.save(new Shape(1, 3));
-        repository.save(new Shape(2, 5));
-        repository.save(new Shape(3, 6));
-        repository.save(new Shape(4, 7));
+			System.out.println(">>> create four shapes ");
 
-        // fetch an individual customer by ID
-        Shape sh1 = repository.findById(2L);
-        System.out.println("fetch by id " + sh1.toString());
+			// save a few shapes
+			repository.save(new Shape(1, 3));
+			repository.save(new Shape(2, 5));
+			repository.save(new Shape(3, 6));
+			repository.save(new Shape(4, 7));
 
-        // fetch customers by last name
-        repository.findBySides(7).forEach(sh -> {
-            System.out.println("fetch by sides " + sh.toString());
-        });
-      };
-    }
+			// fetch an individual customer by ID
+			Shape sh1 = repository.findById(2L);
+			System.out.println(">>> fetch by id " + sh1.toString());
+
+			// fetch customers by last name
+			repository.findBySides(7).forEach(sh -> {
+				System.out.println(">>> fetch by sides " + sh.toString());
+			});
+		};
+	}
 
 }

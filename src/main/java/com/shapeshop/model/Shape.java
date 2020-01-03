@@ -9,16 +9,20 @@ import javax.persistence.Id;
 
 @Entity
 public class Shape {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id = -1;
+	private long id;
 	private int sides = 0;
+	private String name;
 	private Color color;
 	
 	protected Shape() {}
-	
-	
+
+	public Shape(String name) {
+		this.name = name;
+	}
+
 	public Shape(long id, int sides, Color color) {
 //		this.id = id;
 		this.sides = sides;
@@ -41,16 +45,29 @@ public class Shape {
 	public int getSides() {
 		return sides;
 	}
-
+	
 	public void setSides(int sides) {
 		this.sides = sides;
 	}
-
+	
 	public Color getColor() {
 		return color;
 	}
-
+	
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return "Shape [id=" + id + ", sides=" + sides + ", name=" + name + ", color=" + color + "]";
 	}
 }

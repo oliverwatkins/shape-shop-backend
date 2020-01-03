@@ -18,6 +18,28 @@ public class ShapeService {
     @Autowired
 	ShapeRepository shapeRepository;
 
+
+
+	public Shape createShape(Shape shape) {
+		shapeRepository.save(shape);
+		return shape;
+	}
+//	public Shape createShape(String name) {
+//		Shape s = new Shape(name);
+//		shapeRepository.save(s);
+//		return s;
+//	}
+//	public Shape updateShape(Shape) {
+//		
+//		return null;
+//	}
+	
+	public Shape deleteShape(long id) {
+		
+		return null;
+	}
+
+    
 	public List<Shape> getAllShapes() {
 		
 		List<Shape> result = 
@@ -25,4 +47,7 @@ public class ShapeService {
 				    .collect(Collectors.toList());
 		return result;
 	}
+
+
+
 }
