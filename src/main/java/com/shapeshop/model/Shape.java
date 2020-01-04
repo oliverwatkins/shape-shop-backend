@@ -1,7 +1,5 @@
 package com.shapeshop.model;
 
-import java.awt.Color;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,22 +13,19 @@ public class Shape {
 	private long id;
 	private int sides = 0;
 	private String name;
-	private Color color;
 	
 	protected Shape() {}
 
 	public Shape(String name) {
 		this.name = name;
 	}
-
-	public Shape(long id, int sides, Color color) {
-//		this.id = id;
+	
+	public Shape(String name, int sides) {
+		this.name = name;
 		this.sides = sides;
-		this.color = color;
 	}
 
 	public Shape(long id, int sides) {
-//		this.id = id;
 		this.sides = sides;
 	}
 	
@@ -50,14 +45,6 @@ public class Shape {
 		this.sides = sides;
 	}
 	
-	public Color getColor() {
-		return color;
-	}
-	
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -68,6 +55,6 @@ public class Shape {
 	
 	@Override
 	public String toString() {
-		return "Shape [id=" + id + ", sides=" + sides + ", name=" + name + ", color=" + color + "]";
+		return "Shape [id=" + id + ", sides=" + sides + ", name=" + name + "]";
 	}
 }

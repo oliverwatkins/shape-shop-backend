@@ -21,9 +21,7 @@ public class App {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-
 //            System.out.println("Let's inspect the beans provided by Spring Boot:");
-//
 //            String[] beanNames = ctx.getBeanDefinitionNames();
 //            Arrays.sort(beanNames);
 //            for (String beanName : beanNames) {
@@ -36,13 +34,15 @@ public class App {
 	public CommandLineRunner loadShapes(ShapeRepository repository) {
 		return (args) -> {
 
-			System.out.println(">>> create four shapes ");
+			System.out.println(">>> create some shapes ");
 
 			// save a few shapes
-			repository.save(new Shape(1, 3));
-			repository.save(new Shape(2, 5));
-			repository.save(new Shape(3, 6));
-			repository.save(new Shape(4, 7));
+			repository.save(new Shape("triangle", 3));
+			repository.save(new Shape("square", 4));
+			repository.save(new Shape("rhombus", 4));
+			repository.save(new Shape("hexagon", 6));
+			repository.save(new Shape("octagon", 8));
+			repository.save(new Shape("circle", 1));
 
 			// fetch an individual customer by ID
 			Shape sh1 = repository.findById(2L);
