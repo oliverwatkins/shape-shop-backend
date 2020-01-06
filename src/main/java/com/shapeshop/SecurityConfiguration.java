@@ -8,41 +8,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration  
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {  
       
-	@Override  
-	public void configure(HttpSecurity http) throws Exception {  
-		
-		
-		
-	       http  
-           .authorizeRequests()  
-           .antMatchers( "/public/**").permitAll()  
-           .anyRequest().authenticated()  
-               .and()  
-           .formLogin()  
-               .loginPage("/login.html")  
-               .failureUrl("/login-error.html")  
-               .permitAll();  
-		
-		
-		
-		
-		
-		
-		
-//		
-//		
-//		
-//		
-//		
-//		
-//	    http  
-//	        .authorizeRequests()  
-//	        .anyRequest().authenticated()  
-//	        .and()  
-//	        .formLogin()  
-//	        .and()  
-//	        .httpBasic();  
-	}
+//	@Override  
+//	public void configure(HttpSecurity http) throws Exception {  
+//       http  
+//       .authorizeRequests()  
+//       .antMatchers( "/public/**").permitAll()  
+//       .anyRequest().authenticated()  
+//           .and()  
+//       .formLogin()  
+//           .loginPage("/login.html")  
+//           .failureUrl("/login-error.html")  
+//           .permitAll();  
+//	}
+	
+	
+	
+    @Override  
+    public void configure(HttpSecurity http) throws Exception {  
+        http.antMatcher("/**")  
+            .authorizeRequests()  
+            .antMatchers("/", "/login**").permitAll()  
+            .anyRequest().authenticated()  
+            .and()  
+            .oauth2Login();  
+    } 
       
     @Override  
     protected void configure(AuthenticationManagerBuilder auth) throws Exception { 
