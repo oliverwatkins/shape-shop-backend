@@ -10,13 +10,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       
 	@Override  
 	public void configure(HttpSecurity http) throws Exception {  
-	    http  
-	        .authorizeRequests()  
-	        .anyRequest().authenticated()  
-	        .and()  
-	        .formLogin()  
-	        .and()  
-	        .httpBasic();  
+		
+		
+		
+	       http  
+           .authorizeRequests()  
+           .antMatchers( "/public/**").permitAll()  
+           .anyRequest().authenticated()  
+               .and()  
+           .formLogin()  
+               .loginPage("/login.html")  
+               .failureUrl("/login-error.html")  
+               .permitAll();  
+		
+		
+		
+		
+		
+		
+		
+//		
+//		
+//		
+//		
+//		
+//		
+//	    http  
+//	        .authorizeRequests()  
+//	        .anyRequest().authenticated()  
+//	        .and()  
+//	        .formLogin()  
+//	        .and()  
+//	        .httpBasic();  
 	}
       
     @Override  
