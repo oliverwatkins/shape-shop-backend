@@ -14,5 +14,4 @@ public interface ShapeRepository extends CrudRepository<Shape, Long>{
 	
 	List<Shape> findBySides(int sides);
 	
-	
 }
