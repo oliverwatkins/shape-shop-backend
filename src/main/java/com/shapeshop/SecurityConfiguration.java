@@ -8,18 +8,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration  
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {  
       
-    @Override  
-    public void configure(HttpSecurity http) throws Exception {  
-    	
-    	
-    	System.out.println("configure(HttpSecurity http)");
-    	
-        http  
-            .authorizeRequests()  
-            .anyRequest().authenticated()  
-            .and()  
-            .httpBasic();  
-    }  
+	@Override  
+	public void configure(HttpSecurity http) throws Exception {  
+	    http  
+	        .authorizeRequests()  
+	        .anyRequest().authenticated()  
+	        .and()  
+	        .formLogin()  
+	        .and()  
+	        .httpBasic();  
+	}
       
     @Override  
     protected void configure(AuthenticationManagerBuilder auth) throws Exception { 
