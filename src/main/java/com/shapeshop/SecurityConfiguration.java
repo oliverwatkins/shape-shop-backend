@@ -17,9 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private final MyAuthenticationProvider authProvider;
 
 	public SecurityConfiguration(MyAuthenticationProvider authProvider, LoggedUserInfo userInfo,
-			UserTokenService userTokenService,
-			@Value("${management.endpoint.health.whitelist.lb}") String healthcheckWhitelistLB,
-			@Value("${management.endpoint.health.whitelist.remote}") String healthcheckWhitelistIp) {
+			UserTokenService userTokenService) {
 		this.authProvider = authProvider;
 		this.userInfo = userInfo;
 		this.userTokenService = userTokenService;
