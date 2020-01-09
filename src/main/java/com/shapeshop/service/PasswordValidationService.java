@@ -15,7 +15,14 @@ public class PasswordValidationService {
     private static final int PASSWORD_MAX_LENGTH = 50;
 
     public boolean isPasswordMatch(User user, String password) {
-        return user.getPassword().equals(encryptPassword(password));
+    	
+    	System.out.println("user password is " + user.getPassword());
+    	System.out.println("encryptPassword(password) " + encryptPassword(password));
+    	
+    	boolean b = user.getPassword().equals(encryptPassword(password));
+    	System.out.println("b " + b);
+    	
+        return b;
     }
 
     public String encryptPassword(String password) {

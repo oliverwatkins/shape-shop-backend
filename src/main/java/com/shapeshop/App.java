@@ -1,19 +1,30 @@
 package com.shapeshop;
 
-import java.util.Arrays;
+import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import com.shapeshop.model.Shape;
+import com.shapeshop.model.User;
+import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.ShapeRepository;
+import com.shapeshop.repository.UserRepository;
+import com.shapeshop.service.PasswordValidationService;
 
 @SpringBootApplication
 public class App {
 
+	
+	@Autowired
+	private PasswordValidationService passwordValidationService;
+
+	
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
@@ -29,12 +40,31 @@ public class App {
 //            }
 		};
 	}
+	
+	@Bean
+	public CommandLineRunner loadUsers(UserRepository repository) {
+		return (args) -> {
+			
+			String passs = passwordValidationService.encryptPassword("pass");
+			
+			System.out.println(">>> ");
+			System.out.println(">>> create some users !!!!!!!!!!!!!");
+			System.out.println(">>> passs " + passs);
+			
+			repository.save(new User(UserRole.ADMIN, "admin", passs, "custid", "blah", Locale.GERMANY));
+			repository.save(new User(UserRole.USER, "user", passs, "custid", "blah", Locale.GERMANY));
+		};
+	}
+
+		
 
 	@Bean
 	public CommandLineRunner loadShapes(ShapeRepository repository) {
 		return (args) -> {
 
-			System.out.println(">>> create some shapes ");
+			System.out.println(">>> ");
+			System.out.println(">>> create some shapes !!!!!!!!!!!!!");
+			System.out.println(">>> ");
 
 			// save a few shapes
 			repository.save(new Shape("triangle", 3));

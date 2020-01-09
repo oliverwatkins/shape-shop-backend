@@ -2,7 +2,6 @@ package com.shapeshop.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,8 +15,30 @@ import java.util.Locale;
 @Entity
 @Table(name = "users")
 public class User {
+
+
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	private String id;
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
+
+	@Column(nullable = false, unique = true)
+	private String email;
+
+	@Column(nullable = false)
+	private String password;
+
+	private String customerId;
 	
-public User(UserRole role, String email, String password, String customerId, String membershipId, Locale locale) {
+	public User() {
+		super();
+	}
+
+	public User(UserRole role, String email, String password, String customerId, String membershipId, Locale locale) {
 		super();
 		this.role = role;
 		this.email = email;
@@ -27,25 +48,7 @@ public User(UserRole role, String email, String password, String customerId, Str
 		this.locale = locale;
 	}
 
-	
-	@Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private String id;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    private String customerId;
-
-    public User(String id, UserRole role, String email, String password, String customerId, String membershipId,
+	public User(String id, UserRole role, String email, String password, String customerId, String membershipId,
 			LocalDateTime passwordChangeDate, Locale locale, UserStatus status) {
 		super();
 		this.id = id;
@@ -61,19 +64,19 @@ public User(UserRole role, String email, String password, String customerId, Str
 
 	private String membershipId;
 
-    @Column(name = "password_change_dt")
-    private LocalDateTime passwordChangeDate;
+	@Column(name = "password_change_dt")
+	private LocalDateTime passwordChangeDate;
 
-    private Locale locale;
+	private Locale locale;
 
-    @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.NOT_VERIFIED;
+	@Enumerated(EnumType.STRING)
+	private UserStatus status = UserStatus.NOT_VERIFIED;
 
-    public boolean isActive() {
-        return UserStatus.ACTIVE.equals(status);
-    }
-    
-    public String getId() {
+	public boolean isActive() {
+		return UserStatus.ACTIVE.equals(status);
+	}
+
+	public String getId() {
 		return id;
 	}
 
@@ -144,6 +147,5 @@ public User(UserRole role, String email, String password, String customerId, Str
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
-
 
 }

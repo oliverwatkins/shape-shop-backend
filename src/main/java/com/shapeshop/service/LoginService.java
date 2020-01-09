@@ -21,7 +21,12 @@ public class LoginService {
     private PasswordValidationService passwordValidationService;
 
     public User login(String email, String password) {
+    	
+    	System.out.println("logging in!!!");
+    	
         User user = findValidUser(email);
+
+    	System.out.println("user for email " + email + " " + user);
 
         validatePassword(user, password);
 
@@ -29,6 +34,9 @@ public class LoginService {
     }
 
     private void validatePassword(User user, String password) {
+    	
+    	
+    	
         if (!passwordValidationService.isPasswordMatch(user, password)) {
             LOGGER.warn("Login failed. Invalid password received for " + user.getEmail());
             throw new RuntimeException("ExceptionCode.UNAUTHORIZED");

@@ -33,6 +33,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         try {
             user = service.login(name, password);
         } catch (Exception ex) {
+        	
+        	ex.printStackTrace();
+        	
             throw new BadCredentialsException("wrong data received", ex);
         }
 
