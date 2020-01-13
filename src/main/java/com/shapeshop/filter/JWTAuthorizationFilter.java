@@ -1,4 +1,4 @@
-package com.shapeshop;
+package com.shapeshop.filter;
 
 import java.io.IOException;
 
@@ -12,11 +12,20 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.shapeshop.JWTUtil;
+import com.shapeshop.SecurityConstants;
 import com.shapeshop.entity.UserToken;
 import com.shapeshop.model.LoggedUserInfo;
 import com.shapeshop.service.UserTokenService;
 
 
+
+
+
+/**
+ * BasicAuthenticationFilter extends OncePerRequestFilter  
+ * 
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final LoggedUserInfo loggedUserInfo;

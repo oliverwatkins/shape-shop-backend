@@ -6,8 +6,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.shapeshop.filter.JWTAuthenticationFilter;
+import com.shapeshop.filter.JWTAuthorizationFilter;
 import com.shapeshop.model.LoggedUserInfo;
 import com.shapeshop.service.UserTokenService;
+
+
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -37,6 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/shapes").hasAnyRole("USER", "ADMIN")
 			.antMatchers("/").permitAll()
 			.and().formLogin();
+		
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), userTokenService))
+            .addFilter(new JWTAuthorizationFilter(authenticationManager(), userInfo, userTokenService))
+            // this disables session creation on Spring Security
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	    
 	}
 
 }

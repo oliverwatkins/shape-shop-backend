@@ -1,4 +1,4 @@
-package com.shapeshop;
+package com.shapeshop.filter;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shapeshop.SecurityConstants;
 import com.shapeshop.model.ApplicationUser;
 import com.shapeshop.service.UserTokenService;
 
@@ -44,7 +45,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 List.of()
             );
 
-            return authenticationManager.authenticate(authToken);
+            Authentication auth =  authenticationManager.authenticate(authToken);
+            return auth;
         } catch (IOException ex) {
             throw new IllegalArgumentException(ex);
         }

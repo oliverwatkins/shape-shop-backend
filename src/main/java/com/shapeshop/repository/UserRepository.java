@@ -9,8 +9,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     User findByEmailIgnoreCase(String email);
 
-    User findByMembershipId(String membershipId);
-
     boolean existsByEmailContainingIgnoreCase(String email);
 
     @Transactional
