@@ -21,22 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		this.authProvider = authProvider;
 		this.userInfo = userInfo;
 		this.userTokenService = userTokenService;
-
 	}
-
-//    @Override  
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception { 
-//    	
-//    	System.out.println("configure(AuthenticationManagerBuilder auth)");
-//        
-//    	auth.inMemoryAuthentication()  
-//            .withUser("user")  
-//            	.password("{noop}pass") // Spring Security 5 requires specifying the password storage format  
-//            	.roles("USER").and()
-//            .withUser("admin")
-//            	.password("{noop}pass")
-//            	.roles("ADMIN"); 
-//    }  
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,9 +31,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().
-			antMatchers("/admin").hasRole("ADMIN").antMatchers("/user").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/shapes").hasAnyRole("USER", "ADMIN").antMatchers("/").permitAll().and().formLogin();
+		http.authorizeRequests()
+			.antMatchers("/admin").hasRole("ADMIN")
+			.antMatchers("/user").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/shapes").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/").permitAll()
+			.and().formLogin();
 	}
 
 }

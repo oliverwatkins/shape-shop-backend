@@ -4,8 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shapeshop.entity.User;
 import com.shapeshop.model.NewUserDTO;
-import com.shapeshop.model.User;
 import com.shapeshop.repository.UserRepository;
 
 

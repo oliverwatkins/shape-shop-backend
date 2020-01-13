@@ -9,8 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
+import com.shapeshop.entity.User;
 import com.shapeshop.model.LoggedUserInfo;
-import com.shapeshop.model.User;
 import com.shapeshop.service.LoginService;
 
 @Component
@@ -41,7 +41,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
         var userRole = user.getRole().toString();
         userInfo.setRole(userRole);
-        userInfo.setMembershipId(user.getMembershipId());
         userInfo.setActive(user.isActive());
 
         var role = AuthorityUtils.commaSeparatedStringToAuthorityList(userRole);

@@ -1,4 +1,4 @@
-package com.shapeshop.model;
+package com.shapeshop.entity;
 
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import com.shapeshop.model.UserStatus;
 
 import lombok.Getter;
 
@@ -64,11 +66,6 @@ public class UserToken {
 	@Transient
     public String getRole() {
         return user.getRole().name();
-    }
-
-    @Transient
-    public String getMembershipId() {
-        return user.getMembershipId();
     }
 
     @Transient

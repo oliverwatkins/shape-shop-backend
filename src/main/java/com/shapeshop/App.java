@@ -10,8 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.model.Shape;
-import com.shapeshop.model.User;
+import com.shapeshop.entity.Shape;
+import com.shapeshop.entity.User;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.ShapeRepository;
 import com.shapeshop.repository.UserRepository;

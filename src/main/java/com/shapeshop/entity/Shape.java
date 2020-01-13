@@ -1,4 +1,4 @@
-package com.shapeshop.model;
+package com.shapeshop.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

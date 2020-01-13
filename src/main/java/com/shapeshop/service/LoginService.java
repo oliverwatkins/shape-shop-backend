@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.model.User;
+import com.shapeshop.entity.User;
 
 
 
@@ -22,13 +22,12 @@ public class LoginService {
 
     public User login(String email, String password) {
     	
-    	System.out.println("logging in!!!");
     	
         User user = findValidUser(email);
 
-    	System.out.println("user for email " + email + " " + user);
 
         validatePassword(user, password);
+    	System.out.println("LOG IN SUCCESS!!!");
 
         return user;
     }

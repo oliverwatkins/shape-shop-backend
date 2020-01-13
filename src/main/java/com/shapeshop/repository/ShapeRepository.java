@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.shapeshop.model.Shape;
+import com.shapeshop.entity.Shape;
 
 public interface ShapeRepository extends CrudRepository<Shape, Long>{
 

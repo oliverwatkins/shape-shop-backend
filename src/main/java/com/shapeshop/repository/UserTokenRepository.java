@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shapeshop.model.UserToken;
+import com.shapeshop.entity.UserToken;
 
 public interface UserTokenRepository extends JpaRepository<UserToken, String> {
     UserToken findByToken(String token);

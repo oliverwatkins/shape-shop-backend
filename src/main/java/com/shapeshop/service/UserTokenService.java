@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shapeshop.JWTUtil;
 import com.shapeshop.SecurityConstants;
-import com.shapeshop.model.User;
-import com.shapeshop.model.UserToken;
+import com.shapeshop.entity.User;
+import com.shapeshop.entity.UserToken;
 import com.shapeshop.repository.UserTokenRepository;
 
 

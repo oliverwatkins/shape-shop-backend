@@ -1,6 +1,7 @@
-package com.shapeshop.model;
+package com.shapeshop.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.time.LocalDateTime;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
-import java.util.Locale;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.shapeshop.model.UserRole;
+import com.shapeshop.model.UserStatus;
 
 @Entity
 @Table(name = "users")
@@ -44,7 +48,6 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.customerId = customerId;
-		this.membershipId = membershipId;
 		this.locale = locale;
 	}
 
@@ -56,13 +59,11 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.customerId = customerId;
-		this.membershipId = membershipId;
 		this.passwordChangeDate = passwordChangeDate;
 		this.locale = locale;
 		this.status = status;
 	}
 
-	private String membershipId;
 
 	@Column(name = "password_change_dt")
 	private LocalDateTime passwordChangeDate;
@@ -114,14 +115,6 @@ public class User {
 
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
-	}
-
-	public String getMembershipId() {
-		return membershipId;
-	}
-
-	public void setMembershipId(String membershipId) {
-		this.membershipId = membershipId;
 	}
 
 	public LocalDateTime getPasswordChangeDate() {

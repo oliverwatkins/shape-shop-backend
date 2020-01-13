@@ -7,7 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.model.Shape;
+import com.shapeshop.entity.Shape;
 import com.shapeshop.repository.ShapeRepository;
 
 import lombok.NoArgsConstructor;

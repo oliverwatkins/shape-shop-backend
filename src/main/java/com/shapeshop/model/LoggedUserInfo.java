@@ -18,7 +18,6 @@ public class LoggedUserInfo {
 	
 	private String role;
     private String customerId;
-    private String membershipId;
     private boolean active;
 
     public List<GrantedAuthority> getGrantedAuthorities() {
@@ -43,14 +42,6 @@ public class LoggedUserInfo {
 
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
-	}
-
-	public String getMembershipId() {
-		return membershipId;
-	}
-
-	public void setMembershipId(String membershipId) {
-		this.membershipId = membershipId;
 	}
 
 	public boolean isActive() {
