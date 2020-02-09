@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.entity.User;
+import com.shapeshop.entity.UserEntity;
 
 
 @Service
@@ -14,7 +14,7 @@ public class PasswordValidationService {
 
     private static final int PASSWORD_MAX_LENGTH = 50;
 
-    public boolean isPasswordMatch(User user, String password) {
+    public boolean isPasswordMatch(UserEntity user, String password) {
     	
     	System.out.println("user password is " + user.getPassword());
     	System.out.println("encryptPassword(password) " + encryptPassword(password));

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Shape {
+public class ShapeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,18 +14,18 @@ public class Shape {
 	private int sides = 0;
 	private String name;
 	
-	protected Shape() {}
+	protected ShapeEntity() {}
 
-	public Shape(String name) {
+	public ShapeEntity(String name) {
 		this.name = name;
 	}
 	
-	public Shape(String name, int sides) {
+	public ShapeEntity(String name, int sides) {
 		this.name = name;
 		this.sides = sides;
 	}
 
-	public Shape(long id, int sides) {
+	public ShapeEntity(long id, int sides) {
 		this.sides = sides;
 	}
 	

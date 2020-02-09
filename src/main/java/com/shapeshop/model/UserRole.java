@@ -1,6 +1,8 @@
 package com.shapeshop.model;
 
 public enum UserRole {
-    ADMIN,
-    USER
+    ROLE_KING, 
+    ROLE_PAWN,
+    ROLE_ADMIN, 
+    ROLE_USER
 }

@@ -1,4 +1,4 @@
-package com.shapeshop;
+package com.shapeshop.util;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

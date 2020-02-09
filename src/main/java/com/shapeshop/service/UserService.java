@@ -1,44 +1,48 @@
 package com.shapeshop.service;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.entity.User;
-import com.shapeshop.model.NewUserDTO;
+import com.shapeshop.entity.UserEntity;
 import com.shapeshop.repository.UserRepository;
 
 
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
+
+	@Autowired
+	private UserRepository repository;
 	
-    @Autowired
-    private UserRepository repository;
-
-
     @Autowired
     private PasswordValidationService passwordValidationService;
 
-    
-    public User createUser(NewUserDTO newUser) {
-    	String password = passwordValidationService.encryptPassword(newUser.getPassword());
+	@Override
+	public User loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        User user = new User(newUser.getRole(), newUser.getEmail(),password, newUser.getCustomerId(), newUser.getMembershipId(), newUser.getLocale());
+		if (StringUtils.isEmpty(userName)) {
+			return null;
+		}
 
-        user = repository.save(user);
-        
-        return user;
-    }
+		UserEntity u = repository.findByUserNameIgnoreCase(userName);
+		
+		if (u == null) {
+			throw new UsernameNotFoundException("User Not Found");
+		}
 
-    public boolean isEmailRegistered(String email) {
-        return repository.existsByEmailContainingIgnoreCase(email);
-    }
-
-    public User findByEmail(String email) {
-        if (StringUtils.isEmpty(email)) {
-            return null;
-        }
-        return repository.findByEmailIgnoreCase(email);
-    }
+		SimpleGrantedAuthority a = new SimpleGrantedAuthority(u.getRole().toString());
+		
+		ArrayList<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+		auths.add(a);
+		
+		return new User(u.getUserName(), u.getPassword(), auths);
+	}
 }

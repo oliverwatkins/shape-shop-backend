@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shapeshop.entity.Shape;
+import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.service.ShapeService;
 
 
@@ -30,21 +30,21 @@ public class ShapeController {
 	}
 
 	@PostMapping("/shapes")
-	public ResponseEntity<?> newShape(@RequestBody Shape shape) {
-		Shape s = shapeService.createShape(shape);
+	public ResponseEntity<?> newShape(@RequestBody ShapeEntity shape) {
+		ShapeEntity s = shapeService.createShape(shape);
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/shapes")
-	public Shape[] shapes() {
-		List<Shape> itemList = shapeService.getAllShapes();
-		Shape[] shapes2 = new Shape[itemList.size()];
+	public ShapeEntity[] shapes() {
+		List<ShapeEntity> itemList = shapeService.getAllShapes();
+		ShapeEntity[] shapes2 = new ShapeEntity[itemList.size()];
 		return shapeService.getAllShapes().toArray(shapes2);
 	}
 
 	@GetMapping(value = "/shapes/{id}")
-	public Shape getShapesById(@PathVariable("id") long id) {
-		Shape item = shapeService.getShapeById(id);
+	public ShapeEntity getShapesById(@PathVariable("id") long id) {
+		ShapeEntity item = shapeService.getShapeById(id);
 		return item;
 	}
 
@@ -54,7 +54,7 @@ public class ShapeController {
 	}
 
 	@DeleteMapping(value = "/shapes")
-	public void deleteShapes(@RequestBody Shape shape) {
+	public void deleteShapes(@RequestBody ShapeEntity shape) {
 		shapeService.deleteShape(shape);
 	}
 }

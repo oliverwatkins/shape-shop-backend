@@ -1,4 +1,4 @@
-package com.shapeshop;
+package com.shapeshop.util;
 
 public final class SecurityConstants {
     public static final String SECRET = "75ykAIZDelKmgaibWi7oO3e4Fd9jEtBmLjvQYCe5ieT9O4JDgmEkmxPWZ1c3TWn2";

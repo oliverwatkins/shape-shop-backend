@@ -7,7 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.entity.Shape;
+import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.repository.ShapeRepository;
 
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class ShapeService {
 	@Autowired
 	ShapeRepository shapeRepository;
 
-	public Shape createShape(Shape shape) {
+	public ShapeEntity createShape(ShapeEntity shape) {
 		shapeRepository.save(shape);
 		return shape;
 	}
@@ -27,18 +27,18 @@ public class ShapeService {
 	public void deleteShape(long id) {
 		shapeRepository.deleteById(id);
 	}
-	public void deleteShape(Shape shape) {
+	public void deleteShape(ShapeEntity shape) {
 		shapeRepository.delete(shape);
 	}
 
-	public List<Shape> getAllShapes() {
+	public List<ShapeEntity> getAllShapes() {
 
-		List<Shape> result = StreamSupport.stream(shapeRepository.findAll().spliterator(), false)
+		List<ShapeEntity> result = StreamSupport.stream(shapeRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		return result;
 	}
 
-	public Shape getShapeById(long id) {
+	public ShapeEntity getShapeById(long id) {
 		return shapeRepository.findById(id);
 	}
 

@@ -8,10 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 
-import com.shapeshop.entity.Shape;
-import com.shapeshop.entity.User;
+import com.shapeshop.entity.ShapeEntity;
+import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.ShapeRepository;
 import com.shapeshop.repository.UserRepository;
@@ -32,12 +31,7 @@ public class App {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-//            System.out.println("Let's inspect the beans provided by Spring Boot:");
-//            String[] beanNames = ctx.getBeanDefinitionNames();
-//            Arrays.sort(beanNames);
-//            for (String beanName : beanNames) {
-//                System.out.println(beanName);
-//            }
+			System.out.println("<<<<<>>>>> SHAPE SHOP <<<<<>>>>> ");
 		};
 	}
 	
@@ -45,14 +39,22 @@ public class App {
 	public CommandLineRunner loadUsers(UserRepository repository) {
 		return (args) -> {
 			
-			String passs = passwordValidationService.encryptPassword("pass");
 			
-			System.out.println(">>> ");
-			System.out.println(">>> create some users !!!!!!!!!!!!!");
-			System.out.println(">>> passs " + passs);
 			
-			repository.save(new User(UserRole.ADMIN, "admin", passs, "custid", "blah", Locale.GERMANY));
-			repository.save(new User(UserRole.USER, "user", passs, "custid", "blah", Locale.GERMANY));
+			System.out.println("creating some users");
+			String passs = passwordValidationService.encryptPassword("foo");
+			
+			System.out.println("-->>> ");
+			System.out.println("-->>> create some users !!!!!!!!!!!!!");
+			System.out.println("-->>> passs " + passs);
+			
+
+			repository.save(new UserEntity(UserRole.ROLE_KING, "lion", passs));
+			repository.save(new UserEntity(UserRole.ROLE_PAWN, "cub", passs));
+			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
+			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));
+			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", passs));
+			
 		};
 	}
 
@@ -67,15 +69,15 @@ public class App {
 			System.out.println(">>> ");
 
 			// save a few shapes
-			repository.save(new Shape("triangle", 3));
-			repository.save(new Shape("square", 4));
-			repository.save(new Shape("rhombus", 4));
-			repository.save(new Shape("hexagon", 6));
-			repository.save(new Shape("octagon", 8));
-			repository.save(new Shape("circle", 1));
+			repository.save(new ShapeEntity("triangle", 3));
+			repository.save(new ShapeEntity("square", 4));
+			repository.save(new ShapeEntity("rhombus", 4));
+			repository.save(new ShapeEntity("hexagon", 6));
+			repository.save(new ShapeEntity("octagon", 8));
+			repository.save(new ShapeEntity("circle", 1));
 
 			// fetch an individual customer by ID
-			Shape sh1 = repository.findById(2L);
+			ShapeEntity sh1 = repository.findById(2L);
 			System.out.println(">>> fetch by id " + sh1.toString());
 
 			// fetch customers by last name

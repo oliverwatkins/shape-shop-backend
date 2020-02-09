@@ -3,14 +3,15 @@ package com.shapeshop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shapeshop.entity.User;
+import com.shapeshop.entity.UserEntity;
 
-public interface UserRepository extends JpaRepository<User, String> {
 
-    User findByEmailIgnoreCase(String email);
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 
-    boolean existsByEmailContainingIgnoreCase(String email);
+    UserEntity findByUserNameIgnoreCase(String userName);
+
+    boolean existsByUserNameContainingIgnoreCase(String userName);
 
     @Transactional
-    void deleteByEmail(String email);
+    void deleteByUserName(String userName);
 }
