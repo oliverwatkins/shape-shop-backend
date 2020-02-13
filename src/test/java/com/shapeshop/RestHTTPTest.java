@@ -71,6 +71,10 @@ public class RestHTTPTest {
         System.out.println("contentAsString " + contentAsString2);
         
         assertEquals("user", contentAsString2);
+
+        //cant access admin!!
+    	mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.is(403));
+
     }
     
     
