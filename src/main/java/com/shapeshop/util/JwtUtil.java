@@ -23,31 +23,33 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtUtil {
 
-	private String SECRET_KEY = "secret";
+	private static String SECRET_KEY = "secret";
 	public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60 * 60;
 	public static final String AUTHORITIES_KEY = "scopes";
 
+	
+	public Boolean validateToken(String token, UserDetails userDetails) {
+		
+		String username = extractClaim(token, Claims::getSubject);
+		Date exp = extractClaim(token, Claims::getExpiration);
+		
+		return (username.equals(userDetails.getUsername()) && !exp.before(new Date()));
+	}
+
+	
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
 	}
 
-	public Date extractExpiration(String token) {
-		return extractClaim(token, Claims::getExpiration);
-	}
 
-	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-		final Claims claims = extractAllClaims(token);
-
+	public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+		
+		final Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+		
 		return claimsResolver.apply(claims);
 	}
 
-	private Claims extractAllClaims(String token) {
-		return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-	}
 
-	private Boolean isTokenExpired(String token) {
-		return extractExpiration(token).before(new Date());
-	}
 
 	public UsernamePasswordAuthenticationToken getAuthentication(final String token, final Authentication existingAuth,
 			final UserDetails userDetails) {
@@ -76,26 +78,10 @@ public class JwtUtil {
 		final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.collect(Collectors.joining(","));
 
-		System.out.println("createToken with authorities : " + authorities);
-
 		return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000)).compact();
 	}
 
-	public String createToken(String name) {
 
-		String authorities = "blah, blah";
-
-		System.out.println("createToken with authorities : " + authorities);
-
-		return Jwts.builder().setSubject(name).claim(AUTHORITIES_KEY, authorities)
-				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000)).compact();
-	}
-
-	public Boolean validateToken(String token, UserDetails userDetails) {
-		final String username = extractUsername(token);
-		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-	}
 }

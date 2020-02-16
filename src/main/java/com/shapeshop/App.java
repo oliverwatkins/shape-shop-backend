@@ -14,14 +14,14 @@ import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.ShapeRepository;
 import com.shapeshop.repository.UserRepository;
-import com.shapeshop.service.PasswordValidationService;
+import com.shapeshop.util.PasswordUtils;
 
 @SpringBootApplication
 public class App {
 
 	
 	@Autowired
-	private PasswordValidationService passwordValidationService;
+	private PasswordUtils passwordValidationService;
 
 	
 	public static void main(String[] args) {

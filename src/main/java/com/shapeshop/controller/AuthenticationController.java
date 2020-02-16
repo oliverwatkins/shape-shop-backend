@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shapeshop.model.AuthenticationRequest;
 import com.shapeshop.model.AuthenticationResponse;
-import com.shapeshop.service.PasswordValidationService;
 import com.shapeshop.service.UserService;
 import com.shapeshop.util.JwtUtil;
+import com.shapeshop.util.PasswordUtils;
 
 @RestController
 public class AuthenticationController {
@@ -30,7 +30,7 @@ public class AuthenticationController {
 	private UserService userDetailsService;
 
 	@Autowired
-	private PasswordValidationService passwordValidationService;
+	private PasswordUtils passwordValidationService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)

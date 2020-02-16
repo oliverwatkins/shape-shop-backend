@@ -1,4 +1,4 @@
-package com.shapeshop.service;
+package com.shapeshop.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -8,20 +8,13 @@ import com.shapeshop.entity.UserEntity;
 
 
 @Service
-public class PasswordValidationService {
+public class PasswordUtils {
 
     private static final int PASSWORD_MIN_LENGTH = 5;
-
     private static final int PASSWORD_MAX_LENGTH = 50;
 
     public boolean isPasswordMatch(UserEntity user, String password) {
-    	
-    	System.out.println("user password is " + user.getPassword());
-    	System.out.println("encryptPassword(password) " + encryptPassword(password));
-    	
     	boolean b = user.getPassword().equals(encryptPassword(password));
-    	System.out.println("b " + b);
-    	
         return b;
     }
 

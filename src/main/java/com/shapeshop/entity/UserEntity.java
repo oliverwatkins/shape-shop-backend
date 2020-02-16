@@ -1,8 +1,5 @@
 package com.shapeshop.entity;
 
-import java.time.LocalDateTime;
-import java.util.Locale;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +11,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.shapeshop.model.UserRole;
-import com.shapeshop.model.UserStatus;
 
 @Entity
 @Table(name = "users")

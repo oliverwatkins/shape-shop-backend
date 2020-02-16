@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.repository.UserRepository;
+import com.shapeshop.util.PasswordUtils;
 
 
 
@@ -23,7 +24,7 @@ public class UserService implements UserDetailsService {
 	private UserRepository repository;
 	
     @Autowired
-    private PasswordValidationService passwordValidationService;
+    private PasswordUtils passwordValidationService;
 
 	@Override
 	public User loadUserByUsername(String userName) throws UsernameNotFoundException {

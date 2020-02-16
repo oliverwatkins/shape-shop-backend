@@ -19,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.shapeshop.service.UserService;
 import com.shapeshop.util.JwtUtil;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 
@@ -46,7 +47,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			jwt = authorizationHeader.substring(7);
 
 			try {
-				username = jwtUtil.extractUsername(jwt);
+				username = JwtUtil.extractClaim(jwt, Claims::getSubject);
 			} catch (ExpiredJwtException e) {
 				response.sendError(500, "Expired JWT");
 			} catch (SignatureException e) {
@@ -59,16 +60,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
 			if (jwtUtil.validateToken(jwt, userDetails)) {
-
-				userDetails.getAuthorities(); //has exactly ONE SimpleGrantedAuthority with value "KING"
-
-				
-				
-				
-				SimpleGrantedAuthority s = new SimpleGrantedAuthority("asfd");
-				
-				s.getAuthority(); //string
-				
 				
 				UsernamePasswordAuthenticationToken authentication = jwtUtil.getAuthentication(jwt,
 						SecurityContextHolder.getContext().getAuthentication(), userDetails);
