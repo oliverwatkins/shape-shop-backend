@@ -10,8 +10,7 @@ public class UserController {
 
 	@PreAuthorize("hasAnyRole('ROLE_USER, ROLE_ADMIN')")
 	@GetMapping(value = "/user")
-	public String admin() {
-		
+	public String user() {
 		return "user";  
 	}
 }

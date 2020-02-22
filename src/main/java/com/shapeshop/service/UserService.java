@@ -22,9 +22,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
-	
-    @Autowired
-    private PasswordUtils passwordValidationService;
 
 	@Override
 	public User loadUserByUsername(String userName) throws UsernameNotFoundException {

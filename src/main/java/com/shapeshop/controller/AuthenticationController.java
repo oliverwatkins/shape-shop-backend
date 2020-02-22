@@ -38,17 +38,17 @@ public class AuthenticationController {
 
 		Authentication authentication = null;
 
-		String p = authenticationRequest.getPassword();
+		String pswd = authenticationRequest.getPassword();
 		String uName = authenticationRequest.getUsername();
-		String encrypted = passwordValidationService.encryptPassword(p);
+		String encryptedPswd = passwordValidationService.encryptPassword(pswd);
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
 		authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(uName, encrypted, userDetails.getAuthorities()));
+				.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
 
-		final String jwt = jwtTokenUtil.createToken(authentication);
+		final String jwtToken = jwtTokenUtil.createToken(authentication);
 
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 	}
 }

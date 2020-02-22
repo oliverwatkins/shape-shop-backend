@@ -21,9 +21,6 @@
 //    private PasswordValidationService passwordValidationService;
 //
 //    
-//    
-//    
-//    
 //    public UserEntity login(String email, String password) {
 //    	
 //    	
@@ -35,15 +32,8 @@
 //
 //        return user;
 //    }
-//    
-//    
-//    
-//    
-//    
 //
 //    private void validatePassword(UserEntity user, String password) {
-//    	
-//    	
 //    	
 //        if (!passwordValidationService.isPasswordMatch(user, password)) {
 //            LOGGER.warn("Login failed. Invalid password received for " + user.getEmail());

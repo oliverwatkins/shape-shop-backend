@@ -21,16 +21,19 @@ import com.shapeshop.filter.JwtRequestFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserDetailsService myUserDetailsService;
+
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(myUserDetailsService);
-	}
+	
+//	@Autowired
+//	private UserDetailsService userDetailsService;
+	
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.userDetailsService(userDetailsService);
+//	}
 
 	@Override
 	@Bean
@@ -42,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/").permitAll()
-				.antMatchers("/hello").permitAll()
 				.antMatchers("/authenticate").permitAll()
 				.anyRequest().authenticated()
 			.and().exceptionHandling()

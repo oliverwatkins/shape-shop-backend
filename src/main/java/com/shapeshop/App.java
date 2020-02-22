@@ -39,8 +39,6 @@ public class App {
 	public CommandLineRunner loadUsers(UserRepository repository) {
 		return (args) -> {
 			
-			
-			
 			System.out.println("creating some users");
 			String passs = passwordValidationService.encryptPassword("foo");
 			
@@ -48,16 +46,11 @@ public class App {
 			System.out.println("-->>> create some users !!!!!!!!!!!!!");
 			System.out.println("-->>> passs " + passs);
 			
-
-			repository.save(new UserEntity(UserRole.ROLE_KING, "lion", passs));
-			repository.save(new UserEntity(UserRole.ROLE_PAWN, "cub", passs));
 			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", passs));
-			
 		};
 	}
-
 		
 
 	@Bean

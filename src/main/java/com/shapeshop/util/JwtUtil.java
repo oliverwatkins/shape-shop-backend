@@ -26,7 +26,20 @@ public class JwtUtil {
 	private static String SECRET_KEY = "secret";
 	public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60 * 60;
 	public static final String AUTHORITIES_KEY = "scopes";
+	
+	
+	/**
+	 * Creates Token
+	 */
+	public String createToken(Authentication authentication) {
+		final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+				.collect(Collectors.joining(","));
 
+		return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
+				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000)).compact();
+	}
+	
 	
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		
@@ -36,20 +49,10 @@ public class JwtUtil {
 		return (username.equals(userDetails.getUsername()) && !exp.before(new Date()));
 	}
 
-	
-	public String extractUsername(String token) {
-		return extractClaim(token, Claims::getSubject);
-	}
-
-
 	public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-		
 		final Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-		
 		return claimsResolver.apply(claims);
 	}
-
-
 
 	public UsernamePasswordAuthenticationToken getAuthentication(final String token, final Authentication existingAuth,
 			final UserDetails userDetails) {
@@ -71,17 +74,7 @@ public class JwtUtil {
 		return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
 	}
 
-	/**
-	 * Creates Token
-	 */
-	public String createToken(Authentication authentication) {
-		final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-				.collect(Collectors.joining(","));
 
-		return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authorities)
-				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000)).compact();
-	}
 
 
 }
