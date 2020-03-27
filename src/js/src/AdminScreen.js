@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-export class Admin extends React.PureComponent {
+export class AdminScreen extends React.PureComponent {
 	render() {
 		return (
 			<div>
@@ -11,4 +11,4 @@ export class Admin extends React.PureComponent {
 	}
 }
 
-export default Admin;
+export default AdminScreen;

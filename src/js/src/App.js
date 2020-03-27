@@ -1,14 +1,16 @@
 import React from 'react';
-import './App.css';
+
+import { connect } from 'react-redux';
+
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Link
 } from "react-router-dom";
-import Welcome from "./Welcome";
-import Admin from "./Admin";
-import User from "./User";
+import Welcome from "./WelcomeScreen";
+import AdminScreen from "./AdminScreen";
+import UserScreen from "./UserScreen";
 
 function App() {
   return (
@@ -30,10 +32,10 @@ function App() {
 					</nav>
 					<Switch>
 						<Route path="/admin">
-							<Admin />
+							<AdminScreen />
 						</Route>
 						<Route path="/user">
-							<User />
+							<UserScreen />
 						</Route>
 						<Route path="/">
 							<Welcome />
@@ -45,4 +47,29 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+	return {
+		// countriesList: state.countriesList,
+		// i18n: state.i18n,
+		login: state.login,
+		// userStatus: selectUserStatus(state),
+		// userRole: selectUserRole(state),
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchLanguage: params => {
+			dispatch("fuck you cunt")
+		},
+		fetchCountryList: () => {
+			dispatch("fuck you cunt")
+			// dispatch(receiveCountriesList());
+		},
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(App);

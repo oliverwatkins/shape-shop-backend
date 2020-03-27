@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-export class User extends React.PureComponent {
+export class UserScreen extends React.PureComponent {
 	render() {
 		return (
 			<div>
@@ -11,4 +11,4 @@ export class User extends React.PureComponent {
 	}
 }
 
-export default User;
+export default UserScreen;
