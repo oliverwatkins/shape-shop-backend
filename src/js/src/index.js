@@ -5,20 +5,20 @@ import {Provider} from "react-redux";
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from './reducers';
 
-// export const persistConfig = {
-// 	key: sessionKey,
-// 	storage,
-// 	whitelist: ['login', 'countriesList', 'languageList', 'i18n', 'customer', 'merchant', 'myArea'],
-// };
+import {combineReducers} from 'redux';
+import {reducer as login} from './reducers/loginReducer';
+
+let cr =  combineReducers({
+	login,
+});
 
 const sagaMiddleware = createSagaMiddleware();
 
 //for redux plugin
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));
+const store = createStore(cr, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 ReactDOM.render(
 	<Provider store={store}>

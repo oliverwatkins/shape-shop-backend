@@ -11,6 +11,7 @@ import {
 import Welcome from "./WelcomeScreen";
 import AdminScreen from "./AdminScreen";
 import UserScreen from "./UserScreen";
+import LoginScreen from "./LoginScreen";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
 							<li>
 								<Link to="/user">Users</Link>
 							</li>
+							<li>
+								<Link to="/login">LOGIN</Link>
+							</li>
 						</ul>
 					</nav>
 					<Switch>
@@ -36,6 +40,9 @@ function App() {
 						</Route>
 						<Route path="/user">
 							<UserScreen />
+						</Route>
+						<Route path="/login">
+							<LoginScreen />
 						</Route>
 						<Route path="/">
 							<Welcome />
@@ -60,10 +67,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchLanguage: params => {
-			dispatch("fuck you cunt")
+			dispatch("")
 		},
 		fetchCountryList: () => {
-			dispatch("fuck you cunt")
+			dispatch("")
 			// dispatch(receiveCountriesList());
 		},
 	};

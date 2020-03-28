@@ -1,7 +1,9 @@
 import {Actions} from './actions';
 
 export function reducer(state = initialState, action) {
+
 	switch (action.type) {
+
 		case Actions.LOGIN_SUCCESS:
 			return {
 				...state,
@@ -26,7 +28,6 @@ export function reducer(state = initialState, action) {
 			};
 		default :
 			return state;
-
 	}
 }
 
