@@ -11,7 +11,7 @@ import {
 import Welcome from "./WelcomeScreen";
 import AdminScreen from "./AdminScreen";
 import UserScreen from "./UserScreen";
-import LoginScreen from "./LoginScreen";
+import LoginScreen from "./login/LoginScreen";
 
 function App() {
   return (

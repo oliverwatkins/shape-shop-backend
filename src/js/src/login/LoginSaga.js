@@ -1,14 +1,22 @@
 import { take, put, call } from 'redux-saga/effects';
 import jwtDecode from 'jwt-decode';
-import { Actions, createLoginSuccessAction, createLoginFailAction } from '../../src/components/login/actions';
-import { receiveCustomerDetails, getMerchantDetails } from '../action';
-import { CUSTOMER_ROLE, BUSINESS_ROLE } from '../constants';
-import notify from '../utils/notify';
+import {
+	LoginActions,
+	createLoginSuccessAction,
+	createLoginFailAction,
+	getCustomerDetails,
+	getAdminDetails,
+} from './loginActions';
+import {ADMIN_ROLE, CUSTOMER_ROLE} from "../constants";
 
-export default api => {
+let blah = (api) => {
+
+
+
 	function* loginWatcher() {
 		while (true) {
-			const { user, password } = yield take(Actions.LOGIN);
+			const { user, password } = yield take(LoginActions.LOGIN);
+			// alert("here")
 			yield call(loginWorker, user, password);
 		}
 	}
@@ -27,6 +35,9 @@ export default api => {
 
 	function* login(credentials) {
 		try {
+
+			console.info("al " + api.loginUser)
+
 			const response = yield call(api.loginUser, credentials);
 
 			if (response.ok) {
@@ -47,15 +58,15 @@ export default api => {
 				yield put(createLoginSuccessAction(userCredentials)); //this is being caught by the reducer and put into storage!
 
 				if (decodedToken.role === CUSTOMER_ROLE) {
-					yield put(receiveCustomerDetails(userCredentials.token, userCredentials.role));
-				} else if (decodedToken.role === BUSINESS_ROLE) {
-					yield put(getMerchantDetails(userCredentials.token, userCredentials.role));
+					yield put(getCustomerDetails(userCredentials.token, userCredentials.role));
+				} else if (decodedToken.role === ADMIN_ROLE) {
+					yield put(getAdminDetails(userCredentials.token, userCredentials.role));
 				} else {
 					yield put(createLoginFailAction());
 					throw new Error('Unknown user role type');
 				}
 			} else {
-				notify('error', 'Username or password wrong', 'Please, try again'); // We should remove it when we have the login design
+				// notify('error', 'Username or password wrong', 'Please, try again'); // We should remove it when we have the login design
 				yield put(createLoginFailAction());
 			}
 		} catch (e) {
@@ -69,3 +80,8 @@ export default api => {
 		login,
 	};
 };
+
+
+export default blah;
+
+

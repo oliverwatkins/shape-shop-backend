@@ -1,10 +1,12 @@
-import {Actions} from './actions';
+import {LoginActions} from './loginActions';
 
 export function reducer(state = initialState, action) {
 
+	console.info("in reducer with action " + action)
+
 	switch (action.type) {
 
-		case Actions.LOGIN_SUCCESS:
+		case LoginActions.LOGIN_SUCCESS:
 			return {
 				...state,
 				loginToken: action.token,
@@ -12,17 +14,17 @@ export function reducer(state = initialState, action) {
 				role: action.role,
 				logout: null,
 			};
-		case Actions.LOGIN_FAIL:
+		case LoginActions.LOGIN_FAIL:
 			return {
 				...state,
 				loggingIn: false,
 			};
-		case Actions.LOGOUT:
+		case LoginActions.LOGOUT:
 			return {
 				...state,
 				logout: 'IN_PROGRESS',
 			};
-		case Actions.LOGOUT_SUCCESS:
+		case LoginActions.LOGOUT_SUCCESS:
 			return {
 				loginToken: {},
 			};
