@@ -1,7 +1,11 @@
+import getApiSauceInstance from '../api/getApiSauceInstance';
 
 
 
-const create = (api) => {
+
+const create = () => {
+
+	let api = getApiSauceInstance();
 
 	const setBaseURL = (baseUrl) => {
 		api.setBaseURL(baseUrl);

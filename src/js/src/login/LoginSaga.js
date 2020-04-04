@@ -9,14 +9,12 @@ import {
 } from './loginActions';
 import {ADMIN_ROLE, CUSTOMER_ROLE} from "../constants";
 
-let blah = (api) => {
-
+export default api => {
 
 
 	function* loginWatcher() {
 		while (true) {
 			const { user, password } = yield take(LoginActions.LOGIN);
-			// alert("here")
 			yield call(loginWorker, user, password);
 		}
 	}
@@ -35,8 +33,6 @@ let blah = (api) => {
 
 	function* login(credentials) {
 		try {
-
-			console.info("al " + api.loginUser)
 
 			const response = yield call(api.loginUser, credentials);
 
@@ -81,7 +77,5 @@ let blah = (api) => {
 	};
 };
 
-
-export default blah;
 
 

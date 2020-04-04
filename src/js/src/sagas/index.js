@@ -1,18 +1,23 @@
 import {fork} from 'redux-saga/effects';
-import login from '../login/LoginSaga';
-import initApi from './init';
-import api from './api';
+import login from '../login/LoginSaga'
 
-const baseApi = initApi();
+import api from '../api/api';
+import api_mock from '../api/api_mock';
 
-let weeapi = {
-	...api.create(baseApi),
-};
+let MOCK_MODE = false;
+
+let apiInstance;
+
+if (MOCK_MODE) {
+	apiInstance = api_mock.create();
+} else {
+	apiInstance = api.create();
+}
+
 
 /**
- * Single entry point to start all Sagas at once. '$FlowFixMe' is added
- * to suppress Flow warnings. It does not know how to handle generators that well.
+ * Single entry point to start all Sagas
  */
 export default function* root() {
-	yield fork(login(weeapi).loginWatcher);
+	yield fork(login(apiInstance).loginWatcher);
 }
