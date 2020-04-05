@@ -1,6 +1,8 @@
 import {fork} from 'redux-saga/effects';
 import login from '../login/LoginSaga'
 
+import productSaga from '../products/ProductSaga'
+
 import api from '../api/api';
 import api_mock from '../api/api_mock';
 
@@ -20,4 +22,5 @@ if (MOCK_MODE) {
  */
 export default function* root() {
 	yield fork(login(apiInstance).loginWatcher);
+	yield fork(productSaga(apiInstance).getProductsWatcher);
 }

@@ -10,9 +10,11 @@ import createSagaMiddleware from 'redux-saga';
 
 import {combineReducers} from 'redux';
 import {reducer as login} from './login/loginReducer';
+import {reducer as products} from './products/productsReducer';
 
 let cr =  combineReducers({
 	login,
+	products
 });
 
 const sagaMiddleware = createSagaMiddleware();

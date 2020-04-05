@@ -4,6 +4,7 @@
  * Mock API for running/testing my-wee standalone.
  */
 const create = () => {
+
 	const BUSINESS_TOKEN =
 		'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiTUVSQ0hBTlQiLCJleHAiOjE1NTAyNDc5MjAsInN0YXR1cyI6ImFjdGl2ZSJ9.Y0Qg1meZb2t7fUFLJ9l0WN-smsN1Wrg7bgXVlKLA26O2SM5l_NYGQ6NXy3d16QGAiyFOyV0wKN6DvDjDfUPn5g';
 	const CUSTOMER_TOKEN =
@@ -34,7 +35,7 @@ const create = () => {
 		};
 	};
 
-	const merchantDetails = Authorization => {
+	const adminDetails = Authorization => {
 		return {
 			status: 200,
 			data: {
@@ -44,35 +45,16 @@ const create = () => {
 		};
 	};
 
-
-	const validateDetails = data => {
+	const fetchProducts = () => {
 		return {
-			ok: true,
+			status: 200,
+			data: [{"id":7,"name":"A Pie","price":4.50}, {"id":8,"name":"A Donut","price":4.50}]
 		};
 	};
-
-	const validateBusinessDetails = data => {
-		return {
-			ok: true,
-		};
-	};
-
-	const registrationConfirmation = data => {
-		return {
-			ok: true,
-		};
-	};
-
-	const registrationConfirmationBusiness = data => {
-		return {
-			ok: true,
-		};
-	};
-
 
 	return {
-		// setBaseURL,
 		loginUser,
+		fetchProducts
 	};
 };
 

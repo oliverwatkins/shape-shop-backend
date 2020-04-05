@@ -17,6 +17,12 @@ const create = () => {
 		});
 	};
 
+	const fetchProducts = () => {
+		// api.setHeaders({ ...Authorization });
+
+		return api.get('/products').then(response => response);
+	};
+
 
 	const customerDetails = (Authorization) => {
 		api.setHeaders({ ...Authorization });
@@ -36,6 +42,7 @@ const create = () => {
 
 	return {
 		setBaseURL,
+		fetchProducts,
 		loginUser,
 	};
 };
