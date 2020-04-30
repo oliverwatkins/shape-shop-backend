@@ -13,7 +13,18 @@ import AdminScreen from "./AdminScreen";
 import UserScreen from "./UserScreen";
 import LoginScreen from "./login/LoginScreen";
 import {createFetchProductsAction} from "./products/productActions";
-import {MainNav} from "./MainNav";
+
+// componentDidMount() {
+// 	const shouldGetLanguage = this.shouldGetLanguage(this.props);
+// 	const shouldGetCountries = this.shouldGetCountries(this.props);
+//
+// 	if (shouldGetLanguage) {
+// 		this.props.fetchLanguage(getUserLanguage());
+// 	}
+// 	if (shouldGetCountries) {
+// 		this.props.fetchCountryList();
+// 	}
+// }
 
 class App extends React.PureComponent{
 	componentDidMount() {
@@ -25,9 +36,22 @@ class App extends React.PureComponent{
 			<div className="App">
 				<Router>
 					<div>
-
-						<MainNav/>
-
+						<nav>
+							<ul>
+								<li>
+									<Link to="/">Home</Link>
+								</li>
+								<li>
+									<Link to="/admin">Admin</Link>
+								</li>
+								<li>
+									<Link to="/user">Users</Link>
+								</li>
+								<li>
+									<Link to="/login">LOGIN</Link>
+								</li>
+							</ul>
+						</nav>
 						<Switch>
 							<Route path="/admin">
 								<AdminScreen/>
