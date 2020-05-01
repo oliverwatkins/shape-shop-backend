@@ -12,13 +12,10 @@ export class MainNav extends React.PureComponent {
 						<Link to="/">Home</Link>
 					</li>
 					<li>
-						<Link to="/admin">Admin</Link>
+						<Link to="/order/productlist">Order</Link>
 					</li>
 					<li>
-						<Link to="/user">Users</Link>
-					</li>
-					<li>
-						<Link to="/login">LOGIN</Link>
+						<Link to="/login">ADMIN</Link>
 					</li>
 				</ul>
 			</nav>

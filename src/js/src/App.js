@@ -16,6 +16,7 @@ import {createFetchProductsAction} from "./products/productActions";
 import {MainNav} from "./MainNav";
 
 import "./main.scss"
+import OrderWizard from "./order/OrderWizard";
 
 // componentDidMount() {
 // 	const shouldGetLanguage = this.shouldGetLanguage(this.props);
@@ -44,9 +45,11 @@ class App extends React.PureComponent{
 							<Route path="/admin">
 								<AdminScreen/>
 							</Route>
-							<Route path="/user">
-								<UserScreen/>
+
+							<Route path="/order/productlist">
+								<OrderWizard/>
 							</Route>
+
 							<Route path="/login">
 								<LoginScreen/>
 							</Route>

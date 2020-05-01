@@ -15,13 +15,8 @@ export class Overview extends React.PureComponent {
 
 		return (
 			<div>
-
 				<img className="wee-card__img" src={weeCard} alt="Wee Card" />
-
-				Welcome
-
 				<ProductsPanel items={this.props.products.items}/>
-
 			</div>
 		);
 	}
