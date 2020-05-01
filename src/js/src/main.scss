@@ -1,5 +1,44 @@
 
 
+
+.order-wizard {
+  display: flex;
+  //flex-flow: row wrap;
+  background:aquamarine;
+
+}
+
+/* We tell all items to be 100% width, via flex-basis */
+//.order-wizard > * {
+//  flex: 1 100%;
+//}
+//
+.aside {
+  background: chartreuse;
+
+}
+
+
+
+
+.product-selection {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: DodgerBlue;
+}
+
+.product-selection > div {
+  background-color: #f1f1f1;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  text-align: center;
+  //line-height: 75px;
+  //font-size: 12px;
+}
+
+
+
 .main-nav {
 
   background-color: red;

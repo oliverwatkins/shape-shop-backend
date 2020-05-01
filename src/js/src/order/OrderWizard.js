@@ -4,16 +4,18 @@ import AdminScreen from "../AdminScreen";
 import Payment from "./Payment";
 import ProductList from "./ProductList";
 import Summary from "./Summary";
+import connect from "react-redux/es/connect/connect";
+import {Overview} from "../WelcomeScreen";
 
 
 export class OrderWizard extends React.PureComponent {
 	render() {
 		return (
-			<div>
+			<div className={"order-wizard"}>
 				order wizard.
 				<Switch>
 					<Route path="/order/productlist">
-						<ProductList/>
+						<ProductList products={this.props.products}/>
 					</Route>
 					<Route path="/order/summary">
 						<Summary/>
@@ -22,8 +24,30 @@ export class OrderWizard extends React.PureComponent {
 						<Payment/>
 					</Route>
 				</Switch>
+
+				<div className={"aside"}>
+					Bestellung
+
+					<button>NEXT</button>
+
+				</div>
+
 			</div>
 		);
 	}
 }
-export default OrderWizard;
+
+const mapStateToProps = state => {
+	return {
+		products: state.products,
+	};
+};
+
+
+export default connect(
+	mapStateToProps,
+	null,
+)(OrderWizard);
+
+
+// export default OrderWizard;
