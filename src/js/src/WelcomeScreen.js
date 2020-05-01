@@ -1,8 +1,9 @@
 import * as React from 'react';
 import ProductsPanel from "./ProductsPanel";
+import {createFetchProductsAction} from "./products/productActions";
 import connect from "react-redux/es/connect/connect";
 
-// import weeCard from './assets/img/welcome.jpg';
+import weeCard from './assets/img/welcome.jpg';
 
 
 export class Overview extends React.PureComponent {
@@ -15,7 +16,7 @@ export class Overview extends React.PureComponent {
 		return (
 			<div>
 
-				{/*<img className="wee-card__img" src={weeCard} alt="Wee Card" />*/}
+				<img className="wee-card__img" src={weeCard} alt="Wee Card" />
 
 				Welcome
 
@@ -25,7 +26,6 @@ export class Overview extends React.PureComponent {
 		);
 	}
 }
-
 
 const mapStateToProps = state => {
 	return {

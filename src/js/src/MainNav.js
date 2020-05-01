@@ -6,7 +6,7 @@ export class MainNav extends React.PureComponent {
 
 	render() {
 		return (
-			<nav>
+			<nav className={"main-nav"}>
 				<ul>
 					<li>
 						<Link to="/">Home</Link>
