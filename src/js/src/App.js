@@ -16,6 +16,9 @@ import {createFetchProductsAction} from "./products/productActions";
 import {MainNav} from "./MainNav";
 
 import "./main.scss"
+
+import "./icons.scss"
+
 import OrderWizard from "./order/OrderWizard";
 
 // componentDidMount() {

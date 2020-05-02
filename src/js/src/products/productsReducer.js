@@ -7,12 +7,44 @@ export function reducer(state = initialState, action) {
 	switch (action.type) {
 
 		case Actions.FETCH_PRODUCTS_SUCCESS:
-			// alert("mofo! Got the prods ")
+			return {
+				...state,
+				items: action.data,
+			};
+
+		case Actions.UPDATE_PRODUCT_SELECTION:
+			// alert("mofo! Got the UPDATE_PRODUCT_SELECTION " + action.value + " id " + action.id)
+
+
+			let foundProd = state.items.filter(item => item.id === action.id);
+
+
+			let fp = foundProd[0];
+
+			fp.quantity = action.value;
+
+			alert(JSON.stringify(fp))
+
+
+			// return Object.assign({}, state, {
+			// 	confirmation: {
+			// 		registering: false,
+			// 		registrationConfirmed: false,
+			// 	},
+			// });
 
 
 			return {
 				...state,
-				items: action.data,
+				items: state.items.map((item) => {
+					if (item.id === action.id) {
+						return {"id": item.id,
+							"name": item.name,
+							"price": item.price,
+							"quantity": action.value}
+					}
+					return item;
+				}),
 			};
 
 		default :

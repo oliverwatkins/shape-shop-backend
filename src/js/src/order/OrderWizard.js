@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Route, Switch} from "react-router-dom";
+import {Link, Route, Switch} from "react-router-dom";
 import AdminScreen from "../AdminScreen";
 import Payment from "./Payment";
 import ProductList from "./ProductList";
@@ -27,8 +27,12 @@ export class OrderWizard extends React.PureComponent {
 
 				<div className={"aside"}>
 					Bestellung
+						<Link to="/welcome">NEXT!</Link>
 
-					<button>NEXT</button>
+
+					<span className="ico ico--md ico--home">XX</span>
+
+					<span className="fas fa-camera">cc</span>
 
 				</div>
 
