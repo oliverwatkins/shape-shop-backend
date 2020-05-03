@@ -23,7 +23,7 @@ export function reducer(state = initialState, action) {
 
 			fp.quantity = action.value;
 
-			alert(JSON.stringify(fp))
+			// alert(JSON.stringify(fp))
 
 
 			// return Object.assign({}, state, {

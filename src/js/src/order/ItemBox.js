@@ -24,8 +24,8 @@ export class ItemBox extends React.PureComponent {
 
 	render() {
 
-		console.info(this.state.select)
-		console.info(this.state.quantity)
+		// console.info(this.state.select)
+		// console.info(this.state.quantity)
 
 		let style = {
 			border: "3px",
@@ -34,7 +34,7 @@ export class ItemBox extends React.PureComponent {
 
 
 		// if (value%2 == 0)
-		if (this.state.select || this.state.quantity > 0) {
+		if (this.props.product.quantity > 0) {
 			border = true;
 
 			style.borderStyle = "dotted"
@@ -70,15 +70,16 @@ export class ItemBox extends React.PureComponent {
 
 	handleChangeCheckbox = (e) => {
 
-		// this.props.handleCB(e.currentTarget.value === "on" ? true : false)
+		console.info("here e.currentTarget.value " + e.currentTarget.value)
 
-		// console.info("here e.currentTarget.value " + e.currentTarget.value)
-		//
-		//
-		// this.setState({
-		// 	select: (e.currentTarget.value === "on" ? true : false)
-		// })
+		console.info("e.currentTarget.checked" + e.currentTarget.checked)
 
+
+		if (e.currentTarget.checked) {
+			this.props.handleQ(1, this.props.product.id)
+		}else {
+			this.props.handleQ(0, this.props.product.id)
+		}
 
 	}
 

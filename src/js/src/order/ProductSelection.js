@@ -3,7 +3,6 @@ import * as React from 'react';
 import "./../main.scss"
 
 import ItemBox from "./ItemBox";
-import ControlledCheckbox from "./ControlledCheckbox";
 import {createFetchProductsAction, createUpdateProductSelection} from "../products/productActions";
 import {connect} from "react-redux";
 
@@ -16,7 +15,7 @@ export class ProductSelection extends React.PureComponent {
 
 		return (
 			<div>
-				ProductSelection
+				ProductSelectionX
 				<div className="product-selection">
 					{
 						items && items.map((e) => (
