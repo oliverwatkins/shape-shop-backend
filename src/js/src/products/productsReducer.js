@@ -13,26 +13,12 @@ export function reducer(state = initialState, action) {
 			};
 
 		case Actions.UPDATE_PRODUCT_SELECTION:
-			// alert("mofo! Got the UPDATE_PRODUCT_SELECTION " + action.value + " id " + action.id)
-
 
 			let foundProd = state.items.filter(item => item.id === action.id);
-
 
 			let fp = foundProd[0];
 
 			fp.quantity = action.value;
-
-			// alert(JSON.stringify(fp))
-
-
-			// return Object.assign({}, state, {
-			// 	confirmation: {
-			// 		registering: false,
-			// 		registrationConfirmed: false,
-			// 	},
-			// });
-
 
 			return {
 				...state,

@@ -6,6 +6,7 @@ import ProductList from "./ProductList";
 import Summary from "./Summary";
 import connect from "react-redux/es/connect/connect";
 import {Overview} from "../WelcomeScreen";
+import {selectSelectedProducts} from "../selectors";
 
 
 export class OrderWizard extends React.PureComponent {
@@ -30,6 +31,10 @@ export class OrderWizard extends React.PureComponent {
 						<Link to="/welcome">NEXT!</Link>
 
 
+					{
+						JSON.stringify(this.props.selectedProducts)
+					}
+
 					<span className="ico ico--md ico--home">XX</span>
 
 					<span className="fas fa-camera">cc</span>
@@ -44,6 +49,7 @@ export class OrderWizard extends React.PureComponent {
 const mapStateToProps = state => {
 	return {
 		products: state.products,
+		selectedProducts: selectSelectedProducts(state)
 	};
 };
 

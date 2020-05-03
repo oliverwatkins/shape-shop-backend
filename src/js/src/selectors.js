@@ -3,6 +3,8 @@ export const isUserLoggedIn = (state) => {
 };
 
 
+
+
 export const selectProduct = (state) => {
 	return state.login.loginToken.role;
 };
@@ -24,5 +26,6 @@ export const selectUserEmail = (state) => {
 
 export const selectProducts = (state) => state.products;
 
-export const selectProductBzId = (state, id) => state.products.filter(product => product.id === id);
+export const selectProductById = (state, id) => state.products.filter(product => product.id === id);
 
+export const selectSelectedProducts = (state) => state.products.items.filter(product => product.quantity > 0);

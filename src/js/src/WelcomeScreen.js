@@ -11,8 +11,6 @@ export class Overview extends React.PureComponent {
 
 		console.info("this.props.products " + JSON.stringify(this.props.products))
 
-		// this.props.products
-
 		return (
 			<div>
 				<img className="wee-card__img" src={welcome} alt="Wee Card" />
@@ -28,9 +26,7 @@ const mapStateToProps = state => {
 	};
 };
 
-
 export default connect(
 	mapStateToProps,
 	null,
 )(Overview);
-// export default Overview;

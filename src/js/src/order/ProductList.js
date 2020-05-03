@@ -11,15 +11,9 @@ export class ProductList extends React.PureComponent {
 				<ProductSelection  products={this.props.products}/>
 
 
-
 				<div>Right side
-
-					<div>Right
-						side
+					<div>Right side
 					</div>
-
-
-
 				</div>
 
 

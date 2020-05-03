@@ -53,10 +53,3 @@ export default connect(
 	mapDispatchToProps,
 )(ProductSelection);
 
-
-
-
-
-// {/*<ItemBox product={e}/>*/}
-
-// export default ProductSelection;
