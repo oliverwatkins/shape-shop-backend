@@ -5,8 +5,9 @@ import productSaga from '../products/ProductSaga'
 
 import api from '../api/api';
 import api_mock from '../api/api_mock';
+import {MOCK_MODE} from "../constants";
 
-let MOCK_MODE = false;
+
 
 let apiInstance;
 

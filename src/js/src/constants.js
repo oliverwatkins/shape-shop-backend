@@ -14,3 +14,6 @@ export const ADMIN_ROLE = 'MERCHANT'; //TODO backend returns 'merchant' (not 'BU
 export const STATUS_ACTIVE = 'active';
 export const STATUS_INACTIVE = 'inactive';
 export const STATUS_NOT_VERIFIED = 'not verified';
+
+
+export const MOCK_MODE = true;

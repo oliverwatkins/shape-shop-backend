@@ -14,7 +14,7 @@ export class OrderWizard extends React.PureComponent {
 			<div className={"order-wizard"}>
 				<Switch>
 					<Route path="/order/productlist">
-						<ProductList products={this.props.products}/>
+						<ProductList products={this.props.products} selectedProducts={this.props.selectedProducts}/>
 					</Route>
 					<Route path="/order/summary">
 						<Summary/>
@@ -23,10 +23,7 @@ export class OrderWizard extends React.PureComponent {
 						<Payment/>
 					</Route>
 				</Switch>
-				<div className={"aside"}>
-					<SideSummary selectedProducts={this.props.selectedProducts}/>
-						<Link to="/welcome">NEXT!</Link>
-				</div>
+
 			</div>
 		);
 	}

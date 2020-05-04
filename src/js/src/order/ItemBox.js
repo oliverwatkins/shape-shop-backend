@@ -13,24 +13,16 @@ export class ItemBox extends React.PureComponent {
 	}
 
 	render() {
-
-		let style = {
-			border: "3px",
-		}
-		let border = false;
+		let selected = ""
 
 		if (this.props.product.quantity > 0) {
-			border = true;
-
-			style.borderStyle = "dotted"
-			style.background = "pink"
+			selected = "selected"
 		}
 
 		return (
-			<div style={style}>
-				<img src={pizza} alt="Pic of pizza" width={90}/>
+			<div className={selected}>
+				<img src={pizza} alt="Pic of pizza" width={120}/>
 				<div>
-					<div>{this.props.product.quantity}</div>
 					<div>{this.props.product.name}</div>
 					<div><b> € {this.props.product.price}</b></div>
 				</div>

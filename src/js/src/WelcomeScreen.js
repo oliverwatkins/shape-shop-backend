@@ -8,13 +8,10 @@ import welcome from './assets/img/welcome.jpg';
 
 export class Overview extends React.PureComponent {
 	render() {
-
-		console.info("this.props.products " + JSON.stringify(this.props.products))
-
 		return (
 			<div>
-				<img className="wee-card__img" src={welcome} alt="Wee Card" />
-				<ProductsPanel items={this.props.products.items}/>
+				<img className="wee-card__img" style={{width:"100%"}} src={welcome} alt="  " />
+				{/*<ProductsPanel items={this.props.products.items}/>*/}
 			</div>
 		);
 	}

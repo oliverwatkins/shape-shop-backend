@@ -11,8 +11,12 @@ export class SideSummary extends React.PureComponent<Props> {
 	render() {
 
 		let style = {
-			background:"white",
-			width:300
+			// background:"white",
+			// width:112
+		}
+
+		let styleTD = {
+			padding:"5px"
 		}
 
 		return (
@@ -21,10 +25,10 @@ export class SideSummary extends React.PureComponent<Props> {
 				<table>
 				{
 					this.props.selectedProducts.map((elem: Product)=>{
-						return <tr><td>{elem.name}</td><td>{elem.price}</td><td>{elem.quantity > 1 ? elem.quantity : " "}</td><td> {priceTimesQty(elem.price, elem.quantity)}</td></tr>
+						return <tr><td>{elem.name}</td><td style={styleTD}>{elem.price}</td><td>{elem.quantity > 1 ? elem.quantity : " "}</td><td> {priceTimesQty(elem.price, elem.quantity)}</td></tr>
 					})
 				}
-					<tr><td></td><td>TOTAL:</td><td></td><td>{calculateTotal(this.props.selectedProducts)}</td></tr>
+					<tr><td> </td><td><b>Total:</b></td><td> </td><td>{calculateTotal(this.props.selectedProducts)}</td></tr>
 				</table>
 			</div>
 		);
@@ -32,7 +36,10 @@ export class SideSummary extends React.PureComponent<Props> {
 }
 
 function priceTimesQty(p, qty) {
-	return p * qty
+	let t = p * qty
+	t = t.toFixed(2);
+	return t
+
 }
 
 function calculateTotal(selectedProducts) {

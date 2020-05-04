@@ -17,21 +17,16 @@ import {MainNav} from "./MainNav";
 
 import "./main.scss"
 
+import "./css.scss"
+
+
 import "./icons.scss"
 
 import OrderWizard from "./order/OrderWizard";
+import Footer from "./Footer";
 
-// componentDidMount() {
-// 	const shouldGetLanguage = this.shouldGetLanguage(this.props);
-// 	const shouldGetCountries = this.shouldGetCountries(this.props);
-//
-// 	if (shouldGetLanguage) {
-// 		this.props.fetchLanguage(getUserLanguage());
-// 	}
-// 	if (shouldGetCountries) {
-// 		this.props.fetchCountryList();
-// 	}
-// }
+
+
 
 class App extends React.PureComponent{
 	componentDidMount() {
@@ -62,6 +57,8 @@ class App extends React.PureComponent{
 						</Switch>
 					</div>
 				</Router>
+
+				<Footer></Footer>
 			</div>
 		);
 	}
@@ -69,11 +66,7 @@ class App extends React.PureComponent{
 
 const mapStateToProps = state => {
 	return {
-		// countriesList: state.countriesList,
-		// i18n: state.i18n,
 		login: state.login,
-		// userStatus: selectUserStatus(state),
-		// userRole: selectUserRole(state),
 	};
 };
 

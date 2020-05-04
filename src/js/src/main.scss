@@ -14,8 +14,7 @@
 //}
 //
 .aside {
-  background: chartreuse;
-
+  background: #c1d138;
 }
 
 
@@ -24,17 +23,24 @@
 .product-selection {
   display: flex;
   flex-wrap: wrap;
-  background-color: DodgerBlue;
+  background-color: #fff6fe;
 }
 
 .product-selection > div {
-  background-color: #f1f1f1;
-  width: 200px;
-  height: 200px;
+  background-color: #b7b9db;
+  font-size: x-small;
+  width: 250px;
+  height: 250px;
   margin: 10px;
   text-align: center;
   //line-height: 75px;
   //font-size: 12px;
+}
+
+.product-selection > div.selected{
+  background-color: #db84d0;
+
+  border: 3px dotted blue;
 }
 
 
@@ -49,6 +55,9 @@
     padding: 0;
     overflow: hidden;
     background-color: #333333;
+
+
+
   }
 
   li {
@@ -66,8 +75,5 @@
   li a:hover {
     background-color: #111111;
   }
-
-
-
 }
 
