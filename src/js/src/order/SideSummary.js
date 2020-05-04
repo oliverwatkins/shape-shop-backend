@@ -2,6 +2,11 @@ import * as React from 'react';
 import type {Product} from "../AppState";
 
 
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
+
 type Props = {
 	selectedProducts: string
 }
@@ -11,8 +16,8 @@ export class SideSummary extends React.PureComponent<Props> {
 	render() {
 
 		let style = {
-			// background:"white",
-			// width:112
+			background:"white",
+			width:500
 		}
 
 		let styleTD = {
@@ -22,6 +27,9 @@ export class SideSummary extends React.PureComponent<Props> {
 		return (
 			<div style={style}>
 				<h4>Shopping Cart : </h4>
+
+
+
 				<table>
 				{
 					this.props.selectedProducts.map((elem: Product)=>{

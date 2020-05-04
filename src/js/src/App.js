@@ -24,6 +24,7 @@ import "./icons.scss"
 
 import OrderWizard from "./order/OrderWizard";
 import Footer from "./Footer";
+import Address from "./order/Address";
 
 
 
@@ -46,6 +47,9 @@ class App extends React.PureComponent{
 
 							<Route path="/order/productlist">
 								<OrderWizard/>
+							</Route>
+							<Route path="/order/address">
+								<Address/>
 							</Route>
 
 							<Route path="/login">
