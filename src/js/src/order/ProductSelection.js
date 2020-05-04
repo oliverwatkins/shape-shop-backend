@@ -6,8 +6,6 @@ import ItemBox from "./ItemBox";
 import {createFetchProductsAction, createUpdateProductSelection} from "../products/productActions";
 import {connect} from "react-redux";
 
-
-
 export class ProductSelection extends React.PureComponent {
 	render() {
 
@@ -15,7 +13,6 @@ export class ProductSelection extends React.PureComponent {
 
 		return (
 			<div>
-				ProductSelectionX
 				<div className="product-selection">
 					{
 						items && items.map((e) => (
@@ -29,17 +26,6 @@ export class ProductSelection extends React.PureComponent {
 	}
 }
 
-
-const mapStateToProps = state => {
-	return {
-		// countriesList: state.countriesList,
-		// i18n: state.i18n,
-		// login: state.login,
-		// userStatus: selectUserStatus(state),
-		// userRole: selectUserRole(state),
-	};
-};
-
 const mapDispatchToProps = dispatch => {
 	return {
 		updateProductSelection: (value, id) => {
@@ -49,7 +35,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps,
 )(ProductSelection);
 
