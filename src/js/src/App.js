@@ -1,23 +1,17 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Link
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Welcome from "./WelcomeScreen";
 import AdminScreen from "./AdminScreen";
-import UserScreen from "./UserScreen";
 import LoginScreen from "./login/LoginScreen";
 import {createFetchProductsAction} from "./products/productActions";
 import {MainNav} from "./MainNav";
 
 import "./main.scss"
 
-import "./css.scss"
+import "./alpenhofCss.scss"
 
 
 import "./icons.scss"
@@ -25,8 +19,8 @@ import "./icons.scss"
 import OrderWizard from "./order/OrderWizard";
 import Footer from "./Footer";
 import Address from "./order/Address";
-
-
+import Payment from "./order/Payment";
+import Summary from "./order/Summary";
 
 
 class App extends React.PureComponent{
@@ -48,8 +42,16 @@ class App extends React.PureComponent{
 							<Route path="/order/productlist">
 								<OrderWizard/>
 							</Route>
+
+
 							<Route path="/order/address">
 								<Address/>
+							</Route>
+							<Route path="/order/payment">
+								<Payment/>
+							</Route>
+							<Route path="/order/summary">
+								<Summary/>
 							</Route>
 
 							<Route path="/login">

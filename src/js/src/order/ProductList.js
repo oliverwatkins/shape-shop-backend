@@ -10,7 +10,7 @@ import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 export class ProductList extends React.PureComponent {
 	render() {
 		return (
-			<div style={{display: "flex"}}>
+			<div style={{display: "flex"}} className="wizardPanel">
 				<ProductSelection products={this.props.products}/>
 				<div className={"aside"}>
 					<SideSummary selectedProducts={this.props.selectedProducts}/>

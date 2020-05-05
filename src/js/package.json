@@ -38,6 +38,7 @@
     "flow-bin": "^0.87.0",
     "flow-typed": "^2.5.1",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
+    "formik": "^2.1.4",
     "fs-extra": "7.0.0",
     "history": "^4.7.2",
     "html-webpack-plugin": "4.0.0-alpha.2",

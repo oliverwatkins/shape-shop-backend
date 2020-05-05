@@ -1,6 +1,10 @@
 
 
 
+.wizardPanel {
+  background:orange;
+}
+
 .order-wizard {
   display: flex;
   //flex-flow: row wrap;
@@ -8,13 +12,21 @@
 
 }
 
-/* We tell all items to be 100% width, via flex-basis */
-//.order-wizard > * {
-//  flex: 1 100%;
-//}
-//
 .aside {
   background: #fff6fe;
+}
+
+
+.address {
+  margin:3px;
+}
+
+.address div {
+  margin:30px;
+}
+
+.address span.error {
+  color:red
 }
 
 
@@ -29,18 +41,16 @@
 
 .product-selection > div {
   background-color: #b7b9db;
-  font-size: x-small;
+  font-size: medium;
   width: 250px;
   height: 250px;
   margin: 10px;
   text-align: center;
-  //line-height: 75px;
-  //font-size: 12px;
 }
 
 .product-selection > div.selected{
   background-color: #db84d0;
-  border: 3px dotted blue;
+  //border: 3px dotted blue;
 }
 
 
