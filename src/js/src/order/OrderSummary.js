@@ -25,9 +25,7 @@ export class OrderSummary extends React.PureComponent<Props> {
 
 		return (
 			<div style={style}>
-				<h4>Order : </h4>
-
-
+				{/*<h4>Order : </h4>*/}
 				<table>
 					{
 						this.props.selectedProducts.map((elem: Product) => {

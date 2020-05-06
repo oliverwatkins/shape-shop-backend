@@ -3,8 +3,11 @@ import ProductSelection from "./ProductSelection";
 import OrderSummary from "./OrderSummary";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowCircleRight, faArrowCircleLeft} from "@fortawesome/free-solid-svg-icons";
+import {faArrowCircleRight, faArrowCircleLeft, faTruck} from "@fortawesome/free-solid-svg-icons";
 import {Formik} from "formik";
+
+
+import "./address.scss"
 
 
 //redundant
@@ -20,10 +23,9 @@ export class Address extends React.PureComponent {
 
 				<div className="address">
 					<h2>Delivery or Pickup?</h2>
-
-
-
-
+					<div className="icon-container">
+						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
+					</div>
 					<Formik
 						initialValues={{email: '', password: '', name: ''}}
 						validate={values => {
@@ -61,8 +63,11 @@ export class Address extends React.PureComponent {
 							}) => (
 							<form onSubmit={handleSubmit}>
 								<div>
-									Name
+
+									<label htmlFor="name">Name</label>
+
 									<input
+										id="name"
 										type="text"
 										name="name"
 										onChange={handleChange}
@@ -75,8 +80,10 @@ export class Address extends React.PureComponent {
 								</div>
 								<div>
 
-									Strasse
+									<label htmlFor="street">Strasse</label>
+
 									<input
+										id="street"
 										type="text"
 										name="street"
 										onChange={handleChange}
@@ -90,8 +97,9 @@ export class Address extends React.PureComponent {
 								</div>
 								<div>
 
-									Postleitzahl
+									<label htmlFor="postcode">Postleitzahl</label>
 									<input
+										id="postcode"
 										type="text"
 										name="postcode"
 										onChange={handleChange}
@@ -106,8 +114,9 @@ export class Address extends React.PureComponent {
 
 								<div>
 
-									Telefon
+									<label htmlFor="tel">Telefon</label>
 									<input
+										id="tel"
 										type="text"
 										name="telephone"
 										onChange={handleChange}
@@ -119,8 +128,12 @@ export class Address extends React.PureComponent {
 									</span>
 								</div>
 								<div>
-									Email
+
+
+									<label htmlFor="email">Email</label>
+
 									<input
+										id="email"
 										type="email"
 										name="email"
 										onChange={handleChange}
