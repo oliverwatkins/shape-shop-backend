@@ -14,22 +14,8 @@
 }
 
 .aside {
-  background: #f2ff57;
+  background: #fff6fe;
 }
-
-
-.address {
-  margin:3px;
-}
-
-.address div {
-  margin:30px;
-}
-
-.address span.error {
-  color:red
-}
-
 
 
 
@@ -41,7 +27,7 @@
 }
 
 .product-selection > div {
-  background-color: #b7b9db;
+  background-color: #fff6fe;
   font-size: medium;
   width: 250px;
   height: 250px;
@@ -50,11 +36,9 @@
 }
 
 .product-selection > div.selected{
-  background-color: #db84d0;
+  background-color: #dbceda;
   //border: 3px dotted blue;
 }
-
-
 
 
 //nav

@@ -16,9 +16,15 @@ export class Summary extends React.PureComponent {
 
 				<div style={{width:"100%", height:"100%", background:"white"}}>
 					<div>Summary</div>
+
+					<OrderSummary selectedProducts={this.props.selectedProducts}/>
+
+					<div>Address</div>
+
+
 				</div>
 
-				<OrderSummary selectedProducts={this.props.selectedProducts}/>
+
 
 
 				<div className={"aside"}>

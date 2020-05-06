@@ -1,8 +1,21 @@
 
 .wizardPanel {
 
-  background:orange;
+  background: #fff6fe;
   width:100%;
+
+  .address {
+    margin:3px;
+    width:100%;
+  }
+
+  .address div {
+    margin:30px;
+  }
+
+  .address span.error {
+    color:red
+  }
 
   .row {
     display: -ms-flexbox; /* IE10 */

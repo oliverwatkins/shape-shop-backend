@@ -13,14 +13,8 @@ import "./main.scss"
 
 import "./alpenhofCss.scss"
 
-
-import "./icons.scss"
-
 import OrderWizard from "./order/OrderWizard";
 import Footer from "./Footer";
-import Address from "./order/Address";
-import Payment from "./order/Payment";
-import Summary from "./order/Summary";
 
 
 class App extends React.PureComponent{
@@ -50,7 +44,6 @@ class App extends React.PureComponent{
 						</Switch>
 					</div>
 				</Router>
-
 				<Footer></Footer>
 			</div>
 		);

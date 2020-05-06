@@ -1,18 +1,30 @@
 import * as React from 'react';
-import ProductSelection from "./ProductSelection";
-import OrderSummary from "./OrderSummary";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowCircleRight, faArrowCircleLeft, faTruck} from "@fortawesome/free-solid-svg-icons";
+import {faArrowCircleLeft, faArrowCircleRight, faTruck} from "@fortawesome/free-solid-svg-icons";
 import {Formik} from "formik";
 
+import "./order.scss"
+import {Redirect} from "react-router";
 
-import "./address.scss"
 
-
-//redundant
 export class Address extends React.PureComponent {
+
+	state = {
+		redirect: false
+	}
+
+	setRedirect = () => {
+		this.setState({
+			redirect: true
+		})
+	}
+
 	render() {
+		if (this.state.redirect) {
+			return <Redirect to='/order/payment' />
+		}
+
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
@@ -44,10 +56,17 @@ export class Address extends React.PureComponent {
 							}
 							return errors;
 						}}
-						onSubmit={(values, {setSubmitting}) => {
+
+
+						onSubmit={(values, blah) => {
+
 							setTimeout(() => {
+
 								alert(JSON.stringify(values, null, 2));
-								setSubmitting(false);
+
+								blah.setSubmitting(false);
+
+								this.setRedirect()
 							}, 400);
 						}}
 					>
@@ -128,10 +147,7 @@ export class Address extends React.PureComponent {
 									</span>
 								</div>
 								<div>
-
-
 									<label htmlFor="email">Email</label>
-
 									<input
 										id="email"
 										type="email"
@@ -144,6 +160,7 @@ export class Address extends React.PureComponent {
 									{errors.email && touched.email && errors.email}
 									</span>
 								</div>
+
 								<button type="submit" disabled={isSubmitting}>
 									Submit
 								</button>
@@ -151,7 +168,6 @@ export class Address extends React.PureComponent {
 						)}
 					</Formik>
 				</div>
-
 
 				<div className={"aside"}>
 					<Link to="/order/payment">
