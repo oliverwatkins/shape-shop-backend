@@ -38,22 +38,9 @@ class App extends React.PureComponent{
 							<Route path="/admin">
 								<AdminScreen/>
 							</Route>
-
-							<Route path="/order/productlist">
+							<Route path="/order">
 								<OrderWizard/>
 							</Route>
-
-
-							<Route path="/order/address">
-								<Address/>
-							</Route>
-							<Route path="/order/payment">
-								<Payment/>
-							</Route>
-							<Route path="/order/summary">
-								<Summary/>
-							</Route>
-
 							<Route path="/login">
 								<LoginScreen/>
 							</Route>

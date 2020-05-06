@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ProductSelection from "./ProductSelection";
-import SideSummary from "./SideSummary";
+import OrderSummary from "./OrderSummary";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleRight, faArrowCircleLeft} from "@fortawesome/free-solid-svg-icons";

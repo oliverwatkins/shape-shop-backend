@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import OrderSummary from "./OrderSummary";
 
 
 export class Summary extends React.PureComponent {
@@ -17,6 +18,7 @@ export class Summary extends React.PureComponent {
 					<div>Summary</div>
 				</div>
 
+				<OrderSummary selectedProducts={this.props.selectedProducts}/>
 
 
 				<div className={"aside"}>
