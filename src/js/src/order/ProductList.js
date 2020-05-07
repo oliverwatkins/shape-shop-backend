@@ -6,6 +6,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 
 
+import {wizardPages as pages} from "./OrderWizard"
+
 type Props = {
 	products:[],
 	selectedProducts:[],
@@ -21,7 +23,8 @@ export class ProductList extends React.PureComponent<Props> {
 
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
 
-					<Link to="/order/address">
+
+					<Link to={pages.ADDRESS}>
 						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
 					</Link>
 				</div>

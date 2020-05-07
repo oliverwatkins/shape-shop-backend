@@ -8,6 +8,14 @@ import Summary from "./Summary";
 import Payment from "./Payment";
 import WhichPayment from "./WhichPayment";
 
+//navigation links
+export const wizardPages = {
+	PRODUCT_LIST : "/order/productlist",
+	ADDRESS : "/order/address",
+	WHICH_PAYMENT : "/order/whichPayment",
+	PAYMENT : "/order/payment",
+	SUMMARY : "/order/summary"
+}
 
 export class OrderWizard extends React.PureComponent {
 	render() {
@@ -15,19 +23,19 @@ export class OrderWizard extends React.PureComponent {
 			<div className={"order-wizard"}>
 				<Router>
 						<Switch>
-							<Route path="/order/productlist">
+							<Route path={wizardPages.PRODUCT_LIST}>
 								<ProductList products={this.props.products} selectedProducts={this.props.selectedProducts}/>
 							</Route>
-							<Route path="/order/address">
+							<Route path={wizardPages.ADDRESS}>
 								<Address/>
 							</Route>
-							<Route path="/order/whichPayment">
+							<Route path={wizardPages.WHICH_PAYMENT}>
 								<WhichPayment/>
 							</Route>
-							<Route path="/order/payment">
+							<Route path={wizardPages.PAYMENT}>
 								<Payment/>
 							</Route>
-							<Route path="/order/summary">
+							<Route path={wizardPages.SUMMARY}>
 								<Summary products={this.props.products} selectedProducts={this.props.selectedProducts}/>
 							</Route>
 						</Switch>

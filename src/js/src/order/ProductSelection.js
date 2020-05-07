@@ -6,6 +6,9 @@ import ItemBox from "./ItemBox";
 import {createFetchProductsAction, createUpdateProductSelection} from "./redux/productActions";
 import {connect} from "react-redux";
 
+
+
+
 export class ProductSelection extends React.PureComponent {
 	render() {
 

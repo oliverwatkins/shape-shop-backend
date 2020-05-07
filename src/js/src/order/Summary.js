@@ -10,7 +10,7 @@ export class Summary extends React.PureComponent {
 		return (
 			<div style={{display:"flex"}} className="wizardPanel">
 
-				<Link to="/order/address">
+				<Link to="/order/address??">
 					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize:"100px", color:"gray"}} />
 				</Link>
 
@@ -18,17 +18,11 @@ export class Summary extends React.PureComponent {
 					<div>Summary</div>
 
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
-
 					<div>Address</div>
 
-
 				</div>
-
-
-
-
 				<div className={"aside"}>
-					<Link to="/order/summary">
+					<Link to="???">
 						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize:"100px", color:"gray"}} />
 					</Link>
 				</div>

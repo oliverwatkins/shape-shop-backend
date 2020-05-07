@@ -9,7 +9,7 @@ import {Redirect} from "react-router";
 import {createUpdateAddress, createUpdateProductSelection} from "./redux/productActions";
 import connect from "react-redux/es/connect/connect";
 import {ProductSelection} from "./ProductSelection";
-
+import {wizardPages as pages} from "./OrderWizard"
 
 export class Address extends React.PureComponent {
 
@@ -25,29 +25,21 @@ export class Address extends React.PureComponent {
 
 	render() {
 		if (this.state.redirect) {
-			return <Redirect to='/order/whichPayment' />
+			return <Redirect to={pages.WHICH_PAYMENT}/>
 		}
 
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
-
-
-
-			<button >
-				<Link to="/order/productlist">
-					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-				</Link>
-			</button>
-
-
+				<button>
+					<Link to={pages.PRODUCT_LIST}>
+						<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
+					</Link>
+				</button>
 				<div className="address">
+
 					<h2>Delivery or Pickup?</h2>
+
 					<div className="icon-container">
-
-
-
-
-
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 					</div>
 					<Formik
@@ -122,7 +114,6 @@ export class Address extends React.PureComponent {
 									<span className={"error"}>
 									{errors.street && touched.street && errors.street}
 									</span>
-
 								</div>
 								<div>
 									<label htmlFor="postcode">Postleitzahl</label>
@@ -175,14 +166,14 @@ export class Address extends React.PureComponent {
 					</Formik>
 				</div>
 
-				<button type="submit" form="addressForm" >
+				<button type="submit" form="addressForm">
 					<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
 				</button>
 
 				{/*<div className={"aside"}>*/}
-					{/*<Link to="/order/payment">*/}
-						{/*<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>*/}
-					{/*</Link>*/}
+				{/*<Link to="/order/payment">*/}
+				{/*<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>*/}
+				{/*</Link>*/}
 				{/*</div>*/}
 			</div>
 		);
