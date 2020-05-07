@@ -1,7 +1,7 @@
 import {fork} from 'redux-saga/effects';
 import login from '../login/LoginSaga'
 
-import productSaga from '../products/ProductSaga'
+import productSaga from '../order/redux/ProductSaga'
 
 import api from '../api/api';
 import api_mock from '../api/api_mock';

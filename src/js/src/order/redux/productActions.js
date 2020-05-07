@@ -13,9 +13,6 @@ export function createFetchProductsSuccessAction(data) {
 }
 
 
-
-
-
 export function createUpdateProductSelection(value, id) {
 	return {
 		type: Actions.UPDATE_PRODUCT_SELECTION,
@@ -24,10 +21,19 @@ export function createUpdateProductSelection(value, id) {
 	};
 }
 
+export function createUpdateAddress(value, id) {
+	return {
+		type: Actions.UPDATE_ADDRESS,
+		value: value,
+		id: id
+	};
+}
+
 
 export const Actions = {
+	UPDATE_PAYMENT:'UPDATE_PAYMENT',
 	UPDATE_PRODUCT_SELECTION: 'UPDATE_PRODUCT_SELECTION',
+	UPDATE_ADDRESS: 'UPDATE_ADDRESS',
 	FETCH_PRODUCTS: 'FETCH_PRODUCTS',
-	RECEIVE_SHOPS_FAIL: 'RECEIVE_SHOPS_FAIL',
 	FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
 };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import "./../main.scss"
 
 import ItemBox from "./ItemBox";
-import {createFetchProductsAction, createUpdateProductSelection} from "../products/productActions";
+import {createFetchProductsAction, createUpdateProductSelection} from "./redux/productActions";
 import {connect} from "react-redux";
 
 export class ProductSelection extends React.PureComponent {
@@ -16,7 +16,7 @@ export class ProductSelection extends React.PureComponent {
 				<div className="product-selection">
 					{
 						items && items.map((e) => (
-							<ItemBox product={e} handleQ={this.props.updateProductSelection}/>
+							<ItemBox product={e} handleChangeSelection={this.props.updateProductSelection}/>
 							)
 						)
 					}

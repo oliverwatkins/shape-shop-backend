@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Welcome from "./WelcomeScreen";
 import AdminScreen from "./AdminScreen";
 import LoginScreen from "./login/LoginScreen";
-import {createFetchProductsAction} from "./products/productActions";
+import {createFetchProductsAction} from "./order/redux/productActions";
 import {MainNav} from "./MainNav";
 
 import "./main.scss"

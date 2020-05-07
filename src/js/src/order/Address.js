@@ -6,6 +6,9 @@ import {Formik} from "formik";
 
 import "./order.scss"
 import {Redirect} from "react-router";
+import {createUpdateAddress, createUpdateProductSelection} from "./redux/productActions";
+import connect from "react-redux/es/connect/connect";
+import {ProductSelection} from "./ProductSelection";
 
 
 export class Address extends React.PureComponent {
@@ -22,20 +25,29 @@ export class Address extends React.PureComponent {
 
 	render() {
 		if (this.state.redirect) {
-			return <Redirect to='/order/payment' />
+			return <Redirect to='/order/whichPayment' />
 		}
 
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
+
+
+			<button >
 				<Link to="/order/productlist">
 					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
 				</Link>
+			</button>
 
 
 				<div className="address">
 					<h2>Delivery or Pickup?</h2>
 					<div className="icon-container">
+
+
+
+
+
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 					</div>
 					<Formik
@@ -66,6 +78,8 @@ export class Address extends React.PureComponent {
 
 								blah.setSubmitting(false);
 
+								this.props.updateAddress(values);
+
 								this.setRedirect()
 							}, 400);
 						}}
@@ -80,11 +94,9 @@ export class Address extends React.PureComponent {
 								isSubmitting,
 								/* and other goodies */
 							}) => (
-							<form onSubmit={handleSubmit}>
+							<form onSubmit={handleSubmit} id="addressForm">
 								<div>
-
 									<label htmlFor="name">Name</label>
-
 									<input
 										id="name"
 										type="text"
@@ -98,9 +110,7 @@ export class Address extends React.PureComponent {
 									</span>
 								</div>
 								<div>
-
 									<label htmlFor="street">Strasse</label>
-
 									<input
 										id="street"
 										type="text"
@@ -115,7 +125,6 @@ export class Address extends React.PureComponent {
 
 								</div>
 								<div>
-
 									<label htmlFor="postcode">Postleitzahl</label>
 									<input
 										id="postcode"
@@ -128,11 +137,8 @@ export class Address extends React.PureComponent {
 									<span className={"error"}>
 									{errors.postcode && touched.postcode && errors.postcode}
 									</span>
-
 								</div>
-
 								<div>
-
 									<label htmlFor="tel">Telefon</label>
 									<input
 										id="tel"
@@ -169,14 +175,30 @@ export class Address extends React.PureComponent {
 					</Formik>
 				</div>
 
-				<div className={"aside"}>
-					<Link to="/order/payment">
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</div>
+				<button type="submit" form="addressForm" >
+					<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
+				</button>
+
+				{/*<div className={"aside"}>*/}
+					{/*<Link to="/order/payment">*/}
+						{/*<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>*/}
+					{/*</Link>*/}
+				{/*</div>*/}
 			</div>
 		);
 	}
 }
 
-export default Address;
+const mapDispatchToProps = dispatch => {
+	return {
+		updateAddress: (value, id) => {
+			dispatch(createUpdateAddress(value, id));
+		},
+	};
+};
+
+export default connect(
+	null,
+	mapDispatchToProps,
+)(Address);
+

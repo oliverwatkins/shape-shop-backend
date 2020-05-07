@@ -3,13 +3,10 @@ import ProductList from "./ProductList";
 import connect from "react-redux/es/connect/connect";
 import {selectSelectedProducts} from "../selectors";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {MainNav} from "../MainNav";
-import AdminScreen from "../AdminScreen";
 import Address from "./Address";
-import Payment from "./Payment";
 import Summary from "./Summary";
-import LoginScreen from "../login/LoginScreen";
-import Welcome from "../WelcomeScreen";
+import Payment from "./Payment";
+import WhichPayment from "./WhichPayment";
 
 
 export class OrderWizard extends React.PureComponent {
@@ -23,6 +20,9 @@ export class OrderWizard extends React.PureComponent {
 							</Route>
 							<Route path="/order/address">
 								<Address/>
+							</Route>
+							<Route path="/order/whichPayment">
+								<WhichPayment/>
 							</Route>
 							<Route path="/order/payment">
 								<Payment/>

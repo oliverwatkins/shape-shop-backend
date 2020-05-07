@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ProductsPanel from "./ProductsPanel";
-import {createFetchProductsAction} from "./products/productActions";
+import {createFetchProductsAction} from "./order/redux/productActions";
 import connect from "react-redux/es/connect/connect";
 
 import welcome from './assets/img/welcome.jpg';
