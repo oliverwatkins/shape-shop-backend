@@ -15,7 +15,7 @@ export function reducer(state = initialState, action) {
 		case Actions.UPDATE_ADDRESS:
 			return {
 				...state,
-				address: action.values
+				address: action.value
 			}
 		case Actions.UPDATE_PAYMENT:
 			return {

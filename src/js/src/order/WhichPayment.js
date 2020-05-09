@@ -1,11 +1,8 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 
 import {wizardPages as pages} from "./OrderWizard"
+import {NextButton} from "./NextButton";
+import {BackButton} from "./BackButton";
 
 export class WhichPayment extends React.PureComponent {
 
@@ -14,32 +11,25 @@ export class WhichPayment extends React.PureComponent {
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
-				<button>
-					<Link to={pages.ADDRESS}>
-						<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</button>
-				<div>
-				<h2>How do you wish to pay?</h2>
-				</div>
+				<BackButton page={pages.ADDRESS}/>
 
 				<div>
 					<div>
-						<label htmlFor="postcode">Online?</label>
-						<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+						<h2>How do you wish to pay?</h2>
 					</div>
+
 					<div>
-						<label htmlFor="postcode">Pay on arrival?</label>
-						<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+						<input type="radio" id="contactChoice1"
+									 name="pckupOrDelivery" value="pickup" checked/>
+						<label htmlFor="contactChoice1">Online</label>
+
+						<input type="radio" id="contactChoice2"
+									 name="pckupOrDelivery" value="delivery"/>
+						<label htmlFor="contactChoice2">Pay on arrival</label>
 					</div>
 				</div>
 
-
-				<button>
-					<Link to={pages.SUMMARY}>
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</button>
+				<NextButton label={"NEXT"} page={pages.SUMMARY}/>
 			</div>
 		);
 	}

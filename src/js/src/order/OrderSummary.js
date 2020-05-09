@@ -2,10 +2,6 @@ import * as React from 'react';
 import type {Product} from "../AppState";
 
 
-import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-
 type Props = {
 	selectedProducts: string
 }

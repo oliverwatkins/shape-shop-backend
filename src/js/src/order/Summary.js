@@ -3,9 +3,18 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import OrderSummary from "./OrderSummary";
+import {NextButton} from "./NextButton";
+import {wizardPages as pages} from "./OrderWizard";
 
 
-export class Summary extends React.PureComponent {
+type Props = {
+	selectedProducts: [],
+	address: {}
+}
+
+
+
+export class Summary<Props> extends React.PureComponent {
 	render() {
 		return (
 			<div style={{display:"flex"}} className="wizardPanel">
@@ -15,17 +24,17 @@ export class Summary extends React.PureComponent {
 				</Link>
 
 				<div style={{width:"100%", height:"100%", background:"white"}}>
-					<div>Summary</div>
+					<h2>Summary</h2>
 
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
 					<div>Address</div>
 
+					{JSON.stringify(this.props.address)}
+
+					<div>Payment Type</div>
+
 				</div>
-				<div className={"aside"}>
-					<Link to="???">
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize:"100px", color:"gray"}} />
-					</Link>
-				</div>
+				<NextButton label={"OK"} page={pages.ADDRESS_}/>
 			</div>
 		);
 	}

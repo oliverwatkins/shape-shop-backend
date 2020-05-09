@@ -7,10 +7,11 @@ import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 
 
 import {wizardPages as pages} from "./OrderWizard"
+import {NextButton} from "./NextButton";
 
 type Props = {
-	products:[],
-	selectedProducts:[],
+	products: [],
+	selectedProducts: [],
 }
 
 //redundant
@@ -20,13 +21,8 @@ export class ProductList extends React.PureComponent<Props> {
 			<div style={{display: "flex"}} className="wizardPanel">
 				<ProductSelection products={this.props.products}/>
 				<div className={"aside"}>
-
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
-
-
-					<Link to={pages.ADDRESS}>
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
+					<NextButton label={"NEXT"} page={pages.ADDRESS}/>
 				</div>
 			</div>
 		);

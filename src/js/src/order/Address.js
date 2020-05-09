@@ -10,6 +10,8 @@ import {createUpdateAddress, createUpdateProductSelection} from "./redux/product
 import connect from "react-redux/es/connect/connect";
 import {ProductSelection} from "./ProductSelection";
 import {wizardPages as pages} from "./OrderWizard"
+import {NextButton} from "./NextButton";
+import {BackButton} from "./BackButton";
 
 export class Address extends React.PureComponent {
 
@@ -30,11 +32,9 @@ export class Address extends React.PureComponent {
 
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
-				<button>
-					<Link to={pages.PRODUCT_LIST}>
-						<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</button>
+
+				<BackButton page={pages.PRODUCT_LIST}/>
+
 				<div className="address">
 
 					<h2>Delivery or Pickup?</h2>
@@ -42,30 +42,24 @@ export class Address extends React.PureComponent {
 					<div className="icon-container">
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 					</div>
+
+
+					<div>
+						<input type="radio" id="contactChoice1"
+									 name="pckupOrDelivery" value="pickup" checked/>
+						<label htmlFor="contactChoice1">Pickup</label>
+
+						<input type="radio" id="contactChoice2"
+									 name="pckupOrDelivery" value="delivery"/>
+						<label htmlFor="contactChoice2">Delivery</label>
+					</div>
+
+
 					<Formik
 						initialValues={{email: '', password: '', name: ''}}
-						validate={values => {
-							const errors = {};
-
-							if (!values.name) {
-								errors.name = 'Name Required';
-							}
-
-							if (!values.email) {
-								errors.email = 'Required';
-							} else if (
-								!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-							) {
-								errors.email = 'Invalid email address';
-							}
-							return errors;
-						}}
-
-
+						validate={validator}
 						onSubmit={(values, blah) => {
-
 							setTimeout(() => {
-
 								alert(JSON.stringify(values, null, 2));
 
 								blah.setSubmitting(false);
@@ -74,19 +68,11 @@ export class Address extends React.PureComponent {
 
 								this.setRedirect()
 							}, 400);
-						}}
-					>
-						{({
-								values,
-								errors,
-								touched,
-								handleChange,
-								handleBlur,
-								handleSubmit,
-								isSubmitting,
-								/* and other goodies */
-							}) => (
+						}}>
+
+						{({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
 							<form onSubmit={handleSubmit} id="addressForm">
+
 								<div>
 									<label htmlFor="name">Name</label>
 									<input
@@ -157,7 +143,6 @@ export class Address extends React.PureComponent {
 									{errors.email && touched.email && errors.email}
 									</span>
 								</div>
-
 								<button type="submit" disabled={isSubmitting}>
 									Submit
 								</button>
@@ -165,19 +150,29 @@ export class Address extends React.PureComponent {
 						)}
 					</Formik>
 				</div>
-
-				<button type="submit" form="addressForm">
-					<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-				</button>
-
-				{/*<div className={"aside"}>*/}
-				{/*<Link to="/order/payment">*/}
-				{/*<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>*/}
-				{/*</Link>*/}
-				{/*</div>*/}
+				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/>
 			</div>
 		);
 	}
+}
+
+
+
+let validator = (values) => {
+		const errors = {};
+
+		if (!values.name) {
+			errors.name = 'Name Required';
+		}
+
+		if (!values.email) {
+			errors.email = 'Required';
+		} else if (
+			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+		) {
+			errors.email = 'Invalid email address';
+		}
+		return errors;
 }
 
 const mapDispatchToProps = dispatch => {
@@ -192,4 +187,3 @@ export default connect(
 	null,
 	mapDispatchToProps,
 )(Address);
-
