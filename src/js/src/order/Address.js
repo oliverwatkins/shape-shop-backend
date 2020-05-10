@@ -15,8 +15,8 @@ export class Address extends React.PureComponent {
 
 	state = {
 		redirect: false,
-		pickup: 'pickup',
-		address: ''
+		pickup: true,
+		delivery: false
 	}
 
 	setRedirect = () => {
@@ -26,14 +26,19 @@ export class Address extends React.PureComponent {
 	}
 
 	onPickupChanged = (e) => {
+
 		this.setState({
-			pickup: e.currentTarget.value
+			pickup: e.currentTarget.value === 'pickup',
+			delivery:false
 		});
 	}
 
 	onDeliveryChanged = (e) => {
+
 		this.setState({
-			delivery: e.currentTarget.value
+			delivery: e.currentTarget.value === 'delivery',
+			pickup: false
+
 		});
 	}
 
@@ -42,6 +47,8 @@ export class Address extends React.PureComponent {
 		if (this.state.redirect) {
 			return <Redirect to={pages.WHICH_PAYMENT}/>
 		}
+
+		console.info("this.state.delivery && this.state.pickup" + this.state.delivery && this.state.pickup)
 
 		return (
 			<div className="wizardPanel">
@@ -58,23 +65,25 @@ export class Address extends React.PureComponent {
 
 
 					<div>
-						<input type="radio" id="contactChoice1"
+						<input type="radio"
+									 id="contactChoice1"
 									 name="pckupOrDelivery"
 									 value="pickup"
 									 onChange={this.onPickupChanged}
-									 checked={this.state.pickup === "pickup"}/>
+									 checked={this.state.pickup}/>
 						<label htmlFor="contactChoice1">Pickup</label>
 
-						<input type="radio" id="contactChoice2"
+						<input type="radio"
+									 id="contactChoice2"
 									 name="pckupOrDelivery"
 									 value="delivery"
-									 checked={this.state.delivery === "delivery"}
+									 checked={this.state.delivery}
 									 onChange={this.onDeliveryChanged}
 						/>
 						<label htmlFor="contactChoice2">Delivery</label>
 					</div>
 
-
+					{this.state.delivery && !this.state.pickup &&
 					<Formik
 						initialValues={{email: '', password: '', name: ''}}
 						validate={validator}
@@ -169,6 +178,7 @@ export class Address extends React.PureComponent {
 							</form>
 						)}
 					</Formik>
+					}
 				</div>
 				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/>
 			</div>
