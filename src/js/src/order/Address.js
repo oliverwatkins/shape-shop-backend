@@ -29,13 +29,13 @@ export class Address extends React.PureComponent {
 		}
 
 		return (
-			<div style={{display: "flex"}} className="wizardPanel">
+			<div className="wizardPanel">
 
 				<BackButton page={pages.PRODUCT_LIST}/>
 
-				<div className="address">
+				<div className="wizardInner">
 
-					<h2>Delivery or Pickup?</h2>
+					<h2 className={"wizardHeader"}>Delivery or Pickup?</h2>
 
 					<div className="icon-container">
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>

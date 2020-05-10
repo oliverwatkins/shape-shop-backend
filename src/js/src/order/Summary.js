@@ -8,6 +8,7 @@ import {wizardPages as pages} from "./OrderWizard";
 import AddressSummary from "./AddressSummary";
 import type {Address} from "../AppState";
 import PaymentSummary from "./PaymentSummary";
+import {BackButton} from "./BackButton";
 
 
 type Props = {
@@ -21,11 +22,9 @@ export class Summary<Props> extends React.PureComponent {
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
-				<Link to="/order/address??">
-					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-				</Link>
+				<BackButton page={"/order/address??"}/>
 
-				<div style={{width: "100%", height: "100%", background: "white"}}>
+				<div className={"wizardInner"}>
 					<h2>Summary</h2>
 
 					<h3>Order</h3>
@@ -40,11 +39,7 @@ export class Summary<Props> extends React.PureComponent {
 
 					<PaymentSummary/>
 
-
 					{/*{JSON.stringify(this.props.address)}*/}
-
-
-
 				</div>
 				<NextButton label={"OK"} page={pages.ADDRESS_}/>
 			</div>

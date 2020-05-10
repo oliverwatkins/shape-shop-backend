@@ -1,19 +1,30 @@
 
+//.wizardPanel {
+//  background:orange;
+//  width:100%;
+//  display:flex;
+//}
+
+
 .wizardPanel {
 
   background: #fff6fe;
   width:100%;
+  display:flex;
 
-  .address {
-    margin:3px;
-    width:100%;
-  }
-
-  .address div {
+  .wizardHeader {
     margin:30px;
   }
 
-  .address span.error {
+  .wizardInner {
+    width:100%;
+  }
+
+  .wizardInner div {
+    margin:30px;
+  }
+
+  .wizardInner span.error {
     color:red
   }
 

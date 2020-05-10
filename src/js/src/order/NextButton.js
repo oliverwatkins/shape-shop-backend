@@ -12,21 +12,21 @@ type Props = {
 
 export function NextButton(props: Props) {
 	return (
-		<button className={"nextButton"} type={props.type} form={props.form}>
-			<div style={{display: "flex", fontSize: "65px"}}>
-				<div style={{color: "gray", fontSize: "65px"}}>
+		<button className={"nextButton next-prev-button"} type={props.type} form={props.form}>
+			<div style={{display: "flex"}}>
+				<div className={"label"}>
 					{props.label}
 				</div>
 				{props.page &&
 				<Link to={props.page}>
 					<div>
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
+						<FontAwesomeIcon className={"icon"} icon={faArrowCircleRight} />
 					</div>
 				</Link>
 				}
 				{!props.page &&
 					<div>
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
+						<FontAwesomeIcon className={"icon"} icon={faArrowCircleRight}/>
 					</div>
 				}
 			</div>

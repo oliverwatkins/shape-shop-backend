@@ -20,8 +20,9 @@ export class ProductList extends React.PureComponent<Props> {
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 				<ProductSelection products={this.props.products}/>
-				<div className={"aside"}>
+				<div>
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
+
 					<NextButton label={"NEXT"} page={pages.ADDRESS}/>
 				</div>
 			</div>
