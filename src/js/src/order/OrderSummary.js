@@ -6,43 +6,40 @@ type Props = {
 	selectedProducts: string
 }
 
-export class OrderSummary extends React.PureComponent<Props> {
+export function OrderSummary(props: Props) {
 
-	render() {
-
-		let style = {
-			background: "white",
-			width: 500
-		}
-
-		let styleTD = {
-			padding: "5px 9px 12px 23px"
-		}
-
-		return (
-			<div style={style}>
-				{/*<h4>Order : </h4>*/}
-				<table>
-					{
-						this.props.selectedProducts.map((elem: Product) => {
-							return <tr>
-								<td style={styleTD}>{elem.name}</td>
-								<td style={styleTD}>{elem.price}</td>
-								<td style={styleTD}>{elem.quantity > 1 ? elem.quantity : " "}</td>
-								<td style={styleTD}>{priceTimesQty(elem.price, elem.quantity)}</td>
-							</tr>
-						})
-					}
-					<tr>
-						<td style={styleTD}></td>
-						<td style={styleTD}><b>Total:</b></td>
-						<td style={styleTD}></td>
-						<td style={styleTD}>{calculateTotal(this.props.selectedProducts)}</td>
-					</tr>
-				</table>
-			</div>
-		);
+	let style = {
+		background: "white",
+		width: 500
 	}
+
+	let styleTD = {
+		padding: "5px 9px 12px 23px"
+	}
+
+	return (
+		<div style={style}>
+			{/*<h4>Order : </h4>*/}
+			<table>
+				{
+					props.selectedProducts.map((elem: Product) => {
+						return <tr>
+							<td style={styleTD}>{elem.name}</td>
+							<td style={styleTD}>{elem.price}</td>
+							<td style={styleTD}>{elem.quantity > 1 ? elem.quantity : " "}</td>
+							<td style={styleTD}>{priceTimesQty(elem.price, elem.quantity)}</td>
+						</tr>
+					})
+				}
+				<tr>
+					<td style={styleTD}></td>
+					<td style={styleTD}><b>Total:</b></td>
+					<td style={styleTD}></td>
+					<td style={styleTD}>{calculateTotal(props.selectedProducts)}</td>
+				</tr>
+			</table>
+		</div>
+	);
 }
 
 function priceTimesQty(p, qty) {

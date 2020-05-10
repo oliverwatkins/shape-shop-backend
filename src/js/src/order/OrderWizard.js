@@ -19,6 +19,10 @@ export const wizardPages = {
 
 export class OrderWizard extends React.PureComponent {
 	render() {
+
+		// debugger;
+
+
 		return (
 			<div className={"order-wizard"}>
 				<Router>
@@ -48,7 +52,7 @@ export class OrderWizard extends React.PureComponent {
 const mapStateToProps = state => {
 	return {
 		products: state.products,
-		address: state.products && state.products.address,
+		address: state.products && state.products.address, //TODO move
 		selectedProducts: selectSelectedProducts(state)
 	};
 };

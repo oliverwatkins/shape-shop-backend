@@ -1,14 +1,12 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowCircleLeft, faArrowCircleRight, faTruck} from "@fortawesome/free-solid-svg-icons";
+import {faTruck} from "@fortawesome/free-solid-svg-icons";
 import {Formik} from "formik";
 
 import "./order.scss"
 import {Redirect} from "react-router";
-import {createUpdateAddress, createUpdateProductSelection} from "./redux/productActions";
+import {createUpdateAddress} from "./redux/productActions";
 import connect from "react-redux/es/connect/connect";
-import {ProductSelection} from "./ProductSelection";
 import {wizardPages as pages} from "./OrderWizard"
 import {NextButton} from "./NextButton";
 import {BackButton} from "./BackButton";
