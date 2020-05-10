@@ -14,7 +14,9 @@ import {BackButton} from "./BackButton";
 export class Address extends React.PureComponent {
 
 	state = {
-		redirect: false
+		redirect: false,
+		pickup: 'pickup',
+		address: ''
 	}
 
 	setRedirect = () => {
@@ -22,6 +24,19 @@ export class Address extends React.PureComponent {
 			redirect: true
 		})
 	}
+
+	onPickupChanged = (e) => {
+		this.setState({
+			pickup: e.currentTarget.value
+		});
+	}
+
+	onDeliveryChanged = (e) => {
+		this.setState({
+			delivery: e.currentTarget.value
+		});
+	}
+
 
 	render() {
 		if (this.state.redirect) {
@@ -44,11 +59,18 @@ export class Address extends React.PureComponent {
 
 					<div>
 						<input type="radio" id="contactChoice1"
-									 name="pckupOrDelivery" value="pickup" checked/>
+									 name="pckupOrDelivery"
+									 value="pickup"
+									 onChange={this.onPickupChanged}
+									 checked={this.state.pickup === "pickup"}/>
 						<label htmlFor="contactChoice1">Pickup</label>
 
 						<input type="radio" id="contactChoice2"
-									 name="pckupOrDelivery" value="delivery"/>
+									 name="pckupOrDelivery"
+									 value="delivery"
+									 checked={this.state.delivery === "delivery"}
+									 onChange={this.onDeliveryChanged}
+						/>
 						<label htmlFor="contactChoice2">Delivery</label>
 					</div>
 
@@ -155,22 +177,21 @@ export class Address extends React.PureComponent {
 }
 
 
-
 let validator = (values) => {
-		const errors = {};
+	const errors = {};
 
-		if (!values.name) {
-			errors.name = 'Name Required';
-		}
+	if (!values.name) {
+		errors.name = 'Name Required';
+	}
 
-		if (!values.email) {
-			errors.email = 'Required';
-		} else if (
-			!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-		) {
-			errors.email = 'Invalid email address';
-		}
-		return errors;
+	if (!values.email) {
+		errors.email = 'Required';
+	} else if (
+		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+	) {
+		errors.email = 'Invalid email address';
+	}
+	return errors;
 }
 
 const mapDispatchToProps = dispatch => {
