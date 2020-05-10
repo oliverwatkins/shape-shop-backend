@@ -52,7 +52,7 @@ export class OrderWizard extends React.PureComponent {
 const mapStateToProps = state => {
 	return {
 		products: state.products,
-		address: state.products && state.products.address, //TODO move
+		address: state.order && state.order.address,
 		selectedProducts: selectSelectedProducts(state)
 	};
 };

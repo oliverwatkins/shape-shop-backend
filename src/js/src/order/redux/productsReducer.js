@@ -12,16 +12,16 @@ export function reducer(state = initialState, action) {
 				items: action.data,
 			};
 
-		case Actions.UPDATE_ADDRESS:
-			return {
-				...state,
-				address: action.value
-			}
-		case Actions.UPDATE_PAYMENT:
-			return {
-				...state,
-				payment: action.values
-			}
+		// case Actions.UPDATE_ADDRESS:
+		// 	return {
+		// 		...state,
+		// 		address: action.value
+		// 	}
+		// case Actions.UPDATE_PAYMENT:
+		// 	return {
+		// 		...state,
+		// 		payment: action.values
+		// 	}
 
 
 		case Actions.UPDATE_PRODUCT_SELECTION:

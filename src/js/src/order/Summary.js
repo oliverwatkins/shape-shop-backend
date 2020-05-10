@@ -7,6 +7,7 @@ import {NextButton} from "./NextButton";
 import {wizardPages as pages} from "./OrderWizard";
 import AddressSummary from "./AddressSummary";
 import type {Address} from "../AppState";
+import PaymentSummary from "./PaymentSummary";
 
 
 type Props = {
@@ -31,16 +32,18 @@ export class Summary<Props> extends React.PureComponent {
 
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
 
-					<h3>Send To</h3>
+					<h3>Delivery Address</h3>
 
 					<AddressSummary address={this.props.address}/>
 
 					<h3>Payment</h3>
 
+					<PaymentSummary/>
+
 
 					{/*{JSON.stringify(this.props.address)}*/}
 
-					<div>Payment Type</div>
+
 
 				</div>
 				<NextButton label={"OK"} page={pages.ADDRESS_}/>

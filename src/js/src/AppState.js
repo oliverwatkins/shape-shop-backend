@@ -1,7 +1,9 @@
 //@flow
 export type AppState = {
 	products: {
-		items: Array<Product>
+		items: Array<Product>,
+
+
 	},
 	user: Function,
 };

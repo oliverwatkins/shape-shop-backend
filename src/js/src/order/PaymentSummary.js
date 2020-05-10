@@ -21,22 +21,13 @@ export class Payment extends React.PureComponent {
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
-				<Link to="/order/address">
-					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-				</Link>
 
 
-
-				<Elements stripe={stripePromise}>
-					<CheckoutForm />
-				</Elements>
+				<div>Payment Type</div>
 
 
-				<div className={"aside"}>
-					<Link to="/order/summary">
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</div>
+				$10
+
 			</div>
 		);
 	}
