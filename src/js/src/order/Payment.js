@@ -21,9 +21,9 @@ export class Payment extends React.PureComponent {
 		return (
 			<div style={{display: "flex"}} className="wizardPanel">
 
-				<Link to="/order/address">
-					<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>
-				</Link>
+				{/*<Link to="/order/address">*/}
+					{/*<FontAwesomeIcon icon={faArrowCircleLeft} style={{fontSize: "100px", color: "gray"}}/>*/}
+				{/*</Link>*/}
 
 
 
@@ -32,11 +32,11 @@ export class Payment extends React.PureComponent {
 				</Elements>
 
 
-				<div className={"aside"}>
-					<Link to="/order/summary">
-						<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>
-					</Link>
-				</div>
+				{/*<div className={"aside"}>*/}
+					{/*<Link to="/order/summary">*/}
+						{/*<FontAwesomeIcon icon={faArrowCircleRight} style={{fontSize: "100px", color: "gray"}}/>*/}
+					{/*</Link>*/}
+				{/*</div>*/}
 			</div>
 		);
 	}

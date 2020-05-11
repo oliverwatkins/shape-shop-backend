@@ -26,7 +26,6 @@ export class Address extends React.PureComponent {
 	}
 
 	onPickupChanged = (e) => {
-
 		this.setState({
 			pickup: e.currentTarget.value === 'pickup',
 			delivery:false
@@ -34,11 +33,9 @@ export class Address extends React.PureComponent {
 	}
 
 	onDeliveryChanged = (e) => {
-
 		this.setState({
 			delivery: e.currentTarget.value === 'delivery',
 			pickup: false
-
 		});
 	}
 
@@ -47,8 +44,6 @@ export class Address extends React.PureComponent {
 		if (this.state.redirect) {
 			return <Redirect to={pages.WHICH_PAYMENT}/>
 		}
-
-		console.info("this.state.delivery && this.state.pickup" + this.state.delivery && this.state.pickup)
 
 		return (
 			<div className="wizardPanel">
@@ -62,7 +57,6 @@ export class Address extends React.PureComponent {
 					<div className="icon-container">
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 					</div>
-
 
 					<div>
 						<input type="radio"
@@ -89,20 +83,18 @@ export class Address extends React.PureComponent {
 						validate={validator}
 						onSubmit={(values, blah) => {
 							setTimeout(() => {
-								alert(JSON.stringify(values, null, 2));
-
+								// alert(JSON.stringify(values, null, 2));
 								blah.setSubmitting(false);
 
 								this.props.updateAddress(values);
-
 								this.setRedirect()
 							}, 400);
 						}}>
 
 						{({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
 							<form onSubmit={handleSubmit} id="addressForm">
-
 								<div>
+									<div>XXXXXXXXXXXXXXXXXXX</div>
 									<label htmlFor="name">Name</label>
 									<input
 										id="name"
@@ -180,7 +172,10 @@ export class Address extends React.PureComponent {
 					</Formik>
 					}
 				</div>
-				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/>
+				{this.state.delivery && !this.state.pickup &&
+				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/> }
+				{!this.state.delivery && this.state.pickup &&
+				<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
 			</div>
 		);
 	}

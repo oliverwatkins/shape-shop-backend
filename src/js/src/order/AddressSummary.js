@@ -20,11 +20,16 @@ export function AddressSummary(props: Props) {
 		<div style={style}>
 			{props.address &&
 			<div>
-				Name: {props.address.name}
-				Street: {props.address.street}
-				Postcpde: {props.address.postcode}
-				Email: {props.address.email}
-				Telephone: {props.address.telephone}
+				<div><b>Name: </b>
+				{props.address.name}</div>
+				<div><b>Street:</b>
+				{props.address.street}</div>
+				<div><b>Postcpde:</b>
+				{props.address.postcode}</div>
+				<div><b>Email:</b>
+				{props.address.email}</div>
+				<div><b>Telephone: </b>
+				{props.address.telephone} </div>
 			</div>
 			}
 		</div>
