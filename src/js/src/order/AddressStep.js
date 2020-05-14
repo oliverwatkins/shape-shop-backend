@@ -94,7 +94,6 @@ export class Address extends React.PureComponent {
 						{({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
 							<form onSubmit={handleSubmit} id="addressForm">
 								<div>
-									<div>XXXXXXXXXXXXXXXXXXX</div>
 									<label htmlFor="name">Name</label>
 									<input
 										id="name"

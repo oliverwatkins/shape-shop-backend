@@ -1,12 +1,11 @@
 import * as React from 'react';
-import ProductList from "./ProductList";
-import connect from "react-redux/es/connect/connect";
+import ProductList from "./ProductListStep";
+import {connect} from "react-redux";
 import {selectSelectedProducts} from "../selectors";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Address from "./Address";
-import Summary from "./Summary";
-import Payment from "./Payment";
-import WhichPayment from "./WhichPayment";
+import Address from "./AddressStep";
+import Summary from "./SummaryStep";
+import WhichPayment from "./WhichPaymentStep";
 
 //navigation links
 export const wizardPages = {
@@ -19,10 +18,6 @@ export const wizardPages = {
 
 export class OrderWizard extends React.PureComponent {
 	render() {
-
-		// debugger;
-
-
 		return (
 			<div className={"order-wizard"}>
 				<Router>
@@ -35,9 +30,6 @@ export class OrderWizard extends React.PureComponent {
 							</Route>
 							<Route path={wizardPages.WHICH_PAYMENT}>
 								<WhichPayment/>
-							</Route>
-							<Route path={wizardPages.PAYMENT}>
-								<Payment/>
 							</Route>
 							<Route path={wizardPages.SUMMARY}>
 								<Summary products={this.props.products} selectedProducts={this.props.selectedProducts} address={this.props.address}/>

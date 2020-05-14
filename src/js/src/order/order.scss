@@ -1,14 +1,20 @@
 
-//.wizardPanel {
-//  background:orange;
-//  width:100%;
-//  display:flex;
-//}
-
 
 .wizardPanel {
 
+  color: #000000;
   background: #fff6fe;
+
+  h1 {
+    color: #0a7d06;
+  }
+  h2 {
+    color: #373c7d;
+  }
+  h3 {
+    color: #7d492b;
+  }
+
   width:100%;
   display:flex;
 
@@ -57,12 +63,7 @@
     padding: 0 16px;
   }
 
-  .container {
-    background-color: #f2f2f2;
-    padding: 5px 20px 15px 20px;
-    border: 6px solid #d33140;
-    border-radius: 3px;
-  }
+
 
   input[type=text] {
     width: 50%;
@@ -76,14 +77,6 @@
     margin-bottom: 10px;
     display: block;
   }
-
-  .icon-container {
-    margin-bottom: 20px;
-    padding: 7px 0;
-    font-size: 24px;
-    border: 6px solid #d33140;
-  }
-
 
   span.price {
     float: right;
