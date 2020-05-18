@@ -5,13 +5,29 @@ import {Formik} from "formik";
 
 import "./order.scss"
 import {Redirect} from "react-router";
-import {createUpdateAddress} from "./redux/productActions";
+import {createUpdateAddress, createUpdateDeliveryType} from "./redux/productActions";
 import connect from "react-redux/es/connect/connect";
 import {wizardPages as pages} from "./OrderWizard"
 import {NextButton} from "./NextButton";
 import {BackButton} from "./BackButton";
 
-export class Address extends React.PureComponent {
+type Props = {
+	updateAddress: (value, id)=>void,
+	updateDeliveryType: (value)=>void
+}
+
+type State = {
+	redirect: boolean,
+	type: "delivery" | "pickup",
+}
+
+
+export const deliveryType = {
+	pickup: "pickup",
+	delivery: "delivery"
+}
+
+export class Address extends React.PureComponent<Props, State> {
 
 	state = {
 		redirect: false,
@@ -27,16 +43,21 @@ export class Address extends React.PureComponent {
 
 	onPickupChanged = (e) => {
 		this.setState({
-			pickup: e.currentTarget.value === 'pickup',
+			pickup: e.currentTarget.value === "pickup",
 			delivery:false
 		});
+
+		this.props.updateDeliveryType(deliveryType.pickup)
 	}
 
 	onDeliveryChanged = (e) => {
 		this.setState({
-			delivery: e.currentTarget.value === 'delivery',
+			delivery: e.currentTarget.value === "delivery",
 			pickup: false
 		});
+
+		this.props.updateDeliveryType(deliveryType.delivery)
+
 	}
 
 
@@ -198,11 +219,17 @@ let validator = (values) => {
 	return errors;
 }
 
+
+
 const mapDispatchToProps = dispatch => {
 	return {
 		updateAddress: (value, id) => {
 			dispatch(createUpdateAddress(value, id));
 		},
+		updateDeliveryType: (value) => {
+			dispatch(createUpdateDeliveryType(value));
+		},
+
 	};
 };
 

@@ -29,11 +29,18 @@ export function createUpdateAddress(value, id) {
 	};
 }
 
+export function createUpdateDeliveryType(value) {
+	return {
+		type: Actions.UPDATE_DELIVERY_TYPE,
+		value: value
+	};
+}
 
 export const Actions = {
 	UPDATE_PAYMENT:'UPDATE_PAYMENT',
 	UPDATE_PRODUCT_SELECTION: 'UPDATE_PRODUCT_SELECTION',
 	UPDATE_ADDRESS: 'UPDATE_ADDRESS',
+	UPDATE_DELIVERY_TYPE: 'UPDATE_DELIVERY_TYPE',
 	FETCH_PRODUCTS: 'FETCH_PRODUCTS',
 	FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
 };

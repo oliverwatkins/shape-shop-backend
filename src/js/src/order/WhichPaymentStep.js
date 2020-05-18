@@ -3,7 +3,8 @@ import * as React from 'react';
 import {wizardPages as pages} from "./OrderWizard"
 import {NextButton} from "./NextButton";
 import {BackButton} from "./BackButton";
-import Payment from "./Payment";
+import PaymentPanel from "./PaymentPanel";
+import {connect} from "react-redux";
 
 export class WhichPayment extends React.PureComponent {
 
@@ -59,7 +60,7 @@ export class WhichPayment extends React.PureComponent {
 
 					{this.state.online && !this.state.face2face &&
 					<div>
-						<Payment/>
+						<PaymentPanel/>
 					</div>}
 				</div>
 				<NextButton label={"NEXT"} page={pages.SUMMARY}/>
@@ -67,4 +68,20 @@ export class WhichPayment extends React.PureComponent {
 		);
 	}
 }
-export default WhichPayment;
+
+
+const mapDispatchToProps = dispatch => {
+	return {
+		updateAddress: (value, id) => {
+			alert("here  " + value)
+			// dispatch(createUpdatePayment(value, id));
+		},
+	};
+};
+
+export default connect(
+	null,
+	mapDispatchToProps,
+)(WhichPayment);
+
+// export default WhichPayment;

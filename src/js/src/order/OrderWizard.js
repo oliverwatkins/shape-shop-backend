@@ -32,7 +32,12 @@ export class OrderWizard extends React.PureComponent {
 								<WhichPayment/>
 							</Route>
 							<Route path={wizardPages.SUMMARY}>
-								<Summary products={this.props.products} selectedProducts={this.props.selectedProducts} address={this.props.address}/>
+								<Summary
+									products={this.props.products}
+								 	selectedProducts={this.props.selectedProducts}
+								 	address={this.props.address}
+									deliveryType={this.props.deliveryType}
+								/>
 							</Route>
 						</Switch>
 				</Router>
@@ -45,7 +50,8 @@ const mapStateToProps = state => {
 	return {
 		products: state.products,
 		address: state.order && state.order.address,
-		selectedProducts: selectSelectedProducts(state)
+		selectedProducts: selectSelectedProducts(state),
+		deliveryType: state.order && state.order.deliveryType,
 	};
 };
 

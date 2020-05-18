@@ -15,12 +15,15 @@ type Props = {
 export class ProductList extends React.PureComponent<Props> {
 	render() {
 		return (
-			<div style={{display: "flex"}} className="wizardPanel">
-				<ProductSelection products={this.props.products}/>
-				<div>
-					<OrderSummary selectedProducts={this.props.selectedProducts}/>
+			<div>
 
-					<NextButton label={"NEXT"} page={pages.ADDRESS}/>
+				<div style={{display: "flex"}} className="wizardPanel">
+
+					<ProductSelection products={this.props.products}/>
+					<div style={{textAlign: "right"}}>
+						<NextButton label={"NEXT"} page={pages.ADDRESS}/>
+						<OrderSummary selectedProducts={this.props.selectedProducts}/>
+					</div>
 				</div>
 			</div>
 		);

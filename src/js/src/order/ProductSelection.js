@@ -16,6 +16,7 @@ export class ProductSelection extends React.PureComponent {
 
 		return (
 			<div>
+				<h2 className={"wizardHeader"}>Please make your selection</h2>
 				<div className="product-selection">
 					{
 						items && items.map((e) => (

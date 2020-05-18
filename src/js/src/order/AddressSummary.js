@@ -18,6 +18,8 @@ export function AddressSummary(props: Props) {
 	}
 	return (
 		<div style={style}>
+
+
 			{props.address &&
 			<div>
 				<div><b>Name: </b>
@@ -32,6 +34,8 @@ export function AddressSummary(props: Props) {
 				{props.address.telephone} </div>
 			</div>
 			}
+
+
 		</div>
 	);
 }

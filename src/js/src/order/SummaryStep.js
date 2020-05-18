@@ -10,7 +10,8 @@ import {BackButton} from "./BackButton";
 
 type Props = {
 	selectedProducts: [],
-	address: Address
+	address: Address,
+	deliveryType: string,
 }
 
 
@@ -28,11 +29,24 @@ export class Summary<Props> extends React.PureComponent {
 
 					<OrderSummary selectedProducts={this.props.selectedProducts}/>
 
-					<h3>Delivery Address</h3>
 
-					<AddressSummary address={this.props.address}/>
 
-					<h3>Payment</h3>
+
+
+
+
+
+					<h3>Delivery Type</h3>
+					<h4>
+						{this.props.deliveryType}
+					</h4>
+
+					{this.props.deliveryType === "delivery" &&
+					<AddressSummary address={this.props.address}/> }
+
+					<h3>Payment Type</h3>
+
+					<h4>pay at door</h4>
 
 					<PaymentSummary/>
 

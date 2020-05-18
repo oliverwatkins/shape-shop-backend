@@ -23,7 +23,6 @@ export class PaymentSummary extends React.PureComponent {
 
 
 
-				<div>Payment Type</div>
 				$10
 			</div>
 		);
