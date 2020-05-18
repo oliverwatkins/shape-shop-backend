@@ -24,16 +24,9 @@ export class Summary<Props> extends React.PureComponent {
 
 				<div className={"wizardInner"}>
 					<h2>Summary</h2>
-
 					<h3>Order</h3>
 
-					<OrderSummary selectedProducts={this.props.selectedProducts}/>
-
-
-
-
-
-
+						<OrderSummary selectedProducts={this.props.selectedProducts}/>
 
 
 					<h3>Delivery Type</h3>
@@ -42,7 +35,7 @@ export class Summary<Props> extends React.PureComponent {
 					</h4>
 
 					{this.props.deliveryType === "delivery" &&
-					<AddressSummary address={this.props.address}/> }
+						<AddressSummary address={this.props.address}/> }
 
 					<h3>Payment Type</h3>
 
@@ -52,7 +45,7 @@ export class Summary<Props> extends React.PureComponent {
 
 					{/*{JSON.stringify(this.props.address)}*/}
 				</div>
-				<NextButton label={"OK"} page={pages.ADDRESS_}/>
+				<NextButton label={"OK"} page={pages.OK}/>
 			</div>
 		);
 	}

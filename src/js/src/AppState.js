@@ -11,6 +11,8 @@ export type AppState = {
 
 
 export type OrderState = {
+	paymentType: string;
+	deliveryType: string;
 	address: {
 		name: string,
 		telephone: string,

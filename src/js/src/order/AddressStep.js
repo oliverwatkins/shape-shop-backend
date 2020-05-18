@@ -18,11 +18,11 @@ type Props = {
 
 type State = {
 	redirect: boolean,
-	type: "delivery" | "pickup",
+	deliveryType: "delivery" | "pickup",
 }
 
 
-export const deliveryType = {
+export const deliveryTypeX = {
 	pickup: "pickup",
 	delivery: "delivery"
 }
@@ -31,8 +31,7 @@ export class Address extends React.PureComponent<Props, State> {
 
 	state = {
 		redirect: false,
-		pickup: true,
-		delivery: false
+		deliveryType: deliveryTypeX.pickup,
 	}
 
 	setRedirect = () => {
@@ -41,30 +40,35 @@ export class Address extends React.PureComponent<Props, State> {
 		})
 	}
 
-	onPickupChanged = (e) => {
+	onRadioChanged = (e) => {
 		this.setState({
-			pickup: e.currentTarget.value === "pickup",
-			delivery:false
+			deliveryType: e.currentTarget.value,
 		});
-
-		this.props.updateDeliveryType(deliveryType.pickup)
+		this.props.updateDeliveryType(e.currentTarget.value)
 	}
 
-	onDeliveryChanged = (e) => {
-		this.setState({
-			delivery: e.currentTarget.value === "delivery",
-			pickup: false
-		});
 
-		this.props.updateDeliveryType(deliveryType.delivery)
-
-	}
+	// onPickupChanged = (e) => {
+	// 	this.setState({
+	// 		deliveryType: e.currentTarget.value === "pickup" ? "pickup" : "",
+	// 	});
+	// 	this.props.updateDeliveryType(deliveryTypeX.pickup)
+	// }
+	//
+	// onDeliveryChanged = (e) => {
+	// 	this.setState({
+	// 		deliveryType: e.currentTarget.value === "delivery" ? "delivery" : "",
+	// 	});
+	// 	this.props.updateDeliveryType(deliveryTypeX.delivery)
+	// }
 
 
 	render() {
 		if (this.state.redirect) {
 			return <Redirect to={pages.WHICH_PAYMENT}/>
 		}
+
+		console.info("this.state.delivery " + this.state.delivery)
 
 		return (
 			<div className="wizardPanel">
@@ -84,21 +88,23 @@ export class Address extends React.PureComponent<Props, State> {
 									 id="contactChoice1"
 									 name="pckupOrDelivery"
 									 value="pickup"
-									 onChange={this.onPickupChanged}
-									 checked={this.state.pickup}/>
+									 onChange={this.onRadioChanged}
+									 // onChange={this.onPickupChanged}
+									 checked={this.state.deliveryType === deliveryTypeX.pickup}/>
 						<label htmlFor="contactChoice1">Pickup</label>
 
 						<input type="radio"
 									 id="contactChoice2"
 									 name="pckupOrDelivery"
 									 value="delivery"
-									 checked={this.state.delivery}
-									 onChange={this.onDeliveryChanged}
+									 checked={this.state.deliveryType === deliveryTypeX.delivery}
+									 onChange={this.onRadioChanged}
+									 // onChange={this.onDeliveryChanged}
 						/>
 						<label htmlFor="contactChoice2">Delivery</label>
 					</div>
 
-					{this.state.delivery && !this.state.pickup &&
+					{this.state.deliveryType && (this.state.deliveryType === deliveryTypeX.delivery) &&
 					<Formik
 						initialValues={{email: '', password: '', name: ''}}
 						validate={validator}
@@ -194,7 +200,7 @@ export class Address extends React.PureComponent<Props, State> {
 				</div>
 				{this.state.delivery && !this.state.pickup &&
 				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/> }
-				{!this.state.delivery && this.state.pickup &&
+				{(this.state.deliveryType === deliveryTypeX.pickup) &&
 				<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
 			</div>
 		);
@@ -229,7 +235,6 @@ const mapDispatchToProps = dispatch => {
 		updateDeliveryType: (value) => {
 			dispatch(createUpdateDeliveryType(value));
 		},
-
 	};
 };
 

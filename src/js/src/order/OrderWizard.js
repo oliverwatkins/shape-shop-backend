@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Address from "./AddressStep";
 import Summary from "./SummaryStep";
 import WhichPayment from "./WhichPaymentStep";
+import OKStep from "./OKStep";
+import type {AppState, Product} from "../AppState";
 
 //navigation links
 export const wizardPages = {
@@ -13,10 +15,18 @@ export const wizardPages = {
 	ADDRESS : "/order/address",
 	WHICH_PAYMENT : "/order/whichPayment",
 	PAYMENT : "/order/payment",
-	SUMMARY : "/order/summary"
+	SUMMARY : "/order/summary",
+	OK: "/order/OK"
 }
 
-export class OrderWizard extends React.PureComponent {
+type Props = {
+	products: Array<Product>,
+	selectedProducts: Array<Product>,
+	address: Address,
+	deliveryType: string,
+}
+
+export class OrderWizard extends React.PureComponent<Props> {
 	render() {
 		return (
 			<div className={"order-wizard"}>
@@ -39,6 +49,9 @@ export class OrderWizard extends React.PureComponent {
 									deliveryType={this.props.deliveryType}
 								/>
 							</Route>
+							<Route path={wizardPages.OK}>
+								<OKStep/>
+							</Route>
 						</Switch>
 				</Router>
 			</div>
@@ -46,12 +59,13 @@ export class OrderWizard extends React.PureComponent {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState) => {
 	return {
 		products: state.products,
 		address: state.order && state.order.address,
 		selectedProducts: selectSelectedProducts(state),
 		deliveryType: state.order && state.order.deliveryType,
+		paymentType: state.order && state.order.paymentType,
 	};
 };
 
