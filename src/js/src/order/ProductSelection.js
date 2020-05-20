@@ -5,14 +5,20 @@ import "./../main.scss"
 import ItemBox from "./ItemBox";
 import {createFetchProductsAction, createUpdateProductSelection} from "./redux/productActions";
 import {connect} from "react-redux";
+import type {Product} from "../AppState";
 
 
+type Props = {
+	productItems: Array<Product>
+}
 
 
-export class ProductSelection extends React.PureComponent {
+export class ProductSelection extends React.PureComponent<Props> {
 	render() {
 
-		let items = this.props.products.items;
+		let items = this.props.productItems;
+
+		// let items = this.props.products.items;
 
 		return (
 			<div>

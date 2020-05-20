@@ -23,3 +23,13 @@ export const selectProducts = (state) => state.products;
 export const selectProductById = (state, id) => state.products.filter(product => product.id === id);
 
 export const selectSelectedProducts = (state) => state.products.items.filter(product => product.quantity > 0);
+
+
+
+export const selectMains = (state) => state.products.items.filter(product => product.type === "main");
+
+export const selectDrinks = (state) => state.products.items.filter(product => product.type === "drinks");
+
+
+// products: selectMains(state),
+// 	drinks: selectDrinks(state),

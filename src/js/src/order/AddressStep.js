@@ -21,8 +21,7 @@ type State = {
 	deliveryType: "delivery" | "pickup",
 }
 
-
-export const deliveryTypeX = {
+export const deliveryTypes = {
 	pickup: "pickup",
 	delivery: "delivery"
 }
@@ -31,7 +30,7 @@ export class Address extends React.PureComponent<Props, State> {
 
 	state = {
 		redirect: false,
-		deliveryType: deliveryTypeX.pickup,
+		deliveryType: deliveryTypes.pickup,
 	}
 
 	setRedirect = () => {
@@ -47,22 +46,6 @@ export class Address extends React.PureComponent<Props, State> {
 		this.props.updateDeliveryType(e.currentTarget.value)
 	}
 
-
-	// onPickupChanged = (e) => {
-	// 	this.setState({
-	// 		deliveryType: e.currentTarget.value === "pickup" ? "pickup" : "",
-	// 	});
-	// 	this.props.updateDeliveryType(deliveryTypeX.pickup)
-	// }
-	//
-	// onDeliveryChanged = (e) => {
-	// 	this.setState({
-	// 		deliveryType: e.currentTarget.value === "delivery" ? "delivery" : "",
-	// 	});
-	// 	this.props.updateDeliveryType(deliveryTypeX.delivery)
-	// }
-
-
 	render() {
 		if (this.state.redirect) {
 			return <Redirect to={pages.WHICH_PAYMENT}/>
@@ -76,13 +59,10 @@ export class Address extends React.PureComponent<Props, State> {
 				<BackButton page={pages.PRODUCT_LIST}/>
 
 				<div className="wizardInner">
-
 					<h2 className={"wizardHeader"}>Delivery or Pickup?</h2>
-
 					<div className="icon-container">
 						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 					</div>
-
 					<div>
 						<input type="radio"
 									 id="contactChoice1"
@@ -90,21 +70,20 @@ export class Address extends React.PureComponent<Props, State> {
 									 value="pickup"
 									 onChange={this.onRadioChanged}
 									 // onChange={this.onPickupChanged}
-									 checked={this.state.deliveryType === deliveryTypeX.pickup}/>
+									 checked={this.state.deliveryType === deliveryTypes.pickup}/>
 						<label htmlFor="contactChoice1">Pickup</label>
-
 						<input type="radio"
 									 id="contactChoice2"
 									 name="pckupOrDelivery"
 									 value="delivery"
-									 checked={this.state.deliveryType === deliveryTypeX.delivery}
+									 checked={this.state.deliveryType === deliveryTypes.delivery}
 									 onChange={this.onRadioChanged}
 									 // onChange={this.onDeliveryChanged}
 						/>
 						<label htmlFor="contactChoice2">Delivery</label>
 					</div>
 
-					{this.state.deliveryType && (this.state.deliveryType === deliveryTypeX.delivery) &&
+					{this.state.deliveryType && (this.state.deliveryType === deliveryTypes.delivery) &&
 					<Formik
 						initialValues={{email: '', password: '', name: ''}}
 						validate={validator}
@@ -198,9 +177,10 @@ export class Address extends React.PureComponent<Props, State> {
 					</Formik>
 					}
 				</div>
-				{this.state.delivery && !this.state.pickup &&
+				{this.state.deliveryType === deliveryTypes.delivery &&
 				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/> }
-				{(this.state.deliveryType === deliveryTypeX.pickup) &&
+
+				{(this.state.deliveryType === deliveryTypes.pickup) &&
 				<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
 			</div>
 		);

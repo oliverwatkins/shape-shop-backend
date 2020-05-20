@@ -5,10 +5,11 @@ import OrderSummary from "./OrderSummary";
 
 import {wizardPages as pages} from "./OrderWizard"
 import {NextButton} from "./NextButton";
+import type {Product} from "../AppState";
 
 type Props = {
-	products: [],
-	selectedProducts: [],
+	productItems: Array<Product>,
+	selectedProducts: Array<Product>,
 }
 
 //redundant
@@ -19,9 +20,9 @@ export class ProductList extends React.PureComponent<Props> {
 
 				<div style={{display: "flex"}} className="wizardPanel">
 
-					<ProductSelection products={this.props.products}/>
+					<ProductSelection productItems={this.props.productItems}/>
 					<div style={{textAlign: "right"}}>
-						<NextButton label={"NEXT"} page={pages.ADDRESS}/>
+						<NextButton label={"NEXT"} page={pages.DRINK_LIST}/>
 						<OrderSummary selectedProducts={this.props.selectedProducts}/>
 					</div>
 				</div>

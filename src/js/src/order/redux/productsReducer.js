@@ -39,6 +39,7 @@ export function reducer(state = initialState, action) {
 						return {"id": item.id,
 							"name": item.name,
 							"price": item.price,
+							"type": item.type,
 							"quantity": action.value}
 					}
 					return item;
