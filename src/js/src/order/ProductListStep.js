@@ -18,12 +18,18 @@ export class ProductList extends React.PureComponent<Props> {
 		return (
 			<div>
 
-				<div style={{display: "flex"}} className="wizardPanel">
+				<div style={{display: "flex", flexDirection: "column"}} className="wizardPanel">
+					<h2 className={"wizardHeader"}>Mains</h2>
 
-					<ProductSelection productItems={this.props.productItems}/>
-					<div style={{textAlign: "right"}}>
-						<NextButton label={"NEXT"} page={pages.DRINK_LIST}/>
-						<OrderSummary selectedProducts={this.props.selectedProducts}/>
+					<div className={"wizardMain"} style={{display: "flex"}}>
+
+						<ProductSelection productItems={this.props.productItems}/>
+
+						<div style={{textAlign: "right"}}>
+							<NextButton label={"NEXT"} page={pages.DRINK_LIST}/>
+							<OrderSummary selectedProducts={this.props.selectedProducts}/>
+						</div>
+
 					</div>
 				</div>
 			</div>

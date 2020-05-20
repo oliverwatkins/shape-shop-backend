@@ -56,132 +56,147 @@ export class Address extends React.PureComponent<Props, State> {
 		return (
 			<div className="wizardPanel">
 
-				<BackButton page={pages.PRODUCT_LIST}/>
+				<h2 className={"wizardHeader"}>Delivery or Pickup?</h2>
+				<div className="wizardMain">
+					<BackButton page={pages.PRODUCT_LIST}/>
 
-				<div className="wizardInner">
-					<h2 className={"wizardHeader"}>Delivery or Pickup?</h2>
-					<div className="icon-container">
-						<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
-					</div>
-					<div>
-						<input type="radio"
-									 id="contactChoice1"
-									 name="pckupOrDelivery"
-									 value="pickup"
-									 onChange={this.onRadioChanged}
-									 // onChange={this.onPickupChanged}
-									 checked={this.state.deliveryType === deliveryTypes.pickup}/>
-						<label htmlFor="contactChoice1">Pickup</label>
-						<input type="radio"
-									 id="contactChoice2"
-									 name="pckupOrDelivery"
-									 value="delivery"
-									 checked={this.state.deliveryType === deliveryTypes.delivery}
-									 onChange={this.onRadioChanged}
-									 // onChange={this.onDeliveryChanged}
-						/>
-						<label htmlFor="contactChoice2">Delivery</label>
-					</div>
 
-					{this.state.deliveryType && (this.state.deliveryType === deliveryTypes.delivery) &&
-					<Formik
-						initialValues={{email: '', password: '', name: ''}}
-						validate={validator}
-						onSubmit={(values, blah) => {
-							setTimeout(() => {
-								// alert(JSON.stringify(values, null, 2));
-								blah.setSubmitting(false);
+					<div className="wizardInner">
+						<div className="icon-container">
+							<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
+						</div>
+						<div>
+							<input type="radio"
+										 id="contactChoice1"
+										 name="pckupOrDelivery"
+										 value="pickup"
+										 onChange={this.onRadioChanged}
+								// onChange={this.onPickupChanged}
+										 checked={this.state.deliveryType === deliveryTypes.pickup}/>
+							<label htmlFor="contactChoice1">Pickup</label>
+							<input type="radio"
+										 id="contactChoice2"
+										 name="pckupOrDelivery"
+										 value="delivery"
+										 checked={this.state.deliveryType === deliveryTypes.delivery}
+										 onChange={this.onRadioChanged}
+								// onChange={this.onDeliveryChanged}
+							/>
+							<label htmlFor="contactChoice2">Delivery</label>
+						</div>
 
-								this.props.updateAddress(values);
-								this.setRedirect()
-							}, 400);
-						}}>
+						{this.state.deliveryType && (this.state.deliveryType === deliveryTypes.delivery) &&
+						<Formik
+							initialValues={{email: '', password: '', name: ''}}
+							validate={validator}
+							onSubmit={(values, blah) => {
+								setTimeout(() => {
+									// alert(JSON.stringify(values, null, 2));
+									blah.setSubmitting(false);
 
-						{({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
-							<form onSubmit={handleSubmit} id="addressForm">
-								<div>
-									<label htmlFor="name">Name</label>
-									<input
-										id="name"
-										type="text"
-										name="name"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.name}
-									/>
-									<span className={"error"}>
+									this.props.updateAddress(values);
+									this.setRedirect()
+								}, 400);
+							}}>
+
+							{({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
+								<form onSubmit={handleSubmit} id="addressForm">
+									<div>
+										<label htmlFor="name">Name</label>
+										<input
+											id="name"
+											type="text"
+											name="name"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.name}
+										/>
+										<span className={"error"}>
 									{errors.name && touched.name && errors.name}
 									</span>
-								</div>
-								<div>
-									<label htmlFor="street">Strasse</label>
-									<input
-										id="street"
-										type="text"
-										name="street"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.street}
-									/>
-									<span className={"error"}>
+									</div>
+									<div>
+										<label htmlFor="street">Strasse</label>
+										<input
+											id="street"
+											type="text"
+											name="street"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.street}
+										/>
+										<span className={"error"}>
 									{errors.street && touched.street && errors.street}
 									</span>
-								</div>
-								<div>
-									<label htmlFor="postcode">Postleitzahl</label>
-									<input
-										id="postcode"
-										type="text"
-										name="postcode"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.postcode}
-									/>
-									<span className={"error"}>
+									</div>
+									<div>
+										<label htmlFor="postcode">Postleitzahl</label>
+										<input
+											id="postcode"
+											type="text"
+											name="postcode"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.postcode}
+										/>
+										<span className={"error"}>
 									{errors.postcode && touched.postcode && errors.postcode}
 									</span>
-								</div>
-								<div>
-									<label htmlFor="tel">Telefon</label>
-									<input
-										id="tel"
-										type="text"
-										name="telephone"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.telephone}
-									/>
-									<span className={"error"}>
+									</div>
+									<div>
+										<label htmlFor="tel">Telefon</label>
+										<input
+											id="tel"
+											type="text"
+											name="telephone"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.telephone}
+										/>
+										<span className={"error"}>
 									{errors.telephone && touched.telephone && errors.telephone}
 									</span>
-								</div>
-								<div>
-									<label htmlFor="email">Email</label>
-									<input
-										id="email"
-										type="email"
-										name="email"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										value={values.email}
-									/>
-									<span className={"error"}>
+									</div>
+									<div>
+										<label htmlFor="email">Email</label>
+										<input
+											id="email"
+											type="email"
+											name="email"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											value={values.email}
+										/>
+										<span className={"error"}>
 									{errors.email && touched.email && errors.email}
 									</span>
-								</div>
-								<button type="submit" disabled={isSubmitting}>
-									Submit
-								</button>
-							</form>
-						)}
-					</Formik>
-					}
-				</div>
-				{this.state.deliveryType === deliveryTypes.delivery &&
-				<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/> }
+									</div>
+									<button type="submit" disabled={isSubmitting}>
+										Submit
+									</button>
+								</form>
+							)}
+						</Formik>
+						}
+					</div>
+					{this.state.deliveryType === deliveryTypes.delivery &&
+					<NextButton label={"NEXT"} type={"submit"} form={"addressForm"}/> }
 
-				{(this.state.deliveryType === deliveryTypes.pickup) &&
-				<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
+					{(this.state.deliveryType === deliveryTypes.pickup) &&
+					<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
+
+
+
+
+
+
+
+
+
+
+				</div>
+
+
 			</div>
 		);
 	}

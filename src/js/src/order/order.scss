@@ -1,9 +1,31 @@
 
 
+//.wizardPanel {
+  //style={{display: "flex", flexDirection: "column"}}
+
+
+  //.wizardMain {
+  //  style={{display: "flex", flexDirection: "row"}}
+  //
+  //}
+
+//}
+
+
+
 .wizardPanel {
 
   color: #000000;
   background: #fff6fe;
+
+  width:100%;
+  display:flex;
+  flex-direction: column;
+
+  .wizardMain {
+    display: flex;
+    flex-direction: row;
+  }
 
   h1 {
     color: #0a7d06;
@@ -20,8 +42,7 @@
     padding-left: 50px;
   }
 
-  width:100%;
-  display:flex;
+
 
   .wizardHeader {
     margin:30px;
@@ -38,6 +59,8 @@
   .wizardInner span.error {
     color:red
   }
+
+
 
   .row {
     display: -ms-flexbox; /* IE10 */

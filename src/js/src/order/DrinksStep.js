@@ -25,6 +25,7 @@ import OrderSummary from "./OrderSummary";
 import {wizardPages as pages} from "./OrderWizard"
 import {NextButton} from "./NextButton";
 import type {Product} from "../AppState";
+import {BackButton} from "./BackButton";
 
 type Props = {
 	drinks: Array<Product>,
@@ -35,13 +36,15 @@ type Props = {
 export class DrinksStep extends React.PureComponent<Props> {
 	render() {
 		return (
-			<div>
+			<div className="wizardPanel">
 
 				<h2 className={"wizardHeader"}>Maybe some drinks?</h2>
-				<div style={{display: "flex"}} className="wizardPanel">
+
+				<div className={"wizardMain"} >
+
+					<BackButton page={pages.PRODUCT_LIST}/>
 
 					<ProductSelection productItems={this.props.drinks}/>
-
 
 					<div style={{textAlign: "right"}}>
 						<NextButton label={"NEXT"} page={pages.ADDRESS}/>

@@ -30,12 +30,13 @@ export class WhichPayment extends React.PureComponent {
 
 	render() {
 		return (
-			<div style={{display: "flex"}} className="wizardPanel">
-				<BackButton page={pages.ADDRESS}/>
-				<div className="wizardInner">
-					<div>
-						<h2>How do you wish to pay?</h2>
-					</div>
+			<div className="wizardPanel">
+
+				<h2 className={"wizardHeader"}>How do you wish to pay?</h2>
+
+				<div className="wizardMain">
+
+					<BackButton page={pages.ADDRESS}/>
 					<div>
 						<input type="radio"
 									 id="contactChoice2"
@@ -62,8 +63,9 @@ export class WhichPayment extends React.PureComponent {
 					<div>
 						<PaymentPanel/>
 					</div>}
+
+					<NextButton label={"NEXT"} page={pages.SUMMARY}/>
 				</div>
-				<NextButton label={"NEXT"} page={pages.SUMMARY}/>
 			</div>
 		);
 	}
