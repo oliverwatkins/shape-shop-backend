@@ -32,12 +32,13 @@ export class WhichPayment extends React.PureComponent {
 		return (
 			<div className="wizardPanel">
 
-				<h2 className={"wizardHeader"}>How do you wish to pay?</h2>
+				<h2 className="wizardHeader">How do you wish to pay?</h2>
 
 				<div className="wizardMain">
 
 					<BackButton page={pages.ADDRESS}/>
-					<div>
+
+					<div className="wizardCenter" >
 						<input type="radio"
 									 id="contactChoice2"
 									 name="pickupOrDelivery"

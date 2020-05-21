@@ -18,10 +18,10 @@ export class ProductList extends React.PureComponent<Props> {
 		return (
 			<div>
 
-				<div style={{display: "flex", flexDirection: "column"}} className="wizardPanel">
-					<h2 className={"wizardHeader"}>Mains</h2>
+				<div className="wizardPanel">
+					<h2 className="wizardHeader">Mains</h2>
 
-					<div className={"wizardMain"} style={{display: "flex"}}>
+					<div className="wizardMain">
 
 						<ProductSelection productItems={this.props.productItems}/>
 

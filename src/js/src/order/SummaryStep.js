@@ -18,34 +18,40 @@ type Props = {
 export class Summary<Props> extends React.PureComponent {
 	render() {
 		return (
-			<div style={{display: "flex"}} className="wizardPanel">
+			<div className="wizardPanel">
 
-				<BackButton page={"/order/address??"}/>
 
-				<div className={"wizardInner"}>
-					<h2>Summary</h2>
-					<h3>Order</h3>
+				<h2 className="wizardHeader">Summary</h2>
 
+				<div className="wizardMain">
+
+
+					<BackButton page={"/order/address??"}/>
+
+					<div className="wizardCenter">
+
+						<h3>Order</h3>
 						<OrderSummary selectedProducts={this.props.selectedProducts}/>
+						<h3>Delivery Type</h3>
+						<h4>
+							{this.props.deliveryType}
+						</h4>
 
+						{this.props.deliveryType === "delivery" &&
+						<AddressSummary address={this.props.address}/>}
 
-					<h3>Delivery Type</h3>
-					<h4>
-						{this.props.deliveryType}
-					</h4>
+						<h3>Payment Type</h3>
 
-					{this.props.deliveryType === "delivery" &&
-						<AddressSummary address={this.props.address}/> }
+						<h4>pay at door</h4>
 
-					<h3>Payment Type</h3>
+						<PaymentSummary/>
 
-					<h4>pay at door</h4>
+					</div>
 
-					<PaymentSummary/>
+					<NextButton label={"OK"} page={pages.OK}/>
 
-					{/*{JSON.stringify(this.props.address)}*/}
 				</div>
-				<NextButton label={"OK"} page={pages.OK}/>
+
 			</div>
 		);
 	}

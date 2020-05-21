@@ -1,4 +1,3 @@
-
 // Wein
 //
 // Bei uns gibt es immer 15 offene Weine, als kleines Glas, in der Karaffe oder als Flasche. Hier eine kleine Auswahl davon:
@@ -40,12 +39,13 @@ export class DrinksStep extends React.PureComponent<Props> {
 
 				<h2 className={"wizardHeader"}>Maybe some drinks?</h2>
 
-				<div className={"wizardMain"} >
+				<div className={"wizardMain"}>
 
 					<BackButton page={pages.PRODUCT_LIST}/>
 
-					<ProductSelection productItems={this.props.drinks}/>
-
+					<div className="wizardCenter">
+						<ProductSelection productItems={this.props.drinks}/>
+					</div>
 					<div style={{textAlign: "right"}}>
 						<NextButton label={"NEXT"} page={pages.ADDRESS}/>
 						<OrderSummary selectedProducts={this.props.selectedProducts}/>

@@ -61,7 +61,7 @@ export class Address extends React.PureComponent<Props, State> {
 					<BackButton page={pages.PRODUCT_LIST}/>
 
 
-					<div className="wizardInner">
+					<div className="wizardCenter">
 						<div className="icon-container">
 							<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
 						</div>
@@ -184,19 +184,7 @@ export class Address extends React.PureComponent<Props, State> {
 
 					{(this.state.deliveryType === deliveryTypes.pickup) &&
 					<NextButton label={"NEXT"} page={pages.WHICH_PAYMENT}/> }
-
-
-
-
-
-
-
-
-
-
 				</div>
-
-
 			</div>
 		);
 	}
