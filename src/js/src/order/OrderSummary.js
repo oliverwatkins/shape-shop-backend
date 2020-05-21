@@ -3,7 +3,8 @@ import type {Product} from "../AppState";
 
 
 type Props = {
-	selectedProducts: string
+	selectedProducts: Array<Product>,
+	selectedDrinks: Array<Product>,
 }
 
 export function OrderSummary(props: Props) {
@@ -21,6 +22,34 @@ export function OrderSummary(props: Props) {
 		<div style={style}>
 			{/*<h4>Order : </h4>*/}
 			<table>
+				<tr>
+					<td style={styleTD}>Drinks </td>
+					<td style={styleTD}></td>
+					<td style={styleTD}></td>
+					<td style={styleTD}></td>
+				</tr>
+
+
+
+
+				{
+					props.selectedDrinks.map((elem: Product) => {
+						return <tr>
+							<td style={styleTD}>{elem.name}</td>
+							<td style={styleTD}>{elem.price}</td>
+							<td style={styleTD}>{elem.quantity > 1 ? elem.quantity : " "}</td>
+							<td style={styleTD}>{priceTimesQty(elem.price, elem.quantity)}</td>
+						</tr>
+					})
+				}
+
+				<tr>
+					<td style={styleTD}>Mains </td>
+					<td style={styleTD}></td>
+					<td style={styleTD}></td>
+					<td style={styleTD}></td>
+				</tr>
+
 				{
 					props.selectedProducts.map((elem: Product) => {
 						return <tr>

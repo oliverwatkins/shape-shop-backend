@@ -14,19 +14,29 @@ export class WhichPayment extends React.PureComponent {
 		online: false
 	}
 
-	onFace2faceChanged = (e) => {
+
+	onRadioChanged = (e) => {
 		this.setState({
-			face2face: e.currentTarget.value === 'face2face',
-			online:false
+			paymentType: e.currentTarget.value,
 		});
+		this.props.updatePaymentType(e.currentTarget.value)
 	}
 
-	onOnlineChanged = (e) => {
-		this.setState({
-			online: e.currentTarget.value === 'online',
-			face2face: false
-		});
-	}
+
+
+	// onFace2faceChanged = (e) => {
+	// 	this.setState({
+	// 		face2face: e.currentTarget.value === 'face2face',
+	// 		online:false
+	// 	});
+	// }
+	//
+	// onOnlineChanged = (e) => {
+	// 	this.setState({
+	// 		online: e.currentTarget.value === 'online',
+	// 		face2face: false
+	// 	});
+	// }
 
 	render() {
 		return (
@@ -44,7 +54,7 @@ export class WhichPayment extends React.PureComponent {
 									 name="pickupOrDelivery"
 									 value="face2face"
 									 checked={this.state.face2face}
-									 onChange={this.onFace2faceChanged}
+									 onChange={this.onRadioChanged}
 						/>
 
 						<label htmlFor="contactChoice2">Pay on arrival</label>
@@ -54,7 +64,7 @@ export class WhichPayment extends React.PureComponent {
 									 name="pickupOrDelivery"
 									 value="online"
 									 checked={this.state.online}
-									 onChange={this.onOnlineChanged}
+									 onChange={this.onRadioChanged}
 
 						/>
 						<label htmlFor="contactChoice1">Online</label>
@@ -75,7 +85,7 @@ export class WhichPayment extends React.PureComponent {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		updateAddress: (value, id) => {
+		updatePaymentType: (value, id) => {
 			alert("here  " + value)
 			// dispatch(createUpdatePayment(value, id));
 		},

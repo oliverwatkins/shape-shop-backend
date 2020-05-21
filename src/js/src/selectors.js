@@ -1,3 +1,5 @@
+import type {Product} from "./AppState";
+
 export const isUserLoggedIn = (state) => {
 	return Boolean(state.login.loginToken && state.login.loginToken.role);
 };
@@ -22,9 +24,9 @@ export const selectProducts = (state) => state.products;
 
 export const selectProductById = (state, id) => state.products.filter(product => product.id === id);
 
-export const selectSelectedProducts = (state) => state.products.items.filter(product => product.quantity > 0);
+export const selectSelectedProducts = (state) => state.products.items.filter(product => product.quantity > 0  && product.type === "main");
 
-
+export const selectSelectedDrinks = (state) => state.products.items.filter((product: Product ) => product.quantity > 0 && product.type === "drinks");
 
 export const selectMains = (state) => state.products.items.filter(product => product.type === "main");
 

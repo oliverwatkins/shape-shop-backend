@@ -18,20 +18,16 @@
     flex-direction: row;
 
     .wizardCenter {
-      flex: 1
+      margin: 40px;
+      flex: 1;
     }
   }
 
 
-  .wizardInner {
-    width: 100%;
-  }
 
-  .wizardInner div {
-    margin: 30px;
-  }
 
-  .wizardInner span.error {
+  //address form
+  span.error {
     color: red
   }
 

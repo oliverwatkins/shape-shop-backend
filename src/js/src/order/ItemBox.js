@@ -32,7 +32,6 @@ export class ItemBox extends React.PureComponent {
 		);
 	}
 
-
 	handleChangeCheckbox = (e) => {
 		if (e.currentTarget.checked) {
 			this.props.handleChangeSelection(1, this.props.product.id)

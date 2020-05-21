@@ -62,9 +62,11 @@ export class Address extends React.PureComponent<Props, State> {
 
 
 					<div className="wizardCenter">
+
 						<div className="icon-container">
-							<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy"}}/>
+							<FontAwesomeIcon icon={faTruck} style={{fontSize: "60px", color: "navy", margin: "25px"}}/>
 						</div>
+
 						<div>
 							<input type="radio"
 										 id="contactChoice1"

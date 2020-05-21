@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ProductList from "./ProductListStep";
 import {connect} from "react-redux";
-import {selectDrinks, selectMains, selectSelectedProducts} from "../selectors";
+import {selectDrinks, selectMains, selectSelectedDrinks, selectSelectedProducts} from "../selectors";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Address from "./AddressStep";
 import Summary from "./SummaryStep";
@@ -25,6 +25,7 @@ type Props = {
 	products: Array<Product>,
 	drinks:Array<Product>,
 	selectedProducts: Array<Product>,
+	selectedDrinks: Array<Product>,
 	address: Address,
 	deliveryType: string,
 }
@@ -36,11 +37,15 @@ export class OrderWizard extends React.PureComponent<Props> {
 				<Router>
 						<Switch>
 							<Route path={wizardPages.PRODUCT_LIST}>
-								<ProductList productItems={this.props.products} selectedProducts={this.props.selectedProducts}/>
+								<ProductList productItems={this.props.products}
+														 selectedProducts={this.props.selectedProducts}
+														 selectedDrinks={this.props.selectedDrinks}/>
 							</Route>
 
 							<Route path={wizardPages.DRINK_LIST}>
-								<DrinksStep drinks={this.props.drinks} selectedProducts={this.props.selectedProducts}/>
+								<DrinksStep drinks={this.props.drinks} selectedProducts={this.props.selectedProducts}
+														selectedDrinks={this.props.selectedDrinks}
+									/>
 							</Route>
 
 							<Route path={wizardPages.ADDRESS}>
@@ -53,6 +58,7 @@ export class OrderWizard extends React.PureComponent<Props> {
 								<Summary
 									products={this.props.products}
 								 	selectedProducts={this.props.selectedProducts}
+									selectedDrinks={this.props.selectedDrinks}
 								 	address={this.props.address}
 									deliveryType={this.props.deliveryType}
 								/>
@@ -73,6 +79,7 @@ const mapStateToProps = (state: AppState) => {
 		drinks: selectDrinks(state),
 		address: state.order && state.order.address,
 		selectedProducts: selectSelectedProducts(state),
+		selectedDrinks: selectSelectedDrinks(state),
 		deliveryType: state.order && state.order.deliveryType,
 		paymentType: state.order && state.order.paymentType,
 	};

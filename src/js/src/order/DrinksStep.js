@@ -29,6 +29,8 @@ import {BackButton} from "./BackButton";
 type Props = {
 	drinks: Array<Product>,
 	selectedProducts: Array<Product>,
+	selectedDrinks: Array<Product>,
+
 }
 
 //redundant
@@ -48,7 +50,7 @@ export class DrinksStep extends React.PureComponent<Props> {
 					</div>
 					<div style={{textAlign: "right"}}>
 						<NextButton label={"NEXT"} page={pages.ADDRESS}/>
-						<OrderSummary selectedProducts={this.props.selectedProducts}/>
+						<OrderSummary selectedProducts={this.props.selectedProducts} selectedDrinks={this.props.selectedDrinks}/>
 					</div>
 				</div>
 			</div>
