@@ -5,6 +5,8 @@ import connect from "react-redux/es/connect/connect";
 
 import welcome from './assets/img/welcome.jpg';
 
+// import img from './file.png';
+
 
 export class Overview extends React.PureComponent {
 	render() {
