@@ -13,6 +13,9 @@ import {reducer as login} from './login/loginReducer';
 import {reducer as products} from './order/redux/productsReducer';
 import {reducer as order} from './order/redux/orderReducer';
 
+
+alert("tell me what is wrong")
+
 let cr =  combineReducers({
 	login,
 	products,

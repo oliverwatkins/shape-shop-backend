@@ -134,7 +134,12 @@
     "test": "node scripts/test.js",
     "test:update": "node scripts/test.js  --updateSnapshot",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+
+
+      "dev2": "webpack-dev-server --content-base src --inline --hot",
+      "package2": "webpack --content-base src --inline --hot",
+      "build2": "webpack"
   },
   "eslintConfig": {
     "extends": "react-app"
