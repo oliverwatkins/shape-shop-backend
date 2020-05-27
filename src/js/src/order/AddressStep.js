@@ -46,7 +46,7 @@ export class Address extends React.PureComponent<Props, State> {
 		})
 	}
 
-	onRadioChanged(e) {
+	onRadioChanged = (e) => {
 		this.setState({
 			deliveryType: e.currentTarget.value,
 		});

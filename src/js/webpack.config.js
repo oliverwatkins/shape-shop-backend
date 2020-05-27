@@ -58,6 +58,10 @@ module.exports = {
 			template: "./src/index.html",
 			filename: "./index.html"
 		}),
+
+		// "@babel/plugin-proposal-class-properties",
+
+
 		new FlowWebpackPlugin(),
 	],
 };

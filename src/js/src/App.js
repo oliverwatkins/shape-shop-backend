@@ -23,8 +23,6 @@ class App extends React.PureComponent{
 	}
 
 	render() {
-
-		alert("what the fuck is wrong with this")
 		return (
 			<div className="App">
 				<Router>

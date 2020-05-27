@@ -17,7 +17,7 @@ export class WhichPayment extends React.PureComponent {
 		}
 	}
 
-	onRadioChanged(e) {
+	onRadioChanged = (e) => {
 		this.setState({
 			paymentType: e.currentTarget.value,
 		});

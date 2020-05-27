@@ -1,13 +1,10 @@
-
-
-
 import {Provider} from "react-redux";
 
 import App from './App';
 
 import saga from './sagas';
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import {combineReducers} from 'redux';
@@ -19,7 +16,7 @@ import {reducer as order} from './order/redux/orderReducer';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-let cr =  combineReducers({
+let cr = combineReducers({
 	login,
 	products,
 	order
@@ -38,7 +35,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<App/>,
 	</Provider>,
-document.getElementById('app')
+	document.getElementById('app')
 );
 
 

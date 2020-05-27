@@ -1,8 +1,5 @@
 import * as React from 'react';
 import pizza from './../assets/img/pizza.png';
-import connect from "react-redux/es/connect/connect";
-import {OrderWizard} from "./OrderWizard";
-import {createFetchProductsAction} from "./redux/productActions";
 
 export class ItemBox extends React.PureComponent {
 
@@ -32,7 +29,10 @@ export class ItemBox extends React.PureComponent {
 		);
 	}
 
-	handleChangeCheckbox(e) {
+
+
+
+	handleChangeCheckbox = (e) => {
 		if (e.currentTarget.checked) {
 			this.props.handleChangeSelection(1, this.props.product.id)
 		}else {
@@ -40,7 +40,7 @@ export class ItemBox extends React.PureComponent {
 		}
 	}
 
-	handleChangeQuantity(e) {
+	handleChangeQuantity = (e) => {
 		this.props.handleChangeSelection(e.currentTarget.value, this.props.product.id)
 	}
 }
