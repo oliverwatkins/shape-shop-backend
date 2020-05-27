@@ -1,8 +1,10 @@
-var debug = process.env.NODE_ENV !== "production";
-var webpack = require('webpack');
-var path = require('path');
+let debug = process.env.NODE_ENV !== "production";
+let webpack = require('webpack');
+let path = require('path');
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const FlowWebpackPlugin = require('flow-webpack-plugin')
+
 
 module.exports = {
 	context: path.join(__dirname, "src"),
@@ -43,7 +45,11 @@ module.exports = {
 			}
 		]
 	},
-
+	devServer: {
+		publicPath: "/",
+		contentBase: "./public",
+		hot: true
+	},
 	plugins: debug ? [] : [
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin(),
@@ -51,6 +57,7 @@ module.exports = {
 		new HtmlWebPackPlugin({
 			template: "./src/index.html",
 			filename: "./index.html"
-		})
+		}),
+		new FlowWebpackPlugin(),
 	],
 };

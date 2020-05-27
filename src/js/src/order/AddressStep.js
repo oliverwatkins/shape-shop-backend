@@ -28,18 +28,25 @@ export const deliveryTypes = {
 
 export class Address extends React.PureComponent<Props, State> {
 
-	state = {
-		redirect: false,
-		deliveryType: deliveryTypes.pickup,
+	constructor() {
+		super();
+		this.state = {
+			redirect: false,
+			deliveryType: deliveryTypes.pickup,
+		}
 	}
+	// state = {
+	// 	redirect: false,
+	// 	deliveryType: deliveryTypes.pickup,
+	// }
 
-	setRedirect = () => {
+	setRedirect() {
 		this.setState({
 			redirect: true
 		})
 	}
 
-	onRadioChanged = (e) => {
+	onRadioChanged(e) {
 		this.setState({
 			deliveryType: e.currentTarget.value,
 		});

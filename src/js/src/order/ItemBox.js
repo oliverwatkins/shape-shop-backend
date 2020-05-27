@@ -32,7 +32,7 @@ export class ItemBox extends React.PureComponent {
 		);
 	}
 
-	handleChangeCheckbox = (e) => {
+	handleChangeCheckbox(e) {
 		if (e.currentTarget.checked) {
 			this.props.handleChangeSelection(1, this.props.product.id)
 		}else {
@@ -40,7 +40,7 @@ export class ItemBox extends React.PureComponent {
 		}
 	}
 
-	handleChangeQuantity = (e) => {
+	handleChangeQuantity(e) {
 		this.props.handleChangeSelection(e.currentTarget.value, this.props.product.id)
 	}
 }

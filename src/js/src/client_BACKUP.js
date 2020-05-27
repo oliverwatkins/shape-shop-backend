@@ -1,9 +1,7 @@
-
-
-
-import {Provider} from "react-redux";
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './App';
+import {Provider} from "react-redux";
 
 import saga from './sagas';
 
@@ -16,17 +14,18 @@ import {reducer as products} from './order/redux/productsReducer';
 import {reducer as order} from './order/redux/orderReducer';
 
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+// alert("tell me what is wrong")
+
+
 
 let cr =  combineReducers({
-	login,
-	products,
-	order
+  login,
+  products,
+  order
 });
 
-
 const sagaMiddleware = createSagaMiddleware();
+
 //for redux plugin
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -34,12 +33,12 @@ const store = createStore(cr, composeEnhancers(applyMiddleware(sagaMiddleware)))
 sagaMiddleware.run(saga);
 
 
-ReactDOM.render(
-	<Provider store={store}>
-		<App/>,
-	</Provider>,
-document.getElementById('app')
-);
 
+ReactDOM.render(
+  <Provider store={store}>
+    <App/>,
+  </Provider>,
+  document.getElementById('root')
+);
 
 
