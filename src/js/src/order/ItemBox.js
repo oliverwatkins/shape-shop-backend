@@ -8,11 +8,12 @@ export class ItemBox extends React.PureComponent {
 		if (this.props.product.quantity > 0) {
 			selected = "selected"
 		}
+		// throw ""
 		return (
 			<div className={selected}>
 				<img src={pizza} alt="Pic of pizza" width={120}/>
 				<div>
-					<div>{this.props.product.name}</div>
+					<div>{this.props.product.name}</div>XXXX
 					<div><b> € {this.props.product.price}</b></div>
 				</div>
 				<input type="checkbox"

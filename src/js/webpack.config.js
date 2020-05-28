@@ -45,9 +45,22 @@ module.exports = {
 			}
 		]
 	},
+
+	// devServer: {
+	// 	historyApiFallback: true,
+	// 	contentBase: './',
+	// 	hot: true
+	// },
+
+
 	devServer: {
+		historyApiFallback: true,
 		publicPath: "/",
-		contentBase: "./public",
+
+			// ./
+		contentBase: "./",
+
+		// contentBase: "./public",
 		hot: true
 	},
 	plugins: debug ? [] : [
