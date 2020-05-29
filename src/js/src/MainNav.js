@@ -35,7 +35,8 @@ export class MainNav extends React.PureComponent {
 						<Link to="/order/productlist">Order</Link>
 					</li>
 					<li style={style2}>
-						<Link to="/login">Admin</Link>
+						<Link to="/login">Admin 				TODO this is deprecated. Front end has moved to shape-shop-font-end..
+						</Link>
 					</li>
 
 					<li style={style}>
