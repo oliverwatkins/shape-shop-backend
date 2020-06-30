@@ -16,6 +16,8 @@ public class ProductEntity {
 	private String name;
 	private BigDecimal price;
 	
+	private String type;
+	private String imageFilename;
 	
 	protected ProductEntity() {}
 
@@ -23,10 +25,12 @@ public class ProductEntity {
 		this.name = name;
 	}
 
-	public ProductEntity(String name, BigDecimal price) {
+	public ProductEntity(String name, BigDecimal price, String type, String imageFilename) {
 		super();
 		this.name = name;
 		this.price = price;
+		this.type = type;
+		this.imageFilename = imageFilename;
 	}
 
 	public long getId() {
@@ -56,5 +60,21 @@ public class ProductEntity {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + "  name=" + name + "]";
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getImageFilename() {
+		return imageFilename;
+	}
+
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
 	}
 }

@@ -34,8 +34,8 @@ public class ProductController {
 	@GetMapping(value = "/products")
 	public ProductEntity[] shapes() {
 		List<ProductEntity> itemList = productService.getAllProducts();
-		ProductEntity[] shapes2 = new ProductEntity[itemList.size()];
-		return productService.getAllProducts().toArray(shapes2);
+		ProductEntity[] array = new ProductEntity[itemList.size()];
+		return productService.getAllProducts().toArray(array); //huh??
 	}
 
 	@GetMapping(value = "/products/{id}")

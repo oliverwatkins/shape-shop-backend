@@ -92,34 +92,53 @@ public class App {
 			System.out.println(">>> create some products !!!!!!!!!!!!!");
 			System.out.println(">>> ");
 
+			
+			
+			
+			
+//			"id": 7,
+//			"name": "Minestone - italienische Gemüsesuppe mit Basilikumpesto",
+//			"price": 4.50,
+//			"type": "main",
+//			"imageFilename": "pizza.png",
+			
 			// save a few shapes
-			repository.save(new ProductEntity("Minestone - italienische Gemüsesuppe mit Basilikumpesto", new BigDecimal(4.50)));
-			repository.save(new ProductEntity("Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", new BigDecimal(7.90)));
-			repository.save(new ProductEntity("Zucchiniröllchen gefüllt mit Ziegenkäse und Honig auf Rucolasalat mit Roten Beten und gerösteten Mandeln", new BigDecimal(7.90)));
+			repository.save(new ProductEntity("Minestone - italienische Gemüsesuppe mit Basilikumpesto", 
+					new BigDecimal(4.50),
+					"main",
+					"pizza.png"
+					));
+			repository.save(new ProductEntity("Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", new BigDecimal(7.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Zucchiniröllchen gefüllt mit Ziegenkäse und Honig auf Rucolasalat mit Roten Beten und gerösteten Mandeln", new BigDecimal(7.90),"main", "pizza.png"));
 
 			
-			repository.save(new ProductEntity("Lachs-Spinat-Lasagne", new BigDecimal(10.90)));
-			repository.save(new ProductEntity("Lasagna Classica al Forno mit Hackfleisch", new BigDecimal(9.90)));
-			repository.save(new ProductEntity("Ravioli gefüllt mit Bärlauch und Ricotta in Zitronenbutter mit Spargel", new BigDecimal(11.90)));
-			repository.save(new ProductEntity("Hausgemachte Rosmarin-Gnocchi mit Hirschragout", new BigDecimal(11.90)));
+			repository.save(new ProductEntity("Lachs-Spinat-Lasagne", new BigDecimal(10.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Lasagna Classica al Forno mit Hackfleisch", new BigDecimal(9.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Ravioli gefüllt mit Bärlauch und Ricotta in Zitronenbutter mit Spargel", new BigDecimal(11.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Hausgemachte Rosmarin-Gnocchi mit Hirschragout", new BigDecimal(11.90),"main", "pizza.png"));
 			
 			
-			repository.save(new ProductEntity("Fritto misto di Verdura – frittierter Blumenkohl, Zucchini, Champignons, Paprika, Aubergine und Artischockenherz mit Knoblauchmayonnaise und Kräuterkartoffeln", new BigDecimal(12.90)));
+			repository.save(new ProductEntity("Fritto misto di Verdura – frittierter Blumenkohl, Zucchini, Champignons, Paprika, Aubergine und Artischockenherz mit Knoblauchmayonnaise und Kräuterkartoffeln", new BigDecimal(12.90),"main", "pizza.png"));
 			
 			
-			repository.save(new ProductEntity("Pizza mit grünem und Weißem Spargel und Kirschtomaten", new BigDecimal(10.90)));
-			repository.save(new ProductEntity("Pizza mit Mortadella, Burrata und Trüffelcreme", new BigDecimal(10.90)));
-			repository.save(new ProductEntity("Pizza mit Kirschtomaten, Burrata und Basilikum-Pesto", new BigDecimal(10.90)));
+			repository.save(new ProductEntity("Pizza mit grünem und Weißem Spargel und Kirschtomaten", new BigDecimal(10.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Pizza mit Mortadella, Burrata und Trüffelcreme", new BigDecimal(10.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Pizza mit Kirschtomaten, Burrata und Basilikum-Pesto", new BigDecimal(10.90),"main", "pizza.png"));
 			
 			
-			repository.save(new ProductEntity("Saltimbocca alla Romana – Kalbslendenmedaillons mit Salbei und Parmaschinken in Weißweinsauce, dazu Kartoffel-Gemüse-Gratin", new BigDecimal(13.90)));
-			repository.save(new ProductEntity("Gegrillte Spieße mit Salsiccia, Hähnchenbrust, Rinderlende und Zwiebeln, dazu hausgemachte Barbecuesauce und Kräuterkartoffeln", new BigDecimal(13.90)));
+			repository.save(new ProductEntity("Saltimbocca alla Romana – Kalbslendenmedaillons mit Salbei und Parmaschinken in Weißweinsauce, dazu Kartoffel-Gemüse-Gratin", new BigDecimal(13.90),"main", "pizza.png"));
+			repository.save(new ProductEntity("Gegrillte Spieße mit Salsiccia, Hähnchenbrust, Rinderlende und Zwiebeln, dazu hausgemachte Barbecuesauce und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png"));
 
 			
-			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90)));
+			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png"));
 
 			
-			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50)));
+			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50),"main", "pizza.png"));
+
+			
+			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png"));
+			repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png"));
+
 			
 
 			// fetch an individual customer by ID
