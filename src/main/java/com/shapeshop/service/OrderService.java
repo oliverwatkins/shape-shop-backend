@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.ShapeEntity;
+import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 
 import lombok.NoArgsConstructor;
@@ -20,34 +21,34 @@ import lombok.NoArgsConstructor;
 public class OrderService {
 
 	@Autowired
-	ProductRepository productRepository;
+	OrderRepository orderRepository;
 
-	public ProductEntity createProduct(ProductEntity product) {
-		productRepository.save(product);
+	public OrderEntity createOrder(OrderEntity product) {
+		orderRepository.save(product);
 		return product;
 	}
 
 	public void deleteProduct(long id) {
-		productRepository.deleteById(id);
+		orderRepository.deleteById(id);
 	}
-	public void deleteProduct(ProductEntity shape) {
-		productRepository.delete(shape);
+	public void deleteProduct(OrderEntity shape) {
+		orderRepository.delete(shape);
 	}
 
 	public List<OrderEntity> getAllOrders() {
 
 //		getAllOrders
 		
-//		List<OrderEntity> result = StreamSupport.stream(productRepository.findAll().spliterator(), false)
-//				.collect(Collectors.toList());
+		List<OrderEntity> result = StreamSupport.stream(orderRepository.findAll().spliterator(), false)
+				.collect(Collectors.toList());
 
-		List<OrderEntity> result = new ArrayList<OrderEntity>();
+//		List<OrderEntity> result = new ArrayList<OrderEntity>();
 		
 		return result;
 	}
 
-	public ProductEntity getProductById(long id) {
-		return productRepository.findById(id);
+	public OrderEntity getOrderById(long id) {
+		return orderRepository.findById(id);
 	}
 
 }

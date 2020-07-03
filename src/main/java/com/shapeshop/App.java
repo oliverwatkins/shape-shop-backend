@@ -1,6 +1,7 @@
 package com.shapeshop;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
+import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 import com.shapeshop.repository.ShapeRepository;
 import com.shapeshop.repository.UserRepository;
@@ -81,6 +84,23 @@ public class App {
 			});
 		};
 	}
+	
+	@Bean
+	public CommandLineRunner loadOrders(OrderRepository repository) {
+		
+		return (args) -> {
+			System.out.println(">>> ");
+			System.out.println(">>> create some products !!!!!!!!!!!!!");
+			System.out.println(">>> ");
+			
+			
+			repository.save(new OrderEntity("this is my order", new Date()));
+			repository.save(new OrderEntity("this is my order 2", new Date()));
+					
+		};
+		
+		
+	}
 
 	
 	
@@ -139,6 +159,9 @@ public class App {
 			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png"));
 			repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png"));
 
+			
+			
+			
 			
 
 			// fetch an individual customer by ID
