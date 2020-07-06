@@ -52,7 +52,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				response.sendError(500, "Expired JWT");
 			} catch (SignatureException e) {
 				response.sendError(500, "SignatureException. JWT signature does not match locally computed signature");
+			} catch (Exception e) {
+				response.sendError(500, "Exception. JWT exception " + e.getMessage());
 			}
+			
 		}
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

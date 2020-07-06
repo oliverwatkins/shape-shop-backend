@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.ProductEntity;
-import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.repository.ProductRepository;
 
 import lombok.NoArgsConstructor;

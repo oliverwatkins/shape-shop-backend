@@ -12,12 +12,10 @@ import org.springframework.context.annotation.Bean;
 
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.ProductEntity;
-import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
-import com.shapeshop.repository.ShapeRepository;
 import com.shapeshop.repository.UserRepository;
 import com.shapeshop.util.PasswordUtils;
 
@@ -44,44 +42,14 @@ public class App {
 	public CommandLineRunner loadUsers(UserRepository repository) {
 		return (args) -> {
 			
-			System.out.println("creating some users");
+//			System.out.println("creating some users");
 			String passs = passwordValidationService.encryptPassword("foo");
 			
-			System.out.println("-->>> ");
-			System.out.println("-->>> create some users !!!!!!!!!!!!!");
-			System.out.println("-->>> passs " + passs);
+			System.out.println("-->>> create some users ! ");
 			
 			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", passs));
-		};
-	}
-		
-
-	@Bean
-	public CommandLineRunner loadShapes(ShapeRepository repository) {
-		return (args) -> {
-
-			System.out.println(">>> ");
-			System.out.println(">>> create some shapes !!!!!!!!!!!!!");
-			System.out.println(">>> ");
-
-			// save a few shapes
-			repository.save(new ShapeEntity("triangle", 3));
-			repository.save(new ShapeEntity("square", 4));
-			repository.save(new ShapeEntity("rhombus", 4));
-			repository.save(new ShapeEntity("hexagon", 6));
-			repository.save(new ShapeEntity("octagon", 8));
-			repository.save(new ShapeEntity("circle", 1));
-
-			// fetch an individual customer by ID
-			ShapeEntity sh1 = repository.findById(2L);
-			System.out.println(">>> fetch by id " + sh1.toString());
-
-			// fetch customers by last name
-			repository.findBySides(7).forEach(sh -> {
-				System.out.println(">>> fetch by sides " + sh.toString());
-			});
 		};
 	}
 	
@@ -89,17 +57,12 @@ public class App {
 	public CommandLineRunner loadOrders(OrderRepository repository) {
 		
 		return (args) -> {
-			System.out.println(">>> ");
-			System.out.println(">>> create some products !!!!!!!!!!!!!");
-			System.out.println(">>> ");
 			
+			System.out.println("-->>> create some orders ! ");
 			
 			repository.save(new OrderEntity("this is my order", new Date()));
 			repository.save(new OrderEntity("this is my order 2", new Date()));
-					
 		};
-		
-		
 	}
 
 	
@@ -108,9 +71,7 @@ public class App {
 	public CommandLineRunner loadProducts(ProductRepository repository) {
 		return (args) -> {
 
-			System.out.println(">>> ");
-			System.out.println(">>> create some products !!!!!!!!!!!!!");
-			System.out.println(">>> ");
+			System.out.println("-->>> create some products ! ");
 
 			
 			

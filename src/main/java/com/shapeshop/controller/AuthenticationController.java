@@ -53,4 +53,32 @@ public class AuthenticationController {
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)
+			throws Exception {
+
+		
+		
+		
+//		Authentication authentication = null;
+//
+//		String pswd = authenticationRequest.getPassword();
+//		String uName = authenticationRequest.getUsername();
+//		String encryptedPswd = passwordValidationService.encryptPassword(pswd);
+//
+//		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+//
+//		authentication = authenticationManager
+//				.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
+//
+//		final String jwtToken = jwtTokenUtil.createToken(authentication);
+//
+		return ResponseEntity.ok(new AuthenticationResponse("TODO"));
+	}
+	
+	
+	
+	
 }

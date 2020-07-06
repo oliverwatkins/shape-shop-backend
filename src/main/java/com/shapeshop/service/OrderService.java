@@ -1,6 +1,5 @@
 package com.shapeshop.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -9,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.OrderEntity;
-import com.shapeshop.entity.ProductEntity;
-import com.shapeshop.entity.ShapeEntity;
 import com.shapeshop.repository.OrderRepository;
-import com.shapeshop.repository.ProductRepository;
 
 import lombok.NoArgsConstructor;
 
