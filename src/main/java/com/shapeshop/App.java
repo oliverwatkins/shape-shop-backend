@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.shapeshop.entity.DeliveryType;
 import com.shapeshop.entity.OrderEntity;
+import com.shapeshop.entity.PaymentType;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
@@ -60,8 +62,8 @@ public class App {
 			
 			System.out.println("-->>> create some orders ! ");
 			
-			repository.save(new OrderEntity("this is my order", new Date()));
-			repository.save(new OrderEntity("this is my order 2", new Date()));
+			repository.save(new OrderEntity("Jon Does", "5234523444", new Date(), PaymentType.CARD, DeliveryType.DELIVERY, "4 Somestr"));
+			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr"));
 		};
 	}
 

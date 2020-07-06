@@ -11,6 +11,6 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Long>{
 
     public OrderEntity findById(long id);
     
-    public List<OrderEntity> findByDescription(String lastName);
+    public List<OrderEntity> findByName(String name);
 	
 }
