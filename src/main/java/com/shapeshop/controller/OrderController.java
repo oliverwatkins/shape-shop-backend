@@ -28,6 +28,10 @@ public class OrderController {
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order) {
 		System.out.println("post order !!!");
 		OrderEntity s = orderService.createOrder(order);
+		
+		System.out.println("created order : " + s);
+		
+		
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 	

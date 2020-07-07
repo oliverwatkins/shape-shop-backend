@@ -1,22 +1,40 @@
 package com.shapeshop.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PRODUCT")
 public class ProductEntity {
 
 	@Id
+	@Column(name="PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String name;
-	private BigDecimal price;
 	
+	@ManyToMany
+	private List<OrderEntity> orders = new ArrayList<>();
+	
+	@Column(name="PRODUCT_NAME")
+	private String name;
+
+	@Column(name="PRODUCT_PRICE")
+	private BigDecimal price;
+
+	//mains / drinks etc.
+	@Column(name="PRODUCT_TYPE")
 	private String type;
+	
+	@Column(name="PRODUCT_IMG_FILENAME")
 	private String imageFilename;
 	
 	protected ProductEntity() {}
@@ -32,6 +50,7 @@ public class ProductEntity {
 		this.type = type;
 		this.imageFilename = imageFilename;
 	}
+
 
 	public long getId() {
 		return id;
@@ -56,11 +75,6 @@ public class ProductEntity {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	
-	@Override
-	public String toString() {
-		return "Product [id=" + id + "  name=" + name + "]";
-	}
 
 	public String getType() {
 		return type;
@@ -76,5 +90,11 @@ public class ProductEntity {
 
 	public void setImageFilename(String imageFilename) {
 		this.imageFilename = imageFilename;
+	}
+	
+	@Override
+	public String toString() {
+		return "ProductEntity [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type + ", imageFilename="
+				+ imageFilename + "]";
 	}
 }
