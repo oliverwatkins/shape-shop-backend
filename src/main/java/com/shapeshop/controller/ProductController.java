@@ -33,8 +33,11 @@ public class ProductController {
 	@CrossOrigin
 	@GetMapping(value = "/products")
 	public ProductEntity[] shapes() {
+		
+		
 		List<ProductEntity> itemList = productService.getAllProducts();
 		ProductEntity[] array = new ProductEntity[itemList.size()];
+		System.out.println("Got products .!.!");
 		return productService.getAllProducts().toArray(array); //huh??
 	}
 

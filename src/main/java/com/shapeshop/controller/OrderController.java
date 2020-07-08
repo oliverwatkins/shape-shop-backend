@@ -23,7 +23,6 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@CrossOrigin
-	
 	@PostMapping(value = "/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order) {
 		System.out.println("post order !!!");

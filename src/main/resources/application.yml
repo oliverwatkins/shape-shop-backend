@@ -1,5 +1,9 @@
 
 spring:  
+  h2:
+    console:
+      enabled: true
+      path: /h2
   thymeleaf:  
     cache: false  
   security:  
@@ -9,3 +13,6 @@ spring:
           github:  
             client-id: b6a8b4767bf93102a5d3  
             client-secret: 4f4d329e579472f3a299a29ce48e84d7dc470ec0
+            
+            
+            
