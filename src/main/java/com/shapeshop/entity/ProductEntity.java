@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT")
 public class ProductEntity {
 
+
+
 	@Id
 	@Column(name="PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -91,10 +93,10 @@ public class ProductEntity {
 	public void setImageFilename(String imageFilename) {
 		this.imageFilename = imageFilename;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type + ", imageFilename="
-				+ imageFilename + "]";
+		return "ProductEntity [id=" + id + ", orders=" + orders + ", name=" + name + ", price=" + price + ", type="
+				+ type + ", imageFilename=" + imageFilename + "]";
 	}
 }

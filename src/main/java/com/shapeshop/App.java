@@ -1,6 +1,7 @@
 package com.shapeshop;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.shapeshop.entity.AddressEntity;
+import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.DeliveryType;
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.PaymentType;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
+import com.shapeshop.repository.AddressRepository;
+import com.shapeshop.repository.CreditCardRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 import com.shapeshop.repository.UserRepository;
@@ -27,6 +32,9 @@ public class App {
 	
 	@Autowired
 	private PasswordUtils passwordValidationService;
+	
+	@Autowired
+	ProductRepository pRes;
 
 	
 	public static void main(String[] args) {
@@ -39,9 +47,6 @@ public class App {
 			System.out.println("<<<<<>>>>> SHAPE SHOP <<<<<>>>>> ");
 		};
 	}
-	
-
-	
 	
 	@Bean
 	public CommandLineRunner loadProducts(ProductRepository repository) {
@@ -66,7 +71,11 @@ public class App {
 			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png"));
 			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50),"main", "pizza.png"));
 			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png"));
-			repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png"));
+			
+			ProductEntity pe = repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png"));
+			
+			System.out.println("got pe " + pe);
+			
 
 		};
 	}
@@ -85,16 +94,41 @@ public class App {
 		};
 	}
 	
+	
+	@Bean
+	public CommandLineRunner loadAddresses(AddressRepository repository) {
+		return (args) -> {
+			AddressEntity a = new AddressEntity("Jar Jar Binks ");
+			repository.save(a);
+		};
+	}
+	
+	@Bean
+	public CommandLineRunner loadCC(CreditCardRepository repository) {
+		return (args) -> {
+			CreditCardEntity cc = new CreditCardEntity("23412341234", "22/22", "JJ Binks", "VISA");
+			repository.save(cc);
+		};
+	}
+	
 	@Bean
 	public CommandLineRunner loadOrders(OrderRepository repository) {
-		
 		return (args) -> {
+//			AddressEntity a = new AddressEntity("Jar Jar Binks ");
+//			CreditCardEntity cc = new CreditCardEntity("23412341234", "22/22", "JJ Binks", "VISA");
 			
 			System.out.println("-->>> create some orders ! ");
 			
-			repository.save(new OrderEntity("Jon Does", "5234523444", new Date(), PaymentType.CARD, DeliveryType.DELIVERY, "4 Somestr"));
+			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findAll();
+			
+			repository.save(new OrderEntity(
+					new Date(), 
+					PaymentType.CARD, 
+					DeliveryType.DELIVERY, 
+					null, 
+					null, 
+					al));
 			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr"));
 		};
 	}
-
 }

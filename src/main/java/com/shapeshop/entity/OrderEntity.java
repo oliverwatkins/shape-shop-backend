@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "ORDERS")
 public class OrderEntity {
+
+
 
 	@Id
 	@Column(name="ORDER_ID")
@@ -24,23 +27,32 @@ public class OrderEntity {
 
 	@ManyToMany
 	private List<ProductEntity> selectedProducts = new ArrayList<>();
+	
+	@OneToOne
+	private CreditCardEntity creditCardEntity;
 
-	@Column(name="ORDER_NAME")
-	private String name;
+	@OneToOne
+	private AddressEntity addressEntity;
+
 	@Column(name="ORDER_DATE")
 	private Date date;
 	@Column(name="ORDER_PAYMENTTYPE")
 	private PaymentType paymentType;
 	@Column(name="ORDER_DELIVERYTYPE")
 	private DeliveryType deliveryType;
-	@Column(name="ORDER_STREET")
-	private String street;
-	@Column(name="ORDER_POSTCODE")
-	private String postCode;
-	@Column(name="ORDER_TELEPHONE")
-	private String telephone;
-	@Column(name="ORDER_EMAIL")
-	private String email;
+	
+//	@Column(name="ORDER_NAME")
+//	private String name;
+//	@Column(name="ORDER_STREET")
+//	private String street;
+//	@Column(name="ORDER_POSTCODE")
+//	private String postCode;
+//	@Column(name="ORDER_TELEPHONE")
+//	private String telephone;
+//	@Column(name="ORDER_EMAIL")
+//	private String email;
+//	
+	
 	@Column(name="ORDER_AMOUNT")
 	private String amount;
 
@@ -54,17 +66,52 @@ public class OrderEntity {
 	protected OrderEntity() {
 	}
 
-	public OrderEntity(String name, String telephone, Date date, PaymentType payment, DeliveryType deliveryType,
-			String address) {
+	public OrderEntity( Date date, PaymentType payment, DeliveryType deliveryType,
+			AddressEntity address, CreditCardEntity creditCard, ArrayList<ProductEntity> selectedProducts) {
 		super();
-		this.name = name;
-		this.telephone = telephone;
+		
+		this.addressEntity = address;
+		this.creditCardEntity = creditCard;
+//		this.name = name;
+//		this.telephone = telephone;
 		this.date = date;
 		this.paymentType = payment;
 		this.deliveryType = deliveryType;
+		this.selectedProducts = selectedProducts;
 	}
 
+	public OrderEntity(
+			String name, 
+			String telephone, 
+			Date date, PaymentType payment, DeliveryType deliveryType,
+			String string3) {
+		
+//		this.addressEntity = address;
+//		this.creditCardEntity = creditCard;
+//		this.name = name;
+//		this.telephone = telephone;
+		this.date = date;
+		this.paymentType = payment;
+		this.deliveryType = deliveryType;
+		
+	}
 
+	public CreditCardEntity getCreditCardEntity() {
+		return creditCardEntity;
+	}
+
+	public void setCreditCardEntity(CreditCardEntity creditCardEntity) {
+		this.creditCardEntity = creditCardEntity;
+	}
+
+	public AddressEntity getAddressEntity() {
+		return addressEntity;
+	}
+
+	public void setAddressEntity(AddressEntity addressEntity) {
+		this.addressEntity = addressEntity;
+	}
+	
 	public PaymentType getPaymentType() {
 		return paymentType;
 	}
@@ -72,30 +119,30 @@ public class OrderEntity {
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
 	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getPostCode() {
-		return postCode;
-	}
-
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+//
+//	public String getStreet() {
+//		return street;
+//	}
+//
+//	public void setStreet(String street) {
+//		this.street = street;
+//	}
+//
+//	public String getPostCode() {
+//		return postCode;
+//	}
+//
+//	public void setPostCode(String postCode) {
+//		this.postCode = postCode;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
 	
 //	
@@ -155,13 +202,13 @@ public class OrderEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
 
 	public Date getDate() {
 		return date;
@@ -187,13 +234,13 @@ public class OrderEntity {
 		this.deliveryType = deliveryType;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+//	public String getTelephone() {
+//		return telephone;
+//	}
+//
+//	public void setTelephone(String telephone) {
+//		this.telephone = telephone;
+//	}
 	
 	public List<ProductEntity> getSelectedProducts() {
 		return selectedProducts;
@@ -203,12 +250,10 @@ public class OrderEntity {
 		this.selectedProducts = selectedProducts;
 	}
 
-
 	@Override
 	public String toString() {
-		return "OrderEntity [id=" + id + ", name=" + name + ", selectedProducts=" + selectedProducts + ", date=" + date
-				+ ", paymentType=" + paymentType + ", deliveryType=" + deliveryType + ", street=" + street
-				+ ", postCode=" + postCode + ", telephone=" + telephone + ", email=" + email + ", amount=" + amount + "]";
+		return "OrderEntity [id=" + id + ", selectedProducts=" + selectedProducts + ", creditCardEntity="
+				+ creditCardEntity + ", addressEntity=" + addressEntity + ", date=" + date + ", paymentType="
+				+ paymentType + ", deliveryType=" + deliveryType + ", amount=" + amount + "]";
 	}
-
 }
