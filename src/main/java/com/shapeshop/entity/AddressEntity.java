@@ -26,6 +26,10 @@ public class AddressEntity {
 	private String street;
 	private String postcode;
 
+	
+	protected AddressEntity() {
+	}
+	
 	public AddressEntity(String name) {
 		this.name = name;
 	}

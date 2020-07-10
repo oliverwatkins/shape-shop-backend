@@ -36,6 +36,11 @@ public class App {
 	@Autowired
 	ProductRepository pRes;
 
+	@Autowired
+	CreditCardRepository ccRes;
+	
+	@Autowired
+	AddressRepository aRes;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
@@ -120,13 +125,15 @@ public class App {
 			System.out.println("-->>> create some orders !!! ");
 			
 			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findAll();
+			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
+			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
 			
 			repository.save(new OrderEntity(
 					new Date(), 
 					PaymentType.CARD, 
 					DeliveryType.DELIVERY, 
-					null, 
-					null, 
+					adds.get(0), 
+					ccE.get(0), 
 					al));
 			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr"));
 		};

@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name = "CREDIT_CARD")
 public class CreditCardEntity {
 
+	
+	protected CreditCardEntity() {
+	}
+	
 	public CreditCardEntity(String number, String expDate, String name, String type) {
 		super();
 		this.number = number;
