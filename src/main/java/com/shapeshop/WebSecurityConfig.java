@@ -26,15 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
-	
-//	@Autowired
-//	private UserDetailsService userDetailsService;
-	
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.userDetailsService(userDetailsService);
-//	}
-
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -47,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").permitAll()
 				.antMatchers("/products").permitAll()
 				.antMatchers("/orders").permitAll()
+				.antMatchers("/*/orders").permitAll()
 				.antMatchers("/authenticate").permitAll()
 				.anyRequest().authenticated()
 			.and().exceptionHandling()

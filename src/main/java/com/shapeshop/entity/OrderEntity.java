@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,13 +19,14 @@ import javax.persistence.Table;
 @Table(name = "ORDERS")
 public class OrderEntity {
 
-
-
 	@Id
 	@Column(name="ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@ManyToOne
+	private CompanyEntity company = new CompanyEntity();
+	
 	@ManyToMany
 	private List<ProductEntity> selectedProducts = new ArrayList<>();
 	
@@ -41,58 +43,40 @@ public class OrderEntity {
 	@Column(name="ORDER_DELIVERYTYPE")
 	private DeliveryType deliveryType;
 	
-//	@Column(name="ORDER_NAME")
-//	private String name;
-//	@Column(name="ORDER_STREET")
-//	private String street;
-//	@Column(name="ORDER_POSTCODE")
-//	private String postCode;
-//	@Column(name="ORDER_TELEPHONE")
-//	private String telephone;
-//	@Column(name="ORDER_EMAIL")
-//	private String email;
-//	
-	
 	@Column(name="ORDER_AMOUNT")
 	private String amount;
-
-
-//	private String nameCC;
-//	private String numberCC;
-//	private String zipherCC;
-//	private String expDateCC;
 
 
 	protected OrderEntity() {
 	}
 
-	public OrderEntity( Date date, PaymentType payment, DeliveryType deliveryType,
-			AddressEntity address, CreditCardEntity creditCard, ArrayList<ProductEntity> selectedProducts) {
+	public OrderEntity( Date date, 
+								PaymentType payment, 
+								DeliveryType deliveryType,
+								AddressEntity address, 
+								CreditCardEntity creditCard, 
+								ArrayList<ProductEntity> selectedProducts, 
+								CompanyEntity company) {
 		super();
-		
 		this.addressEntity = address;
 		this.creditCardEntity = creditCard;
-//		this.name = name;
-//		this.telephone = telephone;
 		this.date = date;
 		this.paymentType = payment;
 		this.deliveryType = deliveryType;
 		this.selectedProducts = selectedProducts;
+		this.company = company;
 	}
 
-	public OrderEntity(
-			String name, 
-			String telephone, 
-			Date date, PaymentType payment, DeliveryType deliveryType,
-			String string3) {
-		
-//		this.addressEntity = address;
-//		this.creditCardEntity = creditCard;
-//		this.name = name;
-//		this.telephone = telephone;
+	public OrderEntity(String name, 
+								String telephone, 
+								Date date, PaymentType payment, 
+								DeliveryType deliveryType,
+								String string3, CompanyEntity company) {
+		super();
 		this.date = date;
 		this.paymentType = payment;
 		this.deliveryType = deliveryType;
+		this.company = company;
 		
 	}
 
@@ -119,72 +103,6 @@ public class OrderEntity {
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
 	}
-//
-//	public String getStreet() {
-//		return street;
-//	}
-//
-//	public void setStreet(String street) {
-//		this.street = street;
-//	}
-//
-//	public String getPostCode() {
-//		return postCode;
-//	}
-//
-//	public void setPostCode(String postCode) {
-//		this.postCode = postCode;
-//	}
-//
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-
-	
-//	
-//	public String getNameCC() {
-//		return nameCC;
-//	}
-//
-//	public void setNameCC(String nameCC) {
-//		this.nameCC = nameCC;
-//	}
-//
-//	public String getNumberCC() {
-//		return numberCC;
-//	}
-//
-//	public void setNumberCC(String numberCC) {
-//		this.numberCC = numberCC;
-//	}
-//
-//	public String getZipherCC() {
-//		return zipherCC;
-//	}
-//
-//	public void setZipherCC(String zipherCC) {
-//		this.zipherCC = zipherCC;
-//	}
-//
-//	public String getExpDateCC() {
-//		return expDateCC;
-//	}
-//
-//	public void setExpDateCC(String expDateCC) {
-//		this.expDateCC = expDateCC;
-//	}
-//
-//	public String[] getItems() {
-//		return items;
-//	}
-//
-//	public void setItems(String[] items) {
-//		this.items = items;
-//	}
 
 	public String getAmount() {
 		return amount;
@@ -201,14 +119,6 @@ public class OrderEntity {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
 
 	public Date getDate() {
 		return date;
@@ -233,14 +143,6 @@ public class OrderEntity {
 	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-
-//	public String getTelephone() {
-//		return telephone;
-//	}
-//
-//	public void setTelephone(String telephone) {
-//		this.telephone = telephone;
-//	}
 	
 	public List<ProductEntity> getSelectedProducts() {
 		return selectedProducts;
@@ -252,8 +154,8 @@ public class OrderEntity {
 
 	@Override
 	public String toString() {
-		return "OrderEntity [id=" + id + ", selectedProducts=" + selectedProducts + ", creditCardEntity="
-				+ creditCardEntity + ", addressEntity=" + addressEntity + ", date=" + date + ", paymentType="
-				+ paymentType + ", deliveryType=" + deliveryType + ", amount=" + amount + "]";
+		return "OrderEntity [id=" + id + ", company=" + company + ", selectedProducts=" + selectedProducts
+				+ ", creditCardEntity=" + creditCardEntity + ", addressEntity=" + addressEntity + ", date=" + date
+				+ ", paymentType=" + paymentType + ", deliveryType=" + deliveryType + ", amount=" + amount + "]";
 	}
 }

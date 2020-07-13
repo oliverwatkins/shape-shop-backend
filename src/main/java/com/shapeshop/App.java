@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import com.shapeshop.entity.AddressEntity;
+import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.DeliveryType;
 import com.shapeshop.entity.OrderEntity;
@@ -20,6 +21,7 @@ import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.AddressRepository;
+import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.CreditCardRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
@@ -37,6 +39,9 @@ public class App {
 	ProductRepository pRes;
 
 	@Autowired
+	CompanyRepository cRes;
+
+	@Autowired
 	CreditCardRepository ccRes;
 	
 	@Autowired
@@ -52,6 +57,44 @@ public class App {
 			System.out.println("<<<<<>>>>> SHAPE SHOP <<<<<>>>>> ");
 		};
 	}
+
+	@Bean
+	public CommandLineRunner loadCompanies(CompanyRepository repository) {
+		return (args) -> {
+
+			System.out.println("-->>> create some companies ! ");
+			
+			// save a few products
+			repository.save(new CompanyEntity("alpenhof"));
+			repository.save(new CompanyEntity("higgins"));
+		};
+	}
+	
+	
+	@Bean
+	public CommandLineRunner loadProducts2(ProductRepository repository) {
+		return (args) -> {
+
+			System.out.println("-->>> create some products ! ");
+			
+			CompanyEntity ce = cRes.findByName("higgins");
+			
+			repository.save(new ProductEntity("Limit Session IPA", new BigDecimal(7.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Idaho NE Pale Ale", new BigDecimal(4.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Eclipse Black IPA", new BigDecimal(3.50), "main", "beer.png", ce));
+			
+			repository.save(new ProductEntity("NEW Release! Outer Limit Session IPA", new BigDecimal(1.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Trailblazer Table Beer", new BigDecimal(4.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Escape English Special Bitter", new BigDecimal(7.50), "main", "beer.png", ce));
+			
+			repository.save(new ProductEntity("Peak Seeker IPA", new BigDecimal(8.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Pioneer Cream Ale", new BigDecimal(4.50), "main", "beer.png", ce));
+			repository.save(new ProductEntity("Pumpkin Ale", new BigDecimal(4.50), "main", "beer.png", ce));
+			
+		};
+	}
+	
+
 	
 	@Bean
 	public CommandLineRunner loadProducts(ProductRepository repository) {
@@ -59,29 +102,27 @@ public class App {
 
 			System.out.println("-->>> create some products ! ");
 			
+			CompanyEntity ce = cRes.findByName("alpenhof");
+			
 			// save a few products
-			repository.save(new ProductEntity("Minestone - italienische Gemüsesuppe mit Basilikumpesto", new BigDecimal(4.50), "main", "pizza.png"));
-			repository.save(new ProductEntity("Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", new BigDecimal(7.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Zucchiniröllchen gefüllt mit Ziegenkäse und Honig auf Rucolasalat mit Roten Beten und gerösteten Mandeln", new BigDecimal(7.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Lachs-Spinat-Lasagne", new BigDecimal(10.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Lasagna Classica al Forno mit Hackfleisch", new BigDecimal(9.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Ravioli gefüllt mit Bärlauch und Ricotta in Zitronenbutter mit Spargel", new BigDecimal(11.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Hausgemachte Rosmarin-Gnocchi mit Hirschragout", new BigDecimal(11.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Fritto misto di Verdura – frittierter Blumenkohl, Zucchini, Champignons, Paprika, Aubergine und Artischockenherz mit Knoblauchmayonnaise und Kräuterkartoffeln", new BigDecimal(12.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Pizza mit grünem und Weißem Spargel und Kirschtomaten", new BigDecimal(10.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Pizza mit Mortadella, Burrata und Trüffelcreme", new BigDecimal(10.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Pizza mit Kirschtomaten, Burrata und Basilikum-Pesto", new BigDecimal(10.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Saltimbocca alla Romana – Kalbslendenmedaillons mit Salbei und Parmaschinken in Weißweinsauce, dazu Kartoffel-Gemüse-Gratin", new BigDecimal(13.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Gegrillte Spieße mit Salsiccia, Hähnchenbrust, Rinderlende und Zwiebeln, dazu hausgemachte Barbecuesauce und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png"));
-			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50),"main", "pizza.png"));
-			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png"));
-			
-			ProductEntity pe = repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png"));
-			
+			repository.save(new ProductEntity("Minestone - italienische Gemüsesuppe mit Basilikumpesto", new BigDecimal(4.50), "main", "pizza.png", ce));
+			repository.save(new ProductEntity("Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", new BigDecimal(7.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Zucchiniröllchen gefüllt mit Ziegenkäse und Honig auf Rucolasalat mit Roten Beten und gerösteten Mandeln", new BigDecimal(7.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Lachs-Spinat-Lasagne", new BigDecimal(10.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Lasagna Classica al Forno mit Hackfleisch", new BigDecimal(9.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Ravioli gefüllt mit Bärlauch und Ricotta in Zitronenbutter mit Spargel", new BigDecimal(11.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Hausgemachte Rosmarin-Gnocchi mit Hirschragout", new BigDecimal(11.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Fritto misto di Verdura – frittierter Blumenkohl, Zucchini, Champignons, Paprika, Aubergine und Artischockenherz mit Knoblauchmayonnaise und Kräuterkartoffeln", new BigDecimal(12.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Pizza mit grünem und Weißem Spargel und Kirschtomaten", new BigDecimal(10.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Pizza mit Mortadella, Burrata und Trüffelcreme", new BigDecimal(10.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Pizza mit Kirschtomaten, Burrata und Basilikum-Pesto", new BigDecimal(10.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Saltimbocca alla Romana – Kalbslendenmedaillons mit Salbei und Parmaschinken in Weißweinsauce, dazu Kartoffel-Gemüse-Gratin", new BigDecimal(13.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Gegrillte Spieße mit Salsiccia, Hähnchenbrust, Rinderlende und Zwiebeln, dazu hausgemachte Barbecuesauce und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50),"main", "pizza.png", ce));
+			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png", ce));
+			ProductEntity pe = repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png", ce));
 			System.out.println("got pe " + pe);
-			
-
 		};
 	}
 	
@@ -119,12 +160,12 @@ public class App {
 	@Bean
 	public CommandLineRunner loadOrders(OrderRepository repository) {
 		return (args) -> {
-//			AddressEntity a = new AddressEntity("Jar Jar Binks ");
-//			CreditCardEntity cc = new CreditCardEntity("23412341234", "22/22", "JJ Binks", "VISA");
 			
 			System.out.println("-->>> create some orders !!! ");
 			
-			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findAll();
+			CompanyEntity ce = cRes.findByName("alpenhof");
+			
+			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
 			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
 			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
 			
@@ -134,8 +175,32 @@ public class App {
 					DeliveryType.DELIVERY, 
 					adds.get(0), 
 					ccE.get(0), 
-					al));
-			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr"));
+					al, ce));
+			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr", ce));
+		};
+	}
+	
+	
+	@Bean
+	public CommandLineRunner loadOrders2(OrderRepository repository) {
+		return (args) -> {
+			
+			System.out.println("-->>> create some orders !!! ");
+			
+			CompanyEntity ce = cRes.findByName("higgins");
+			
+			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
+			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
+			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
+			
+			repository.save(new OrderEntity(
+					new Date(), 
+					PaymentType.CARD, 
+					DeliveryType.DELIVERY, 
+					adds.get(0), 
+					ccE.get(0), 
+					al, ce));
+			repository.save(new OrderEntity("Luke Skywalker2 ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Higginsstr", ce));
 		};
 	}
 }

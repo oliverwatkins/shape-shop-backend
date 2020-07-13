@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,9 @@ import javax.persistence.Table;
 public class ProductEntity {
 
 
+	@ManyToOne
+	private CompanyEntity company = new CompanyEntity();
+	
 
 	@Id
 	@Column(name="PRODUCT_ID")
@@ -41,16 +45,18 @@ public class ProductEntity {
 	
 	protected ProductEntity() {}
 
-	public ProductEntity(String name) {
+	public ProductEntity(String name, CompanyEntity company) {
 		this.name = name;
+		this.company = company;
 	}
 
-	public ProductEntity(String name, BigDecimal price, String type, String imageFilename) {
+	public ProductEntity(String name, BigDecimal price, String type, String imageFilename, CompanyEntity company) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.type = type;
 		this.imageFilename = imageFilename;
+		this.company = company;
 	}
 
 
@@ -96,7 +102,7 @@ public class ProductEntity {
 
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + id + ", orders=" + orders + ", name=" + name + ", price=" + price + ", type="
-				+ type + ", imageFilename=" + imageFilename + "]";
+		return "ProductEntity [company=" + company + ", id=" + id + ", orders=" + orders + ", name=" + name + ", price="
+				+ price + ", type=" + type + ", imageFilename=" + imageFilename + "]";
 	}
 }

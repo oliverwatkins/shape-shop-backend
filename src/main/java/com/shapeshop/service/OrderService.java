@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.repository.OrderRepository;
 
@@ -24,27 +25,26 @@ public class OrderService {
 		return product;
 	}
 
-	public void deleteProduct(long id) {
+	public void deleteOrder(long id) {
 		orderRepository.deleteById(id);
 	}
-	public void deleteProduct(OrderEntity shape) {
+	public void deleteOrder(OrderEntity shape) {
 		orderRepository.delete(shape);
 	}
 
 	public List<OrderEntity> getAllOrders() {
-
-//		getAllOrders
-		
 		List<OrderEntity> result = StreamSupport.stream(orderRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
-
-//		List<OrderEntity> result = new ArrayList<OrderEntity>();
-		
+		return result;
+	}
+	
+	public List<OrderEntity> getOrdersByCompany(CompanyEntity company) {
+		List<OrderEntity> result = StreamSupport.stream(orderRepository.findByCompany(company).spliterator(), false)
+				.collect(Collectors.toList());
 		return result;
 	}
 
 	public OrderEntity getOrderById(long id) {
 		return orderRepository.findById(id);
 	}
-
 }

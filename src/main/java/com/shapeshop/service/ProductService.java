@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.ProductRepository;
 
@@ -30,6 +31,14 @@ public class ProductService {
 	public void deleteProduct(ProductEntity shape) {
 		productRepository.delete(shape);
 	}
+	
+	public List<ProductEntity> getProductsByCompany(CompanyEntity company) {
+
+		List<ProductEntity> result = StreamSupport.stream(productRepository.findByCompany(company).spliterator(), false)
+				.collect(Collectors.toList());
+		return result;
+	}
+	
 
 	public List<ProductEntity> getAllProducts() {
 
