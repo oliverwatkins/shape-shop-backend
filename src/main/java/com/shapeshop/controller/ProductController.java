@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.ProductEntity;
+import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.ProductService;
 
 
@@ -23,7 +25,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-
+	@Autowired
+	private CompanyRepository companyR;
+	
 	@PostMapping("/products")
 	public ResponseEntity<?> newShape(@RequestBody ProductEntity shape) {
 		ProductEntity s = productService.createProduct(shape);
@@ -31,14 +35,18 @@ public class ProductController {
 	}
 	
 	@CrossOrigin
-	@GetMapping(value = "/products")
-	public ProductEntity[] shapes() {
+	@GetMapping(value = "/{companyName}/products")
+	public ProductEntity[] getProducts(@PathVariable("companyName") String companyName) {
+		
+		System.out.println("companyName " + companyName);
+		
+		CompanyEntity c = companyR.findByName(companyName);
 		
 		
-		List<ProductEntity> itemList = productService.getAllProducts();
+		List<ProductEntity> itemList = productService.getProductsByCompany(c);
 		ProductEntity[] array = new ProductEntity[itemList.size()];
 		System.out.println("Got products .!.!");
-		return productService.getAllProducts().toArray(array); //huh??
+		return productService.getProductsByCompany(c).toArray(array); //huh??
 	}
 
 	@GetMapping(value = "/products/{id}")
@@ -52,7 +60,7 @@ public class ProductController {
 		productService.deleteProduct(id);
 	}
 
-	@DeleteMapping(value = "/products")
+	@DeleteMapping(value = "/{companyName}/products")
 	public void deleteShapes(@RequestBody ProductEntity shape) {
 		productService.deleteProduct(shape);
 	}

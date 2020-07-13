@@ -19,6 +19,14 @@ import javax.persistence.Table;
 @Table(name = "ORDERS")
 public class OrderEntity {
 
+	public CompanyEntity getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyEntity company) {
+		this.company = company;
+	}
+
 	@Id
 	@Column(name="ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)

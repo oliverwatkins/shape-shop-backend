@@ -29,9 +29,16 @@ public class OrderController {
 	private CompanyRepository companyR;
 
 	@CrossOrigin
-	@PostMapping(value = "/orders")
-	public ResponseEntity<Object> order(@RequestBody OrderEntity order) {
+	@PostMapping(value = "/{companyName}/orders")
+	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
 		System.out.println("post order !!!");
+		
+		System.out.println("companyName " + companyName);
+		
+		CompanyEntity c = companyR.findByName(companyName);
+		
+		order.setCompany(c);
+		
 		OrderEntity s = orderService.createOrder(order);
 		
 		System.out.println("created order : " + s);
