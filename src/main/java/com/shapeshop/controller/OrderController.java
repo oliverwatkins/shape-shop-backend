@@ -59,6 +59,10 @@ public class OrderController {
 		
 		System.out.println("getOrders ! for company " + c);
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
+		
+		
+		
+		
 		OrderEntity[] orders = new OrderEntity[itemList.size()];
 		return orderService.getOrdersByCompany(c).toArray(orders);
 	}

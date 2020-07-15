@@ -144,7 +144,7 @@ public class App {
 	@Bean
 	public CommandLineRunner loadAddresses(AddressRepository repository) {
 		return (args) -> {
-			AddressEntity a = new AddressEntity("Jar Jar Binks ");
+			AddressEntity a = new AddressEntity("Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444");
 			repository.save(a);
 		};
 	}
@@ -161,7 +161,7 @@ public class App {
 	public CommandLineRunner loadOrders(OrderRepository repository) {
 		return (args) -> {
 			
-			System.out.println("-->>> create some orders !!! ");
+			System.out.println("-->>> create some orders (alpenhof) !!! ");
 			
 			CompanyEntity ce = cRes.findByName("alpenhof");
 			
@@ -175,8 +175,18 @@ public class App {
 					DeliveryType.DELIVERY, 
 					adds.get(0), 
 					ccE.get(0), 
-					al, ce));
-			repository.save(new OrderEntity("Jar Jar Binks ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Somestr", ce));
+					new ArrayList(al.subList(1, 3)), 
+					ce));
+			
+			repository.save(new OrderEntity(
+					new Date(), 
+					PaymentType.CARD, 
+					DeliveryType.DELIVERY, 
+					adds.get(0), 
+					ccE.get(0), 
+					new ArrayList(al.subList(5, 6)), 
+					ce));
+			
 		};
 	}
 	

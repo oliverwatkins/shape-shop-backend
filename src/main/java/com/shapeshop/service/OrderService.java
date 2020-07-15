@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.OrderEntity;
+import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.OrderRepository;
 
 import lombok.NoArgsConstructor;
@@ -20,7 +21,14 @@ public class OrderService {
 	@Autowired
 	OrderRepository orderRepository;
 
+	@Autowired
+	AddressRepository addressRepository;
+
+	
 	public OrderEntity createOrder(OrderEntity product) {
+		
+		addressRepository.save(product.getAddressEntity());
+		
 		orderRepository.save(product);
 		return product;
 	}
