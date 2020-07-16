@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.repository.AddressRepository;
+import com.shapeshop.repository.CreditCardRepository;
 import com.shapeshop.repository.OrderRepository;
 
 import lombok.NoArgsConstructor;
@@ -24,10 +25,15 @@ public class OrderService {
 	@Autowired
 	AddressRepository addressRepository;
 
+	@Autowired
+	CreditCardRepository creditCardRepository;
 	
 	public OrderEntity createOrder(OrderEntity product) {
 		
 		addressRepository.save(product.getAddressEntity());
+		
+		creditCardRepository.save(product.getCreditCardEntity());
+		
 		
 		orderRepository.save(product);
 		return product;
