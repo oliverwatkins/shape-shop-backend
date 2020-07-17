@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,7 +35,7 @@ public class OrderEntity {
 	@ManyToOne
 	private CompanyEntity company = new CompanyEntity();
 	
-	@ManyToMany
+	@OneToMany
 	private List<OrderItemEntity> selectedProducts = new ArrayList<>();
 	
 	@OneToOne
