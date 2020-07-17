@@ -29,11 +29,12 @@ public class OrderService {
 	CreditCardRepository creditCardRepository;
 	
 	public OrderEntity createOrder(OrderEntity product) {
+
+		if (product.getAddressEntity() != null)
+			addressRepository.save(product.getAddressEntity());
 		
-		addressRepository.save(product.getAddressEntity());
-		
-		creditCardRepository.save(product.getCreditCardEntity());
-		
+		if (product.getCreditCardEntity() != null)
+			creditCardRepository.save(product.getCreditCardEntity());
 		
 		orderRepository.save(product);
 		return product;
