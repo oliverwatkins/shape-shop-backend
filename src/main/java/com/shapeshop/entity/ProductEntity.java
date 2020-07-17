@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +28,8 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToMany
-	private List<OrderEntity> orders = new ArrayList<>();
+	@OneToMany
+	private List<OrderItemEntity> orders = new ArrayList<>();
 	
 	@Column(name="PRODUCT_NAME")
 	private String name;

@@ -36,7 +36,7 @@ public class OrderEntity {
 	private CompanyEntity company = new CompanyEntity();
 	
 	@ManyToMany
-	private List<ProductEntity> selectedProducts = new ArrayList<>();
+	private List<OrderItemEntity> selectedProducts = new ArrayList<>();
 	
 	@OneToOne
 	private CreditCardEntity creditCardEntity;
@@ -63,7 +63,7 @@ public class OrderEntity {
 								DeliveryType deliveryType,
 								AddressEntity address, 
 								CreditCardEntity creditCard, 
-								ArrayList<ProductEntity> selectedProducts, 
+								ArrayList<OrderItemEntity> selectedProducts, 
 								CompanyEntity company) {
 		super();
 		this.addressEntity = address;
@@ -152,11 +152,11 @@ public class OrderEntity {
 		this.deliveryType = deliveryType;
 	}
 	
-	public List<ProductEntity> getSelectedProducts() {
+	public List<OrderItemEntity> getSelectedProducts() {
 		return selectedProducts;
 	}
 
-	public void setSelectedProducts(List<ProductEntity> selectedProducts) {
+	public void setSelectedProducts(List<OrderItemEntity> selectedProducts) {
 		this.selectedProducts = selectedProducts;
 	}
 
