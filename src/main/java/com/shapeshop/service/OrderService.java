@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.OrderEntity;
+import com.shapeshop.entity.OrderItemEntity;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CreditCardRepository;
+import com.shapeshop.repository.OrderItemRepository;
 import com.shapeshop.repository.OrderRepository;
 
 import lombok.NoArgsConstructor;
@@ -20,6 +22,9 @@ import lombok.NoArgsConstructor;
 public class OrderService {
 
 	@Autowired
+	OrderItemRepository orderItemRepository;
+	
+	@Autowired
 	OrderRepository orderRepository;
 
 	@Autowired
@@ -28,16 +33,32 @@ public class OrderService {
 	@Autowired
 	CreditCardRepository creditCardRepository;
 	
-	public OrderEntity createOrder(OrderEntity product) {
+	public OrderEntity createOrder(OrderEntity order) {
 
-		if (product.getAddressEntity() != null)
-			addressRepository.save(product.getAddressEntity());
+		if (order.getAddressEntity() != null)
+			addressRepository.save(order.getAddressEntity());
 		
-		if (product.getCreditCardEntity() != null)
-			creditCardRepository.save(product.getCreditCardEntity());
+		if (order.getCreditCardEntity() != null)
+			creditCardRepository.save(order.getCreditCardEntity());
 		
-		orderRepository.save(product);
-		return product;
+		
+		List<OrderItemEntity> oitems = order.getOrderItems();
+		System.out.println("oitems " + oitems);
+
+		for (OrderItemEntity orderItemEntity : oitems) {
+			
+			System.out.println("orderItemEntity " + orderItemEntity);
+			orderItemRepository.save(orderItemEntity);
+		}
+		
+		if (oitems.size() == 0) {
+			throw new RuntimeException("oitems.size() == 0 ");
+		}
+		
+		
+		
+		orderRepository.save(order);
+		return order;
 	}
 
 	public void deleteOrder(long id) {

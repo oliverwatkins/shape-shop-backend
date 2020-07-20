@@ -19,8 +19,6 @@ import javax.persistence.Table;
 @Table(name = "ORDERS")
 public class OrderEntity {
 
-
-
 	@Id
 	@Column(name="ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)

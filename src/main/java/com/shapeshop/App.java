@@ -179,15 +179,15 @@ public class App {
 			ProductEntity p2 = al.get(1);
 			
 			
-//			OrderEntity o1 = new OrderEntity(
-//					new Date(), 
-//					PaymentType.CARD, 
-//					DeliveryType.DELIVERY, 
-//					adds.get(0), 
-//					ccE.get(0), 
-//					ce);
-//			
-//			oRep.save(o1);
+			OrderEntity o1 = new OrderEntity(
+					new Date(), 
+					PaymentType.CARD, 
+					DeliveryType.DELIVERY, 
+					adds.get(0), 
+					ccE.get(0), 
+					ce);
+			
+			oRep.save(o1);
 			
 			OrderEntity o2 = new OrderEntity(
 					new Date(), 
