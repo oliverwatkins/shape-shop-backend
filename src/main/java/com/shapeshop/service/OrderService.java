@@ -56,6 +56,9 @@ public class OrderService {
 	public List<OrderEntity> getOrdersByCompany(CompanyEntity company) {
 		List<OrderEntity> result = StreamSupport.stream(orderRepository.findByCompany(company).spliterator(), false)
 				.collect(Collectors.toList());
+		
+		
+		
 		return result;
 	}
 

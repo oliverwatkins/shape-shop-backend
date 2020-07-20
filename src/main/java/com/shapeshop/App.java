@@ -3,6 +3,7 @@ package com.shapeshop;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +17,7 @@ import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.DeliveryType;
 import com.shapeshop.entity.OrderEntity;
+import com.shapeshop.entity.OrderItemEntity;
 import com.shapeshop.entity.PaymentType;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.UserEntity;
@@ -23,6 +25,7 @@ import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.CreditCardRepository;
+import com.shapeshop.repository.OrderItemRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 import com.shapeshop.repository.UserRepository;
@@ -37,6 +40,9 @@ public class App {
 	
 	@Autowired
 	ProductRepository pRes;
+
+	@Autowired
+	OrderItemRepository oiRep;
 
 	@Autowired
 	CompanyRepository cRes;
@@ -158,7 +164,7 @@ public class App {
 	}
 	
 	@Bean
-	public CommandLineRunner loadOrders(OrderRepository repository) {
+	public CommandLineRunner loadOrders(OrderRepository oRep) {
 		return (args) -> {
 			
 			System.out.println("-->>> create some orders (alpenhof) !!! ");
@@ -169,24 +175,53 @@ public class App {
 			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
 			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
 			
-			repository.save(new OrderEntity(
+			ProductEntity p1 = al.get(0);
+			ProductEntity p2 = al.get(1);
+			
+			
+//			OrderEntity o1 = new OrderEntity(
+//					new Date(), 
+//					PaymentType.CARD, 
+//					DeliveryType.DELIVERY, 
+//					adds.get(0), 
+//					ccE.get(0), 
+//					ce);
+//			
+//			oRep.save(o1);
+			
+			OrderEntity o2 = new OrderEntity(
 					new Date(), 
 					PaymentType.CARD, 
 					DeliveryType.DELIVERY, 
 					adds.get(0), 
 					ccE.get(0), 
-					new ArrayList(al.subList(1, 3)), 
-					ce));
+					ce);
+
 			
-			repository.save(new OrderEntity(
-					new Date(), 
-					PaymentType.CARD, 
-					DeliveryType.DELIVERY, 
-					adds.get(0), 
-					ccE.get(0), 
-					new ArrayList(al.subList(5, 6)), 
-					ce));
+			OrderItemEntity oi1 = new OrderItemEntity(p1, 12);
+			OrderItemEntity oi2 = new OrderItemEntity(p2, 12);
 			
+			ArrayList<OrderItemEntity> oies = new ArrayList<OrderItemEntity>();
+
+			oies.add(oi1);
+			oies.add(oi2);
+			
+			o2.setOrderItems(oies);
+			
+			oiRep.save(oi1);
+			oiRep.save(oi2);
+			
+			oRep.save(o2);
+			
+			
+//			List l = (List)oRep.findAll();
+//			
+//			System.out.println("l " + l );
+			
+			
+
+
+
 		};
 	}
 	
@@ -194,23 +229,27 @@ public class App {
 	@Bean
 	public CommandLineRunner loadOrders2(OrderRepository repository) {
 		return (args) -> {
-			
-			System.out.println("-->>> create some orders !!! ");
-			
-			CompanyEntity ce = cRes.findByName("higgins");
-			
-			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
-			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
-			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
-			
-			repository.save(new OrderEntity(
-					new Date(), 
-					PaymentType.CARD, 
-					DeliveryType.DELIVERY, 
-					adds.get(0), 
-					ccE.get(0), 
-					al, ce));
-			repository.save(new OrderEntity("Luke Skywalker2 ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Higginsstr", ce));
+//			
+//			System.out.println("-->>> create some orders !!! ");
+//			
+//			CompanyEntity ce = cRes.findByName("higgins");
+//			
+//			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
+//			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
+//			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
+//			
+//			OrderEntity o = new OrderEntity(
+//					new Date(), 
+//					PaymentType.CARD, 
+//					DeliveryType.DELIVERY, 
+//					adds.get(0), 
+//					ccE.get(0), 
+//					ce);
+//			
+//			OrderItemEntity oi = new OrderItemEntity(al.get(0), o, "");
+//			
+//			repository.save();
+//			repository.save(new OrderEntity("Luke Skywalker2 ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Higginsstr", ce));
 		};
 	}
 }

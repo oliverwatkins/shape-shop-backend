@@ -1,11 +1,11 @@
 package com.shapeshop.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,13 +19,7 @@ import javax.persistence.Table;
 @Table(name = "ORDERS")
 public class OrderEntity {
 
-	public CompanyEntity getCompany() {
-		return company;
-	}
 
-	public void setCompany(CompanyEntity company) {
-		this.company = company;
-	}
 
 	@Id
 	@Column(name="ORDER_ID")
@@ -35,14 +29,14 @@ public class OrderEntity {
 	@ManyToOne
 	private CompanyEntity company = new CompanyEntity();
 	
-	@OneToMany
-	private List<OrderItemEntity> selectedProducts = new ArrayList<>();
-	
 	@OneToOne
 	private CreditCardEntity creditCardEntity;
 
 	@OneToOne
 	private AddressEntity addressEntity;
+	
+	@OneToMany
+	private List<OrderItemEntity> orderItems;
 
 	@Column(name="ORDER_DATE")
 	private Date date;
@@ -63,7 +57,6 @@ public class OrderEntity {
 								DeliveryType deliveryType,
 								AddressEntity address, 
 								CreditCardEntity creditCard, 
-								ArrayList<OrderItemEntity> selectedProducts, 
 								CompanyEntity company) {
 		super();
 		this.addressEntity = address;
@@ -71,7 +64,6 @@ public class OrderEntity {
 		this.date = date;
 		this.paymentType = payment;
 		this.deliveryType = deliveryType;
-		this.selectedProducts = selectedProducts;
 		this.company = company;
 	}
 
@@ -88,6 +80,14 @@ public class OrderEntity {
 		
 	}
 
+	public CompanyEntity getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyEntity company) {
+		this.company = company;
+	}
+	
 	public CreditCardEntity getCreditCardEntity() {
 		return creditCardEntity;
 	}
@@ -153,16 +153,24 @@ public class OrderEntity {
 	}
 	
 	public List<OrderItemEntity> getSelectedProducts() {
-		return selectedProducts;
+		return orderItems;
 	}
 
 	public void setSelectedProducts(List<OrderItemEntity> selectedProducts) {
-		this.selectedProducts = selectedProducts;
+		this.orderItems = selectedProducts;
+	}
+	
+	public List<OrderItemEntity> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItemEntity> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderEntity [id=" + id + ", company=" + company + ", selectedProducts=" + selectedProducts
+		return "OrderEntity [id=" + id + ", company=" + company + ", selectedProducts=" + orderItems
 				+ ", creditCardEntity=" + creditCardEntity + ", addressEntity=" + addressEntity + ", date=" + date
 				+ ", paymentType=" + paymentType + ", deliveryType=" + deliveryType + ", amount=" + amount + "]";
 	}

@@ -50,7 +50,7 @@ public class OrderController {
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
-	public OrderEntity[]  getOrders(@PathVariable("companyName") String companyName) {
+	public OrderEntity[] getOrders(@PathVariable("companyName") String companyName) {
 		
 		
 		System.out.println("companyName " + companyName);
@@ -60,10 +60,12 @@ public class OrderController {
 		System.out.println("getOrders ! for company " + c);
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
 		
-		
-		
-		
 		OrderEntity[] orders = new OrderEntity[itemList.size()];
-		return orderService.getOrdersByCompany(c).toArray(orders);
+		
+		OrderEntity[] ars = orderService.getOrdersByCompany(c).toArray(orders); 
+		
+		return ars;
+		
+		
 	}
 }

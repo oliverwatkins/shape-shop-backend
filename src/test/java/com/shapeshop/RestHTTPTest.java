@@ -44,7 +44,7 @@ public class RestHTTPTest {
     	mvc.perform(MockMvcRequestBuilders.get("/admin")).andExpect(matcher.isForbidden());
     	
     	//public
-    	mvc.perform(MockMvcRequestBuilders.get("/")).andExpect(matcher.isOk());
+    	mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products")).andExpect(matcher.isOk());
     	
     	String requestJson = "{\"username\": \"IDoNotExistInTheDB\",\"password\": \"foo\"}";
     	
