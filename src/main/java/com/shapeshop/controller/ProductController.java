@@ -38,15 +38,13 @@ public class ProductController {
 	@GetMapping(value = "/{companyName}/products")
 	public ProductEntity[] getProducts(@PathVariable("companyName") String companyName) {
 		
-		System.out.println("companyName " + companyName);
-		
 		CompanyEntity c = companyR.findByName(companyName);
 		
-		
 		List<ProductEntity> itemList = productService.getProductsByCompany(c);
-		ProductEntity[] array = new ProductEntity[itemList.size()];
-		System.out.println("Got products .!.!");
-		return productService.getProductsByCompany(c).toArray(array); //huh??
+		
+		System.out.println("Got products for company " + companyName + " . Number of products " + itemList.size());
+
+		return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
 	}
 
 	@GetMapping(value = "/products/{id}")

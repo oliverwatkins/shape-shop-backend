@@ -43,19 +43,17 @@ public class OrderService {
 		
 		
 		List<OrderItemEntity> oitems = order.getOrderItems();
-		System.out.println("oitems " + oitems);
+		System.out.println("-->>> number of order items " + oitems.size() + " ");
 
 		for (OrderItemEntity orderItemEntity : oitems) {
 			
-			System.out.println("orderItemEntity " + orderItemEntity);
+			System.out.println("-->>> orderItemEntity " + orderItemEntity);
 			orderItemRepository.save(orderItemEntity);
 		}
 		
 		if (oitems.size() == 0) {
 			throw new RuntimeException("oitems.size() == 0 ");
 		}
-		
-		
 		
 		orderRepository.save(order);
 		return order;
@@ -77,8 +75,6 @@ public class OrderService {
 	public List<OrderEntity> getOrdersByCompany(CompanyEntity company) {
 		List<OrderEntity> result = StreamSupport.stream(orderRepository.findByCompany(company).spliterator(), false)
 				.collect(Collectors.toList());
-		
-		
 		
 		return result;
 	}

@@ -31,20 +31,17 @@ public class OrderController {
 	@CrossOrigin
 	@PostMapping(value = "/{companyName}/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
-		System.out.println("post order !!!");
-		
-		System.out.println("companyName " + companyName);
+		System.out.println("-->>> post order for company " + companyName + " : " + order);
 		
 		CompanyEntity c = companyR.findByName(companyName);
 		
 		order.setCompany(c);
 		
-		OrderEntity s = orderService.createOrder(order);
+		OrderEntity o = orderService.createOrder(order);
 		
-		System.out.println("created order : " + s);
+		System.out.println("-->>> created order ");
 		
-		
-		return new ResponseEntity<>(s, HttpStatus.OK);
+		return new ResponseEntity<>(o, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
@@ -52,20 +49,14 @@ public class OrderController {
 	@GetMapping(value = "/{companyName}/orders")
 	public OrderEntity[] getOrders(@PathVariable("companyName") String companyName) {
 		
-		
-		System.out.println("companyName " + companyName);
+		System.out.println("-->>> companyName " + companyName);
 		
 		CompanyEntity c = companyR.findByName(companyName);
 		
-		System.out.println("getOrders ! for company " + c);
+		System.out.println("-->>> getOrders for company " + c);
+
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
 		
-		OrderEntity[] orders = new OrderEntity[itemList.size()];
-		
-		OrderEntity[] ars = orderService.getOrdersByCompany(c).toArray(orders); 
-		
-		return ars;
-		
-		
+		return itemList.toArray(new OrderEntity[itemList.size()]); 
 	}
 }

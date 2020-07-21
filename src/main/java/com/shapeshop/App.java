@@ -33,7 +33,6 @@ import com.shapeshop.util.PasswordUtils;
 
 @SpringBootApplication
 public class App {
-
 	
 	@Autowired
 	private PasswordUtils passwordValidationService;
@@ -81,7 +80,7 @@ public class App {
 	public CommandLineRunner loadProducts2(ProductRepository repository) {
 		return (args) -> {
 
-			System.out.println("-->>> create some products ! ");
+			System.out.println("-->>> create some products (higgins) ! ");
 			
 			CompanyEntity ce = cRes.findByName("higgins");
 			
@@ -106,7 +105,7 @@ public class App {
 	public CommandLineRunner loadProducts(ProductRepository repository) {
 		return (args) -> {
 
-			System.out.println("-->>> create some products ! ");
+			System.out.println("-->>> create some products (alpenhof) ! ");
 			
 			CompanyEntity ce = cRes.findByName("alpenhof");
 			
@@ -127,8 +126,7 @@ public class App {
 			repository.save(new ProductEntity("Fritto Misto di Pesce -  frittierte Fische und Meeresfrüchte mit Knoblauch-Mayonnaise und Kräuterkartoffeln", new BigDecimal(13.90),"main", "pizza.png", ce));
 			repository.save(new ProductEntity("Mango-Panna Cotta mit Erdbeersalat", new BigDecimal(4.50),"main", "pizza.png", ce));
 			repository.save(new ProductEntity("Chardonay", new BigDecimal(4.50),"drinks", "pizza.png", ce));
-			ProductEntity pe = repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png", ce));
-			System.out.println("got pe " + pe);
+			repository.save(new ProductEntity("Shiraz", new BigDecimal(4.50),"drinks", "pizza.png", ce));
 		};
 	}
 	
@@ -212,44 +210,48 @@ public class App {
 			oiRep.save(oi2);
 			
 			oRep.save(o2);
-			
-			
-//			List l = (List)oRep.findAll();
-//			
-//			System.out.println("l " + l );
-			
-			
-
-
 
 		};
 	}
 	
 	
 	@Bean
-	public CommandLineRunner loadOrders2(OrderRepository repository) {
+	public CommandLineRunner loadOrders2(OrderRepository oRep) {
 		return (args) -> {
-//			
-//			System.out.println("-->>> create some orders !!! ");
-//			
-//			CompanyEntity ce = cRes.findByName("higgins");
-//			
-//			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
-//			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
-//			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
-//			
-//			OrderEntity o = new OrderEntity(
-//					new Date(), 
-//					PaymentType.CARD, 
-//					DeliveryType.DELIVERY, 
-//					adds.get(0), 
-//					ccE.get(0), 
-//					ce);
-//			
-//			OrderItemEntity oi = new OrderItemEntity(al.get(0), o, "");
-//			
-//			repository.save();
-//			repository.save(new OrderEntity("Luke Skywalker2 ", "845545664",new Date(), PaymentType.CASH, DeliveryType.PICKUP, "55 Higginsstr", ce));
+			
+			System.out.println("-->>> create some orders (higgins) !!! ");
+			
+			CompanyEntity ce = cRes.findByName("higgins");
+			
+			ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(ce);
+			ArrayList<CreditCardEntity> ccE = (ArrayList<CreditCardEntity>) ccRes.findAll();
+			ArrayList<AddressEntity> adds = (ArrayList<AddressEntity>) aRes.findAll();
+			
+			ProductEntity p1 = al.get(0);
+			ProductEntity p2 = al.get(1);
+			
+			OrderEntity o = new OrderEntity(
+					new Date(), 
+					PaymentType.CARD, 
+					DeliveryType.DELIVERY, 
+					adds.get(0), 
+					ccE.get(0), 
+					ce);
+			
+			OrderItemEntity oi1 = new OrderItemEntity(p1, 99);
+			OrderItemEntity oi2 = new OrderItemEntity(p2, 9);
+			
+			ArrayList<OrderItemEntity> oies = new ArrayList<OrderItemEntity>();
+			
+			oies.add(oi1);
+			oies.add(oi2);
+			
+			o.setOrderItems(oies);
+			
+			oiRep.save(oi1);
+			oiRep.save(oi2);
+			
+			oRep.save(o);
 		};
 	}
 }
