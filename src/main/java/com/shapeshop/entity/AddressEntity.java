@@ -26,9 +26,8 @@ public class AddressEntity {
 	private String street;
 	private String postcode;
 	private String telephone;
-	
+	private String email;
 
-	
 	protected AddressEntity() {
 	}
 	
@@ -36,12 +35,13 @@ public class AddressEntity {
 		this.name = name;
 	}
 	
-	public AddressEntity(String name, String street, String postcode, String telephone) {
+	public AddressEntity(String name, String street, String postcode, String telephone, String email) {
 		super();
 		this.name = name;
 		this.street = street;
 		this.postcode = postcode;
 		this.telephone = telephone;
+		this.email = email;
 	}
 	
 	public String getName() {
@@ -74,4 +74,12 @@ public class AddressEntity {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }
