@@ -45,6 +45,10 @@ public class OrderEntity {
 	
 	@Column(name="ORDER_AMOUNT")
 	private String amount;
+	
+	@Column(name="ORDER_STATE")
+	private OrderState state = OrderState.OPEN;
+
 
 
 	protected OrderEntity() {
@@ -165,6 +169,16 @@ public class OrderEntity {
 	public void setOrderItems(List<OrderItemEntity> orderItems) {
 		this.orderItems = orderItems;
 	}
+	
+	public OrderState getState() {
+		return state;
+	}
+
+	public void setState(OrderState state) {
+		this.state = state;
+	}
+
+	
 
 	@Override
 	public String toString() {
