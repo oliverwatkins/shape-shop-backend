@@ -32,30 +32,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/products").permitAll()
-				.antMatchers("/*/products").permitAll()
-				.antMatchers("/orders").permitAll()
-				.antMatchers("/*/orders").permitAll()
-				.antMatchers("/authenticate").permitAll()
-				.anyRequest().authenticated()
-			.and().exceptionHandling()
-			
-			//to get h2 console running need these two lines (http://localhost:8080/h2) ...but get cross origin problems
-//			.and().csrf().ignoringAntMatchers("/h2/**") // Make H2-Console non-secured; for debug purposes
-//			.and().headers().frameOptions().sameOrigin() 
-			
-			
-			
-			.and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-	    // add this line to use H2 web console
-	    http.headers().frameOptions().disable();
+		
+		
+//		http.csrf().disable().authorizeRequests()
+//				.antMatchers("/").permitAll()
+//				.antMatchers("/products").permitAll()
+//				.antMatchers("/*/products").permitAll()
+//				.antMatchers("/orders").permitAll()
+//				.antMatchers("/*/orders").permitAll()
+//				.antMatchers("/authenticate").permitAll()
+//				.anyRequest().authenticated()
+//			.and().exceptionHandling()
+//			
+//			//to get h2 console running need these two lines (http://localhost:8080/h2) ...but get cross origin problems
+////			.and().csrf().ignoringAntMatchers("/h2/**") // Make H2-Console non-secured; for debug purposes
+////			.and().headers().frameOptions().sameOrigin() 
+//			
+//			
+//			
+//			.and().sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//	    // add this line to use H2 web console
+//	    http.headers().frameOptions().disable();
 
 	    
-		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Bean
