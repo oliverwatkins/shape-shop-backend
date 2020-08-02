@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.shapeshop.entity.AddressEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
@@ -17,6 +15,7 @@ import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.CreditCardRepository;
+import com.shapeshop.repository.OrderItemRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 
@@ -49,7 +48,7 @@ public class Higgins {
 	
 	
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
-			CreditCardRepository ccRes, AddressRepository aRes, CrudRepository<OrderItemEntity, Long> oiRep) {
+			CreditCardRepository ccRes, AddressRepository aRes, OrderItemRepository oiRep) {
 		
 		System.out.println("-->>> create some orders (higgins) !!! ");
 

@@ -46,9 +46,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.and().csrf().ignoringAntMatchers("/h2/**") // Make H2-Console non-secured; for debug purposes
 //			.and().headers().frameOptions().sameOrigin() 
 			
+			
+			
 			.and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+	    // add this line to use H2 web console
+	    http.headers().frameOptions().disable();
+
+	    
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
