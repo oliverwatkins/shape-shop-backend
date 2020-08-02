@@ -17,6 +17,7 @@ import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.CreditCardRepository;
+import com.shapeshop.repository.OrderItemRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 import com.shapeshop.repository.UserRepository;
@@ -32,7 +33,7 @@ public class App {
 	ProductRepository pRes;
 
 	@Autowired
-	CrudRepository<OrderItemEntity, Long> oiRep;
+	OrderItemRepository oiRep;
 
 	@Autowired
 	CompanyRepository cRes;
