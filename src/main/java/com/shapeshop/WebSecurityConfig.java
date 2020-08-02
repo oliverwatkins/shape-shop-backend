@@ -21,8 +21,6 @@ import com.shapeshop.filter.JwtRequestFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 

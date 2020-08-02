@@ -85,9 +85,8 @@ public class Alpenhof {
 		ProductEntity p2 = al.get(1);
 		ProductEntity p3 = al.get(2);
 		ProductEntity p4 = al.get(3);
-
+		
 		{
-
 			OrderEntity o1 = new OrderEntity(new Date(), PaymentType.CARD, DeliveryType.DELIVERY, contactData.get(0),
 					paymentData.get(0), company);
 
