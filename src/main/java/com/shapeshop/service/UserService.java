@@ -16,7 +16,6 @@ import com.shapeshop.repository.UserRepository;
 import com.shapeshop.util.PasswordUtils;
 
 
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -26,9 +25,9 @@ public class UserService implements UserDetailsService {
 	@Override
 	public User loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		if (StringUtils.isEmpty(userName)) {
-			return null;
-		}
+//		if (StringUtils.isEmpty(userName)) {
+//			return null;
+//		}
 
 		UserEntity u = repository.findByUserNameIgnoreCase(userName);
 		

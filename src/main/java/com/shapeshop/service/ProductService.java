@@ -28,12 +28,11 @@ public class ProductService {
 	public void deleteProduct(long id) {
 		productRepository.deleteById(id);
 	}
-	public void deleteProduct(ProductEntity shape) {
-		productRepository.delete(shape);
+	public void deleteProduct(ProductEntity p) {
+		productRepository.delete(p);
 	}
 	
 	public List<ProductEntity> getProductsByCompany(CompanyEntity company) {
-
 		List<ProductEntity> result = StreamSupport.stream(productRepository.findByCompany(company).spliterator(), false)
 				.collect(Collectors.toList());
 		return result;
@@ -41,7 +40,6 @@ public class ProductService {
 	
 
 	public List<ProductEntity> getAllProducts() {
-
 		List<ProductEntity> result = StreamSupport.stream(productRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		return result;

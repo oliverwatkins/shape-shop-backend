@@ -1,31 +1,22 @@
 package com.shapeshop;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.repository.CrudRepository;
 
 import com.shapeshop.entity.AddressEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
-import com.shapeshop.entity.DeliveryType;
-import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.OrderItemEntity;
-import com.shapeshop.entity.PaymentType;
-import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.CreditCardRepository;
-import com.shapeshop.repository.OrderItemRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 import com.shapeshop.repository.UserRepository;
@@ -41,7 +32,7 @@ public class App {
 	ProductRepository pRes;
 
 	@Autowired
-	OrderItemRepository oiRep;
+	CrudRepository<OrderItemEntity, Long> oiRep;
 
 	@Autowired
 	CompanyRepository cRes;
