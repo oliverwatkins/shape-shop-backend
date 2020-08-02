@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 			.and().exceptionHandling()
 			
+			
+			
 			//to get h2 console running need these two lines (http://localhost:8080/h2) ...but get cross origin problems
 //			.and().csrf().ignoringAntMatchers("/h2/**") // Make H2-Console non-secured; for debug purposes
 //			.and().headers().frameOptions().sameOrigin() 
@@ -50,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+		http.headers().frameOptions().disable();
+		
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 

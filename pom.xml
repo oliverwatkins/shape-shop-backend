@@ -23,6 +23,8 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<!-- need this version to get h2 database running correctly  -->
+			<version>1.4.193</version> 
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
