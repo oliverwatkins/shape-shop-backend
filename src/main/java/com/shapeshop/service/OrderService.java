@@ -23,7 +23,7 @@ public class OrderService {
 
 	@Autowired
 	CrudRepository<OrderItemEntity, Long> orderItemRepository;
-	
+
 	@Autowired
 	OrderRepository orderRepository;
 
@@ -32,21 +32,21 @@ public class OrderService {
 
 	@Autowired
 	CreditCardRepository creditCardRepository;
-	
+
 	public OrderEntity createOrder(OrderEntity order) {
 
 		if (order.getAddressEntity() != null)
 			addressRepository.save(order.getAddressEntity());
-		
+
 		if (order.getCreditCardEntity() != null)
 			creditCardRepository.save(order.getCreditCardEntity());
-		
+
 		List<OrderItemEntity> oitems = order.getOrderItems();
 
 		if (oitems.size() == 0) {
 			throw new RuntimeException(" Order has no order items. ");
 		}
-		
+
 		for (OrderItemEntity orderItemEntity : oitems) {
 			orderItemRepository.save(orderItemEntity);
 		}
@@ -55,18 +55,21 @@ public class OrderService {
 	}
 
 	public List<OrderEntity> getAllOrders() {
-		List<OrderEntity> result = StreamSupport.stream(orderRepository.findAll().spliterator(), false).collect(Collectors.toList());
+		List<OrderEntity> result = StreamSupport.stream(orderRepository.findAll().spliterator(), false)
+				.collect(Collectors.toList());
 		return result;
 	}
-	
+
 	public List<OrderEntity> getOrdersByCompany(CompanyEntity company) {
-		List<OrderEntity> result = StreamSupport.stream(orderRepository.findByCompany(company).spliterator(), false).collect(Collectors.toList());
+		List<OrderEntity> result = StreamSupport.stream(orderRepository.findByCompany(company).spliterator(), false)
+				.collect(Collectors.toList());
 		return result;
 	}
 
 	public void deleteOrder(long id) {
 		orderRepository.deleteById(id);
 	}
+
 	public void deleteOrder(OrderEntity shape) {
 		orderRepository.delete(shape);
 	}

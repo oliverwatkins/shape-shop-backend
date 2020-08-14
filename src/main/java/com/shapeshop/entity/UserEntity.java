@@ -23,14 +23,14 @@ public class UserEntity {
 
 	@Column(nullable = false, unique = true)
 	private String userName;
-	
+
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
 	@Column(nullable = false)
 	private String password;
-	
+
 	public UserEntity() {
 		super();
 	}

@@ -18,33 +18,32 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT")
 public class ProductEntity {
 
-
 	@ManyToOne
 	private CompanyEntity company = new CompanyEntity();
-	
 
 	@Id
-	@Column(name="PRODUCT_ID")
+	@Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@OneToMany
 	private List<OrderItemEntity> orders = new ArrayList<>();
-	
-	@Column(name="PRODUCT_NAME")
+
+	@Column(name = "PRODUCT_NAME")
 	private String name;
 
-	@Column(name="PRODUCT_PRICE")
+	@Column(name = "PRODUCT_PRICE")
 	private BigDecimal price;
 
-	//mains / drinks etc.
-	@Column(name="PRODUCT_TYPE")
+	// mains / drinks etc.
+	@Column(name = "PRODUCT_TYPE")
 	private String type;
-	
-	@Column(name="PRODUCT_IMG_FILENAME")
+
+	@Column(name = "PRODUCT_IMG_FILENAME")
 	private String imageFilename;
-	
-	protected ProductEntity() {}
+
+	protected ProductEntity() {
+	}
 
 	public ProductEntity(String name, CompanyEntity company) {
 		this.name = name;
@@ -60,7 +59,6 @@ public class ProductEntity {
 		this.company = company;
 	}
 
-
 	public long getId() {
 		return id;
 	}
@@ -68,11 +66,11 @@ public class ProductEntity {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}

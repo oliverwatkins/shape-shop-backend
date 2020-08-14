@@ -13,6 +13,8 @@ import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.OrderItemEntity;
 import com.shapeshop.entity.UserEntity;
+import com.shapeshop.mockdata.Alpenhof;
+import com.shapeshop.mockdata.Higgins;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CompanyRepository;
@@ -96,7 +98,6 @@ public class App {
 		};
 	}
 
-
 	@Bean
 	public CommandLineRunner loadProducts(ProductRepository repository) {
 		return (args) -> {
@@ -127,7 +128,6 @@ public class App {
 			System.out.println("-->>> create some users ! ");
 			
 //			TODO users should be bound to company
-
 			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", passs));

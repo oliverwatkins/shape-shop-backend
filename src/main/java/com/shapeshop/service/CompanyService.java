@@ -28,6 +28,7 @@ public class CompanyService {
 	public void deleteCompany(long id) {
 		companyRepository.deleteById(id);
 	}
+
 	public void deleteOrder(CompanyEntity company) {
 		companyRepository.delete(company);
 	}

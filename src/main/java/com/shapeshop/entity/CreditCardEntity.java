@@ -11,10 +11,8 @@ import javax.persistence.Table;
 @Table(name = "CREDIT_CARD")
 public class CreditCardEntity {
 
-
-	
 	@Id
-	@Column(name="CC_ID")
+	@Column(name = "CC_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "NUMBER")
@@ -25,11 +23,10 @@ public class CreditCardEntity {
 	private String name;
 	@Column(name = "TYPE")
 	private String type;
-	
 
 	protected CreditCardEntity() {
 	}
-	
+
 	public CreditCardEntity(String number, String expDate, String name, String type) {
 		super();
 		this.number = number;
@@ -38,8 +35,6 @@ public class CreditCardEntity {
 		this.type = type;
 	}
 
-	
-	
 	public String getNumber() {
 		return number;
 	}

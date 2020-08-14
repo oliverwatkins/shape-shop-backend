@@ -11,18 +11,16 @@ import javax.persistence.Table;
 @Table(name = "COMPANY")
 public class CompanyEntity {
 
-
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "NAME")
 	private String name;
-	
 
 	protected CompanyEntity() {
 	}
-	
+
 	public CompanyEntity(String name) {
 		super();
 		this.name = name;
@@ -39,8 +37,7 @@ public class CompanyEntity {
 	public long getId() {
 		return id;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "CompanyEntity [id=" + id + ", name=" + name + "]";

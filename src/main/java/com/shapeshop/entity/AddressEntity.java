@@ -8,33 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * TODO rename to Contact data (Does not necessarily need to correspond to a whole address)
- *
+ * TODO rename to Contact data (Does not necessarily need to correspond to a
+ * whole address)
  */
 
 @Entity
 @Table(name = "ADDRESS")
 public class AddressEntity {
 
-
 	@Id
-	@Column(name="ADDRESS_ID")
+	@Column(name = "ADDRESS_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String name;
 	private String street;
 	private String postcode;
 	private String telephone;
 	private String email;
 
-	protected AddressEntity() {
-	}
-	
-	public AddressEntity(String name) {
-		this.name = name;
-	}
-	
 	public AddressEntity(String name, String street, String postcode, String telephone, String email) {
 		super();
 		this.name = name;
@@ -43,7 +35,7 @@ public class AddressEntity {
 		this.telephone = telephone;
 		this.email = email;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -67,6 +59,7 @@ public class AddressEntity {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
+
 	public String getTelephone() {
 		return telephone;
 	}
@@ -74,6 +67,7 @@ public class AddressEntity {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -81,5 +75,12 @@ public class AddressEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	protected AddressEntity() {
+	}
+
+	public AddressEntity(String name) {
+		this.name = name;
+	}
+
 }

@@ -14,52 +14,45 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "ORDERS")
 public class OrderEntity {
 
 	@Id
-	@Column(name="ORDER_ID")
+	@Column(name = "ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@ManyToOne
 	private CompanyEntity company = new CompanyEntity();
-	
+
 	@OneToOne
 	private CreditCardEntity creditCardEntity;
 
 	@OneToOne
 	private AddressEntity addressEntity;
-	
+
 	@OneToMany
 	private List<OrderItemEntity> orderItems;
 
-	@Column(name="ORDER_DATE")
+	@Column(name = "ORDER_DATE")
 	private Date date;
-	@Column(name="ORDER_PAYMENTTYPE")
+	@Column(name = "ORDER_PAYMENTTYPE")
 	private PaymentType paymentType;
-	@Column(name="ORDER_DELIVERYTYPE")
+	@Column(name = "ORDER_DELIVERYTYPE")
 	private DeliveryType deliveryType;
-	
-	@Column(name="ORDER_AMOUNT")
+
+	@Column(name = "ORDER_AMOUNT")
 	private String amount;
-	
-	@Column(name="ORDER_STATE")
+
+	@Column(name = "ORDER_STATE")
 	private OrderState state = OrderState.OPEN;
-
-
 
 	protected OrderEntity() {
 	}
 
-	public OrderEntity( Date date, 
-								PaymentType payment, 
-								DeliveryType deliveryType,
-								AddressEntity address, 
-								CreditCardEntity creditCard, 
-								CompanyEntity company) {
+	public OrderEntity(Date date, PaymentType payment, DeliveryType deliveryType, AddressEntity address,
+			CreditCardEntity creditCard, CompanyEntity company) {
 		super();
 		this.addressEntity = address;
 		this.creditCardEntity = creditCard;
@@ -69,17 +62,14 @@ public class OrderEntity {
 		this.company = company;
 	}
 
-	public OrderEntity(String name, 
-								String telephone, 
-								Date date, PaymentType payment, 
-								DeliveryType deliveryType,
-								String string3, CompanyEntity company) {
+	public OrderEntity(String name, String telephone, Date date, PaymentType payment, DeliveryType deliveryType,
+			String string3, CompanyEntity company) {
 		super();
 		this.date = date;
 		this.paymentType = payment;
 		this.deliveryType = deliveryType;
 		this.company = company;
-		
+
 	}
 
 	public CompanyEntity getCompany() {
@@ -89,7 +79,7 @@ public class OrderEntity {
 	public void setCompany(CompanyEntity company) {
 		this.company = company;
 	}
-	
+
 	public CreditCardEntity getCreditCardEntity() {
 		return creditCardEntity;
 	}
@@ -105,7 +95,7 @@ public class OrderEntity {
 	public void setAddressEntity(AddressEntity addressEntity) {
 		this.addressEntity = addressEntity;
 	}
-	
+
 	public PaymentType getPaymentType() {
 		return paymentType;
 	}
@@ -153,7 +143,7 @@ public class OrderEntity {
 	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-	
+
 	public List<OrderItemEntity> getSelectedProducts() {
 		return orderItems;
 	}
@@ -161,7 +151,7 @@ public class OrderEntity {
 	public void setSelectedProducts(List<OrderItemEntity> selectedProducts) {
 		this.orderItems = selectedProducts;
 	}
-	
+
 	public List<OrderItemEntity> getOrderItems() {
 		return orderItems;
 	}
@@ -169,7 +159,7 @@ public class OrderEntity {
 	public void setOrderItems(List<OrderItemEntity> orderItems) {
 		this.orderItems = orderItems;
 	}
-	
+
 	public OrderState getState() {
 		return state;
 	}
@@ -177,8 +167,6 @@ public class OrderEntity {
 	public void setState(OrderState state) {
 		this.state = state;
 	}
-
-	
 
 	@Override
 	public String toString() {

@@ -9,22 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "ORDERS_ITEM")
 public class OrderItemEntity {
 
-
-
 	@Id
-	@Column(name="ORDERS_ITEM_ID")
+	@Column(name = "ORDERS_ITEM_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@ManyToOne(optional=false, fetch=FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	private ProductEntity product = new ProductEntity();
 
-	@Column(name="ORDER_AMOUNT")
+	@Column(name = "ORDER_AMOUNT")
 	private int amount;
 
 	protected OrderItemEntity() {
@@ -35,8 +32,8 @@ public class OrderItemEntity {
 		this.product = product;
 		this.amount = amount;
 	}
-	
- 	public int getAmount() {
+
+	public int getAmount() {
 		return amount;
 	}
 
@@ -51,7 +48,7 @@ public class OrderItemEntity {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public ProductEntity getProduct() {
 		return product;
 	}
@@ -59,7 +56,6 @@ public class OrderItemEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
-	
 
 	@Override
 	public String toString() {
