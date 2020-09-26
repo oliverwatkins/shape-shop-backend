@@ -63,7 +63,17 @@ kubectl delete deplyoments --all
 
 GCLOUD RUN :
 
+https://cloud.google.com/run/docs/quickstarts/build-and-deploy#java
+
+
 Go into base directory (where docker file is)
+
+Apparantyle just run :
+
+C:\dev\shape-shop>gcloud builds submit --tag gcr.io/whataboutanewproject/shapeshop
+
+
+
 
 
 
