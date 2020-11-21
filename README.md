@@ -120,6 +120,18 @@ kubectl get all
 
 gcloud container clusters get-credentials helloworld --zone us-central1-c --project strange-vortex-286312
 
+- execute deployment yaml
+
+kubectl create -f deployment.yaml
+
+- have a look at the ingress
+
+kubectl get ingress hello-ingress -oyaml
+
+
+- and find the IP in the status field. That is the URL to access the backend!!
+
+
 
 
 
