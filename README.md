@@ -13,7 +13,7 @@ docker build -t shapeshop:1.0 .
 - image should appear in the list of images. Check by running :
 
 docker images
-
+ 
 - run in container (make sure ports are not in use)
 
 docker run -p 8080:8080 shapeshop
