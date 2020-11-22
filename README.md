@@ -16,7 +16,7 @@ docker images
  
 - run in container (make sure ports are not in use)
 
-docker run -p 8080:8080 shapeshop
+docker run -p 8080:8080 shapeshop:1.0
 
 - should appear in running containers by executing :
 
@@ -61,7 +61,12 @@ kubectl delete deplyoments --all
 
 
 
-GCLOUD RUN :
+
+
+
+
+
+GCLOUD RUN (work in progress - still not working):
 
 https://cloud.google.com/run/docs/quickstarts/build-and-deploy#java
 
@@ -81,7 +86,7 @@ C:\dev\shape-shop>gcloud builds submit --tag gcr.io/whataboutanewproject/shapesh
 
 
 
-KUBERNETES (work in progress) :
+KUBERNETES (work in progress - still not working) :
 
 To run on Kubernetes :
 
