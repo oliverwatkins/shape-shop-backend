@@ -1,7 +1,9 @@
 
-# shape-shop-backend
+shape-shop-backend
+====================
 
-###DOCKER :
+DOCKER :
+----------
 
 To run on Docker :
 
@@ -43,48 +45,54 @@ docker push ollyw123/shapeshop
 
 
 
-# mySQL and docker
+mySQL and docker
+----------
 
-#based on this example :
-#https://dzone.com/articles/all-about-hibernate-manytomany-association
 
-#create and run image of MySQL
-docker run -d -p 6033:3306 --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shape_shop" mysql
+based on this example :
+https://dzone.com/articles/all-about-hibernate-manytomany-association
 
+create and run image of MySQL :
+
+
+``docker run -d -p 6033:3306 --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shape_shop" mysql``
+
+``
 docker exec -it docker-mysql bash
-mysql -uroot -p 
-#password = root
+mysql -uroot -p ``
+(password = root)
 
-show databases;
-#shape_shop should be there
+``show databases;``
+shape_shop should be there
 
-exit;
-exit;
+``exit;
+exit;``
 
-#play in initial SQL :
+play in initial SQL :
 
-docker exec -i docker-mysql mysql -uroot -proot book_manager < initial_DB.sql
+``docker exec -i docker-mysql mysql -uroot -proot book_manager < initial_DB.sql``
 
-#go into the database :
-docker exec -it docker-mysql bash
-mysql -uroot -p 
-#password = root
+go into the database :
+``docker exec -it docker-mysql bash``
+``mysql -uroot -p ``
+(password = root)
 
-show databases;
-#shape_shop should be there
+``show databases;``
+shape_shop should be there
 
-use shape_shop
-select * from shape;
-#table should have data!!
+``use shape_shop``
+``select * from shape;``
+table should have data!!
 
-exit;
-exit;
+``exit;``
+``exit;``
 
 
 
 
 
 DOCKER-COMPOSE :
+----------
 
 docker-compose up
 
