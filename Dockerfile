@@ -3,4 +3,11 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} backend.jar
+
+# Expose port 80 to the Docker host, so we can access it
+# from the outside.
+EXPOSE 80
+
+
 ENTRYPOINT ["java","-jar","/backend.jar"]
+

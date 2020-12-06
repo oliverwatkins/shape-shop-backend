@@ -44,18 +44,22 @@ docker push ollyw123/shapeshop
 
 
 
-QUICK LINKS
 
-docker images
-docker container ls
-kubectl get services
-kubectl get nodes
-kubectl get all
-kubectl cluster-info
-kubectl config get-contexts
+DOCKER-COMPOSE :
 
-kubectl delete services --all
-kubectl delete deplyoments --all
+docker-compose up
+
+Current Problem :
+
+ Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$H
+ikari.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker': Inv
+ocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.UncategorizedScriptException: Failed to execute database script; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionExcept
+ion: Failed to obtain JDBC Connection; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+
+
+
+
 
 
 

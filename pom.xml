@@ -11,23 +11,25 @@
 	</parent>
 	
 	<groupId>org.springframework</groupId>
-	<artifactId>shape-shop-backend</artifactId>
+	<artifactId>shape-shop-backendyyyy</artifactId>
 	<version>0.1.0</version>
 
 
 	<dependencies>
+
+
+<!--		MySQL-->
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
-<!--		MySQL-->
-
-<!--		<dependency>-->
-<!--			<groupId>mysql</groupId>-->
-<!--			<artifactId>mysql-connector-java</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.h2database</groupId>
