@@ -5,7 +5,7 @@ version: '3.7'
 # Define services
 services:
   # App backend service. Concatonates shape-shop-backend-app-server_1
-  app-serverxxx:
+  app-server:
     # Configuration for building the docker image for the backend service
     build:
 #      context: polling-app-server # Use an image built from the specified dockerfile in the `polling-app-server` directory.
