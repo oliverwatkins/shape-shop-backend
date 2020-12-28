@@ -47,13 +47,17 @@ public class App {
 	AddressRepository aRes;
 
 	public static void main(String[] args) {
+
+
+		System.out.println("<<<<<>>>>> main <<<<<>>>>> ");
+
 		SpringApplication.run(App.class, args);
 	}
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("<<<<<>>>>> SHAPE SHOP <<<<<>>>>> ");
+			System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! SHAPE SHOP !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
 		};
 	}
 

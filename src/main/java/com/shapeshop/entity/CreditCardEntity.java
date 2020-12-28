@@ -13,7 +13,7 @@ public class CreditCardEntity {
 
 	@Id
 	@Column(name = "CC_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(name = "NUMBER")
 	private String number;

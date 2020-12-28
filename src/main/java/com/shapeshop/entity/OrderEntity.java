@@ -20,7 +20,7 @@ public class OrderEntity {
 
 	@Id
 	@Column(name = "ORDER_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@ManyToOne

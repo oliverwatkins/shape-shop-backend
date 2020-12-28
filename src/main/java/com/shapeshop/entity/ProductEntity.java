@@ -23,7 +23,7 @@ public class ProductEntity {
 
 	@Id
 	@Column(name = "PRODUCT_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@OneToMany
