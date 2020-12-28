@@ -2,7 +2,7 @@
 shape-shop-backend
 ====================
 
-DOCKER :
+DOCKER (simple setup) :
 ----------
 
 To run on Docker :
@@ -16,7 +16,7 @@ docker build -t shapeshop:1.0 .
 
 docker images
  
-- run in container (make sure ports are not in use)
+- run in container (make sure ports are not in use) (make sure databse is in memory mode TODO)
 
 docker run -p 8080:8080 shapeshop:1.0
 
@@ -77,11 +77,12 @@ go into the database :
 ``docker exec -it mysql-docker-container bash``
 ``mysql -uroot -p ``
 (password = root)
-
-``show databases;``
 shape_shop should be there
 
-``use shape_shop``
+``use shape_shop;``
+
+``show tables;``
+
 ``select * from shape;``
 table should have data!!
 
@@ -92,25 +93,23 @@ table should have data!!
 
 
 
-
-
-
-
 DOCKER-COMPOSE :
 ----------
 
+delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
+
+run maven : 'package' 
+
 docker-compose up
 
-Current Problem :
 
- Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$H
-ikari.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker': Inv
-ocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.UncategorizedScriptException: Failed to execute database script; nested exception is org.springframework.jdbc.CannotGetJdbcConnectionExcept
-ion: Failed to obtain JDBC Connection; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+Current error :
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'shapeshop.company' doesn't exist
 
+so now play in the initial_DB
 
 
-
+docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < initial_DB.sql
 
 
 
@@ -121,6 +120,29 @@ ion: Failed to obtain JDBC Connection; nested exception is com.mysql.jdbc.except
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GCLOUD 
+--------
 
 GCLOUD RUN (work in progress - still not working):
 
@@ -140,7 +162,8 @@ C:\dev\shape-shop>gcloud builds submit --tag gcr.io/whataboutanewproject/shapesh
 
 
 
-
+KUBERNETES 
+--------
 
 KUBERNETES (work in progress - still not working) :
 

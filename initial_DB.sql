@@ -23,9 +23,9 @@
 # Dump of table author
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `shape`;
+DROP TABLE IF EXISTS `company`;
 
-CREATE TABLE `shape` (
+CREATE TABLE `company` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
@@ -45,10 +45,10 @@ CREATE TABLE `shape` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `shape` WRITE;
-/*!40000 ALTER TABLE `shape` DISABLE KEYS */;
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
 
-INSERT INTO `shape` (`id`, `name`, `email`, `mobile`, `address`, `birthdate`, `country`, `background`, `biography`, `nickname`, `created`, `updated`, `created_by`, `updated_by`, `status`, `photo_url`)
+INSERT INTO `company` (`id`, `name`, `email`, `mobile`, `address`, `birthdate`, `country`, `background`, `biography`, `nickname`, `created`, `updated`, `created_by`, `updated_by`, `status`, `photo_url`)
 VALUES
 	(1,'Sanjoy Kumer Deb','sanjoyd.cse@gmail.com','01719149840',NULL,'2019-07-21',NULL,NULL,NULL,NULL,NULL,NULL,'rrr',NULL,'ACTIVE',NULL),
 	(2,'Sanjoy Kumer Deb','sanjoyd.cse@gmail.com','01719149840',NULL,'2019-07-21',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
@@ -63,7 +63,7 @@ VALUES
 	(11,'Sanjoy Kumer Dey','sanjoyd.cse@gmail','01719149840','Dhaka','2018-12-12','Bangladesh','Sanjoy Background','Sanjoy Biography','sanju',NULL,'2019-07-27 11:21:49',NULL,NULL,'ACTIVE',NULL),
 	(12,'Kakoli','kakoli@gmail.com','01718989898','jghjhjk','2019-07-11','Bangladesh','Kakoli Background','Kakoli Biography','koli',NULL,'2019-07-27 11:21:17',NULL,NULL,'ACTIVE',NULL);
 
-/*!40000 ALTER TABLE `shape` ENABLE KEYS */;
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -115,7 +115,7 @@ CREATE TABLE `book_author` (
   `author_id` int(11) DEFAULT NULL,
   KEY `FKbjqhp85wjv8vpr0beygh6jsgo` (`author_id`),
   KEY `FKhwgu59n9o80xv75plf9ggj7xn` (`book_id`),
-  CONSTRAINT `FKbjqhp85wjv8vpr0beygh6jsgo` FOREIGN KEY (`author_id`) REFERENCES `shape` (`id`),
+  CONSTRAINT `FKbjqhp85wjv8vpr0beygh6jsgo` FOREIGN KEY (`author_id`) REFERENCES `company` (`id`),
   CONSTRAINT `FKhwgu59n9o80xv75plf9ggj7xn` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

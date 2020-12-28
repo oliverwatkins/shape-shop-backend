@@ -11,7 +11,7 @@
 	</parent>
 	
 	<groupId>org.springframework</groupId>
-	<artifactId>shape-shop-backendyyyy</artifactId>
+	<artifactId>shape-shop-backend</artifactId>
 	<version>0.1.0</version>
 
 
