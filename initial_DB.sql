@@ -27,8 +27,8 @@ DROP TABLE IF EXISTS `company`;
 
 CREATE TABLE `company` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT 'asdf',
+  `email` varchar(45) DEFAULT 'asdf@asdf.com',
   `mobile` varchar(45) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `birthdate` date NOT NULL,

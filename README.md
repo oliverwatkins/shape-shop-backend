@@ -10,23 +10,23 @@ To run on Docker :
 - make sure docker is installed
 - go in project directory, and run :
 
-docker build -t shapeshop:1.0 .
+`` docker build -t shapeshop:1.0 . ``
 
 - image should appear in the list of images. Check by running :
 
-docker images
+`` docker images ``
  
 - run in container (make sure ports are not in use) (make sure databse is in memory mode TODO)
 
-docker run -p 8080:8080 shapeshop:1.0
+`` docker run -p 8080:8080 shapeshop:1.0 ``
 
 - should appear in running containers by executing :
 
-docker container ls
+`` docker container ls ``
 
 - run the following in a browser. It should be possible to get some json back
 
-http://localhost:8080/higgines/products
+`` http://localhost:8080/higgines/products ``
 
 - and thats it! :)
 
@@ -34,11 +34,11 @@ Next, push image to docker hub
 
 - tag image like this. Number is the ID of the shapeshop image from before. ollyw123 is username on docker hub. firsttry is some kind of tag name.
 
-docker tag 7769f3792278 ollyw123/shapeshop:firsttry
+`` docker tag 7769f3792278 ollyw123/shapeshop:firsttry ``
 
 - then push 
 
-docker push ollyw123/shapeshop
+`` docker push ollyw123/shapeshop ``
 
 - log into docker hub. It should appear in the list
 
@@ -96,23 +96,21 @@ table should have data!!
 DOCKER-COMPOSE :
 ----------
 
-delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
+1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
 
-run maven : 'package' 
+2) run maven : 'package' 
 
-docker-compose up
+3) docker-compose up
 
 
 Current error :
 Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'shapeshop.company' doesn't exist
 
-so now play in the initial_DB
+so now play in the **initial_DB** (make sure db container is running)
 
+`` docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < initial_DB.sql ``
 
-docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < initial_DB.sql
-
-
-
+and run **docker-compose up** again
 
 
 
