@@ -15,11 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class OrderEntity {
 
 	@Id
-	@Column(name = "ORDER_ID")
+	@Column(name = "order_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
@@ -35,17 +35,17 @@ public class OrderEntity {
 	@OneToMany
 	private List<OrderItemEntity> orderItems;
 
-	@Column(name = "ORDER_DATE")
+	@Column(name = "order_date")
 	private Date date;
-	@Column(name = "ORDER_PAYMENTTYPE")
+	@Column(name = "order_payment_type")
 	private PaymentType paymentType;
-	@Column(name = "ORDER_DELIVERYTYPE")
+	@Column(name = "order_delivery_type")
 	private DeliveryType deliveryType;
 
-	@Column(name = "ORDER_AMOUNT")
+	@Column(name = "order_amout")
 	private String amount;
 
-	@Column(name = "ORDER_STATE")
+	@Column(name = "order_state")
 	private OrderState state = OrderState.OPEN;
 
 	protected OrderEntity() {

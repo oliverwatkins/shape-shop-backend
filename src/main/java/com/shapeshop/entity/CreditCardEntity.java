@@ -8,20 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CREDIT_CARD")
+@Table(name = "credit_card")
 public class CreditCardEntity {
 
 	@Id
-	@Column(name = "CC_ID")
+	@Column(name = "cc_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "NUMBER")
+	@Column(name = "number")
 	private String number;
-	@Column(name = "EXP_DATE")
+	@Column(name = "exp_date")
 	private String expDate;
-	@Column(name = "NAME")
+	@Column(name = "name")
 	private String name;
-	@Column(name = "TYPE")
+	@Column(name = "type")
 	private String type;
 
 	protected CreditCardEntity() {

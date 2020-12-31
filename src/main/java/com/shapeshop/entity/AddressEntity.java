@@ -13,11 +13,11 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "ADDRESS")
+@Table(name = "address")
 public class AddressEntity {
 
 	@Id
-	@Column(name = "ADDRESS_ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 

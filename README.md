@@ -16,7 +16,7 @@ To run on Docker :
 
 `` docker images ``
  
-- run in container (make sure ports are not in use) (make sure databse is in memory mode TODO)
+- run in container (make sure ports are not in use) (make sure databse is in memory DB mode TODO)
 
 `` docker run -p 8080:8080 shapeshop:1.0 ``
 
@@ -55,41 +55,54 @@ https://dzone.com/articles/all-about-hibernate-manytomany-association
 
 create and run image of MySQL :
 
-``docker run -d -p 6033:3306 --name=mysql-docker-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shape_shop" mysql``
+``docker run -d -p 6033:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql``
 
-``docker exec -it mysql-docker-container bash ``
+``docker exec -it shape-shop-db-container bash ``
 
-
-``mysql -uroot -p ``
+``mysql -uroot -proot ``
 (password = root)
 
 ``show databases;``
-shape_shop should be there
+shapeshop should be there
 
 ``exit;
 exit;``
 
 play in initial SQL :
 
-``docker exec -i mysql-docker-container mysql -uroot -proot shape_shop < initial_DB.sql``
+``docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < schema_gen.sql``
 
 go into the database :
-``docker exec -it mysql-docker-container bash``
-``mysql -uroot -p ``
+``docker exec -it shape-shop-db-container bash``
+``mysql -uroot -proot ``
 (password = root)
-shape_shop should be there
+shapeshop should be there
 
-``use shape_shop;``
+``use shapeshop;``
 
 ``show tables;``
 
-``select * from shape;``
-table should have data!!
-
 ``exit;``
 ``exit;``
 
+Now create image from container
 
+``docker commit shape-shop-db-container``
+
+This will create a nameless image (REPOSITORY = <<none>> ).
+
+Find the image ID and tag it with an appropriate name :
+
+``docker tag fd45b0f4eaa5 shape-shop-db ``
+
+Or you can name it as ollyw123/shape-shop-db and then push it :
+
+First login to Docker 
+
+``docker login ``
+(ollyw123,t..1)
+
+`` docker push ollyw123/shape-shop-db ``
 
 
 
@@ -106,9 +119,9 @@ DOCKER-COMPOSE :
 Current error :
 Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'shapeshop.company' doesn't exist
 
-so now play in the **initial_DB** (make sure db container is running)
+so now play in the **schema_gen.sql** (make sure db container is running)
 
-`` docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < initial_DB.sql ``
+`` docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < schema_gen.sql ``
 
 and run **docker-compose up** again
 

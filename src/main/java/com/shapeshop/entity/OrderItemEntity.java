@@ -1,27 +1,21 @@
 package com.shapeshop.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "ORDERS_ITEM")
+@Table(name = "orders_item")
 public class OrderItemEntity {
 
 	@Id
-	@Column(name = "ORDERS_ITEM_ID")
+	@Column(name = "orders_item_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id", nullable = false, updatable = false)
 	private ProductEntity product = new ProductEntity();
 
-	@Column(name = "ORDER_AMOUNT")
+	@Column(name = "order_amount")
 	private int amount;
 
 	protected OrderItemEntity() {
