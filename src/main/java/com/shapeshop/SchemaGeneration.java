@@ -13,6 +13,15 @@ import java.util.Map;
 
 public class SchemaGeneration {
 
+    /**
+     * TODO is generating unnecesary tables :
+     *
+     *  orders_orders_item and product_orders_item;
+     *
+     *  also, alter statements in the schema_gen are breaking the script.
+     *
+     */
+
     public static void main(String[] args) {
 
         Map<String, String> settings = new HashMap<>();

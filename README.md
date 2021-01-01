@@ -115,15 +115,13 @@ DOCKER-COMPOSE :
 
 3) docker-compose up
 
+If there are connection errors, remove ALL images and container related to shape-shop and try again.
 
 Current error :
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'shapeshop.company' doesn't exist
 
-so now play in the **schema_gen.sql** (make sure db container is running)
+Caused by: javax.persistence.NonUniqueResultException: query did not return a unique result: 2
 
-`` docker exec -i shape-shop-backend_db_1 mysql -uroot -proot shapeshop < schema_gen.sql ``
 
-and run **docker-compose up** again
 
 
 
