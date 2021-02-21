@@ -2,8 +2,7 @@
 shape-shop-backend
 ====================
 
-DOCKER (simple setup) :
-----------
+### DOCKER (simple setup) APP without DB
 
 To run on Docker :
 
@@ -45,8 +44,8 @@ Next, push image to docker hub
 
 
 
-mySQL and docker
-----------
+
+### MySQL and docker (create instance of MYSQL. play in DDL, tag and then push) *
 
 Run an instance of mySQL and populate it with new database schema
 
@@ -106,8 +105,7 @@ First login to Docker
 
 
 
-DOCKER-COMPOSE :
-----------
+### DOCKER-COMPOSE :
 
 1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
 
@@ -139,19 +137,11 @@ Caused by: javax.persistence.NonUniqueResultException: query did not return a un
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-GCLOUD 
+Kubenertes GCP etc..
 --------
+
+#### GCLOUD
+
 
 GCLOUD RUN (work in progress - still not working):
 
@@ -171,8 +161,7 @@ C:\dev\shape-shop>gcloud builds submit --tag gcr.io/whataboutanewproject/shapesh
 
 
 
-KUBERNETES 
---------
+#### KUBERNETES 
 
 KUBERNETES (work in progress - still not working) :
 
