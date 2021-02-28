@@ -54,7 +54,9 @@ https://dzone.com/articles/all-about-hibernate-manytomany-association
 
 create and run image of MySQL :
 
-``docker run -d -p 6033:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql``
+``
+docker run -d -p 6033:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+``
 
 ``docker exec -it shape-shop-db-container bash ``
 
@@ -69,7 +71,7 @@ exit;``
 
 play in initial SQL :
 
-``docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < schema_gen.sql``
+``docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql``
 
 go into the database :
 ``docker exec -it shape-shop-db-container bash``
@@ -102,6 +104,10 @@ First login to Docker
 (ollyw123,t..1)
 
 `` docker push ollyw123/shape-shop-db ``
+
+
+
+
 
 
 

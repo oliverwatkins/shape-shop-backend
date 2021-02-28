@@ -70,9 +70,11 @@ public class App {
 			// save a few products
 			repository.save(new CompanyEntity("alpenhof"));
 			repository.save(new CompanyEntity("higgins"));
+
+
 		};
 	}
-	
+
 	@Bean
 	public CommandLineRunner loadAddresses(AddressRepository repository) {
 		return (args) -> {
@@ -108,7 +110,7 @@ public class App {
 			Alpenhof.createProducts(repository, cRes);
 		};
 	}
-	
+
 	@Bean
 	public CommandLineRunner loadOrders(OrderRepository oRep) {
 		return (args) -> {
@@ -129,8 +131,8 @@ public class App {
 
 			String passs = passwordValidationService.encryptPassword("foo");
 
-			System.out.println("-->>> create some users ! ");
-			
+			System.out.println("-->>> create some users ! password = " + passs);
+
 //			TODO users should be bound to company
 			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
 			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));

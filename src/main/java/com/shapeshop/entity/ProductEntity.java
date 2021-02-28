@@ -16,11 +16,12 @@ public class ProductEntity {
 	private long id;
 
 	@ManyToOne
-	@JoinColumn(name = "company_id_test", nullable = false, updatable = false)
+	@JoinColumn(name = "company_id", nullable = false, updatable = false)
 	private CompanyEntity company = new CompanyEntity();
 
 
 	@OneToMany
+	@JoinColumn(name = "id")
 	private List<OrderItemEntity> orders = new ArrayList<>();
 
 	@Column(name = "name")
