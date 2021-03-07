@@ -107,4 +107,4 @@ alter table orders_item
 alter table orders_item
     add constraint FKqa7i0ev3xqm2d6t93n9blxef1 foreign key (order_id) references orders (order_id);
 alter table product
-    add constraint FKfq5l3xbmjnklegxpwm1yeodkj foreign key (company_id_test) references company (id);
+    add constraint FKfq5l3xbmjnklegxpwm1yeodkj foreign key (company_id) references company (id);
