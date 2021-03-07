@@ -73,6 +73,10 @@ play in initial SQL :
 
 ``docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql``
 
+play in initial TEST_DATA :
+
+``docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql``
+
 go into the database :
 ``docker exec -it shape-shop-db-container bash``
 ``mysql -uroot -proot ``
