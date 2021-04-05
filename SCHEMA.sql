@@ -12,13 +12,30 @@
 #     drop foreign key FKqa7i0ev3xqm2d6t93n9blxef1;
 # alter table product
 #     drop foreign key FKfq5l3xbmjnklegxpwm1yeodkj;
-drop table if exists address;
-drop table if exists company;
-drop table if exists credit_card;
-drop table if exists orders;
 drop table if exists orders_item;
+drop table if exists orders;
 drop table if exists product;
 drop table if exists users;
+drop table if exists credit_card;
+drop table if exists address;
+drop table if exists company;
+
+
+# DELETE FROM orders_item;
+# DELETE FROM orders;
+# DELETE FROM product;
+# DELETE FROM users;
+# DELETE FROM credit_card;
+# DELETE FROM address;
+# DELETE FROM company;
+
+
+
+
+
+
+
+
 
 create table address
 (
@@ -34,7 +51,7 @@ create table address
 create table company
 (
     id   bigint not null auto_increment,
-    name varchar(255),
+    name varchar(255) UNIQUE,
     primary key (id)
 ) engine = InnoDB;
 

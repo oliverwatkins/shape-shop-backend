@@ -2,6 +2,25 @@
 shape-shop-backend
 ====================
 
+
+
+### DO THIS:
+
+docker run -d -p 3406:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
+
+In IDE should be able to see this with this URL :
+jdbc:mysql://localhost:3406/shapeshop
+
+In spring properties add this :
+spring.datasource.url=jdbc:mysql://localhost:3406/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+it is now possible to start app in IDE and debug through the code.
+
+
+
+
 ### DOCKER (simple setup) APP without DB
 
 To run on Docker :
@@ -55,7 +74,7 @@ https://dzone.com/articles/all-about-hibernate-manytomany-association
 create and run image of MySQL :
 
 ``
-docker run -d -p 6033:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker run -d -p 3406:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 ``
 
 ``docker exec -it shape-shop-db-container bash ``
@@ -81,7 +100,7 @@ go into the database :
 ``docker exec -it shape-shop-db-container bash``
 ``mysql -uroot -proot ``
 (password = root)
-shapeshop should be there
+shapeshop should be there as well as test data
 
 ``use shapeshop;``
 
@@ -90,7 +109,13 @@ shapeshop should be there
 ``exit;``
 ``exit;``
 
-Now create image from container
+
+
+
+*** NOTE. THIS DOES NOT WORK!! *** 
+https://stackoverflow.com/questions/66734991/cannot-save-database-changes-to-mysql-docker-image
+
+Now create image from container 
 
 ``docker commit shape-shop-db-container``
 
@@ -98,9 +123,11 @@ This will create a nameless image (REPOSITORY = <<none>> ).
 
 Find the image ID and tag it with an appropriate name :
 
-``docker tag fd45b0f4eaa5 shape-shop-db ``
+``docker tag fd45b0f4eaa5 shape-shop-db:1.1 ``
 
 Or you can name it as ollyw123/shape-shop-db and then push it :
+
+``docker image tag shape-shop-db:1.1 ollyw123/shape-shop-db:1.1 ``
 
 First login to Docker 
 
@@ -108,6 +135,23 @@ First login to Docker
 (ollyw123,t..1)
 
 `` docker push ollyw123/shape-shop-db ``
+
+Run database again as another container :
+
+`` docker run -d -p 3406:3306 --name db ollyw123/shape-shop-db:latest `` 
+
+(3306 is a special magical number for MYSQL, so dont change it)
+
+Should look like this :
+
+`` CONTAINER ID        IMAGE                           COMMAND                  CREATED              STATUS              PORTS                                         NAMES`` 
+`` b907f878f82b        ollyw123/shape-shop-db:latest   "docker-entrypoint.s…"   About a minute ago   Up About a minute   3306/tcp, 33060/tcp, 0.0.0.0:3406->3407/tcp   db `` 
+
+The connection URL should look like this : 
+
+`` jdbc:mysql://localhost:3406/shapeshop`` 
+
+
 
 
 
@@ -128,6 +172,10 @@ If there are connection errors, remove ALL images and container related to shape
 Current error :
 
 Caused by: javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+UPDATE : connection problems again. tried to remove all shapeshop associated conatienrs and images but stiill same problem
+UPDATE : changed ports for DB to 3406 and 3407, and application server to 9090:90
+
+
 
 
 

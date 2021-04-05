@@ -1,12 +1,12 @@
 
 START TRANSACTION;
 
-DELETE FROM users;
-DELETE FROM address;
-DELETE FROM credit_card;
-DELETE FROM product;
 DELETE FROM orders_item;
 DELETE FROM orders;
+DELETE FROM product;
+DELETE FROM users;
+DELETE FROM credit_card;
+DELETE FROM address;
 DELETE FROM company;
 
 INSERT INTO company (id, name) VALUES (1, "alpenhof");
