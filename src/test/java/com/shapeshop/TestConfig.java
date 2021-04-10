@@ -8,7 +8,7 @@ import com.shapeshop.mockdata.Alpenhof;
 import com.shapeshop.mockdata.Higgins;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
-import com.shapeshop.util.PasswordUtils;
+import com.shapeshop.security.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.context.TestConfiguration;

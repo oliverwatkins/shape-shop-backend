@@ -18,7 +18,9 @@ import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.ProductService;
 
-
+/**
+ * Product Controller
+ */
 @RestController
 public class ProductController {
 
@@ -27,21 +29,21 @@ public class ProductController {
 
 	@Autowired
 	private CompanyRepository companyR;
-	
+
 	@PostMapping("/products")
 	public ResponseEntity<?> newShape(@RequestBody ProductEntity shape) {
 		ProductEntity s = productService.createProduct(shape);
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
 	@GetMapping(value = "/{companyName}/products")
 	public ProductEntity[] getProducts(@PathVariable("companyName") String companyName) {
-		
+
 		CompanyEntity c = companyR.findByName(companyName);
-		
+
 		List<ProductEntity> itemList = productService.getProductsByCompany(c);
-		
+
 		System.out.println("Got products for company " + companyName + " . Number of products " + itemList.size());
 
 		return itemList.toArray(new ProductEntity[itemList.size()]); //huh??

@@ -1,4 +1,4 @@
-package com.shapeshop.util;
+package com.shapeshop.security;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;

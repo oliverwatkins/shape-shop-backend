@@ -1,22 +1,21 @@
 package com.shapeshop.controller;
 
+import com.shapeshop.model.AuthenticationRequest;
+import com.shapeshop.model.AuthenticationResponse;
+import com.shapeshop.service.UserService;
+import com.shapeshop.security.JwtUtil;
+import com.shapeshop.security.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.shapeshop.model.AuthenticationRequest;
-import com.shapeshop.model.AuthenticationResponse;
-import com.shapeshop.service.UserService;
-import com.shapeshop.util.JwtUtil;
-import com.shapeshop.util.PasswordUtils;
+/**
+ * Login/Logout endpoints.
+ */
 
 @RestController
 public class AuthenticationController {
@@ -33,6 +32,13 @@ public class AuthenticationController {
 	@Autowired
 	private PasswordUtils passwordValidationService;
 
+	/**
+	 * Authenticate a user who is trying to log in.
+	 *
+	 * @param authenticationRequest authentication request when logging in
+	 * @return HTTP response enttiy
+	 * @throws Exception
+	 */
 	@CrossOrigin
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
@@ -53,15 +59,12 @@ public class AuthenticationController {
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
 
-		
-		
-		
 //		Authentication authentication = null;
 //
 //		String pswd = authenticationRequest.getPassword();
@@ -75,10 +78,6 @@ public class AuthenticationController {
 //
 //		final String jwtToken = jwtTokenUtil.createToken(authentication);
 //
-		return ResponseEntity.ok(new AuthenticationResponse("TODO"));
+		return ResponseEntity.ok(new AuthenticationResponse("TODO this isnt working correctly"));
 	}
-	
-	
-	
-	
 }

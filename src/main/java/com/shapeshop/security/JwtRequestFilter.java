@@ -1,4 +1,4 @@
-package com.shapeshop.filter;
+package com.shapeshop.security;
 
 import java.io.IOException;
 
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -17,13 +16,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.shapeshop.service.UserService;
-import com.shapeshop.util.JwtUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
-
-
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -37,7 +33,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
-		
+
 		final String authorizationHeader = request.getHeader("Authorization");
 
 		String username = null;
@@ -55,26 +51,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			} catch (Exception e) {
 				response.sendError(500, "Exception. JWT exception " + e.getMessage());
 			}
-			
 		}
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
 			if (jwtUtil.validateToken(jwt, userDetails)) {
-				
+
 				UsernamePasswordAuthenticationToken authentication = jwtUtil.getAuthentication(jwt,
 						SecurityContextHolder.getContext().getAuthentication(), userDetails);
 
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				
+
 				logger.info("authenticated user " + username + ", setting security context");
 				SecurityContextHolder.getContext().setAuthentication(authentication);
-
 			}
 		}
-
 		chain.doFilter(request, response);
 	}
-
 }

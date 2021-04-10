@@ -1,4 +1,4 @@
-package com.shapeshop.util;
+package com.shapeshop.security;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,8 +26,8 @@ public class JwtUtil {
 	private static String SECRET_KEY = "secret";
 	public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5 * 60 * 60;
 	public static final String AUTHORITIES_KEY = "scopes";
-	
-	
+
+
 	/**
 	 * Creates Token
 	 */
@@ -39,13 +39,13 @@ public class JwtUtil {
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000)).compact();
 	}
-	
-	
+
+
 	public Boolean validateToken(String token, UserDetails userDetails) {
-		
+
 		String username = extractClaim(token, Claims::getSubject);
 		Date exp = extractClaim(token, Claims::getExpiration);
-		
+
 		return (username.equals(userDetails.getUsername()) && !exp.before(new Date()));
 	}
 
