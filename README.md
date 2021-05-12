@@ -4,7 +4,7 @@ shape-shop-backend
 
 
 
-### DO THIS:
+### DATABASE: DO THIS:
 
 docker run -d -p 3406:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
@@ -13,10 +13,18 @@ docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA
 In IDE should be able to see this with this URL :
 jdbc:mysql://localhost:3406/shapeshop
 
-In spring properties add this :
+In spring properties add this :hibernate.dialect
 spring.datasource.url=jdbc:mysql://localhost:3406/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
 
 it is now possible to start app in IDE and debug through the code.
+
+### APP
+3 things -
+- Maven package
+- docker build
+- docker run
+
+
 
 
 
