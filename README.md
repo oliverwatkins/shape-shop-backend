@@ -2,19 +2,20 @@
 shape-shop-backend
 ====================
 
+docker network create shape-shop-network
 
 
 ### DATABASE: DO THIS:
 
-docker run -d -p 3406:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network  --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
 In IDE should be able to see this with this URL :
-jdbc:mysql://localhost:3406/shapeshop
+jdbc:mysql://localhost:3306/shapeshop
 
 In spring properties add this :hibernate.dialect
-spring.datasource.url=jdbc:mysql://localhost:3406/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
 
 it is now possible to start app in IDE and debug through the code.
 
@@ -24,8 +25,12 @@ it is now possible to start app in IDE and debug through the code.
 - docker build
 - docker run
 
+docker build -t shapeshop:1.0 . 
+docker run -p 8080:8080 shapeshop:1.0 --network shape-shop-network 
 
 
+
+docker run -it --network shape-shop-network nicolaka/netshoot
 
 
 
@@ -44,7 +49,7 @@ To run on Docker :
  
 - run in container (make sure ports are not in use) (make sure databse is in memory DB mode TODO)
 
-`` docker run -p 8080:8080 shapeshop:1.0 ``
+`` docker run -p 8080:8080 shapeshop:1.0  --network shape-shop-network ``
 
 - should appear in running containers by executing :
 
@@ -82,10 +87,10 @@ https://dzone.com/articles/all-about-hibernate-manytomany-association
 create and run image of MySQL :
 
 ``
-docker run -d -p 3406:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 ``
 
-``docker exec -it shape-shop-db-container bash ``
+``docker exec -it shape-shop-db-container bash show``
 
 ``mysql -uroot -proot ``
 (password = root)
@@ -146,7 +151,7 @@ First login to Docker
 
 Run database again as another container :
 
-`` docker run -d -p 3406:3306 --name db ollyw123/shape-shop-db:latest `` 
+`` docker run -d -p 3306:3306 --name db ollyw123/shape-shop-db:latest `` 
 
 (3306 is a special magical number for MYSQL, so dont change it)
 
@@ -157,7 +162,7 @@ Should look like this :
 
 The connection URL should look like this : 
 
-`` jdbc:mysql://localhost:3406/shapeshop`` 
+`` jdbc:mysql://localhost:3306/shapeshop`` 
 
 
 
