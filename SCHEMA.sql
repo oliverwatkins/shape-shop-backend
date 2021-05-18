@@ -32,7 +32,11 @@ drop table if exists company;
 
 
 
-
+# play around with this to see if changes to DB container is happening
+create table testest
+(
+    name      varchar(255)
+) engine = InnoDB;
 
 
 

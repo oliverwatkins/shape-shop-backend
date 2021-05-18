@@ -1,11 +1,37 @@
 
-shape-shop-backend
-====================
+
+This README consists of three parts.
+
+- 1. Running the application within the IDE against the DB in a docker container.
+- 2. Running the application and DB via two docker containers.
+- 3. Running everything using docker-compose
+
+### 1. Running the application within the IDE against the DB in a docker container
+
+Run the database :
+
+docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
+
+In IDE should be able to see this with this URL :
+jdbc:mysql://localhost:3306/shapeshop
+
+In spring properties add this :hibernate.dialect
+spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+it is now possible to start app in IDE and debug through the code.
+
+
+
+
+
+
+
+### 2. Running the application and DB via two docker containers. TODO
 
 docker network create shape-shop-network
-
-
-### DATABASE: DO THIS:
+# create volume?
 
 docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network  --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
@@ -19,7 +45,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverT
 
 it is now possible to start app in IDE and debug through the code.
 
-### APP
+# App (TODO)
 3 things -
 - Maven package
 - docker build
@@ -30,7 +56,59 @@ docker run -p 8080:8080 shapeshop:1.0 --network shape-shop-network
 
 
 
-docker run -it --network shape-shop-network nicolaka/netshoot
+### 3. Running everything using docker-compose TODO
+
+remove all containers and volumnes
+
+`` docker-compose down ``
+`` docker container prune ``
+`` docker volume prune ``
+
+There should be no volumes or processes associated with shapeshop.
+
+
+1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
+
+2) run maven : 'package' 
+
+(TODO - incorporate Maven into the DockerFile)
+
+3) docker-compose up
+
+This should work. Sometimes there are connection errors at first but after a while it seems
+to stabilize and connect to the DB.
+
+If there are connection errors, remove ALL images, containers, volumes, networks related 
+to shape-shop and try again.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -38,7 +116,6 @@ docker run -it --network shape-shop-network nicolaka/netshoot
 
 To run on Docker :
 
-- make sure docker is installed
 - go in project directory, and run :
 
 `` docker build -t shapeshop:1.0 . ``
@@ -49,7 +126,7 @@ To run on Docker :
  
 - run in container (make sure ports are not in use) (make sure databse is in memory DB mode TODO)
 
-`` docker run -p 8080:8080 shapeshop:1.0  --network shape-shop-network ``
+`` docker run -p 8080:8080 shapeshop:1.0 ``
 
 - should appear in running containers by executing :
 
@@ -167,122 +244,6 @@ The connection URL should look like this :
 
 
 
-
-
-
-
-
-### DOCKER-COMPOSE :
-
-1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
-
-2) run maven : 'package' 
-
-3) docker-compose up
-
-If there are connection errors, remove ALL images and container related to shape-shop and try again.
-
-Current error :
-
-Caused by: javax.persistence.NonUniqueResultException: query did not return a unique result: 2
-UPDATE : connection problems again. tried to remove all shapeshop associated conatienrs and images but stiill same problem
-UPDATE : changed ports for DB to 3406 and 3407, and application server to 9090:90
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Kubenertes GCP etc..
---------
-
-#### GCLOUD
-
-
-GCLOUD RUN (work in progress - still not working):
-
-https://cloud.google.com/run/docs/quickstarts/build-and-deploy#java
-
-
-Go into base directory (where docker file is)
-
-Apparantyle just run :
-
-C:\dev\shape-shop>gcloud builds submit --tag gcr.io/whataboutanewproject/shapeshop
-
-
-
-
-
-
-
-
-#### KUBERNETES 
-
-KUBERNETES (work in progress - still not working) :
-
-To run on Kubernetes :
-
-- create gcloud account
-
-
-
-- Perform these three commands from within the project directory (dry run just means it first puts in a yaml file. Nothing yet is created):
-
-kubectl create deployment shape-shop --image=shapeshop --dry-run -o=yaml > deployment.yaml
-
-kubectl apply -f deployment.yaml
-
-kubectl create service clusterip shape-shop --tcp=8080:8080 --dry-run -o=yaml >> deployment.yaml
-
-kubectl apply -f deployment.yaml
-
-
-- but I think this is more correct (using the expose) because clusterip is internal
-
-kubectl expose deployment shape-shop --type=LoadBalancer --port=8080
-
-
-
-- Make sure that shape-shop appears in the services list :
-
-kubectl get svc
-
-- or..
-
-kubectl get all
-
-
-
-- create a cluster on gcloud. Then LOCALLY connect to it :
-
-gcloud container clusters get-credentials helloworld --zone us-central1-c --project strange-vortex-286312
-
-- execute deployment yaml
-
-kubectl create -f deployment.yaml
-
-- have a look at the ingress
-
-kubectl get ingress hello-ingress -oyaml
-
-
-- and find the IP in the status field. That is the URL to access the backend!!
 
 
 

@@ -1,8 +1,7 @@
 package com.shapeshop;
 
 import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.UserEntity;
-import com.shapeshop.model.UserRole;
+import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @SpringBootApplication
 public class App {
 
@@ -20,12 +24,7 @@ public class App {
 
 	public static void main(String[] args) {
 		System.out.println("<<<<<>>>>> main <<<<<>>>>> ");
-
 		SpringApplication.run(App.class, args);
-
-
-
-
 	}
 
 	@Bean
@@ -35,24 +34,14 @@ public class App {
 		};
 	}
 
-
 	@Bean
 	public CommandLineRunner testDBConnectionWorks(UserRepository repository) {
 		return (args) -> {
 
-			CompanyEntity ce = cRes.findByName("alpenhof");
-
-			System.out.println("CompanyEntity ! " + ce);
-		};
-	}
-
-	@Bean
-	public CommandLineRunner commandLineRunner2(ApplicationContext ctx) {
-		CompanyEntity ce = cRes.findByName("alpenhof");
-
-
-		return args -> {
-			System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! SHAPE SHOP !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
+//			List<CompanyEntity> result = StreamSupport.stream(cRes.findAll().spliterator(), false)
+//					.collect(Collectors.toList());
+			CompanyEntity result = cRes.findByName("higgins");
+			System.out.println("CompanyEntity ! " + result.toString());
 		};
 	}
 }

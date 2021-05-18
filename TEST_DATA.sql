@@ -9,7 +9,7 @@ DELETE FROM credit_card;
 DELETE FROM address;
 DELETE FROM company;
 
-INSERT INTO company (id, name) VALUES (1, "alpenhof");
+INSERT INTO company (id, name) VALUES (1, "alpenhofXX");
 INSERT INTO company (id, name) VALUES (2, "higgins");
 
 INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
