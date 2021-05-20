@@ -56,6 +56,10 @@ docker run -p 8080:8080 shapeshop:1.0 --network shape-shop-network
 
 
 
+
+
+
+
 ### 3. Running everything using docker-compose TODO
 
 remove all containers and volumnes
@@ -80,6 +84,11 @@ to stabilize and connect to the DB.
 
 If there are connection errors, remove ALL images, containers, volumes, networks related 
 to shape-shop and try again.
+
+Should be able to access like so :
+http://localhost:8080/higgins/products
+
+
 
 
 

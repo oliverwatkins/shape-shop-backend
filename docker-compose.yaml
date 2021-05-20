@@ -5,7 +5,7 @@ services:
       context: . # same dir
       dockerfile: Dockerfile
     ports:
-      - "9090:90" # Forward the exposed port 9090 on the container to port 90 on the host machine
+      - "8080:8080" # Forward the exposed port 9090 on the container to port 90 on the host machine
     depends_on:
       - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service

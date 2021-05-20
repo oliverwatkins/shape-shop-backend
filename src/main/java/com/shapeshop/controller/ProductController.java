@@ -30,6 +30,13 @@ public class ProductController {
 	@Autowired
 	private CompanyRepository companyR;
 
+	@CrossOrigin
+	@GetMapping(value = "/test")
+	public String test() {
+		return "hello";
+	}
+
+
 	@PostMapping("/products")
 	public ResponseEntity<?> newShape(@RequestBody ProductEntity shape) {
 		ProductEntity s = productService.createProduct(shape);
