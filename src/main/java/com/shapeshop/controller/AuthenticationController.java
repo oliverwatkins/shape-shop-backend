@@ -44,20 +44,37 @@ public class AuthenticationController {
 	public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
 
-		Authentication authentication = null;
+		try {
 
-		String pswd = authenticationRequest.getPassword();
-		String uName = authenticationRequest.getUsername();
-		String encryptedPswd = passwordValidationService.encryptPassword(pswd);
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+			Authentication authentication = null;
 
-		authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
+			String pswd = authenticationRequest.getPassword();
+			String uName = authenticationRequest.getUsername();
 
-		final String jwtToken = jwtTokenUtil.createToken(authentication);
+			System.out.println("logging in a user " + uName + " pswd " + pswd);
 
-		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+			String encryptedPswd = passwordValidationService.encryptPassword(pswd);
+
+			System.out.println("encryptedPswd " + encryptedPswd);
+
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+			System.out.println("loaded use details " + userDetails);
+
+			authentication = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
+
+			final String jwtToken = jwtTokenUtil.createToken(authentication);
+
+			System.out.println("got a new token " + jwtToken);
+
+			return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@CrossOrigin

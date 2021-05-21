@@ -3,7 +3,7 @@ services:
   app-server:
     build:
       context: . # same dir
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_with_mvn
     ports:
       - "8080:8080" # Forward the exposed port 9090 on the container to port 90 on the host machine
     depends_on:

@@ -41,7 +41,10 @@ public class App {
 //			List<CompanyEntity> result = StreamSupport.stream(cRes.findAll().spliterator(), false)
 //					.collect(Collectors.toList());
 			CompanyEntity result = cRes.findByName("higgins");
-			System.out.println("CompanyEntity ! " + result.toString());
+
+			System.out.println("Hello hello 3");
+
+			System.out.println("CompanyEntity ! " + (result != null ? result.toString() : " no higgins"));
 		};
 	}
 }

@@ -109,12 +109,12 @@ create table users
     id       bigint not null auto_increment,
     password varchar(255) not null,
     role     varchar(255) not null,
-    userName varchar(255) not null,
+    user_name varchar(255) not null,
     primary key (id)
 ) engine = InnoDB;
 
 alter table users
-    add constraint UK_mmns67o5v4bfippoqitu4v3t6 unique (userName);
+    add constraint UK_mmns67o5v4bfippoqitu4v3t6 unique (user_name);
 alter table orders
     add constraint FKhwb4y673okgt2yuvxrdim6yeo foreign key (addressEntity_id) references address (id);
 alter table orders

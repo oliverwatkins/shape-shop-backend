@@ -33,7 +33,10 @@ it is now possible to start app in IDE and debug through the code.
 docker network create shape-shop-network
 # create volume?
 
-docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network  --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+
+
+docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
@@ -60,13 +63,19 @@ docker run -p 8080:8080 shapeshop:1.0 --network shape-shop-network
 
 
 
-### 3. Running everything using docker-compose TODO
+### 3. Running everything using docker-compose 
 
-remove all containers and volumnes
+remove all containers and volumes and images
 
 `` docker-compose down ``
 `` docker container prune ``
 `` docker volume prune ``
+
+KILL :
+
+`` docker container stop shape-shop-back-end_db_1 `` 
+`` docker container rm shape-shop-back-end_db_1 `` 
+`` docker volume rm shape-shop-back-end_db-data2 `` 
 
 There should be no volumes or processes associated with shapeshop.
 
@@ -89,8 +98,12 @@ Should be able to access like so :
 http://localhost:8080/higgins/products
 
 
+You can look at the database by doing this
 
-
+``docker exec -it shape-shop-back-end_db_1 bash ``
+``mysql -uroot -proot ``
+``show databases;``
+``use shapeshop;``
 
 
 
@@ -176,7 +189,7 @@ create and run image of MySQL :
 docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 ``
 
-``docker exec -it shape-shop-db-container bash show``
+``docker exec -it shape-shop-db-container bash ``
 
 ``mysql -uroot -proot ``
 (password = root)
