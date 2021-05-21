@@ -104,14 +104,18 @@ public class TestConfig {
 	public CommandLineRunner loadUsers(UserRepository repository) {
 		return (args) -> {
 
-			String passs = passwordValidationService.encryptPassword("foo");
+			String fpasss = passwordValidationService.encryptPassword("foo");
+			String apasss = passwordValidationService.encryptPassword("admin");
+			String upasss = passwordValidationService.encryptPassword("user");
 
-			System.out.println("-->>> create some users ! password = " + passs);
+			System.out.println("-->>> create some users ! admin password = " + apasss);
+			System.out.println("-->>> create some users ! user password = " + upasss);
+			System.out.println("-->>> create some users ! foo password = " + fpasss);
 
 //			TODO users should be bound to company
-			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", passs));
-			repository.save(new UserEntity(UserRole.ROLE_USER, "user", passs));
-			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", passs));
+			repository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", apasss));
+			repository.save(new UserEntity(UserRole.ROLE_USER, "user", upasss));
+			repository.save(new UserEntity(UserRole.ROLE_USER, "foo", fpasss));
 		};
 	}
 }

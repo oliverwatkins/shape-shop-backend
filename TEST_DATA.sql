@@ -19,8 +19,8 @@ INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (3, "D
 INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (1, "xxx-xxx-xxxx-6345", "22/22", "JJ Binks", "VISA");
 INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (2, "xxx-xxx-xxxx-6323", "12/24", "P Leah", "MASTERCARD");
 
-INSERT INTO users (id, user_name, password, role) VALUES (1, "admin", "2C26B46B68FFC68FF99B453C1D30413413422D706483BFA0F98A5E886266E7AE", "ROLE_ADMIN");
-INSERT INTO users (id, user_name, password, role) VALUES (2, "user", "2C26B46B68FFC68FF99B453C1D30413413422D706483BFA0F98A5E886266E7AE", "ROLE_USER");
+INSERT INTO users (id, user_name, password, role) VALUES (1, "admin", "8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918", "ROLE_ADMIN");
+INSERT INTO users (id, user_name, password, role) VALUES (2, "user", "04F8996DA763B7A969B1028EE3007569EAF3A635486DDAB211D512C85B9DF8FB", "ROLE_USER");
 INSERT INTO users (id, user_name, password, role) VALUES (3, "foo", "2C26B46B68FFC68FF99B453C1D30413413422D706483BFA0F98A5E886266E7AE", "ROLE_USER");
 
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (1, "Limit Session IPA", 7.50, "main", "beer.png", 2);

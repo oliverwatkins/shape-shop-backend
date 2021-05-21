@@ -38,7 +38,7 @@ public class GetOrdersTest {
 
     	mvc.perform(MockMvcRequestBuilders.get("/alpenhof/orders")).andExpect(matcher.isForbidden());
 
-    	String requestJson = "{\"username\": \"admin\",\"password\": \"foo\"}";
+    	String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 
     	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
 

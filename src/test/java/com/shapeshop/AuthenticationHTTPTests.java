@@ -52,7 +52,7 @@ public class AuthenticationHTTPTests {
 
     @org.junit.Test
     public void shouldAuthenticateUser() throws Exception {
-    	String requestJson = "{\"username\": \"user\",\"password\": \"foo\"}";
+    	String requestJson = "{\"username\": \"user\",\"password\": \"user\"}";
 
     	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
 
@@ -89,7 +89,7 @@ public class AuthenticationHTTPTests {
 
     @org.junit.Test
     public void shouldAuthenticateAdmin() throws Exception {
-    	String requestJson = "{\"username\": \"admin\",\"password\": \"foo\"}";
+    	String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 
     	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
 
