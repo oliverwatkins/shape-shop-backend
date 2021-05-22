@@ -77,7 +77,7 @@ create table orders
     order_delivery_type    integer,
     order_payment_type     integer,
     order_state            integer,
-    addressEntity_id       bigint,
+    address_entity_id       bigint,
     company_id             bigint,
     creditCardEntity_cc_id bigint,
     primary key (order_id)
@@ -116,7 +116,7 @@ create table users
 alter table users
     add constraint UK_mmns67o5v4bfippoqitu4v3t6 unique (user_name);
 alter table orders
-    add constraint FKhwb4y673okgt2yuvxrdim6yeo foreign key (addressEntity_id) references address (id);
+    add constraint FKhwb4y673okgt2yuvxrdim6yeo foreign key (address_entity_id) references address (id);
 alter table orders
     add constraint FKjp7lhaugpjb7u4su3h2khmnb3 foreign key (company_id) references company (id);
 alter table orders

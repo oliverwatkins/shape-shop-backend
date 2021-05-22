@@ -42,7 +42,7 @@ public class App {
 //					.collect(Collectors.toList());
 			CompanyEntity result = cRes.findByName("higgins");
 
-			System.out.println("Hello hello 3");
+			System.out.println("Hello hello 4");
 
 			System.out.println("CompanyEntity ! " + (result != null ? result.toString() : " no higgins"));
 		};

@@ -32,6 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 
+//		TODO put CORS back. Was not working for login for admin
+
 //		http.csrf().disable().authorizeRequests()
 //				.antMatchers("/").permitAll()
 //				.antMatchers("/products").permitAll()
