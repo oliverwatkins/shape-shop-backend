@@ -40,10 +40,12 @@ INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (12
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (13, "Lachs-Spinat-Lasagne", 10.90, "main", "pizza.png", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (14, "Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", 4.50, "main", "pizza.png", 1);
 
-INSERT INTO orders (order_id, order_date, order_delivery_type, order_payment_type, company_id, creditCardEntity_cc_id, address_entity_id)
-VALUES (1, 123123123, 1, 1, 1, 1, 1);
+INSERT INTO orders (order_id, order_state, order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (1, 0, 123123123, 1, 1, 1, 1, 1);
 
 INSERT INTO orders_item (order_amount, orders_item_id, product_id) values (2, 1, 1);
+
+
 
 COMMIT;
 
@@ -51,7 +53,7 @@ COMMIT;
 #     OrderItemEntity oi1 = new OrderItemEntity(p1, 99);
 # OrderItemEntity oi2 = new OrderItemEntity(p2, 9);
 #
-# INSERT INTO orders (order_date, order_delivery_type, order_payment_type, company_id, creditCardEntity_cc_id, addressEntity_id)
+# INSERT INTO orders (order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, addressEntity_id)
 # VALUES (123123123, "DELIVERY", "CARD", 1, 1, 1);
 
 

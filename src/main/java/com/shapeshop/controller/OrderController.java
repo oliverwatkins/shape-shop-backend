@@ -64,14 +64,13 @@ public class OrderController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
 	public OrderEntity[] getOrders(@PathVariable("companyName") String companyName) {
-
 		System.out.println("-->>> companyName " + companyName);
 
 		CompanyEntity c = companyR.findByName(companyName);
-
 		System.out.println("-->>> getOrders for company " + c);
 
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
+		System.out.println("-->>> Number of orders " + itemList.size());
 
 		return itemList.toArray(new OrderEntity[itemList.size()]);
 	}

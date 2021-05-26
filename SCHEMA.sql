@@ -79,7 +79,7 @@ create table orders
     order_state            integer,
     address_entity_id       bigint,
     company_id             bigint,
-    creditCardEntity_cc_id bigint,
+    credit_card_entity_cc_id bigint,
     primary key (order_id)
 ) engine = InnoDB;
 
@@ -120,7 +120,7 @@ alter table orders
 alter table orders
     add constraint FKjp7lhaugpjb7u4su3h2khmnb3 foreign key (company_id) references company (id);
 alter table orders
-    add constraint FK7w5elqmehyp6yp8di8juemso7 foreign key (creditCardEntity_cc_id) references credit_card (cc_id);
+    add constraint FK7w5elqmehyp6yp8di8juemso7 foreign key (credit_card_entity_cc_id) references credit_card (cc_id);
 alter table orders_item
     add constraint FKlrqyo8q92lfie02g03gp8l89x foreign key (product_id) references product (id);
 alter table orders_item
