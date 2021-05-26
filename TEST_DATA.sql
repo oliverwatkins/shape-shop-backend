@@ -37,7 +37,7 @@ INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (11
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (12, "Beer Mats", 12.50, "main", "beer.png", 2);
 
 # // save a few products 2
-INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (13, "Lachs-Spinat-Lasagne", 10.90, "main", "pizza.png", 1);
+INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (13, "Lachs-Spinat-Lasagne", 10.90, "main", "green_pasta.jpg", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (14, "Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", 4.50, "main", "pizza.png", 1);
 
 INSERT INTO orders (order_id, order_state, order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
