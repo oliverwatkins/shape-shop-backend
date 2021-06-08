@@ -67,7 +67,7 @@ public class AuthenticationHTTPTests {
 
         assertNotNull(token);
 
-        /**
+        /*
          * A logged in 'user' should be able to access /user
          */
 
@@ -80,18 +80,29 @@ public class AuthenticationHTTPTests {
 
         assertEquals("user", contentAsString);
 
-        /**
+        /*
          * A logged in 'user' should NOT be able to access /admin
          */
     	mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.is(403));
 
     }
 
+
     @org.junit.Test
     public void shouldAuthenticateAdmin() throws Exception {
+
+
+
+
     	String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 
     	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
+
+
+
+
+
+
 
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();

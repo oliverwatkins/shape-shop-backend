@@ -5,13 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.ProductEntity;
@@ -36,10 +31,38 @@ public class ProductController {
 		return "hello";
 	}
 
+//	@RequestMapping(value = "/booking/{id}", method = RequestMethod.PUT)
+//	public String list(@PathVariable String id){
+//		Booking booking= bookingRepository.findOne(id);
+//
+//		//code
+//
+//		bookingService.update(booking);
+//	}
 
+//	@PutMapping(value = "/{id}")
+//	public Person savePerson(@RequestBody Person person, @PathVariable("id") Long id ) {
+//		Person found = personRepository.findOne(id);
+//
+//		//merge 'found' from database with send person, or just send it with id
+//		//Person merged..
+//		return personRepository.save(merged);
+//	}
+
+
+	@CrossOrigin
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping("/{companyName}/products/{id}")
+	public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product, @PathVariable("id") Long id, @PathVariable("companyName") String companyName ) {
+		productService.updateProduct(product, id);
+
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@PostMapping("/products")
-	public ResponseEntity<?> newShape(@RequestBody ProductEntity shape) {
-		ProductEntity s = productService.createProduct(shape);
+	public ResponseEntity<?> newProduct(@RequestBody ProductEntity product) {
+		ProductEntity s = productService.createProduct(product);
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 

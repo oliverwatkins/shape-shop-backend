@@ -24,4 +24,19 @@ public class ImageController {
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
     }
+
+
+    //TODO
+    @RequestMapping(value = "/images/{sid}", method = RequestMethod.POST,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public void updateImage(HttpServletResponse response, @PathVariable("sid") String sid) throws IOException {
+
+
+        var imgFile = new ClassPathResource("image/" + sid);
+
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
+    }
+
+
 }
