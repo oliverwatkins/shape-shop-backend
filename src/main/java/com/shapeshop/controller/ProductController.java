@@ -31,25 +31,6 @@ public class ProductController {
 		return "hello";
 	}
 
-//	@RequestMapping(value = "/booking/{id}", method = RequestMethod.PUT)
-//	public String list(@PathVariable String id){
-//		Booking booking= bookingRepository.findOne(id);
-//
-//		//code
-//
-//		bookingService.update(booking);
-//	}
-
-//	@PutMapping(value = "/{id}")
-//	public Person savePerson(@RequestBody Person person, @PathVariable("id") Long id ) {
-//		Person found = personRepository.findOne(id);
-//
-//		//merge 'found' from database with send person, or just send it with id
-//		//Person merged..
-//		return personRepository.save(merged);
-//	}
-
-
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/{companyName}/products/{id}")
@@ -79,19 +60,20 @@ public class ProductController {
 		return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
 	}
 
-	@GetMapping(value = "/products/{id}")
-	public ProductEntity getProductsById(@PathVariable("id") long id) {
+	@GetMapping(value = "/{companyName}/products/{id}")
+	public ProductEntity getProductsById(@PathVariable("companyName") String companyName, @PathVariable("id") long id) {
 		ProductEntity item = productService.getProductById(id);
 		return item;
 	}
 
-	@DeleteMapping(value = "/products/{id}")
-	public void deleteShapesById(@PathVariable("id") long id) {
+	@DeleteMapping(value = "/{companyName}/products/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void deleteProductById(@PathVariable("id") long id) {
 		productService.deleteProduct(id);
 	}
 
-	@DeleteMapping(value = "/{companyName}/products")
-	public void deleteShapes(@RequestBody ProductEntity shape) {
-		productService.deleteProduct(shape);
-	}
+//	@DeleteMapping(value = "/{companyName}/products")
+//	public void deleteShapes(@RequestBody ProductEntity shape) {
+//		productService.deleteProduct(shape);
+//	}
 }
