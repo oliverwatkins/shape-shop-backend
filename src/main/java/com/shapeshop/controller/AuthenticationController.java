@@ -45,8 +45,6 @@ public class AuthenticationController {
 			throws Exception {
 
 		try {
-
-
 			Authentication authentication = null;
 
 			String pswd = authenticationRequest.getPassword();
