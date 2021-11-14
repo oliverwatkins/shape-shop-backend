@@ -12,6 +12,12 @@ Run the database :
 
 docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
+
+(Note sometimes you may get : 
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
+Just wait 30 seconds and try again)
+
+
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
 In IDE should be able to see this with this URL :
@@ -19,6 +25,8 @@ jdbc:mysql://localhost:3306/shapeshop
 
 In spring properties add this :hibernate.dialect
 spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+START BACKEND APP IN IDE
 
 it is now possible to start app (server side - spring) in IDE and debug through the code. It should be possible to 
 access http://localhost:8080/alpenhof/products

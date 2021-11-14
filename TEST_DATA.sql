@@ -1,7 +1,7 @@
 
 START TRANSACTION;
 
-DELETE FROM orders_item;
+
 DELETE FROM orders;
 DELETE FROM product;
 DELETE FROM users;
@@ -39,7 +39,7 @@ INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (12
 # // save a few products 2
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (13, "Lachs-Spinat-Lasagne", 10.90, "main", "lachs_spinat.jpg", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (14, "Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree", 4.50, "main", "calamari.jpg", 1);
-INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (15, "Minestone - italienische Gemüsesuppe mit Basilikumpesto", 10.90, "main", "minestrone.jpg", 1);
+INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (15, "MMinestone - italienische Gemüsesuppe mit Basilikumpesto", 10.90, "main", "minestrone.jpg", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (16, "Zucchiniröllchen gefüllt mit Ziegenkäse und Honig auf Rucolasalat mit Roten Beten und gerösteten Mandeln", 7.90, "main", "zucchini_rolls.jpg", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (17, "Lasagna Classica al Forno mit Hackfleisch", 10.90, "main", "lasagne.jpg", 1);
 INSERT INTO product (id, name, price, type, img_filename, company_id) VALUES (18, "Ravioli gefüllt mit Bärlauch und Ricotta in Zitronenbutter mit Spargel", 4.50, "main", "ravioli.jpg", 1);

@@ -31,7 +31,7 @@ public class Alpenhof {
 		CompanyEntity ce = cRes.findByName("alpenhof");
 
 		// save a few products
-		repository.save(new ProductEntity("Minestone - italienische Gemüsesuppe mit Basilikumpesto",
+		repository.save(new ProductEntity("XXXMinestone - italienische Gemüsesuppe mit Basilikumpesto",
 				new BigDecimal(4.50), "main", "pizza.png", ce));
 		repository
 				.save(new ProductEntity("Gegrillte Calamari gefüllt mit Zucchini und Paprika auf Aurberginen-Püree",

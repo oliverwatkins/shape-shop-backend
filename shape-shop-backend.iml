@@ -7,6 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
+          <factory-entry name="shape-shop-backend" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
