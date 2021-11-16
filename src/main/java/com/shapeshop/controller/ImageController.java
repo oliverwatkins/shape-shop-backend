@@ -1,17 +1,13 @@
 package com.shapeshop.controller;
 
-import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.OrderEntity;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 
 @CrossOrigin
 @RestController
@@ -53,8 +49,57 @@ public class ImageController {
 
         var imgFile = new ClassPathResource("image/" + productId);
 
-        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
+
+        convertMultiPartToFile(file);
+
+
+//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
     }
+
+    private static File convertMultiPartToFile(MultipartFile file ) throws IOException
+    {
+        File convFile = new File( file.getOriginalFilename() );
+        FileOutputStream fos = new FileOutputStream( convFile );
+        fos.write( file.getBytes() );
+        fos.close();
+        return convFile;
+    }
+
+//    public String fileUpload(UploadedFile uploadedFile) {
+//        InputStream inputStream = null;
+//        OutputStream outputStream = null;
+//        MultipartFile file = uploadedFile.getFile();
+//        String fileName = file.getOriginalFilename();
+//        File newFile = new File(imagesFolder + fileName);
+//
+//        try {
+//            inputStream = file.getInputStream();
+//
+//            if (!newFile.exists()) {
+//                newFile.createNewFile();
+//            }
+//            outputStream = new FileOutputStream(newFile);
+//            int read = 0;
+//            byte[] bytes = new byte[1024];
+//
+//            while ((read = inputStream.read(bytes)) != -1) {
+//                outputStream.write(bytes, 0, read);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return newFile.getAbsolutePath();
+//    }
+//    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+//                                   RedirectAttributes redirectAttributes) {
+//
+//        storageService.store(file);
+//        redirectAttributes.addFlashAttribute("message",
+//                "You successfully uploaded " + file.getOriginalFilename() + "!");
+//
+//        return "redirect:/";
+//    }
 
 }
