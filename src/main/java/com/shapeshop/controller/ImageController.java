@@ -1,5 +1,9 @@
 package com.shapeshop.controller;
 
+import com.shapeshop.entity.ProductEntity;
+import com.shapeshop.repository.CompanyRepository;
+import com.shapeshop.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.util.StreamUtils;
@@ -14,13 +18,18 @@ import java.io.*;
 public class ImageController {
 
 
+    @Autowired
+    private ProductRepository productRepository;
+
+
     //TODO is this being used?
     @CrossOrigin
-    @RequestMapping(value = "/images/{sid}", method = RequestMethod.GET,
+    @RequestMapping(value = "/{companyName}/images/{sid}", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public void getImage(HttpServletResponse response, @PathVariable("sid") String sid) throws IOException {
+    public void getImage(HttpServletResponse response, @PathVariable("companyName") String companyName,
+                         @PathVariable("sid") String sid) throws IOException {
 
-        var imgFile = new ClassPathResource("image/" + sid);
+        var imgFile = new ClassPathResource("alpenhof/image/" + sid);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
@@ -35,7 +44,7 @@ public class ImageController {
 
         System.out.println("updateImage ");
 
-        var imgFile = new ClassPathResource("image/" + productId);
+        var imgFile = new ClassPathResource("alpenhof/image/" + productId);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
@@ -47,22 +56,30 @@ public class ImageController {
 
         System.out.println("updateImage " + file);
 
-        var imgFile = new ClassPathResource("image/" + productId);
-
-
         convertMultiPartToFile(file);
 
+        ProductEntity p = productRepository.findById(Long.parseLong(productId));
+        p.setImageFilename(file.getOriginalFilename());
+        productRepository.save(p);
 
-//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-//        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
     }
 
     private static File convertMultiPartToFile(MultipartFile file ) throws IOException
     {
-        File convFile = new File( file.getOriginalFilename() );
+
+        String fileLocation = new File("src\\main\\resources\\alpenhof\\image").getAbsolutePath() + "\\" + file.getOriginalFilename();
+
+        File convFile = new File( fileLocation);
+
         FileOutputStream fos = new FileOutputStream( convFile );
+
         fos.write( file.getBytes() );
         fos.close();
+
+
+
+        // now update image in Product
+
         return convFile;
     }
 
