@@ -21,7 +21,6 @@ public class SchemaGeneration {
      *  also, alter statements in the schema_gen are breaking the script.
      *
      */
-
     public static void main(String[] args) {
 
         Map<String, String> settings = new HashMap<>();
@@ -49,25 +48,13 @@ public class SchemaGeneration {
         EnumSet<TargetType> enumSet = EnumSet.of(TargetType.SCRIPT);
         SchemaExport schemaExport = new SchemaExport();
 
-
         schemaExport.setDelimiter(";");
 
         schemaExport.setOutputFile("schema_gen.sql");
         schemaExport.execute(enumSet, SchemaExport.Action.BOTH, metadata.buildMetadata());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //??
     public static void mainX(String[] args) {
 
         Map<String, String> settings = new HashMap<>();

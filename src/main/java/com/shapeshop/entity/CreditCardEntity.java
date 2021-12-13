@@ -70,5 +70,4 @@ public class CreditCardEntity {
 	public long getId() {
 		return id;
 	}
-
 }

@@ -8,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.repository.CompanyRepository;
 
-import lombok.NoArgsConstructor;
-
 @Service
-@NoArgsConstructor
 public class CompanyService {
 
 	@Autowired

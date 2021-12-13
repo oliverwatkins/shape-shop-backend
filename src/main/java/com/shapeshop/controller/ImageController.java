@@ -17,36 +17,6 @@ public class ImageController {
     @Autowired
     private ProductRepository productRepository;
 
-
-//    //TODO is this being used?
-//    @CrossOrigin
-//    @RequestMapping(value = "/{companyName}/images/{sid}", method = RequestMethod.GET,
-//            produces = MediaType.IMAGE_JPEG_VALUE)
-//    public void getImage(HttpServletResponse response, @PathVariable("companyName") String companyName,
-//                         @PathVariable("sid") String sid) throws IOException {
-//
-//        var imgFile = new ClassPathResource("alpenhof/image/" + sid);
-//
-//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-//        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
-//    }
-
-
-//    //TODO
-//    @CrossOrigin
-//    @RequestMapping(value = "/{companyName}/images/{sid}", method = RequestMethod.POST,
-//            produces = MediaType.IMAGE_JPEG_VALUE)
-//    public void updateImage(HttpServletResponse response, @PathVariable("sid") String productId) throws IOException {
-//
-//        System.out.println("updateImage ");
-//
-//        var imgFile = new ClassPathResource("alpenhof/image/" + productId);
-//
-//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-//        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
-//    }
-
-    //TODO
     @CrossOrigin
     @RequestMapping(value = "/{companyName}/uploadfile/{productId}", method = RequestMethod.POST)
     public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response, @PathVariable("productId") String productId) throws IOException {
@@ -59,7 +29,7 @@ public class ImageController {
         p.setImageFilename(file.getOriginalFilename());
         productRepository.save(p);
 
-        System.out.println("convertMultiPartToFile : updated prouct with image filename " + file.getOriginalFilename());
+        System.out.println("convertMultiPartToFile : updated product with image filename " + file.getOriginalFilename());
     }
 
     private static File writeFileToFileSystem(MultipartFile file) throws IOException {
@@ -77,5 +47,4 @@ public class ImageController {
 
         return convFile;
     }
-
 }

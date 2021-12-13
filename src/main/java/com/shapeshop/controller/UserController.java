@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+// TODO is User Role used at all ?
 @RestController
 public class UserController {
 

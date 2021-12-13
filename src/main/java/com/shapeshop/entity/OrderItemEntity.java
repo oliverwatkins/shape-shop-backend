@@ -55,5 +55,4 @@ public class OrderItemEntity {
 	public String toString() {
 		return "OrderItemEntity [id=" + id + ", product=" + product + ", amount=" + amount + "]";
 	}
-
 }

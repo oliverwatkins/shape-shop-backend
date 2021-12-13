@@ -30,7 +30,6 @@ public class OrderController {
 	@Autowired
 	private CompanyRepository companyR;
 
-
 	/**
 	 * creates an order
 	 *
@@ -58,7 +57,6 @@ public class OrderController {
 	 * Get a list of orders for company.
 	 *
 	 * @param companyName
-	 * @return
 	 */
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -42,5 +42,4 @@ public class CompanyEntity {
 	public String toString() {
 		return "CompanyEntity [id=" + id + ", name=" + name + "]";
 	}
-
 }

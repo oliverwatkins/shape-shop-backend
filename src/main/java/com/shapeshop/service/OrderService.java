@@ -15,10 +15,7 @@ import com.shapeshop.repository.AddressRepository;
 import com.shapeshop.repository.CreditCardRepository;
 import com.shapeshop.repository.OrderRepository;
 
-import lombok.NoArgsConstructor;
-
 @Service
-@NoArgsConstructor
 public class OrderService {
 
 	@Autowired

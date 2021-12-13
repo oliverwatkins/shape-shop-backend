@@ -1,6 +1,5 @@
 package com.shapeshop;
 
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,7 +18,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Tests for authentication, login, 403 errors etc.
+ * Tests authentication and authorization.
+ *
+ *
+ *
+ *
  */
 @Import(TestConfig.class)
 @EnableWebMvc
@@ -33,19 +36,18 @@ public class AuthenticationHTTPTests {
     private MockMvc mvc;
 
 
-    @Ignore
     @org.junit.Test
-    public void shouldNotauthenticate() throws Exception {
+    public void shouldNotAuthenticate() throws Exception {
 
-    	mvc.perform(MockMvcRequestBuilders.get("/users")).andExpect(matcher.isForbidden());
-
+        // forbidden. 403 - private endpoint
+        mvc.perform(MockMvcRequestBuilders.get("/user")).andExpect(matcher.isForbidden());
     	mvc.perform(MockMvcRequestBuilders.get("/admin")).andExpect(matcher.isForbidden());
 
-    	//public
+    	//OK. 200 - public endpoint
     	mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products")).andExpect(matcher.isOk());
 
+        // forbidden. 403 - authenticate nonexistant user
     	String requestJson = "{\"username\": \"IDoNotExistInTheDB\",\"password\": \"foo\"}";
-
         mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isForbidden());
     }
 
@@ -54,36 +56,30 @@ public class AuthenticationHTTPTests {
     public void shouldAuthenticateUser() throws Exception {
     	String requestJson = "{\"username\": \"user\",\"password\": \"user\"}";
 
-    	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
-
+        //OK. 200
+    	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isOk());
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
 
-        System.out.println("contentAsString " + contentAsString);
-
+        System.out.println("contentAsString (token) " + contentAsString);
         String token = contentAsString.substring(8, contentAsString.length()-2);
-
         System.out.println("token " + token);
-
         assertNotNull(token);
 
-        /*
-         * A logged in 'user' should be able to access /user
+        /**
+         * User is now logged in. A logged in 'user' should be able to access /user by passing in "token".
          */
 
-    	resultActions = mvc.perform(MockMvcRequestBuilders.get("/user").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
+        //OK. 200
+    	resultActions = mvc.perform(MockMvcRequestBuilders.get("/user").header("Authorization", "Bearer " + token)).andExpect(matcher.isOk());
 
         result = resultActions.andReturn();
         contentAsString = result.getResponse().getContentAsString();
-
         System.out.println("contentAsString " + contentAsString);
-
         assertEquals("user", contentAsString);
 
-        /*
-         * A logged in 'user' should NOT be able to access /admin
-         */
-    	mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.is(403));
+        // forbidden. 403 - A logged in 'user' should NOT be able to access /admin
+    	mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.isForbidden());
 
     }
 
@@ -91,45 +87,26 @@ public class AuthenticationHTTPTests {
     @org.junit.Test
     public void shouldAuthenticateAdmin() throws Exception {
 
-
-
-
     	String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 
-    	ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
-
-
-
-
-
-
+        //OK. 200
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isOk());
 
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-
         System.out.println("contentAsString " + contentAsString);
-
         String token = contentAsString.substring(8, contentAsString.length()-2);
-
-        System.out.println("token " + token);
-
         assertNotNull(token);
 
-        /**
-         * A logged in 'admin' should be able to access /user
-         */
-    	resultActions = mvc.perform(MockMvcRequestBuilders.get("/user").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
+        //OK. 200 - A logged in 'admin' should be able to access /user
+    	resultActions = mvc.perform(MockMvcRequestBuilders.get("/user").header("Authorization", "Bearer " + token)).andExpect(matcher.isOk());
 
         result = resultActions.andReturn();
         contentAsString = result.getResponse().getContentAsString();
-
         System.out.println("contentAsString " + contentAsString);
-
         assertEquals("user", contentAsString);
 
-        /**
-         * A logged in 'admin' should be able to access /admin
-         */
-        mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
+        //OK. 200 - A logged in 'admin' should be able to access /admin
+        mvc.perform(MockMvcRequestBuilders.get("/admin").header("Authorization", "Bearer " + token)).andExpect(matcher.isOk());
     }
 }

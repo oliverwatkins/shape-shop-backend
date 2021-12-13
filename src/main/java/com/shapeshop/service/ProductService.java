@@ -12,10 +12,7 @@ import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.ProductRepository;
 
-import lombok.NoArgsConstructor;
-
 @Service
-@NoArgsConstructor
 public class ProductService {
 
     @Autowired

@@ -23,14 +23,14 @@ public class App {
 	CompanyRepository cRes;
 
 	public static void main(String[] args) {
-		System.out.println("<<<<<>>>>> main <<<<<>>>>> ");
+		System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! STARTING SPRING !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
 		SpringApplication.run(App.class, args);
 	}
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! SHAPE SHOP !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
+			System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! STARTING SHAPE SHOP !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
 		};
 	}
 
@@ -38,13 +38,23 @@ public class App {
 	public CommandLineRunner testDBConnectionWorks(UserRepository repository) {
 		return (args) -> {
 
-//			List<CompanyEntity> result = StreamSupport.stream(cRes.findAll().spliterator(), false)
-//					.collect(Collectors.toList());
 			CompanyEntity result = cRes.findByName("higgins");
 
-			System.out.println("Hello hello 5");
-
 			System.out.println("CompanyEntity ! " + (result != null ? result.toString() : " no higgins"));
+
+			if (result != null) {
+				System.out.println("\t\t\t _________.__                             _________.__");
+				System.out.println("\t\t\t/   _____/|  |__ _____  ______   ____    /   _____/|  |__   ____ ______");
+				System.out.println(" \t\t\t\\_____  \\ |  |  \\\\__  \\ \\____ \\_/ __ \\   \\_____  \\ |  |  \\ /  _ \\\\____ \\");
+				System.out.println(" \t\t\t/        \\|   Y  \\/ __ \\|  |_> >  ___/   /        \\|   Y  (  <_> )  |_> >");
+				System.out.println("\t\t   /_______  /|___|  (____  /   __/ \\___  > /_______  /|___|  /\\____/|   __/");
+				System.out.println("\t\t\t       \\/      \\/     \\/|__|        \\/          \\/      \\/       |__|");
+				System.out.println(":: Shape Shop :: v.1.0 (Copyright Oliver Watkins)");
+				System.out.println("");
+				System.out.println("");
+			}else {
+				System.err.println("No company data found for higgins");
+			}
 		};
 	}
 }

@@ -36,13 +36,13 @@ public class UserEntity {
 		this.password = password;
 	}
 
-	public UserEntity(String id, UserRole role, String userName, String password) {
-		super();
-		this.id = id;
-		this.role = role;
-		this.userName = userName;
-		this.password = password;
-	}
+//	public UserEntity(String id, UserRole role, String userName, String password) {
+//		super();
+//		this.id = id;
+//		this.role = role;
+//		this.userName = userName;
+//		this.password = password;
+//	}
 
 	public String getId() {
 		return id;
