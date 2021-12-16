@@ -40,7 +40,6 @@ public class OrderController {
 	@CrossOrigin
 	@PostMapping(value = "/{companyName}/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
-		System.out.println("-->>> post order for company " + companyName + " : " + order);
 
 		CompanyEntity c = companyR.findByName(companyName);
 

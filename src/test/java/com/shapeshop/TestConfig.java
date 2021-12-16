@@ -4,8 +4,8 @@ import com.shapeshop.entity.AddressEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.UserEntity;
-import com.shapeshop.mockdata.Alpenhof;
-import com.shapeshop.mockdata.Higgins;
+import com.shapeshop.mockdata.Carlscafe;
+import com.shapeshop.mockdata.AnniesArtSupplies;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
 import com.shapeshop.security.PasswordUtils;
@@ -45,7 +45,7 @@ public class TestConfig {
 
 			System.out.println("-->>> create some companies ! ");
 
-			repository.save(new CompanyEntity("alpenhof"));
+			repository.save(new CompanyEntity("carlscafe"));
 			repository.save(new CompanyEntity("higgins"));
 		};
 	}
@@ -53,21 +53,19 @@ public class TestConfig {
 	@Bean
 	public CommandLineRunner loadAddresses(AddressRepository repository) {
 		return (args) -> {
-			AddressEntity a = new AddressEntity("Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
+			AddressEntity a = new AddressEntity("Bob", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
 			repository.save(a);
-			AddressEntity a2 = new AddressEntity("Luke Skywalker", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
+			AddressEntity a2 = new AddressEntity("Jane", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
 			repository.save(a2);
-			AddressEntity a3 = new AddressEntity("Darth Vader", null, null, "+(09)42344333", null);
-			repository.save(a3);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadCC(CreditCardRepository repository) {
 		return (args) -> {
-			CreditCardEntity cc = new CreditCardEntity("xxx-xxx-xxxx-6345", "22/22", "JJ Binks", "VISA");
+			CreditCardEntity cc = new CreditCardEntity("xxxx-xxxx-xxxx-1234", "22/22", "Bob", "VISA");
 			repository.save(cc);
-			CreditCardEntity cc2 = new CreditCardEntity("xxx-xxx-xxxx-6523", "12/24", "P Leah", "MASTERCARD");
+			CreditCardEntity cc2 = new CreditCardEntity("xxx-xxx-xxxx-6789", "12/24", "Jane", "MASTERCARD");
 			repository.save(cc2);
 		};
 	}
@@ -75,28 +73,28 @@ public class TestConfig {
 	@Bean
 	public CommandLineRunner loadProducts2(ProductRepository repository) {
 		return (args) -> {
-			Higgins.createProducts(repository, cRes);
+			AnniesArtSupplies.createProducts(repository, cRes);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadProducts(ProductRepository repository) {
 		return (args) -> {
-			Alpenhof.createProducts(repository, cRes);
+			Carlscafe.createProducts(repository, cRes);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadOrders(OrderRepository oRep) {
 		return (args) -> {
-			Alpenhof.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
+			Carlscafe.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadOrders2(OrderRepository oRep) {
 		return (args) -> {
-			Higgins.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
+			AnniesArtSupplies.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
 		};
 	}
 

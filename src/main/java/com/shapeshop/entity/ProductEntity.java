@@ -1,11 +1,14 @@
 package com.shapeshop.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "product")
 public class ProductEntity {
@@ -19,8 +22,7 @@ public class ProductEntity {
 	@JoinColumn(name = "company_id", nullable = false, updatable = false)
 	private CompanyEntity company = new CompanyEntity();
 
-	@OneToMany
-			(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id")
 	private List<OrderItemEntity> orders = new ArrayList<>();
 
@@ -30,7 +32,6 @@ public class ProductEntity {
 	@Column(name = "price")
 	private BigDecimal price;
 
-	// mains / drinks etc.
 	@Column(name = "type")
 	private String type;
 
@@ -52,51 +53,5 @@ public class ProductEntity {
 		this.type = type;
 		this.imageFilename = imageFilename;
 		this.company = company;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getImageFilename() {
-		return imageFilename;
-	}
-
-	public void setImageFilename(String imageFilename) {
-		this.imageFilename = imageFilename;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductEntity [company=" + company + ", id=" + id + ", orders=" + orders + ", name=" + name + ", price="
-				+ price + ", type=" + type + ", imageFilename=" + imageFilename + "]";
 	}
 }

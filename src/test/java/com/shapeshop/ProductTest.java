@@ -29,18 +29,23 @@ public class ProductTest {
     @Autowired
     private MockMvc mvc;
 
-    /**
-     * Get orders via HTTP
-     */
     @org.junit.Test
     public void getProducts() throws Exception {
 
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products")).andExpect(matcher.isOk());
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/products")).andExpect(matcher.isOk());
 
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
 
-        JSONObject p1 = new JSONObject();
+        JSONArray expectedArray = expectedArray();
+        JSONArray recievedArray = new JSONArray(contentAsString);
+
+        JSONAssert.assertEquals(
+                expectedArray, recievedArray, JSONCompareMode.LENIENT);
+    }
+
+    private JSONArray expectedArray() {
+        JSONObject p1 = new JSONObject().put("id", 13);
         p1.put("id", 13);
         p1.put("name", "hamburger");
         p1.put("price", 1.5);
@@ -81,11 +86,7 @@ public class ProductTest {
         array.put(p3);
         array.put(p4);
         array.put(p5);
-
-        JSONArray array2 = new JSONArray(contentAsString);
-
-        JSONAssert.assertEquals(
-                array, array2, JSONCompareMode.LENIENT);
+        return array;
     }
 
 }

@@ -66,10 +66,6 @@ public class AuthenticationHTTPTests {
         System.out.println("token " + token);
         assertNotNull(token);
 
-        /**
-         * User is now logged in. A logged in 'user' should be able to access /user by passing in "token".
-         */
-
         //OK. 200
     	resultActions = mvc.perform(MockMvcRequestBuilders.get("/user").header("Authorization", "Bearer " + token)).andExpect(matcher.isOk());
 
