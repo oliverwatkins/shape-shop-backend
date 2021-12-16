@@ -1,4 +1,4 @@
-package com.shapeshop.mockdata;
+package com.shapeshop.config.mockdata;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

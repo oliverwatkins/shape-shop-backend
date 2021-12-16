@@ -1,7 +1,10 @@
 package com.shapeshop.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "orders_item")
 public class OrderItemEntity {
@@ -22,37 +25,7 @@ public class OrderItemEntity {
 	}
 
 	public OrderItemEntity(ProductEntity product, int amount) {
-		super();
 		this.product = product;
 		this.amount = amount;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public ProductEntity getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductEntity product) {
-		this.product = product;
-	}
-
-	@Override
-	public String toString() {
-		return "OrderItemEntity [id=" + id + ", product=" + product + ", amount=" + amount + "]";
 	}
 }

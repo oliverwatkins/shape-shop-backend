@@ -1,5 +1,6 @@
 package com.shapeshop;
 
+import com.shapeshop.config.TestConfig;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,7 +38,7 @@ public class AuthenticationHTTPTests {
 
 
     @org.junit.Test
-    public void shouldNotAuthenticate() throws Exception {
+    public void shouldNotAuth() throws Exception {
 
         // forbidden. 403 - private endpoint
         mvc.perform(MockMvcRequestBuilders.get("/user")).andExpect(matcher.isForbidden());
@@ -46,14 +47,14 @@ public class AuthenticationHTTPTests {
     	//OK. 200 - public endpoint
     	mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products")).andExpect(matcher.isOk());
 
-        // forbidden. 403 - authenticate nonexistant user
+        // unauthorized. 401 - authenticate nonexistant user
     	String requestJson = "{\"username\": \"IDoNotExistInTheDB\",\"password\": \"foo\"}";
-        mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isForbidden());
+        mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isUnauthorized());
     }
 
 
     @org.junit.Test
-    public void shouldAuthenticateUser() throws Exception {
+    public void shouldAuthUser() throws Exception {
     	String requestJson = "{\"username\": \"user\",\"password\": \"user\"}";
 
         //OK. 200
@@ -81,7 +82,7 @@ public class AuthenticationHTTPTests {
 
 
     @org.junit.Test
-    public void shouldAuthenticateAdmin() throws Exception {
+    public void shouldAuthAdmin() throws Exception {
 
     	String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 

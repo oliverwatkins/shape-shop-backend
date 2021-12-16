@@ -1,6 +1,7 @@
 package com.shapeshop;
 
 
+import com.shapeshop.config.TestConfig;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;

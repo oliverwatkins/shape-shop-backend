@@ -13,7 +13,6 @@ import java.io.*;
 @RestController
 public class ImageController {
 
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -21,15 +20,11 @@ public class ImageController {
     @RequestMapping(value = "/{companyName}/uploadfile/{productId}", method = RequestMethod.POST)
     public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response, @PathVariable("productId") String productId) throws IOException {
 
-        System.out.println("updateImage " + file);
-
         writeFileToFileSystem(file);
 
         ProductEntity p = productRepository.findById(Long.parseLong(productId));
         p.setImageFilename(file.getOriginalFilename());
         productRepository.save(p);
-
-        System.out.println("convertMultiPartToFile : updated product with image filename " + file.getOriginalFilename());
     }
 
     private static File writeFileToFileSystem(MultipartFile file) throws IOException {
@@ -42,8 +37,6 @@ public class ImageController {
 
         fos.write(file.getBytes());
         fos.close();
-
-        System.out.println("convertMultiPartToFile : saved file " + file.getOriginalFilename());
 
         return convFile;
     }

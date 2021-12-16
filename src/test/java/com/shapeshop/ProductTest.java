@@ -1,5 +1,6 @@
 package com.shapeshop;
 
+import com.shapeshop.config.TestConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.runner.RunWith;
@@ -88,5 +89,4 @@ public class ProductTest {
         array.put(p5);
         return array;
     }
-
 }

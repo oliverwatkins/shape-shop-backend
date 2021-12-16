@@ -1,11 +1,11 @@
-package com.shapeshop;
+package com.shapeshop.config;
 
 import com.shapeshop.entity.AddressEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.UserEntity;
-import com.shapeshop.mockdata.Carlscafe;
-import com.shapeshop.mockdata.AnniesArtSupplies;
+import com.shapeshop.config.mockdata.Carlscafe;
+import com.shapeshop.config.mockdata.AnniesArtSupplies;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
 import com.shapeshop.security.PasswordUtils;

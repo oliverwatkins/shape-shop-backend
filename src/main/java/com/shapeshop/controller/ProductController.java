@@ -13,9 +13,6 @@ import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.ProductService;
 
-/**
- * Product Controller
- */
 @RestController
 public class ProductController {
 
@@ -36,7 +33,6 @@ public class ProductController {
     @PutMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product, @PathVariable("id") Long id, @PathVariable("companyName") String companyName) {
         productService.updateProduct(product, id);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -52,10 +48,7 @@ public class ProductController {
     public ProductEntity[] getProducts(@PathVariable("companyName") String companyName) {
 
         CompanyEntity c = companyR.findByName(companyName);
-
         List<ProductEntity> itemList = productService.getProductsByCompany(c);
-
-        System.out.println("Got products for company " + companyName + " . Number of products " + itemList.size());
 
         return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
     }

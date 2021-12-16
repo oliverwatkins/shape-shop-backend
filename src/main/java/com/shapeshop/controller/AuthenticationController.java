@@ -6,6 +6,7 @@ import com.shapeshop.service.UserService;
 import com.shapeshop.security.JwtUtil;
 import com.shapeshop.security.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Login/Logout endpoints.
  */
-
 @RestController
 public class AuthenticationController {
 
@@ -37,7 +37,6 @@ public class AuthenticationController {
 	 *
 	 * @param authenticationRequest authentication request when logging in
 	 * @return HTTP response enttiy
-	 * @throws Exception
 	 */
 	@CrossOrigin
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -45,33 +44,24 @@ public class AuthenticationController {
 			throws Exception {
 
 		try {
-			Authentication authentication = null;
 
 			String pswd = authenticationRequest.getPassword();
 			String uName = authenticationRequest.getUsername();
 
-			System.out.println("logging in a user " + uName + " pswd " + pswd);
-
 			String encryptedPswd = passwordValidationService.encryptPassword(pswd);
 
-			System.out.println("encryptedPswd " + encryptedPswd);
+			UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-			final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-
-			System.out.println("loaded use details " + userDetails);
-
-			authentication = authenticationManager
+			Authentication authentication = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
 
-			final String jwtToken = jwtTokenUtil.createToken(authentication);
-
-			System.out.println("got a new token " + jwtToken);
+			String jwtToken = jwtTokenUtil.createToken(authentication);
 
 			return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw e;
+			return new ResponseEntity<>("Error attempting to log in ", HttpStatus.UNAUTHORIZED);
 		}
 	}
 

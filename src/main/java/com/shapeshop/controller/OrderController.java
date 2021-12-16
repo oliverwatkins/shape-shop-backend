@@ -42,33 +42,18 @@ public class OrderController {
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
 
 		CompanyEntity c = companyR.findByName(companyName);
-
 		order.setCompany(c);
-
 		OrderEntity o = orderService.createOrder(order);
-
-		System.out.println("-->>> created order ");
-
 		return new ResponseEntity<>(o, HttpStatus.OK);
 	}
 
-	/**
-	 * Get a list of orders for company.
-	 *
-	 * @param companyName
-	 */
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
 	public OrderEntity[] getOrders(@PathVariable("companyName") String companyName) {
-		System.out.println("-->>> companyName " + companyName);
 
 		CompanyEntity c = companyR.findByName(companyName);
-		System.out.println("-->>> getOrders for company " + c);
-
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
-		System.out.println("-->>> Number of orders " + itemList.size());
-
 		return itemList.toArray(new OrderEntity[itemList.size()]);
 	}
 }

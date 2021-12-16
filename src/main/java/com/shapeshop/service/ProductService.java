@@ -42,13 +42,11 @@ public class ProductService {
     public void updateProduct(ProductEntity product, Long id) {
 
         Optional<ProductEntity> pe = productRepository.findById(id);
-//
         if (pe.isPresent()) {
             ProductEntity e = pe.get();
 
             e.setName(product.getName());
             e.setPrice(product.getPrice());
-//
 //            //merge e and product
 
             productRepository.save(e);

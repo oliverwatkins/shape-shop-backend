@@ -25,7 +25,6 @@ public class CompanyEntity {
 	}
 
 	public CompanyEntity(String name) {
-		super();
 		this.name = name;
 	}
 }

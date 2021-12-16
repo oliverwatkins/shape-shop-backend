@@ -31,7 +31,6 @@ public class CreditCardEntity {
 	}
 
 	public CreditCardEntity(String number, String expDate, String name, String type) {
-		super();
 		this.number = number;
 		this.expDate = expDate;
 		this.name = name;

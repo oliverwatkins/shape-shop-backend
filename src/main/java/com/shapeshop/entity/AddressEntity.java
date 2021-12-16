@@ -34,7 +34,6 @@ public class AddressEntity {
 	}
 
 	public AddressEntity(String name, String street, String postcode, String telephone, String email) {
-		super();
 		this.name = name;
 		this.street = street;
 		this.postcode = postcode;

@@ -43,7 +43,6 @@ public class OrderEntity {
 
 	public OrderEntity(Date date, PaymentType payment, DeliveryType deliveryType, AddressEntity address,
 			CreditCardEntity creditCard, CompanyEntity company) {
-		super();
 		this.addressEntity = address;
 		this.creditCardEntity = creditCard;
 		this.date = date;
@@ -55,14 +54,4 @@ public class OrderEntity {
 	public void addOrderItem(OrderItemEntity item) {
 		orderItems.add(item);
 	}
-//	public OrderEntity(String name, String telephone, Date date, PaymentType payment, DeliveryType deliveryType,
-//			String string3, CompanyEntity company) {
-//		super();
-//		this.date = date;
-//		this.paymentType = payment;
-//		this.deliveryType = deliveryType;
-//		this.company = company;
-//
-//	}
-
 }

@@ -2,10 +2,12 @@ package com.shapeshop.entity;
 
 import javax.persistence.*;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.shapeshop.model.UserRole;
 
+@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -33,46 +35,6 @@ public class UserEntity {
 		super();
 		this.role = role;
 		this.userName = userName;
-		this.password = password;
-	}
-
-//	public UserEntity(String id, UserRole role, String userName, String password) {
-//		super();
-//		this.id = id;
-//		this.role = role;
-//		this.userName = userName;
-//		this.password = password;
-//	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String email) {
-		this.userName = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
 		this.password = password;
 	}
 }
