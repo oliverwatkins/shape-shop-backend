@@ -32,10 +32,6 @@ public class OrderController {
 
 	/**
 	 * creates an order
-	 *
-	 * @param order order entity
-	 * @param companyName company
-	 * @return http response
 	 */
 	@CrossOrigin
 	@PostMapping(value = "/{companyName}/orders")

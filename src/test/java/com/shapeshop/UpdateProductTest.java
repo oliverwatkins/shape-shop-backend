@@ -1,6 +1,7 @@
 package com.shapeshop;
 
 
+import com.shapeshop.config.ShapeShopTest;
 import com.shapeshop.config.TestConfig;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
@@ -21,16 +22,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@Import(TestConfig.class)
-@EnableWebMvc
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-public class UpdateProductTest {
 
-    StatusResultMatchers matcher = MockMvcResultMatchers.status();
-    @Autowired
-    private MockMvc mvc;
+public class UpdateProductTest extends ShapeShopTest {
+
 
     /**
      * update product with ID and change its name
@@ -41,14 +35,15 @@ public class UpdateProductTest {
         String updateProductJSON =
                 "{\"name\": \"XXXXXXXXX\"," +
                 "\"price\": \"4.5\", " +
-                "\"id\": \"14\"}";
+                "\"id\": \"2\"}";
 
-        String token = loginAsAdmingAndGetToken();
+        String token = authenticate("admin", "admin");
 
-        mvc.perform(MockMvcRequestBuilders.put("/alpenhof/products/14").header("Authorization", "Bearer " + token).contentType("application/json")
+        mvc.perform(MockMvcRequestBuilders.put("/alpenhof/products/2")
+                .header("Authorization", "Bearer " + token).contentType("application/json")
                 .content(updateProductJSON)).andExpect(matcher.is(200));
 
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products/14").contentType("application/json")
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products/2").contentType("application/json")
                 .content(updateProductJSON)).andExpect(matcher.is(200));
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
@@ -61,7 +56,8 @@ public class UpdateProductTest {
     private String loginAsAdmingAndGetToken() throws Exception {
         String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
 
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate")
+                .contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
 
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();

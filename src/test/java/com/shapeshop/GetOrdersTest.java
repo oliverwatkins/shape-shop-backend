@@ -1,5 +1,6 @@
 package com.shapeshop;
 
+import com.shapeshop.config.ShapeShopTest;
 import com.shapeshop.config.TestConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,16 +22,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static org.junit.Assert.*;
 
-@Import(TestConfig.class)
-@EnableWebMvc
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-public class GetOrdersTest {
 
-	StatusResultMatchers matcher = MockMvcResultMatchers.status();
-    @Autowired
-    private MockMvc mvc;
+public class GetOrdersTest extends ShapeShopTest {
+
 
 	/**
 	 * Get orders via HTTP
@@ -38,7 +32,7 @@ public class GetOrdersTest {
 	@org.junit.Test
     public void getOrders() throws Exception {
 
-        String token = authenticate();
+        String token = authenticate("admin", "admin");
 
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/orders").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
 
@@ -85,7 +79,7 @@ public class GetOrdersTest {
                         //TODO company and orders hanging off the product entity is redundant
                         .put("company", new JSONObject().put("name", "carlscafe").put("id", 1))
                         .put("orders", new JSONArray())
-                        .put("id", 14)
+                        .put("id", 2)
                         .put("type", "main"))
                     .put("amount", 1)
                     .put("id", 1)

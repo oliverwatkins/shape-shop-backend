@@ -1,5 +1,6 @@
 package com.shapeshop;
 
+import com.shapeshop.config.ShapeShopTest;
 import com.shapeshop.config.TestConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,16 +20,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.result.StatusResultMatchers;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@Import(TestConfig.class)
-@EnableWebMvc
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-public class ProductTest {
 
-    StatusResultMatchers matcher = MockMvcResultMatchers.status();
-    @Autowired
-    private MockMvc mvc;
+public class ProductTest extends ShapeShopTest {
 
     @org.junit.Test
     public void getProducts() throws Exception {

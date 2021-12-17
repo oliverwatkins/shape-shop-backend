@@ -20,9 +20,6 @@ import com.shapeshop.repository.CreditCardRepository;
 import com.shapeshop.repository.OrderRepository;
 import com.shapeshop.repository.ProductRepository;
 
-/**
- *
- */
 public class AnniesArtSupplies {
 
 	public static void createProducts(ProductRepository repository, CompanyRepository cRes) {
