@@ -34,45 +34,63 @@ public class ProductTest extends ShapeShopTest {
         JSONArray expectedArray = expectedArray();
         JSONArray recievedArray = new JSONArray(contentAsString);
 
+        System.out.println("recievedArray " + recievedArray);
+        System.out.println("expectedArray " + expectedArray);
+
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
 
     private JSONArray expectedArray() {
         JSONObject p1 = new JSONObject().put("id", 13);
-        p1.put("id", 13);
+        p1.put("id", 1);
         p1.put("name", "hamburger");
         p1.put("price", 1.5);
         p1.put("type", "main");
         p1.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject()
+                .put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
 
         JSONObject p2 = new JSONObject();
-        p2.put("id", 14);
+        p2.put("id", 2);
         p2.put("name", "hotdog");
         p2.put("price", 7.9);
         p2.put("type", "main");
         p2.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject()
+                .put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
 
         JSONObject p3 = new JSONObject();
-        p3.put("id", 15);
+        p3.put("id", 3);
         p3.put("name", "donut");
         p3.put("price", 7.9);
         p3.put("type", "main");
         p3.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject()
+                .put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
 
         JSONObject p4 = new JSONObject();
-        p4.put("id", 16);
+        p4.put("id", 4);
         p4.put("name", "coke");
         p4.put("price", 4.5);
         p4.put("type", "drinks");
         p4.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject()
+                .put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
 
         JSONObject p5 = new JSONObject();
-        p5.put("id", 17);
+        p5.put("id", 5);
         p5.put("name", "water");
         p5.put("price", 4.5);
         p5.put("type", "drinks");
         p5.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject()
+                .put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
 
         JSONArray array = new JSONArray();
         array.put(p1);

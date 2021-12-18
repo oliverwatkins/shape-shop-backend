@@ -92,19 +92,19 @@ public class GetOrdersTest extends ShapeShopTest {
         return array;
     }
 
-    private String authenticate() throws Exception {
-        String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
-
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isOk());
-
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-
-        System.out.println("contentAsString " + contentAsString);
-
-        String token = contentAsString.substring(8, contentAsString.length()-2);
-
-        assertNotNull(token);
-        return token;
-    }
+//    private String authenticate() throws Exception {
+//        String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
+//
+//        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isOk());
+//
+//        MvcResult result = resultActions.andReturn();
+//        String contentAsString = result.getResponse().getContentAsString();
+//
+//        System.out.println("contentAsString " + contentAsString);
+//
+//        String token = contentAsString.substring(8, contentAsString.length()-2);
+//
+//        assertNotNull(token);
+//        return token;
+//    }
 }
