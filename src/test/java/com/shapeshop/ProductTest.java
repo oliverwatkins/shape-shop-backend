@@ -28,11 +28,9 @@ public class ProductTest extends ShapeShopTest {
 
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/products")).andExpect(matcher.isOk());
 
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
+        JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
 
         JSONArray expectedArray = expectedArray();
-        JSONArray recievedArray = new JSONArray(contentAsString);
 
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);

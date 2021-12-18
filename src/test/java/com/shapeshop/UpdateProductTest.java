@@ -4,8 +4,12 @@ package com.shapeshop;
 import com.shapeshop.config.ShapeShopTest;
 import com.shapeshop.config.TestConfig;
 import org.hamcrest.CoreMatchers;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,39 +36,40 @@ public class UpdateProductTest extends ShapeShopTest {
     @org.junit.Test
     public void updateProduct() throws Exception {
 
+        //update price from 4.5 to 5.5
         String updateProductJSON =
-                "{\"name\": \"XXXXXXXXX\"," +
-                "\"price\": \"4.5\", " +
+                "{\"name\": \"hamburger\"," +
+                "\"price\": \"5.5\", " +
                 "\"id\": \"2\"}";
 
         String token = authenticate("admin", "admin");
 
+        // update
         mvc.perform(MockMvcRequestBuilders.put("/alpenhof/products/2")
                 .header("Authorization", "Bearer " + token).contentType("application/json")
                 .content(updateProductJSON)).andExpect(matcher.is(200));
 
+        // get
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products/2").contentType("application/json")
                 .content(updateProductJSON)).andExpect(matcher.is(200));
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
 
-        Assert.assertThat(contentAsString, CoreMatchers.containsString("XXXXXXXXX"));
+        JSONObject obj = extractJSONObjectFromResponse(resultActions);
+
+        JSONObject expectedObject = expectedObject();
+
+        JSONAssert.assertEquals(expectedObject, obj, JSONCompareMode.STRICT);
     }
 
+    private JSONObject expectedObject() {
 
-
-    private String loginAsAdmingAndGetToken() throws Exception {
-        String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
-
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate")
-                .contentType("application/json").content(requestJson)).andExpect(matcher.is(200));
-
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-
-        String token = contentAsString.substring(8, contentAsString.length()-2);
-
-        assertNotNull(token);
-        return token;
+        JSONObject p1 = new JSONObject().put("id", 13);
+        p1.put("id", 2);
+        p1.put("name", "hamburger");
+        p1.put("price", 5.5);
+        p1.put("type", "main");
+        p1.put("imageFilename", "na.png");
+        p1.put("company", new JSONObject().put("name", "carlscafe").put("id", 1));
+        p1.put("orders", new JSONArray());
+        return p1;
     }
 }

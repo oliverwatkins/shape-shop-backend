@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.result.StatusResultMatchers;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.io.UnsupportedEncodingException;
+
 import static org.junit.Assert.*;
 
 
@@ -36,9 +38,8 @@ public class GetOrdersTest extends ShapeShopTest {
 
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/orders").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
 
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-        JSONArray recievedArray = new JSONArray(contentAsString);
+        JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
+
         JSONArray expectedArray = expectedArray();
 
         System.out.println("recievedArray " + recievedArray);
@@ -46,6 +47,7 @@ public class GetOrdersTest extends ShapeShopTest {
 
         JSONAssert.assertEquals(expectedArray, recievedArray, JSONCompareMode.STRICT);
     }
+
 
 
 
