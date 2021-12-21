@@ -53,8 +53,12 @@ docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-n
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
-In IDE should be able to see this with this URL :
+In IDE should be able to connect to the DB with this URL :
 jdbc:mysql://localhost:3306/shapeshop
+
+The backend can be directly called like this :
+http://localhost:8080/alpenhof/products
+
 
 In spring properties add this :hibernate.dialect
 spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false

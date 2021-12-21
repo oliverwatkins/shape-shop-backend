@@ -29,10 +29,6 @@ import static org.junit.Assert.assertTrue;
 
 public class UpdateProductTest extends ShapeShopTest {
 
-
-    /**
-     * update product with ID and change its name
-     */
     @org.junit.Test
     public void updateProduct() throws Exception {
 

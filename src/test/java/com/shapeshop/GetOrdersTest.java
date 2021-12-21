@@ -1,28 +1,16 @@
 package com.shapeshop;
 
 import com.shapeshop.config.ShapeShopTest;
-import com.shapeshop.config.TestConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.result.StatusResultMatchers;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.io.UnsupportedEncodingException;
-
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
 
 
 public class GetOrdersTest extends ShapeShopTest {
@@ -47,7 +35,6 @@ public class GetOrdersTest extends ShapeShopTest {
 
         JSONAssert.assertEquals(expectedArray, recievedArray, JSONCompareMode.STRICT);
     }
-
 
 
 
@@ -93,20 +80,4 @@ public class GetOrdersTest extends ShapeShopTest {
         array.put(order);
         return array;
     }
-
-//    private String authenticate() throws Exception {
-//        String requestJson = "{\"username\": \"admin\",\"password\": \"admin\"}";
-//
-//        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isOk());
-//
-//        MvcResult result = resultActions.andReturn();
-//        String contentAsString = result.getResponse().getContentAsString();
-//
-//        System.out.println("contentAsString " + contentAsString);
-//
-//        String token = contentAsString.substring(8, contentAsString.length()-2);
-//
-//        assertNotNull(token);
-//        return token;
-//    }
 }

@@ -1,0 +1,26 @@
+{
+    "deliveryType": null,
+    "paymentType": null,
+    "orderItems": [
+        {
+            "product": {
+                "id": 1
+            },
+            "amount": 1
+        },
+        {
+            "product": {
+                "id": 2
+            },
+            "amount": 2
+        }
+    ],
+    "addressEntity": {
+        "email": "o_watkins@yahoo.com",
+        "street": "",
+        "name": "o_watkins@yahoo.com",
+        "telephone": "3445",
+        "postcode": ""
+    },
+    "creditCardEntity": null
+}

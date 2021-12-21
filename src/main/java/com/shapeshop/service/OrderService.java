@@ -45,7 +45,12 @@ public class OrderService {
 		}
 
 		for (OrderItemEntity orderItemEntity : oitems) {
-			orderItemRepository.save(orderItemEntity);
+
+			try {
+				orderItemRepository.save(orderItemEntity);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		orderRepository.save(order);
 		return order;
