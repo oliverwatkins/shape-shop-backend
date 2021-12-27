@@ -44,25 +44,6 @@ public class Carlscafe {
 		System.out.println("-->>> create some orders ");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		CompanyEntity company = cRes.findByName("carlscafe");
 
 		ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(company);
@@ -92,24 +73,5 @@ public class Carlscafe {
 			oiRep.save(orderItem1);
 			oRep.save(o1);
 		}
-
-//		{
-//			OrderEntity order = new OrderEntity(new Date(), PaymentType.CASH, DeliveryType.DELIVERY, address_jane,
-//					null, company);
-//
-//			orderItem1 = new OrderItemEntity(product_donut, 1);
-//			orderItem2 = new OrderItemEntity(product_hotdog, 2);
-//
-//			ArrayList<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
-//
-//			orderItems.add(orderItem2);
-//
-//			order.setOrderItems(orderItems);
-//
-//			oiRep.save(orderItem1);
-//			oiRep.save(orderItem2);
-//
-//			oRep.save(order);
-//		}
 	}
 }

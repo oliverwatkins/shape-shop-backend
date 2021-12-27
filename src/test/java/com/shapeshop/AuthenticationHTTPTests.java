@@ -20,10 +20,6 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests authentication and authorization.
- *
- *
- *
- *
  */
 @Import(TestConfig.class)
 @EnableWebMvc

@@ -1,0 +1,12 @@
+{
+  "imageFilename": "na.png",
+  "price": 5.5,
+  "name": "hamburger",
+  "company": {
+    "name": "carlscafe",
+    "id": 1
+  },
+  "orders": [],
+  "id": 2,
+  "type": "main"
+}
