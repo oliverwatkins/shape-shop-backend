@@ -1,27 +1,33 @@
 {
     "date": 1639619535992,
-    "deliveryType": null,
-    "paymentType": null,
+    "deliveryType": "DELIVERY",
+    "paymentType": "CARD",
     "orderItems": [
         {
             "product": {
                 "id": 1
             },
-            "amount": 1
+            "amount": 2
         },
         {
             "product": {
                 "id": 2
             },
-            "amount": 2
+            "amount": 1
         }
     ],
     "addressEntity": {
-        "email": "o_watkins@yahoo.com",
-        "street": "",
-        "name": "o_watkins@yahoo.com",
-        "telephone": "3445",
-        "postcode": ""
+        "email": "bob@gmail.com",
+        "street": "Bobby street 12",
+        "name": "Bob",
+        "telephone": "+(09)928423444",
+        "postcode": "41412"
     },
-    "creditCardEntity": null
+    "creditCardEntity": {
+        "number": "xxxx-xxxx-xxxx-1234",
+        "name": "Bob",
+        "id": 1,
+        "type": "VISA",
+        "expDate": "22/22"
+    }
 }

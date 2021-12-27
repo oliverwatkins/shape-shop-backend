@@ -53,9 +53,9 @@ public class TestConfig {
 	@Bean
 	public CommandLineRunner loadAddresses(AddressRepository repository) {
 		return (args) -> {
-			AddressEntity a = new AddressEntity("Bob", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
+			AddressEntity a = new AddressEntity("Bob", "Bobby street 12", "41412", "+(09)928423444", "bob@gmail.com");
 			repository.save(a);
-			AddressEntity a2 = new AddressEntity("Jane", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
+			AddressEntity a2 = new AddressEntity("Jane", "1 Baker st", "62344", "+(09)34534444", "jane@gmail.com");
 			repository.save(a2);
 		};
 	}

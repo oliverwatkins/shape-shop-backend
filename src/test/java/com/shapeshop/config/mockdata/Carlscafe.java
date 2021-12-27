@@ -12,7 +12,6 @@ import com.shapeshop.entity.CreditCardEntity;
 import com.shapeshop.entity.DeliveryType;
 import com.shapeshop.entity.OrderEntity;
 import com.shapeshop.entity.OrderItemEntity;
-import com.shapeshop.entity.OrderState;
 import com.shapeshop.entity.PaymentType;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.AddressRepository;
