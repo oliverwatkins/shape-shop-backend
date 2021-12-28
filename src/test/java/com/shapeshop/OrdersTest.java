@@ -51,7 +51,7 @@ public class OrdersTest extends ShapeShopTest {
 
         String orderJSON = getNewOrderJSON();
 
-        //trying to order hamburger and hotdog on annies art. Resposne should be 404
+        // trying to order hamburger and hotdog from "annies art". Response should be 404 error
         mvc.perform(MockMvcRequestBuilders.post("/anniesart/orders").contentType("application/json").content(orderJSON)).andExpect(matcher.isNotFound());
     }
 

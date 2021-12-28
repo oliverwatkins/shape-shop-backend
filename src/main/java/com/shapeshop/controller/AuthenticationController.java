@@ -20,55 +20,54 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class AuthenticationController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private JwtUtil jwtTokenUtil;
+    @Autowired
+    private JwtUtil jwtTokenUtil;
 
-	@Autowired
-	private UserService userDetailsService;
+    @Autowired
+    private UserService userDetailsService;
 
-	@Autowired
-	private PasswordUtils passwordValidationService;
+    @Autowired
+    private PasswordUtils passwordValidationService;
 
-	/**
-	 * Authenticate a user who is trying to log in.
-	 *
-	 * @param authenticationRequest authentication request when logging in
-	 * @return HTTP response enttiy
-	 */
-	@CrossOrigin
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
-			throws Exception {
+    /**
+     * Authenticate a user who is trying to log in.
+     *
+     * @param authenticationRequest authentication request when logging in
+     * @return HTTP response entity
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
-		try {
+        try {
 
-			String pswd = authenticationRequest.getPassword();
-			String uName = authenticationRequest.getUsername();
+            String pswd = authenticationRequest.getPassword();
+            String uName = authenticationRequest.getUsername();
 
-			String encryptedPswd = passwordValidationService.encryptPassword(pswd);
+            String encryptedPswd = passwordValidationService.encryptPassword(pswd);
 
-			UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-			Authentication authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(uName, encryptedPswd, userDetails.getAuthorities()));
 
-			String jwtToken = jwtTokenUtil.createToken(authentication);
+            String jwtToken = jwtTokenUtil.createToken(authentication);
 
-			return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+            return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 
-		}catch(Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Error attempting to log in ", HttpStatus.UNAUTHORIZED);
-		}
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error attempting to log in ", HttpStatus.UNAUTHORIZED);
+        }
+    }
 
-	@CrossOrigin
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)
-			throws Exception {
+    @CrossOrigin
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)
+            throws Exception {
 
 //		Authentication authentication = null;
 //
@@ -83,6 +82,6 @@ public class AuthenticationController {
 //
 //		final String jwtToken = jwtTokenUtil.createToken(authentication);
 //
-		return ResponseEntity.ok(new AuthenticationResponse("TODO this isnt working correctly"));
-	}
+        return ResponseEntity.ok(new AuthenticationResponse("TODO this isnt working correctly"));
+    }
 }

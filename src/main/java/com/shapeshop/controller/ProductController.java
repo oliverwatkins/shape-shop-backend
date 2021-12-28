@@ -2,6 +2,8 @@ package com.shapeshop.controller;
 
 import java.util.List;
 
+import com.shapeshop.ErrorUtil;
+import com.shapeshop.ShapeShopException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +35,19 @@ public class ProductController {
     @PutMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product,
                                            @PathVariable("id") Long id,
-                                           @PathVariable("companyName") String companyName) {
-        productService.updateProduct(product, id, companyName);
+                                           @PathVariable("companyName") String companyName)  {
+        try {
+            productService.updateProduct(product, id, companyName);
+        } catch (ShapeShopException e) {
+            e.printStackTrace();
+
+            ResponseEntity response = ErrorUtil.getResponseEntity(e);
+            return response;
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -58,4 +58,21 @@ public class UpdateProductTest extends ShapeShopTest {
 
         JSONAssert.assertEquals(expectedObject, obj, JSONCompareMode.STRICT);
     }
+
+
+    @org.junit.Test
+    public void updateWrongProduct() throws Exception {
+
+        //update product (2) that exists in carls cafe. But updating in annies art.
+        String updateProductJSON =
+                "{\"name\": \"big mac\" }";
+
+        String token = authenticate("admin", "admin");
+
+        // update
+        mvc.perform(MockMvcRequestBuilders.put("/anniesart/products/2")
+                .header("Authorization", "Bearer " + token).contentType("application/json")
+                .content(updateProductJSON)).andExpect(matcher.is(404));
+    }
+
 }

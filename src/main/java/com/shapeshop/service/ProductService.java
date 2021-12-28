@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.shapeshop.ShapeShopException;
 import com.shapeshop.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,13 +44,15 @@ public class ProductService {
         return productRep.findById(id);
     }
 
-    public void updateProduct(ProductEntity product, Long id, String companyName) {
+    public void updateProduct(ProductEntity product, Long id, String companyName) throws ShapeShopException {
 
-        CompanyEntity c = companyRep.findByName(companyName);
+        CompanyEntity company = companyRep.findByName(companyName);
+        if (company == null) {
+            throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
+        }
 
-        List<ProductEntity> prods = this.getProductsByCompany(c);
+        List<ProductEntity> prods = this.getProductsByCompany(company);
         ProductEntity foundEntity = null;
-
 
         for (ProductEntity p: prods) {
             if (p.getId() == id) {
@@ -64,29 +67,8 @@ public class ProductService {
                 foundEntity.setPrice(product.getPrice());
             productRep.save(foundEntity);
         }else {
-            throw new RuntimeException("Cannot find product with id " + id + " and company name " + companyName);
+            throw new ShapeShopException("Product does not exist ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
         }
-
-
-
-//        Optional<ProductEntity> pe = productRep.findById(id);
-//        if (pe.isPresent()) {
-//            ProductEntity e = pe.get();
-//
-//            if (product.getName() != null)
-//                e.setName(product.getName());
-//            if (product.getPrice() != null)
-//                e.setPrice(product.getPrice());
-//
-//
-//
-//
-////            //merge e and product
-//
-//            productRep.save(e);
-//        } else {
-//            throw new RuntimeException("Cannot find product with id : " + id);
-//        }
     }
 
     public void deleteProduct(long id) {
