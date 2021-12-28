@@ -24,19 +24,19 @@ public class TestConfig {
 	private PasswordUtils passwordValidationService;
 
 	@Autowired
-	ProductRepository pRes;
+	ProductRepository pRep;
 
 	@Autowired
 	OrderItemRepository oiRep;
 
 	@Autowired
-	CompanyRepository cRes;
+	CompanyRepository cRep;
 
 	@Autowired
-	CreditCardRepository ccRes;
+	CreditCardRepository ccRep;
 
 	@Autowired
-	AddressRepository aRes;
+	AddressRepository aRep;
 
 
 	@Bean
@@ -46,7 +46,7 @@ public class TestConfig {
 			System.out.println("-->>> create some companies ! ");
 
 			repository.save(new CompanyEntity("carlscafe"));
-			repository.save(new CompanyEntity("higgins"));
+			repository.save(new CompanyEntity("anniesart"));
 		};
 	}
 
@@ -71,30 +71,30 @@ public class TestConfig {
 	}
 
 	@Bean
-	public CommandLineRunner loadProducts2(ProductRepository repository) {
+	public CommandLineRunner loadProducts_Carl(ProductRepository repository) {
 		return (args) -> {
-			AnniesArtSupplies.createProducts(repository, cRes);
+			Carlscafe.createProducts(repository, cRep);
 		};
 	}
 
 	@Bean
-	public CommandLineRunner loadProducts(ProductRepository repository) {
+	public CommandLineRunner loadProducts_Annie(ProductRepository repository) {
 		return (args) -> {
-			Carlscafe.createProducts(repository, cRes);
+			AnniesArtSupplies.createProducts(repository, cRep);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadOrders(OrderRepository oRep) {
 		return (args) -> {
-			Carlscafe.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
+			Carlscafe.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadOrders2(OrderRepository oRep) {
 		return (args) -> {
-			AnniesArtSupplies.createOrders(oRep, cRes, pRes, ccRes, aRes, oiRep);
+			AnniesArtSupplies.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
 		};
 	}
 

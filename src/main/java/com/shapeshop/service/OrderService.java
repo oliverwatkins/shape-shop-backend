@@ -1,22 +1,24 @@
 package com.shapeshop.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
+import com.shapeshop.ShapeShopException;
+import com.shapeshop.entity.CompanyEntity;
+import com.shapeshop.entity.OrderEntity;
+import com.shapeshop.entity.OrderItemEntity;
+import com.shapeshop.entity.ProductEntity;
+import com.shapeshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.OrderEntity;
-import com.shapeshop.entity.OrderItemEntity;
-import com.shapeshop.repository.AddressRepository;
-import com.shapeshop.repository.CreditCardRepository;
-import com.shapeshop.repository.OrderRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class OrderService {
+
+	@Autowired
+	private CompanyRepository companyRep;
 
 	@Autowired
 	CrudRepository<OrderItemEntity, Long> orderItemRepository;
@@ -25,12 +27,15 @@ public class OrderService {
 	OrderRepository orderRepository;
 
 	@Autowired
+	ProductRepository productRepository;
+
+	@Autowired
 	AddressRepository addressRepository;
 
 	@Autowired
 	CreditCardRepository creditCardRepository;
 
-	public OrderEntity createOrder(OrderEntity order) {
+	public OrderEntity createOrder(OrderEntity order) throws ShapeShopException {
 
 		if (order.getAddressEntity() != null)
 			addressRepository.save(order.getAddressEntity());
@@ -41,16 +46,27 @@ public class OrderService {
 		List<OrderItemEntity> oitems = order.getOrderItems();
 
 		if (oitems.size() == 0) {
-			throw new RuntimeException(" Order has no order items. ");
+			throw new ShapeShopException(" Order has no order items. ", ShapeShopException.ErrorType.ORDER_HAS_NO_ORDER_ITEMS);
 		}
 
 		for (OrderItemEntity orderItemEntity : oitems) {
+			long id = orderItemEntity.getProduct().getId();
 
-			try {
-				orderItemRepository.save(orderItemEntity);
-			}catch(Exception e) {
-				e.printStackTrace();
+			ProductEntity pe = productRepository.findById(id);
+
+			if (pe == null) {
+				throw new ShapeShopException(" Product id is not associated with any company ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
 			}
+
+//			System.out.println("pe --> " + pe);
+//
+			if (!order.getCompany().getName().equals(pe.getCompany().getName())) {
+				throw new ShapeShopException(" Product id belongs to wrong company. Order company " +
+						order.getCompany().getName() + " Prod id company " +
+						pe.getCompany().getName(), ShapeShopException.ErrorType.PROD_ID_BELONGS_TO_WRONG_COMPANY);
+			}
+
+			orderItemRepository.save(orderItemEntity);
 		}
 		orderRepository.save(order);
 		return order;

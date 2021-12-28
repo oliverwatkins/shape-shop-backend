@@ -46,6 +46,15 @@ public class OrdersTest extends ShapeShopTest {
         JSONAssert.assertEquals(expectedArray, recievedArray, JSONCompareMode.STRICT);
     }
 
+    @org.junit.Test
+    public void placeOrderWrongProdId() throws Exception {
+
+        String orderJSON = getNewOrderJSON();
+
+        //trying to order hamburger and hotdog on annies art. Resposne should be 404
+        mvc.perform(MockMvcRequestBuilders.post("/anniesart/orders").contentType("application/json").content(orderJSON)).andExpect(matcher.isNotFound());
+    }
+
     private String getNewOrderJSON() throws FileNotFoundException {
         Scanner in = new Scanner(new FileReader("src/test/resources/order.json"));
         StringBuilder sb = new StringBuilder();

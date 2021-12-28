@@ -2,6 +2,7 @@ package com.shapeshop.controller;
 
 import java.util.List;
 
+import com.shapeshop.ShapeShopException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,22 @@ public class OrderController {
 
 		CompanyEntity c = companyR.findByName(companyName);
 		order.setCompany(c);
-		OrderEntity o = orderService.createOrder(order);
+		OrderEntity o = null;
+		try {
+			o = orderService.createOrder(order);
+		} catch (ShapeShopException e) {
+			e.printStackTrace();
+
+			switch(e.getError()) {
+				case ORDER_HAS_NO_ORDER_ITEMS:
+					return new ResponseEntity<>("TODO ", HttpStatus.NOT_ACCEPTABLE);
+				case PROD_ID_BELONGS_TO_WRONG_COMPANY:
+					return new ResponseEntity<>("TODO ", HttpStatus.NOT_FOUND);
+				case PROD_NOT_FOUND:
+					return new ResponseEntity<>("TODO ", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(o, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return new ResponseEntity<>(o, HttpStatus.OK);
 	}
 

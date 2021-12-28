@@ -9,5 +9,6 @@ public interface CompanyRepository extends CrudRepository<CompanyEntity, Long>{
     public CompanyEntity findById(long id);
     
     public CompanyEntity findByName(String lastName);
-	
+
+//    public CompanyEntity getCompanyForProductId(long id);
 }

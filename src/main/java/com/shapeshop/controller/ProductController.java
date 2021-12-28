@@ -31,8 +31,10 @@ public class ProductController {
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{companyName}/products/{id}")
-    public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product, @PathVariable("id") Long id, @PathVariable("companyName") String companyName) {
-        productService.updateProduct(product, id);
+    public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product,
+                                           @PathVariable("id") Long id,
+                                           @PathVariable("companyName") String companyName) {
+        productService.updateProduct(product, id, companyName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
