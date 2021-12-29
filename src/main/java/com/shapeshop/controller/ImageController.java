@@ -1,9 +1,13 @@
 package com.shapeshop.controller;
 
+import com.shapeshop.ErrorUtil;
+import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,53 +23,56 @@ public class ImageController {
 
     @CrossOrigin
     @RequestMapping(value = "/{companyName}/uploadfile/{productId}", method = RequestMethod.POST)
-    public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response, @PathVariable("productId") String productId) throws IOException {
+    public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file,
+                           HttpServletResponse responseX,
+                           @PathVariable("productId") String productId,
+                           @PathVariable("companyName") String companyName
+                           ) {
 
-        writeFileToFileSystem(file);
+        try {
+            writeFileToFileSystem(file, companyName);
 
-        ProductEntity p = productRepository.findById(Long.parseLong(productId));
-        p.setImageFilename(file.getOriginalFilename());
-        productRepository.save(p);
+            ProductEntity p = productRepository.findById(Long.parseLong(productId));
+            p.setImageFilename(file.getOriginalFilename());
+            productRepository.save(p);
+
+        } catch (ShapeShopException e) {
+            e.printStackTrace();
+
+            ResponseEntity response = ErrorUtil.getResponseEntity(e);
+            return response;
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return new ResponseEntity<>("internal server error 3", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    private static File writeFileToFileSystem(MultipartFile file) throws IOException {
+    private static File writeFileToFileSystem(MultipartFile file, String companyName) throws ShapeShopException {
+
+        File convFile;
+        try {
+            File folderPath = new ClassPathResource("static\\images\\" + companyName + "\\").getFile();
+
+            if (!folderPath.exists()) {
+                throw new ShapeShopException("Cannot find image src folder 'static\\images\\" + companyName + "\\ '", ShapeShopException.ErrorType.IMAGE_SRC_FOLDER_NOT_FOUND);
+            }
 
 
-        File file2 = new ClassPathResource("countries.xml").getFile();
+            convFile = new File(folderPath.getPath() + "\\" + file.getOriginalFilename());
+            convFile.createNewFile();
 
-        if (!file2.exists()) {
-            throw new RuntimeException("!file2.exists()");
+            FileOutputStream fos = new FileOutputStream(convFile);
+
+            fos.write(file.getBytes());
+            fos.close();
+
+        }catch(Exception e) {
+            e.printStackTrace();
+
+            throw new ShapeShopException("Error saving image file " + file.getOriginalFilename(), ShapeShopException.ErrorType.IMAGE_SAVE_ERROR, e);
         }
-
-
-        File file3 = new ClassPathResource("static\\images\\alpenhof\\testfile.xml").getFile();
-
-        if (!file3.exists()) {
-            throw new RuntimeException("!file3.exists()");
-        }
-
-
-        File file4 = new ClassPathResource("static\\images\\alpenhof\\").getFile();
-
-        if (!file4.isDirectory()) {
-            throw new RuntimeException("!file4.isDirectory()");
-        }
-
-        File file5 = new File(file4.getPath() + "\\" + "myNewFile.txt");
-        if (file5.createNewFile()) {
-            System.out.println("File created: " + file5.getName());
-        } else {
-            System.out.println("File already exists.");
-        }
-
-        File convFile = new File(file4.getPath() + "\\" + file.getOriginalFilename());
-        convFile.createNewFile();
-
-        FileOutputStream fos = new FileOutputStream(convFile);
-
-        fos.write(file.getBytes());
-        fos.close();
-
         return convFile;
     }
 }
