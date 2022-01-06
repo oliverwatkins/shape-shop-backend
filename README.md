@@ -33,7 +33,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverT
 it is now possible to start app (server side - spring) in IDE and debug through the code. It should be possible to 
 access http://localhost:8080/alpenhof/products
 
-it sould be possible to run the client side as well.
+it should be possible to run the client side as well.
 
 
 

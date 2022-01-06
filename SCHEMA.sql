@@ -98,6 +98,7 @@ create table product
     id              bigint not null auto_increment,
     img_filename    varchar(255),
     name            varchar(255),
+    description     varchar(255),
     price           decimal(19, 2),
     type            varchar(255),
     company_id      bigint not null,

@@ -59,7 +59,6 @@ public class ImageController {
                 throw new ShapeShopException("Cannot find image src folder 'static\\images\\" + companyName + "\\ '", ShapeShopException.ErrorType.IMAGE_SRC_FOLDER_NOT_FOUND);
             }
 
-
             convFile = new File(folderPath.getPath() + "\\" + file.getOriginalFilename());
             convFile.createNewFile();
 
