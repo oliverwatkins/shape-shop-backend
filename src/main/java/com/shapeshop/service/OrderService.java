@@ -50,9 +50,9 @@ public class OrderService {
 		}
 
 		for (OrderItemEntity orderItemEntity : oitems) {
-			long id = orderItemEntity.getProduct().getId();
+			long prodId = orderItemEntity.getProduct().getId();
 
-			ProductEntity pe = productRepository.findById(id);
+			ProductEntity pe = productRepository.findById(prodId);
 
 			if (pe == null) {
 				throw new ShapeShopException(" Product id is not associated with any company ", ShapeShopException.ErrorType.PROD_NOT_FOUND);

@@ -30,6 +30,22 @@ public class ProductController {
         return "hello";
     }
 
+
+    @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/{companyName}/products")
+    public ResponseEntity<?> newProduct(@RequestBody ProductEntity product,
+                                        @PathVariable("companyName") String companyName) {
+        ProductEntity s = null;
+        try {
+            s = productService.createProduct(product, companyName);
+        } catch (ShapeShopException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(s, HttpStatus.OK);
+    }
+
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{companyName}/products/{id}")
@@ -51,12 +67,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @PostMapping("/products")
-    public ResponseEntity<?> newProduct(@RequestBody ProductEntity product) {
-        ProductEntity s = productService.createProduct(product);
-        return new ResponseEntity<>(s, HttpStatus.OK);
-    }
+
 
     @CrossOrigin
     @GetMapping(value = "/{companyName}/products")

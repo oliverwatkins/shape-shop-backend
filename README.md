@@ -18,8 +18,7 @@ Run the database :
 (Note sometimes you may get : 
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
 Just wait 30 seconds and try again)
-
-
+ 
 (3) docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
 In IDE should be able to see this with this URL :

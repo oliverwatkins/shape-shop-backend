@@ -23,7 +23,15 @@ public class ProductService {
     @Autowired
     private CompanyRepository companyRep;
 
-    public ProductEntity createProduct(ProductEntity product) {
+    public ProductEntity createProduct(ProductEntity product, String companyName) throws ShapeShopException {
+
+        CompanyEntity company = companyRep.findByName(companyName);
+        if (company == null) {
+            throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
+        }
+        product.setCompany(company);
+        product.setId(0);
+
         productRep.save(product);
         return product;
     }
