@@ -32,24 +32,8 @@ public class ProductService {
         product.setCompany(company);
         product.setId(0);
 
-        productRep.save(product);
+        product = productRep.save(product);
         return product;
-    }
-
-    public List<ProductEntity> getProductsByCompany(CompanyEntity company) {
-        List<ProductEntity> result = StreamSupport.stream(productRep.findByCompany(company).spliterator(), false)
-                .collect(Collectors.toList());
-        return result;
-    }
-
-    public List<ProductEntity> getAllProducts() {
-        List<ProductEntity> result = StreamSupport.stream(productRep.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        return result;
-    }
-
-    public ProductEntity getProductById(long id) {
-        return productRep.findById(id);
     }
 
     public void updateProduct(ProductEntity product, Long id, String companyName) throws ShapeShopException {
@@ -77,6 +61,22 @@ public class ProductService {
         }else {
             throw new ShapeShopException("Product does not exist ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
         }
+    }
+
+    public List<ProductEntity> getProductsByCompany(CompanyEntity company) {
+        List<ProductEntity> result = StreamSupport.stream(productRep.findByCompany(company).spliterator(), false)
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    public List<ProductEntity> getAllProducts() {
+        List<ProductEntity> result = StreamSupport.stream(productRep.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    public ProductEntity getProductById(long id) {
+        return productRep.findById(id);
     }
 
     public void deleteProduct(long id) {
