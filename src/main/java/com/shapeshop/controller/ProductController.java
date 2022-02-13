@@ -51,7 +51,7 @@ public class ProductController {
     @PutMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product,
                                            @PathVariable("id") Long id,
-                                           @PathVariable("companyName") String companyName)  {
+                                           @PathVariable("companyName") String companyName) {
         try {
             productService.updateProduct(product, id, companyName);
         } catch (ShapeShopException e) {
@@ -67,7 +67,20 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{companyName}/products/{id}")
+    public ResponseEntity<?> deleteProduct(
+            @PathVariable("id") Long id,
+            @PathVariable("companyName") String companyName) {
+        try {
+            productService.deleteProduct(id);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @CrossOrigin
     @GetMapping(value = "/{companyName}/products")
@@ -85,10 +98,10 @@ public class ProductController {
         return item;
     }
 
-    @DeleteMapping(value = "/{companyName}/products/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void deleteProductById(@PathVariable("id") long id) {
-        productService.deleteProduct(id);
-    }
+//    @DeleteMapping(value = "/{companyName}/products/{id}")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    public void deleteProductById(@PathVariable("id") long id) {
+//        productService.deleteProduct(id);
+//    }
 }
 
