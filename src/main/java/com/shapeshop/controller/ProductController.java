@@ -92,6 +92,9 @@ public class ProductController {
         return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
     }
 
+
+
+
     @GetMapping(value = "/{companyName}/products/{id}")
     public ProductEntity getProductsById(@PathVariable("companyName") String companyName, @PathVariable("id") long id) {
         ProductEntity item = productService.getProductById(id);

@@ -3,39 +3,46 @@ package com.shapeshop.config.mockdata;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.shapeshop.entity.*;
+import com.shapeshop.repository.*;
 import org.springframework.data.repository.CrudRepository;
-
-import com.shapeshop.entity.AddressEntity;
-import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.CreditCardEntity;
-import com.shapeshop.entity.DeliveryType;
-import com.shapeshop.entity.OrderEntity;
-import com.shapeshop.entity.OrderItemEntity;
-import com.shapeshop.entity.PaymentType;
-import com.shapeshop.entity.ProductEntity;
-import com.shapeshop.repository.AddressRepository;
-import com.shapeshop.repository.CompanyRepository;
-import com.shapeshop.repository.CreditCardRepository;
-import com.shapeshop.repository.OrderRepository;
-import com.shapeshop.repository.ProductRepository;
 
 public class Carlscafe {
 
+
+	public static void createCategories(CategoryRepository repository, CompanyRepository cRes) {
+		System.out.println("-->>> create some cats  ! ");
+
+		CompanyEntity ce = cRes.findByName("carlscafe");
+
+		// save a few products
+		repository.save(new CategoryEntity("biskits" , ce));
+		repository.save(new CategoryEntity("teas" , ce));
+
+
+	}
+
 	
-	public static void createProducts(ProductRepository repository, CompanyRepository cRes) {
+	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes) {
 
 		System.out.println("-->>> create some products  ! ");
 
 		CompanyEntity ce = cRes.findByName("carlscafe");
 
-		// save a few products
-		repository.save(new ProductEntity("hamburger", new BigDecimal(1.50), "main", "na.png", ce));
-		repository.save(new ProductEntity("hotdog", new BigDecimal(7.90), "main", "na.png", ce));
-		repository.save(new ProductEntity("donut", new BigDecimal(7.90), "main", "na.png", ce));
+		List<CategoryEntity> catE = catRes.findByCompany(ce);
+//		CompanyEntity ce = catRes.findByName("carlscafe");
 
-		repository.save(new ProductEntity("coke", new BigDecimal(4.50), "drinks", "na.png", ce));
-		repository.save(new ProductEntity("water", new BigDecimal(4.50), "drinks", "na.png", ce));
+
+
+		// save a few products
+		repository.save(new ProductEntity("hamburger", new BigDecimal(1.50), "main", "na.png", ce, "a hamburger", catE.get(0)));
+		repository.save(new ProductEntity("hotdog", new BigDecimal(7.90), "main", "na.png", ce, "a hotdog", catE.get(0)));
+		repository.save(new ProductEntity("donut", new BigDecimal(7.90), "main", "na.png", ce, "a donut", catE.get(0)));
+
+		repository.save(new ProductEntity("coke", new BigDecimal(4.50), "drinks", "na.png", ce, "a coke", catE.get(0)));
+		repository.save(new ProductEntity("water", new BigDecimal(4.50), "drinks", "na.png", ce, "a water", catE.get(0)));
 	}
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
@@ -74,4 +81,5 @@ public class Carlscafe {
 			oRep.save(o1);
 		}
 	}
+
 }

@@ -8,6 +8,7 @@ This README consists of three parts.
 
 ### 1. Running the application within the IDE against the DB in a docker container
 
+
 Run the database :
 
 (optional) run KILL.BAT
@@ -15,7 +16,7 @@ Run the database :
 (1) docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 (2) docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 
-(Note sometimes you may get : 
+(...sometimes you may get :
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
 Just wait 30 seconds and try again)
  

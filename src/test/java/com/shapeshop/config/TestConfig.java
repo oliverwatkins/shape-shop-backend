@@ -1,9 +1,6 @@
 package com.shapeshop.config;
 
-import com.shapeshop.entity.AddressEntity;
-import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.CreditCardEntity;
-import com.shapeshop.entity.UserEntity;
+import com.shapeshop.entity.*;
 import com.shapeshop.config.mockdata.Carlscafe;
 import com.shapeshop.config.mockdata.AnniesArtSupplies;
 import com.shapeshop.model.UserRole;
@@ -39,6 +36,7 @@ public class TestConfig {
 	AddressRepository aRep;
 
 
+
 	@Bean
 	public CommandLineRunner loadCompanies(CompanyRepository repository) {
 		return (args) -> {
@@ -71,16 +69,31 @@ public class TestConfig {
 	}
 
 	@Bean
-	public CommandLineRunner loadProducts_Carl(ProductRepository repository) {
+	public CommandLineRunner loadCategories_Annie(CategoryRepository repository) {
 		return (args) -> {
-			Carlscafe.createProducts(repository, cRep);
+			AnniesArtSupplies.createCategories(repository, cRep);
+		};
+	}
+
+
+	@Bean
+	public CommandLineRunner loadCategories_Carl(CategoryRepository repository) {
+		return (args) -> {
+			Carlscafe.createCategories(repository, cRep);
 		};
 	}
 
 	@Bean
-	public CommandLineRunner loadProducts_Annie(ProductRepository repository) {
+	public CommandLineRunner loadProducts_Carl(ProductRepository repository, CategoryRepository catrepository) {
 		return (args) -> {
-			AnniesArtSupplies.createProducts(repository, cRep);
+			Carlscafe.createProducts(repository, cRep, catrepository);
+		};
+	}
+
+	@Bean
+	public CommandLineRunner loadProducts_Annie(ProductRepository repository, CategoryRepository catrepository) {
+		return (args) -> {
+			AnniesArtSupplies.createProducts(repository, cRep, catrepository);
 		};
 	}
 

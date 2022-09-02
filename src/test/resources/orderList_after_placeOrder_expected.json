@@ -29,6 +29,7 @@
           "imageFilename": "na.png",
           "price": 7.9,
           "name": "hotdog",
+          "description": "a hotdog",
           "company": {
             "name": "carlscafe",
             "id": 1
@@ -64,7 +65,7 @@
       "name": "Bob",
       "postcode": "41412",
       "telephone": "+(09)928423444",
-      "id": 4,
+
       "email": "bob@gmail.com"
     },
     "orderItems": [
@@ -73,6 +74,7 @@
           "imageFilename": "na.png",
           "price": 1.5,
           "name": "hamburger",
+          "description": "a hamburger",
           "company": {
             "name": "carlscafe",
             "id": 1
@@ -89,6 +91,7 @@
           "imageFilename": "na.png",
           "price": 7.9,
           "name": "hotdog",
+          "description": "a hotdog",
           "company": {
             "name": "carlscafe",
             "id": 1

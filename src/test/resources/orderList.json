@@ -29,12 +29,21 @@
           "imageFilename": "na.png",
           "price": 7.9,
           "name": "hotdog",
+          "description": "a hotdog",
           "company": {
             "name": "carlscafe",
             "id": 1
           },
           "orders": [],
           "id": 2,
+          "category": {
+            "name": "biskits",
+            "company": {
+              "name": "carlscafe",
+              "id": 1
+            },
+            "id": 3
+          },
           "type": "main"
         },
         "amount": 1,

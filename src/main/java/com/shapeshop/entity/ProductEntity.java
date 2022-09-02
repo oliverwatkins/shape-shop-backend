@@ -19,6 +19,10 @@ public class ProductEntity {
 	private long id;
 
 	@ManyToOne
+	@JoinColumn(name = "category", nullable = false, updatable = false)
+	private CategoryEntity category = new CategoryEntity();
+
+	@ManyToOne
 	@JoinColumn(name = "company_id", nullable = false, updatable = false)
 	private CompanyEntity company = new CompanyEntity();
 
@@ -49,6 +53,16 @@ public class ProductEntity {
 		this.company = company;
 	}
 
+	public ProductEntity(String name, BigDecimal price, String type, String imageFilename, CompanyEntity company, String description, CategoryEntity categoryEntity) {
+		super();
+		this.description = description;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.imageFilename = imageFilename;
+		this.company = company;
+		this.category = categoryEntity;
+	}
 	public ProductEntity(String name, BigDecimal price, String type, String imageFilename, CompanyEntity company) {
 		super();
 		this.name = name;
@@ -57,4 +71,7 @@ public class ProductEntity {
 		this.imageFilename = imageFilename;
 		this.company = company;
 	}
+
+//	public ProductEntity(String hamburger, BigDecimal bigDecimal, String main, String s, CompanyEntity ce, String a_hamburger, CategoryEntity categoryEntity) {
+//	}
 }

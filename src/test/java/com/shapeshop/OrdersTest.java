@@ -2,8 +2,10 @@ package com.shapeshop;
 
 import com.shapeshop.config.ShapeShopTest;
 import org.json.JSONArray;
+import org.skyscreamer.jsonassert.Customization;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -43,7 +45,7 @@ public class OrdersTest extends ShapeShopTest {
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);
 
-        JSONAssert.assertEquals(expectedArray, recievedArray, JSONCompareMode.STRICT);
+        JSONAssert.assertEquals(expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
 
     @org.junit.Test

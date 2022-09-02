@@ -19,18 +19,7 @@ drop table if exists users;
 drop table if exists credit_card;
 drop table if exists address;
 drop table if exists company;
-
-
-# DELETE FROM orders_item;
-# DELETE FROM orders;
-# DELETE FROM product;
-# DELETE FROM users;
-# DELETE FROM credit_card;
-# DELETE FROM address;
-# DELETE FROM company;
-
-
-
+drop table if exists category;
 
 # play around with this to see if changes to DB container is happening
 create table testest
@@ -38,8 +27,13 @@ create table testest
     name      varchar(255)
 ) engine = InnoDB;
 
-
-
+create table category
+(
+    cat_id bigint not null auto_increment,
+    name varchar(255),
+    company_id      bigint not null,
+    primary key (cat_id)
+) engine=InnoDB;
 
 create table address
 (
@@ -102,6 +96,7 @@ create table product
     price           decimal(19, 2),
     type            varchar(255),
     company_id      bigint not null,
+    category        bigint not null,
     primary key (id)
 ) engine = InnoDB;
 
@@ -113,6 +108,9 @@ create table users
     user_name varchar(255) not null,
     primary key (id)
 ) engine = InnoDB;
+
+
+alter table category add constraint FK2twm010w181ypxiegra4o0rgc foreign key (company_id) references company (id);
 
 alter table users
     add constraint UK_mmns67o5v4bfippoqitu4v3t6 unique (user_name);
@@ -130,3 +128,5 @@ alter table orders_item
     add constraint FKqa7i0ev3xqm2d6t93n9blxef1 foreign key (order_id) references orders (order_id);
 alter table product
     add constraint FKfq5l3xbmjnklegxpwm1yeodkj foreign key (company_id) references company (id);
+alter table product
+    add constraint FKqx9wikktsev17ctu0kcpkrafc foreign key (category) references category (cat_id);

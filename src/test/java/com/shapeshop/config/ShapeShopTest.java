@@ -23,6 +23,11 @@ import java.util.Scanner;
 
 import static org.junit.Assert.assertNotNull;
 
+
+/**
+ * Utlity methods
+ */
+
 @Import(TestConfig.class)
 @EnableWebMvc
 @RunWith(SpringRunner.class)
