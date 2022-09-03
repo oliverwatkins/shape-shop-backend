@@ -21,7 +21,7 @@ import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.OrderService;
 
 /**
- * Order Controller. Create orders, get list of orders
+ * Order Controller. Create orders, get list of orders etc.
  */
 @RestController
 public class OrderController {
@@ -32,7 +32,9 @@ public class OrderController {
 	@Autowired
 	private CompanyRepository companyRep;
 
-	// Create order
+	/**
+	 * Create order
+	 */
 	@CrossOrigin
 	@PostMapping(value = "/{companyName}/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {

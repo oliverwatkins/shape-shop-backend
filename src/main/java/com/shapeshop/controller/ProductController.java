@@ -30,7 +30,6 @@ public class ProductController {
         return "hello";
     }
 
-
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/products")
@@ -92,19 +91,10 @@ public class ProductController {
         return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
     }
 
-
-
-
     @GetMapping(value = "/{companyName}/products/{id}")
     public ProductEntity getProductsById(@PathVariable("companyName") String companyName, @PathVariable("id") long id) {
         ProductEntity item = productService.getProductById(id);
         return item;
     }
-
-//    @DeleteMapping(value = "/{companyName}/products/{id}")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-//    public void deleteProductById(@PathVariable("id") long id) {
-//        productService.deleteProduct(id);
-//    }
 }
 

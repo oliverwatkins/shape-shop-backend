@@ -20,8 +20,6 @@ public class Carlscafe {
 		// save a few products
 		repository.save(new CategoryEntity("biskits" , ce));
 		repository.save(new CategoryEntity("teas" , ce));
-
-
 	}
 
 	
@@ -32,9 +30,6 @@ public class Carlscafe {
 		CompanyEntity ce = cRes.findByName("carlscafe");
 
 		List<CategoryEntity> catE = catRes.findByCompany(ce);
-//		CompanyEntity ce = catRes.findByName("carlscafe");
-
-
 
 		// save a few products
 		repository.save(new ProductEntity("hamburger", new BigDecimal(1.50), "main", "na.png", ce, "a hamburger", catE.get(0)));
@@ -49,7 +44,6 @@ public class Carlscafe {
 			CreditCardRepository ccRes, AddressRepository aRes, CrudRepository<OrderItemEntity, Long> oiRep) {
 		
 		System.out.println("-->>> create some orders ");
-
 
 		CompanyEntity company = cRes.findByName("carlscafe");
 

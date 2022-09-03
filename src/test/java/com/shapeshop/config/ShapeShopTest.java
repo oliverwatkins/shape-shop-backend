@@ -2,6 +2,8 @@ package com.shapeshop.config;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,14 +21,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertNotNull;
 
-
-/**
- * Utlity methods
- */
 
 @Import(TestConfig.class)
 @EnableWebMvc
@@ -35,10 +34,64 @@ import static org.junit.Assert.assertNotNull;
 @AutoConfigureMockMvc
 public abstract class ShapeShopTest {
 
+
     @Autowired
     protected MockMvc mvc;
 
     protected StatusResultMatchers matcher = MockMvcResultMatchers.status();
+
+    @Before
+    public void before() throws Exception{
+        System.out.println("is this before each??");
+    }
+
+    @After
+    public void tearDown() throws SQLException {
+        clearDatabase();
+    }
+
+    /**
+     * TODO reset database between all tests. Currently tests are not working if executed sequentially
+     */
+
+    public void clearDatabase() throws SQLException {
+//        Connection c = datasource.getConnection();
+//        Statement s = c.createStatement();
+//
+//        // Disable FK
+//        s.execute("SET REFERENTIAL_INTEGRITY FALSE");
+//
+//        // Find all tables and truncate them
+//        Set<String> tables = new HashSet<String>();
+//        ResultSet rs = s.executeQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES  where TABLE_SCHEMA='PUBLIC'");
+//        while (rs.next()) {
+//            tables.add(rs.getString(1));
+//        }
+//        rs.close();
+//        for (String table : tables) {
+//            s.executeUpdate("TRUNCATE TABLE " + table);
+//        }
+//
+//        // Idem for sequences
+//        Set<String> sequences = new HashSet<String>();
+//        rs = s.executeQuery("SELECT SEQUENCE_NAME FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA='PUBLIC'");
+//        while (rs.next()) {
+//            sequences.add(rs.getString(1));
+//        }
+//        rs.close();
+//        for (String seq : sequences) {
+//            s.executeUpdate("ALTER SEQUENCE " + seq + " RESTART WITH 1");
+//        }
+//
+//        // Enable FK
+//        s.execute("SET REFERENTIAL_INTEGRITY TRUE");
+//        s.close();
+//        c.close();
+    }
+
+    /**
+     * UTILITY METHODS :
+     */
 
     protected JSONArray extractJSONArrayFromResponse(ResultActions resultActions) throws UnsupportedEncodingException {
         MvcResult result = resultActions.andReturn();
@@ -54,14 +107,14 @@ public abstract class ShapeShopTest {
         return recievedObj;
     }
 
-    protected JSONArray extractJSONArrayFromFileName(String filePath) throws UnsupportedEncodingException, FileNotFoundException {
+    protected JSONArray extractJSONArrayFromFileName(String filePath) throws FileNotFoundException {
         String newOrderJSON = getString(filePath);
 
         JSONArray obj = new JSONArray(newOrderJSON);
         return obj;
     }
 
-    protected JSONObject extractJSONObjectFromFileName(String filePath) throws UnsupportedEncodingException, FileNotFoundException {
+    protected JSONObject extractJSONObjectFromFileName(String filePath) throws FileNotFoundException {
         String newOrderJSON = getString(filePath);
 
         JSONObject obj = new JSONObject(newOrderJSON);
@@ -79,8 +132,6 @@ public abstract class ShapeShopTest {
         String json = sb.toString();
         return json;
     }
-
-
 
     public String authenticate(String name, String password) throws Exception {
         String requestJson = "{\"username\":\"" + name + "\",\"password\": \"" + password + "\"}";

@@ -23,7 +23,7 @@ public class App {
 	CompanyRepository cRes;
 
 	public static void main(String[] args) {
-		System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! STARTING SPRING !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
+		System.out.println("<<<<<>>>>> XXXXXXXXXXXXX   !!!!!!!!!!!!!!!!!! STARTING SPRING BOOT !!!!!!!!!!!!!!!!!!!!!!!   XXXXXXXXXX      <<<<<>>>>> ");
 		SpringApplication.run(App.class, args);
 	}
 

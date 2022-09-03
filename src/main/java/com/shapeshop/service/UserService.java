@@ -22,17 +22,17 @@ public class UserService implements UserDetailsService {
 	@Override
 	public User loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		UserEntity u = repository.findByUserNameIgnoreCase(userName);
+		UserEntity user = repository.findByUserNameIgnoreCase(userName);
 
-		if (u == null) {
+		if (user == null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}
 
-		SimpleGrantedAuthority a = new SimpleGrantedAuthority(u.getRole().toString());
+		SimpleGrantedAuthority a = new SimpleGrantedAuthority(user.getRole().toString());
 
-		ArrayList<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
+		ArrayList<GrantedAuthority> auths = new ArrayList<>();
 		auths.add(a);
 
-		return new User(u.getUserName(), u.getPassword(), auths);
+		return new User(user.getUserName(), user.getPassword(), auths);
 	}
 }
