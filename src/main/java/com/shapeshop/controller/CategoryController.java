@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 public class CategoryController {
 
-
     @Autowired
     private CategoryService categoryService;
 
@@ -27,20 +26,19 @@ public class CategoryController {
     @Autowired
     private CategoryRepository catR;
 
-
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/categories")
     public ResponseEntity<?> newCategory(@RequestBody CategoryEntity categoryEntity,
-                                        @PathVariable("categoryName") String categoryName) {
-        CategoryEntity s = null;
+                                        @PathVariable("companyName") String companyName) {
+        CategoryEntity category;
         try {
-            s = categoryService.createCategory(categoryEntity, categoryName);
+            category = categoryService.createCategory(categoryEntity, companyName);
         } catch (ShapeShopException e) {
             e.printStackTrace();
             return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(s, HttpStatus.OK);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @CrossOrigin

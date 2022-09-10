@@ -49,9 +49,17 @@ public class ImageController {
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
+    /**
+     * Write a file onto the server file system
+     *
+     * @param file file send over REST
+     * @param companyName mandate
+     * @return java File object created on the local system
+     * @throws ShapeShopException
+     */
     private static File writeFileToFileSystem(MultipartFile file, String companyName) throws ShapeShopException {
 
-        File convFile;
+        File createdFile;
         try {
             File folderPath = new ClassPathResource("static\\images\\" + companyName + "\\").getFile();
 
@@ -59,10 +67,10 @@ public class ImageController {
                 throw new ShapeShopException("Cannot find image src folder 'static\\images\\" + companyName + "\\ '", ShapeShopException.ErrorType.IMAGE_SRC_FOLDER_NOT_FOUND);
             }
 
-            convFile = new File(folderPath.getPath() + "\\" + file.getOriginalFilename());
-            convFile.createNewFile();
+            createdFile = new File(folderPath.getPath() + "\\" + file.getOriginalFilename());
+            createdFile.createNewFile();
 
-            FileOutputStream fos = new FileOutputStream(convFile);
+            FileOutputStream fos = new FileOutputStream(createdFile);
 
             fos.write(file.getBytes());
             fos.close();
@@ -72,6 +80,6 @@ public class ImageController {
 
             throw new ShapeShopException("Error saving image file " + file.getOriginalFilename(), ShapeShopException.ErrorType.IMAGE_SAVE_ERROR, e);
         }
-        return convFile;
+        return createdFile;
     }
 }

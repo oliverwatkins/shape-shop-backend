@@ -64,6 +64,7 @@ public class AuthenticationController {
         }
     }
 
+    //TODO
     @CrossOrigin
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)

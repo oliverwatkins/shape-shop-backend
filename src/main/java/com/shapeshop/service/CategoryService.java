@@ -22,9 +22,9 @@ public class CategoryService {
     @Autowired
     private CompanyRepository companyRep;
 
-    public CategoryEntity createCategory(CategoryEntity categoryEntity, String catName) throws ShapeShopException {
+    public CategoryEntity createCategory(CategoryEntity categoryEntity, String companyName) throws ShapeShopException {
 
-        CompanyEntity company = companyRep.findByName(catName);
+        CompanyEntity company = companyRep.findByName(companyName);
         if (company == null) {
             throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
         }

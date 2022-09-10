@@ -57,6 +57,9 @@ public class OrderController {
 		return new ResponseEntity<>(o, HttpStatus.OK);
 	}
 
+	/**
+	 * Get orders for company
+	 */
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
