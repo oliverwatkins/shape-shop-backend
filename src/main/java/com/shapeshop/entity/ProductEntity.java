@@ -39,6 +39,7 @@ public class ProductEntity {
 	@Column(name = "price")
 	private BigDecimal price;
 
+	@Deprecated //use category
 	@Column(name = "type")
 	private String type;
 

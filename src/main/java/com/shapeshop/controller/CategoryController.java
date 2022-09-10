@@ -1,25 +1,47 @@
 package com.shapeshop.controller;
 
+import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.CategoryEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.repository.CategoryRepository;
 import com.shapeshop.repository.CompanyRepository;
+import com.shapeshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class CategoryController {
 
+
+    @Autowired
+    private CategoryService categoryService;
+
     @Autowired
     private CompanyRepository companyR;
 
     @Autowired
     private CategoryRepository catR;
+
+
+    @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/{companyName}/categories")
+    public ResponseEntity<?> newCategory(@RequestBody CategoryEntity categoryEntity,
+                                        @PathVariable("categoryName") String categoryName) {
+        CategoryEntity s = null;
+        try {
+            s = categoryService.createCategory(categoryEntity, categoryName);
+        } catch (ShapeShopException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(s, HttpStatus.OK);
+    }
 
     @CrossOrigin
     @GetMapping(value = "/{companyName}/categories")
