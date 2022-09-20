@@ -1,5 +1,6 @@
 package com.shapeshop.config;
 
+import lombok.val;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
@@ -53,7 +54,6 @@ public abstract class ShapeShopTest {
     /**
      * TODO reset database between all tests. Currently tests are not working if executed sequentially
      */
-
     public void clearDatabase() throws SQLException {
 //        Connection c = datasource.getConnection();
 //        Statement s = c.createStatement();
@@ -92,7 +92,6 @@ public abstract class ShapeShopTest {
     /**
      * UTILITY METHODS :
      */
-
     protected JSONArray extractJSONArrayFromResponse(ResultActions resultActions) throws UnsupportedEncodingException {
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
@@ -116,7 +115,6 @@ public abstract class ShapeShopTest {
 
     protected JSONObject extractJSONObjectFromFileName(String filePath) throws FileNotFoundException {
         String newOrderJSON = getString(filePath);
-
         JSONObject obj = new JSONObject(newOrderJSON);
         return obj;
     }
@@ -153,21 +151,55 @@ public abstract class ShapeShopTest {
 
     String defaultCompany = "carlscafe";
 
-    protected ResultActions getCategoriesOverHTTP() throws Exception {
-        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/{" + defaultCompany + "}/categories").contentType("application/json")
-        ).andExpect(matcher.is(200));
-        return resultActions2;
+    protected void deleteCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/" + defaultCompany + "/categories")
+                .header("Authorization", "Bearer " + token).contentType("application/json")
+                .content(createCategoryJSON)).andExpect(matcher.is(200));
     }
 
+
+
+    protected String getCategoriesOverHTTP() throws Exception {
+        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/" + defaultCompany + "/categories").contentType("application/json")
+        ).andExpect(matcher.is(200));
+
+        JSONArray jsonArray = extractJSONArrayFromResponse(resultActions2);
+
+        return jsonArray.toString();
+    }
+
+
+    protected String getProductsOverHTTP() throws Exception {
+        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/" + defaultCompany + "/products").contentType("application/json")
+        ).andExpect(matcher.is(200));
+
+        JSONArray jsonArray = extractJSONArrayFromResponse(resultActions2);
+
+        return jsonArray.toString();
+    }
+//    private String getProductsForCategoryOverHTTP(String createCategoryJSON) throws Exception {
+//        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/{" + defaultCompany + "}/products").contentType("application/json")
+//                .content(createProductJSON)).andExpect(matcher.is(200));
+//        return resultActions2;
+//    }
+
     protected void createCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/{" + defaultCompany + "}/categories")
+        mvc.perform(MockMvcRequestBuilders.post("/" + defaultCompany + "/categories")
                 .header("Authorization", "Bearer " + token).contentType("application/json")
                 .content(createCategoryJSON)).andExpect(matcher.is(200));
     }
 
     protected void createProductOverHTTP(String token, String createProductJSON, String cat) throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/{" + defaultCompany + "}/{" + cat + "}/products")
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/" + defaultCompany + "/" + cat + "/products")
                 .header("Authorization", "Bearer " + token).contentType("application/json")
-                .content(createProductJSON)).andExpect(matcher.is(200));
+                .content(createProductJSON));
+
+        MvcResult mvcResult = resultActions.andReturn();
+        resultActions.andExpect(matcher.is(200));
+
+//        return resultActions.
     }
+
+
+
 }

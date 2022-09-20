@@ -42,6 +42,20 @@ public class CategoryController {
     }
 
     @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{companyName}/categories")
+    public ResponseEntity<?> deleteCategory(@RequestBody CategoryEntity categoryEntity,
+                                         @PathVariable("companyName") String companyName
+                                            ) {
+//        CategoryEntity category;
+        categoryService.deleteCategory(categoryEntity, companyName);
+
+
+
+        return new ResponseEntity<>(categoryEntity, HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @GetMapping(value = "/{companyName}/categories")
     public CategoryEntity[] getCategories(@PathVariable("companyName") String companyName) {
 

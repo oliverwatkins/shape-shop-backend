@@ -20,8 +20,6 @@ public class AnniesArtSupplies {
 		// save a few products
 		repository.save(new CategoryEntity("paints" , ce));
 		repository.save(new CategoryEntity("draw" , ce));
-
-
 	}
 
 	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes) {
@@ -38,7 +36,6 @@ public class AnniesArtSupplies {
 		repository.save(new ProductEntity("pencil", new BigDecimal(9.90), "drawing", "na.png", ce, "painting stuff", cat.get(0)));
 		repository.save(new ProductEntity("charcoal", new BigDecimal(14.50), "drawing", "na.png", ce, "painting stuff", cat.get(0)));
 	}
-
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
 									CreditCardRepository ccRes, AddressRepository aRes, CrudRepository<OrderItemEntity, Long> oiRep) {

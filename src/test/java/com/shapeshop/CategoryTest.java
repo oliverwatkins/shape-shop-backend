@@ -1,7 +1,9 @@
 package com.shapeshop;
 
 import com.shapeshop.config.ShapeShopTest;
+import lombok.val;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.test.web.servlet.ResultActions;
@@ -17,9 +19,6 @@ public class CategoryTest extends ShapeShopTest {
 
         JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
         JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/categoriesList_carl.json");
-
-        System.out.println("recievedArray " + recievedArray);
-        System.out.println("expectedArray " + expectedArray);
 
         //expect biskits and teas
         JSONAssert.assertEquals(
@@ -38,9 +37,8 @@ public class CategoryTest extends ShapeShopTest {
         createCategoryOverHTTP(token, createCategoryJSON);
 
         //get all cats
-        ResultActions resultActions2 = getCategoriesOverHTTP();
-
-        JSONArray recievedArray = extractJSONArrayFromResponse(resultActions2);
+        String cats = getCategoriesOverHTTP();
+        JSONArray recievedArray = new JSONArray(cats);
         JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/categoriesList_carl_after_create.json");
 
         //expect biskits and teas, amd scones
@@ -52,60 +50,70 @@ public class CategoryTest extends ShapeShopTest {
     @org.junit.Test
     public void deleteCategory() throws Exception {
 
+        //auth
         String token = authenticate("admin", "admin");
 
+        //create a cat
         String createCategoryJSON =
                 "{\"name\": \"scones\" }";
-
-        //create a cat
         createCategoryOverHTTP(token, createCategoryJSON);
 
+        //create a prod for new category
         String createProductJSON =
                 "{\"name\": \"jam scone\" }";
-
-        //create a prod
         createProductOverHTTP(token, createProductJSON, "scones");
 
-
-        //get prods
-        //TODO jam scone should be there
-
+        //make sure prod is there
+        String productJSON = getProductsOverHTTP();
+        JSONObject obj = findProduct(productJSON, "jam scone");
+        if (obj == null) {
+            throw new RuntimeException("canny find product");
+        }
 
         //delete cat
-        //TODO
-
-        //get prods from cat
-        //TODO should throw e
-
-
-        //get all prods
-        //TODO jam scone should not exist.
-
-
-
-
-
-//        //create a cat
-//        createProductOverHTTP(token, createCategoryJSON);
-
-        //get all cats
-        ResultActions resultActions2 = getCategoriesOverHTTP();
-
-        JSONArray recievedArray = extractJSONArrayFromResponse(resultActions2);
-        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/categoriesList_carl_after_create.json");
-
-        System.out.println("recievedArray " + recievedArray);
-        System.out.println("expectedArray " + expectedArray);
-
-        //expect biskits and teas, amd scones
-        JSONAssert.assertEquals(
-                expectedArray, recievedArray, JSONCompareMode.LENIENT);
-
-        String createProductJSON =
+        String deleteCategoryJSON =
                 "{\"name\": \"scones\" }";
+        deleteCategoryOverHTTP(token, deleteCategoryJSON);
 
 
+        //make sure cat is not there
+        String categoryJSON = getCategoriesOverHTTP();
+        System.out.println("*** catJSON --> " + categoryJSON);
+        obj = findCategory(categoryJSON, "scones");
+        if (obj != null) {
+            throw new RuntimeException("category is there when it shouldnt be there");
+        }
 
 
+        //make sure prod is NOT there
+        productJSON = getProductsOverHTTP();
+        System.out.println("*** productJSON --> " + productJSON);
+        obj = findProduct(productJSON, "jam scone");
+        if (obj != null) {
+            throw new RuntimeException("product is there when it shouldnt be there");
+        }
+    }
+
+
+    private JSONObject findCategory(String catJSON, String catToFind) {
+        JSONArray array = new JSONArray(catJSON);
+        for (int i = 0; i < array.length(); i++){
+            String name = array.getJSONObject(i).getString("name");
+            if (name.equals(catToFind)) {
+                return array.getJSONObject(i);
+            }
+        }
+        return null;
+    }
+
+    private JSONObject findProduct(String productJSON, String productToFind) {
+        JSONArray array = new JSONArray(productJSON);
+        for (int i = 0; i < array.length(); i++){
+            String name = array.getJSONObject(i).getString("name");
+            if (name.equals(productToFind)) {
+                return array.getJSONObject(i);
+            }
+        }
+        return null;
     }
 }

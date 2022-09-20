@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import com.shapeshop.ShapeShopException;
+import com.shapeshop.entity.CategoryEntity;
+import com.shapeshop.repository.CategoryRepository;
 import com.shapeshop.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,30 @@ public class ProductService {
     @Autowired
     private CompanyRepository companyRep;
 
+    @Autowired
+    private CategoryRepository categoryRep;
+
+    public ProductEntity createProduct(ProductEntity product, String companyName, String category) throws ShapeShopException {
+        CategoryEntity categoryEntity = categoryRep.findByName(category);
+        if (categoryEntity == null) {
+            throw new ShapeShopException("Category does not exist ", ShapeShopException.ErrorType.CATEGORY_DOES_NOT_EXIST);
+        }
+
+        CompanyEntity company = companyRep.findByName(companyName);
+        if (company == null) {
+            throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
+        }
+        product.setCompany(company);
+        product.setCategory(categoryEntity);
+        product.setId(0);
+
+        product = productRep.save(product);
+        return product;
+    }
+
+    /**
+     * @deprecated can only create product with cat
+     */
     public ProductEntity createProduct(ProductEntity product, String companyName) throws ShapeShopException {
 
         CompanyEntity company = companyRep.findByName(companyName);
@@ -86,4 +112,6 @@ public class ProductService {
     public void deleteProduct(ProductEntity p) {
         productRep.delete(p);
     }
+
+
 }

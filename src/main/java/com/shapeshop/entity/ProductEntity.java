@@ -1,6 +1,8 @@
 package com.shapeshop.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,8 +20,10 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	//TODO change cascade to nullable. products can also exist without a category
 	@ManyToOne
-	@JoinColumn(name = "category", nullable = false, updatable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "category", nullable = true, updatable = false)
 	private CategoryEntity category = new CategoryEntity();
 
 	@ManyToOne
