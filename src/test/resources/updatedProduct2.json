@@ -1,12 +1,1 @@
-{
-  "imageFilename": "na.png",
-  "price": 7.9,
-  "name": "big mac",
-  "company": {
-    "name": "carlscafe",
-    "id": 1
-  },
-  "orders": [],
-  "id": 2,
-  "type": "main"
-}
+{"imageFilename":"na.png","price":2.5,"name":"big mac","description":"a hotdog","id":2}

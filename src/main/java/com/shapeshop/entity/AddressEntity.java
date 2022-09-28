@@ -1,6 +1,8 @@
 package com.shapeshop.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +15,9 @@ import javax.persistence.Table;
  * TODO rename to Contact data (Does not necessarily need to correspond to a
  * whole address)
  */
-
-@Data
+@Getter
+@Setter
+//@Data
 @Entity
 @Table(name = "address")
 public class AddressEntity {

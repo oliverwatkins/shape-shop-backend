@@ -1,13 +1,18 @@
 package com.shapeshop.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
-@Data
+//@Data
+@Getter
+@Setter
+
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
@@ -29,6 +34,7 @@ public class OrderEntity {
 	@OneToMany
 	@JoinColumn(name = "order_id")
 	private List<OrderItemEntity> orderItems;
+
 	@Column(name = "order_date")
 	private Date date;
 	@Column(name = "order_payment_type")

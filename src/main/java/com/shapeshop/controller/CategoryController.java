@@ -2,7 +2,11 @@ package com.shapeshop.controller;
 
 import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.CategoryEntity;
+import com.shapeshop.entity.ProductCategoryEntity;
 import com.shapeshop.entity.CompanyEntity;
+import com.shapeshop.entity.dto.CategoryDto;
+import com.shapeshop.entity.dto.Converter;
+import com.shapeshop.entity.dto.ProductDto;
 import com.shapeshop.repository.CategoryRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.CategoryService;
@@ -50,20 +54,20 @@ public class CategoryController {
 //        CategoryEntity category;
         categoryService.deleteCategory(categoryEntity, companyName);
 
-
-
         return new ResponseEntity<>(categoryEntity, HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping(value = "/{companyName}/categories")
-    public CategoryEntity[] getCategories(@PathVariable("companyName") String companyName) {
+    public List<CategoryDto> getCategories(@PathVariable("companyName") String companyName) {
 
         CompanyEntity c = companyR.findByName(companyName);
 
         List<CategoryEntity> itemList = catR.findByCompany(c);
 
-        return itemList.toArray(new CategoryEntity[itemList.size()]);
+        return Converter.convertCategoryToDto(itemList);
+
+//        return itemList.toArray(new CategoryEntity[itemList.size()]);
     }
 }
 

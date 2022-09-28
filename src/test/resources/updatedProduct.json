@@ -2,11 +2,6 @@
   "imageFilename": "na.png",
   "price": 5.5,
   "name": "hotdog",
-  "company": {
-    "name": "carlscafe",
-    "id": 1
-  },
-  "orders": [],
-  "id": 2,
-  "type": "main"
+  "description": "a hotdog",
+  "id": 2
 }

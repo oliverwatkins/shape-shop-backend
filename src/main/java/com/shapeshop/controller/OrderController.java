@@ -1,10 +1,14 @@
 package com.shapeshop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.shapeshop.ErrorUtil;
 import com.shapeshop.ShapeShopException;
+import com.shapeshop.entity.dto.Converter;
+import com.shapeshop.entity.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,10 +67,11 @@ public class OrderController {
 	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
-	public OrderEntity[] getOrders(@PathVariable("companyName") String companyName) {
+	public List<OrderDto> getOrders(@PathVariable("companyName") String companyName) {
 
 		CompanyEntity c = companyRep.findByName(companyName);
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
-		return itemList.toArray(new OrderEntity[itemList.size()]);
+		return Converter.convertOrderToDto(itemList);
+//		return itemList.toArray(new OrderEntity[itemList.size()]);
 	}
 }

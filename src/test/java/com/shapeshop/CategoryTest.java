@@ -25,6 +25,23 @@ public class CategoryTest extends ShapeShopTest {
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
 
+
+    @org.junit.Test
+    public void getProductsForCategory() throws Exception {
+
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/main/products")).andExpect(matcher.isOk());
+
+        JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
+        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/carl_products_for_category_main.json");
+
+        System.out.println("recievedArray " + recievedArray);
+        System.out.println("expectedArray " + expectedArray);
+
+        //expect biskits and teas
+        JSONAssert.assertEquals(
+                expectedArray, recievedArray, JSONCompareMode.LENIENT);
+    }
+
     @org.junit.Test
     public void createCategory() throws Exception {
 
@@ -39,7 +56,10 @@ public class CategoryTest extends ShapeShopTest {
         //get all cats
         String cats = getCategoriesOverHTTP();
         JSONArray recievedArray = new JSONArray(cats);
-        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/categoriesList_carl_after_create.json");
+        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/carl_catList_after_create_cat.json");
+
+        System.out.println("recievedArray " + recievedArray);
+        System.out.println("expectedArray " + expectedArray);
 
         //expect biskits and teas, amd scones
         JSONAssert.assertEquals(

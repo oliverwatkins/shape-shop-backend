@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.shapeshop.ErrorUtil;
 import com.shapeshop.ShapeShopException;
+import com.shapeshop.entity.CategoryEntity;
+import com.shapeshop.entity.dto.Converter;
+import com.shapeshop.entity.dto.ProductDto;
+import com.shapeshop.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,9 @@ public class ProductController {
 
     @Autowired
     private CompanyRepository companyR;
+
+    @Autowired
+    private CategoryRepository categoryR;
 
     @CrossOrigin
     @GetMapping(value = "/test")
@@ -65,16 +72,6 @@ public class ProductController {
     }
 
 
-//    String token, String createProductJSON, String cat
-
-
-
-
-
-
-
-
-
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{companyName}/products/{id}")
@@ -113,18 +110,30 @@ public class ProductController {
 
     @CrossOrigin
     @GetMapping(value = "/{companyName}/products")
-    public ProductEntity[] getProducts(@PathVariable("companyName") String companyName) {
+    public List<ProductDto> getProducts(@PathVariable("companyName") String companyName) {
 
         CompanyEntity c = companyR.findByName(companyName);
         List<ProductEntity> itemList = productService.getProductsByCompany(c);
 
-        return itemList.toArray(new ProductEntity[itemList.size()]); //huh??
+        return Converter.convertProductToDto(itemList);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/{companyName}/{categoryName}/products")
+    public List<ProductDto> getProductsByCategoryAndCompany(@PathVariable("companyName") String companyName, @PathVariable("categoryName") String categoryName) {
+
+        CompanyEntity c = companyR.findByName(companyName);
+        CategoryEntity cat = categoryR.findByName(categoryName);
+
+        List<ProductEntity> itemList = productService.getProductsByCompanyAndCategory(c, cat);
+
+        return Converter.convertProductToDto(itemList);
     }
 
     @GetMapping(value = "/{companyName}/products/{id}")
-    public ProductEntity getProductsById(@PathVariable("companyName") String companyName, @PathVariable("id") long id) {
+    public ProductDto getProductsById(@PathVariable("companyName") String companyName, @PathVariable("id") long id) {
         ProductEntity item = productService.getProductById(id);
-        return item;
+        return Converter.convertProductToDto(item);
     }
 }
 

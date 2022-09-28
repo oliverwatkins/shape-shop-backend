@@ -1,0 +1,23 @@
+[
+  {
+    "imageFilename": "na.png",
+    "price": 1.5,
+    "name": "hamburger",
+    "description": "a hambirger",
+    "id": 1
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 2.5,
+    "name": "hotdog",
+    "description": "a hotdog",
+    "id": 2
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 3.5,
+    "name": "donut",
+    "description": "a dougnut",
+    "id": 3
+  }
+]

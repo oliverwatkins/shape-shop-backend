@@ -1,5 +1,17 @@
 [
   {
+    "name": "main",
+    "company": {
+      "name": "carlscafe"
+    }
+  },
+  {
+    "name": "drinks",
+    "company": {
+      "name": "carlscafe"
+    }
+  },
+  {
     "name": "biskits",
     "company": {
       "name": "carlscafe"

@@ -1,0 +1,25 @@
+[{
+  "date": 1639619535992,
+  "paymentType": "CARD",
+  "deliveryType": "DELIVERY",
+  "company": {"name": "carlscafe", "id": 1},
+  "id": 1,
+  "orderState": "OPEN",
+  "address": {
+    "street": "Bobby street 12",
+    "name": "Bob",
+    "postcode": "41412",
+    "telephone": "+(09)928423444",
+    "email": "bob@gmail.com"
+  },
+  "creditCard": {"number": "xxxx-xxxx-xxxx-1234", "name": "Bob", "id": 1, "type": "VISA", "expDate": "22/22"},
+  "orderItems": [{
+    "product": {
+      "imageFilename": "na.png",
+      "price": 2.5,
+      "name": "hotdog",
+      "description": "a hotdog",
+      "id": 2
+    }, "amount": 1
+  }]
+}]

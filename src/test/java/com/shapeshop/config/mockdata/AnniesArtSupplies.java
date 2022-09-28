@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.*;
 import com.shapeshop.repository.*;
+import com.shapeshop.service.ProductService;
 import org.springframework.data.repository.CrudRepository;
 
 public class AnniesArtSupplies {
@@ -22,19 +24,31 @@ public class AnniesArtSupplies {
 		repository.save(new CategoryEntity("draw" , ce));
 	}
 
-	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes) {
+	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes, ProductService pSer) throws ShapeShopException {
 		System.out.println("-->>> create some products  ! ");
 
 		CompanyEntity ce = cRes.findByName("anniesart");
-		List<CategoryEntity> cat = catRes.findByCompany(ce);
+
+
+//		List<CategoryEntity> cat = catRes.findByCompany(ce);
+
+
+//		ProductEntity pe = new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh");
+
+		pSer.createProduct(new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh"), "anniesart", "paints");
+		pSer.createProduct(new ProductEntity("paint", new BigDecimal(6.66), "na.png", "a paint duh"), "anniesart", "paints");
+		pSer.createProduct(new ProductEntity("canvas", new BigDecimal(7.60), "na.png", "a canvas duh"), "anniesart", "paints");
+
+		pSer.createProduct(new ProductEntity("pencil", new BigDecimal(9.60), "na.png", "a pencil duh"), "anniesart", "draw");
+		pSer.createProduct(new ProductEntity("charcoal", new BigDecimal(16.60), "na.png", "a charoal duh"), "anniesart", "draw");
 
 		// save a few products
-		repository.save(new ProductEntity("brush", new BigDecimal(6.60), "painting", "na.png", ce, "painting stuff", cat.get(0)));
-		repository.save(new ProductEntity("paint", new BigDecimal(6.66), "painting", "na.png", ce, "painting stuff", cat.get(0)));
-		repository.save(new ProductEntity("canvas", new BigDecimal(8.80), "painting", "na.png", ce, "painting stuff", cat.get(0)));
-
-		repository.save(new ProductEntity("pencil", new BigDecimal(9.90), "drawing", "na.png", ce, "painting stuff", cat.get(0)));
-		repository.save(new ProductEntity("charcoal", new BigDecimal(14.50), "drawing", "na.png", ce, "painting stuff", cat.get(0)));
+//		repository.save(new ProductEntity("brush", new BigDecimal(6.60), "painting", "na.png", ce));
+//		repository.save(new ProductEntity("paint", new BigDecimal(6.66), "painting", "na.png", ce));
+//		repository.save(new ProductEntity("canvas", new BigDecimal(8.80), "painting", "na.png", ce));
+//
+//		repository.save(new ProductEntity("pencil", new BigDecimal(9.90), "drawing", "na.png", ce));
+//		repository.save(new ProductEntity("charcoal", new BigDecimal(14.50), "drawing", "na.png", ce));
 	}
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,

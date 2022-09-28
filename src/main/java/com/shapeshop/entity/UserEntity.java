@@ -3,11 +3,14 @@ package com.shapeshop.entity;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.shapeshop.model.UserRole;
-
-@Data
+@Getter
+@Setter
+//@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {

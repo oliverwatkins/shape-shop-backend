@@ -6,6 +6,7 @@ import com.shapeshop.config.mockdata.AnniesArtSupplies;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
 import com.shapeshop.security.PasswordUtils;
+import com.shapeshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -35,7 +36,8 @@ public class TestConfig {
 	@Autowired
 	AddressRepository aRep;
 
-
+	@Autowired
+	ProductService pSer;
 
 	@Bean
 	public CommandLineRunner loadCompanies(CompanyRepository repository) {
@@ -86,14 +88,14 @@ public class TestConfig {
 	@Bean
 	public CommandLineRunner loadProducts_Carl(ProductRepository repository, CategoryRepository catrepository) {
 		return (args) -> {
-			Carlscafe.createProducts(repository, cRep, catrepository);
+			Carlscafe.createProducts(repository, cRep, catrepository, pSer);
 		};
 	}
 
 	@Bean
 	public CommandLineRunner loadProducts_Annie(ProductRepository repository, CategoryRepository catrepository) {
 		return (args) -> {
-			AnniesArtSupplies.createProducts(repository, cRep, catrepository);
+			AnniesArtSupplies.createProducts(repository, cRep, catrepository, pSer);
 		};
 	}
 

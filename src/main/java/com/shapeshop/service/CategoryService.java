@@ -2,17 +2,15 @@ package com.shapeshop.service;
 
 import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.CategoryEntity;
+import com.shapeshop.entity.ProductCategoryEntity;
 import com.shapeshop.entity.CompanyEntity;
 import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.CategoryRepository;
 import com.shapeshop.repository.CompanyRepository;
-import lombok.val;
+import com.shapeshop.repository.ProductCategoryRepository;
+import com.shapeshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class CategoryService {
@@ -21,7 +19,14 @@ public class CategoryService {
     CategoryRepository catRep;
 
     @Autowired
+    ProductRepository prodRep;
+
+    @Autowired
     private CompanyRepository companyRep;
+
+//    @Autowired
+//    private ProductCategoryRepository prodCatRep;
+
 
     public CategoryEntity createCategory(CategoryEntity categoryEntity, String companyName) throws ShapeShopException {
 
@@ -43,27 +48,30 @@ public class CategoryService {
         CategoryEntity category= catRep.findByName(categoryEntity.getName());
         catRep.delete(category);
 
+//        prodCatRep.findByProduct()
+//        prodCatRep.findByCat()
 
-//        catRep
+//        CompanyEntity company= companyRep.findByName(companyName);
 
+//        prodRep2.find
 
-//        public void deleteProduct(long id) {
-//            productRep.deleteById(id);
-//        }
+//        List<ProductEntity> ps = prodRep.findByCompanyAndCategory(company, category);
 //
-//        public void deleteProduct(ProductEntity p) {
-//            productRep.delete(p);
-//        }
-
-//        if (company == null) {
-//            throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
-//        }
-////        categoryEntity.setCompany(company);
-////        categoryEntity.setId(0);
+////        for (ProductEntity p : ps) {
+////            p.setCategory(null);
+//////            prodRep.saveAndFlush(p);
+////            prodRep.save(p);
+////        }
 //
-//        categoryEntity = catRep.save(categoryEntity);
-//        return categoryEntity;
+//        List<ProductEntity> ps2 = prodRep.findByCompanyAndCategory(company, category);
+//
+//        for (ProductEntity p : ps2) {
+//            System.out.println("p " + p);
+////            p.setCategory(null);
+////            prodRep.save(p);
+//        }
 
+//        CategoryEntity category2= catRep.findByName(categoryEntity.getName());
     }
 
 
@@ -72,14 +80,16 @@ public class CategoryService {
         //TODO
     }
 
-    public CategoryEntity getCategory(CategoryEntity categoryEntity, String companyName) throws ShapeShopException {
+    public ProductCategoryEntity getCategory(ProductCategoryEntity categoryEntity, String companyName) throws ShapeShopException {
 
         CompanyEntity company = companyRep.findByName(companyName);
         if (company == null) {
             throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
         }
 
-        CategoryEntity c = catRep.findByName(categoryEntity.getName());
+
+
+//        ProductCategoryEntity c = catRep.findByName(categoryEntity.getName());
 
 //        categoryEntity.setCompany(company);
 //        categoryEntity.setId(0);

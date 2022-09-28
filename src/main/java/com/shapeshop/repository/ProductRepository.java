@@ -14,5 +14,5 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long>{
     public List<ProductEntity> findByName(String lastName);
 
 	public List<ProductEntity> findByCompany(CompanyEntity company);
-	
+
 }

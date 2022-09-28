@@ -184,9 +184,12 @@ public abstract class ShapeShopTest {
 //    }
 
     protected void createCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/" + defaultCompany + "/categories")
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/" + defaultCompany + "/categories")
                 .header("Authorization", "Bearer " + token).contentType("application/json")
                 .content(createCategoryJSON)).andExpect(matcher.is(200));
+
+        MvcResult mvcResult = resultActions.andReturn();
+        resultActions.andExpect(matcher.is(200));
     }
 
     protected void createProductOverHTTP(String token, String createProductJSON, String cat) throws Exception {

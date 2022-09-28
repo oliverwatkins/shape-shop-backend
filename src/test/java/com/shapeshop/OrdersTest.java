@@ -25,7 +25,7 @@ public class OrdersTest extends ShapeShopTest {
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/orders").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
 
         JSONArray recievedArrayPreOrder = extractJSONArrayFromResponse(resultActions);
-        JSONArray expectedArrayPreOrder = extractJSONArrayFromFileName("src/test/resources/orderList.json");
+        JSONArray expectedArrayPreOrder = extractJSONArrayFromFileName("src/test/resources/carl_orderList_pre_create.json");
 
         System.out.println("recievedArray " + recievedArrayPreOrder);
         System.out.println("expectedArray " + expectedArrayPreOrder);
@@ -40,7 +40,7 @@ public class OrdersTest extends ShapeShopTest {
         resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/orders").header("Authorization", "Bearer " + token)).andExpect(matcher.is(200));
 
         JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
-        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/orderList_after_placeOrder_expected.json");
+        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/carl_orderList_after_placeOrder_expected.json");
 
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);

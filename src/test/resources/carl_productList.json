@@ -1,0 +1,37 @@
+[
+  {
+    "imageFilename": "na.png",
+    "price": 1.5,
+    "name": "hamburger",
+    "description": "a hambirger",
+    "id": 1
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 2.5,
+    "name": "hotdog",
+    "description": "a hotdog",
+    "id": 2
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 3.5,
+    "name": "donut",
+    "description": "a dougnut",
+    "id": 3
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 4.5,
+    "name": "coke",
+    "description": "a koke",
+    "id": 4
+  },
+  {
+    "imageFilename": "na.png",
+    "price": 6.5,
+    "name": "water",
+    "description": "a water duh",
+    "id": 5
+  }
+]

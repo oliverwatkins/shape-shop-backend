@@ -1,10 +1,13 @@
 package com.shapeshop.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-
-@Data
+@Getter
+@Setter
+//@Data
 @Entity
 @Table(name = "orders_item")
 public class OrderItemEntity {

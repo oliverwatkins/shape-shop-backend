@@ -38,7 +38,7 @@ public class SchemaGeneration {
         MetadataSources metadata =
                 new MetadataSources(serviceRegistry);
 
-        metadata.addAnnotatedClass(CategoryEntity.class);
+        metadata.addAnnotatedClass(ProductCategoryEntity.class);
         metadata.addAnnotatedClass(AddressEntity.class);
         metadata.addAnnotatedClass(CompanyEntity.class);
         metadata.addAnnotatedClass(CreditCardEntity.class);

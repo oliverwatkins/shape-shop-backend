@@ -17,7 +17,7 @@ public class ProductTest extends ShapeShopTest {
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/carlscafe/products")).andExpect(matcher.isOk());
 
         JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
-        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/productList.json");
+        JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/carl_productList.json");
 
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);

@@ -1,8 +1,8 @@
 package com.shapeshop.repository;
 
 import com.shapeshop.entity.CategoryEntity;
+import com.shapeshop.entity.ProductCategoryEntity;
 import com.shapeshop.entity.CompanyEntity;
-import com.shapeshop.entity.ProductEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
