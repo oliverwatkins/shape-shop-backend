@@ -14,6 +14,10 @@ import java.util.Map;
 public class SchemaGeneration {
 
     /**
+     *
+     * MUST HAVE DB CONTAINER RUNNING FIRST!!!!
+     * ADD NEW ENTITIES TO THE CODE BELOW!!!!
+     *
      * TODO is generating unnecesary tables :
      *
      *  orders_orders_item and product_orders_item;
@@ -38,6 +42,8 @@ public class SchemaGeneration {
         MetadataSources metadata =
                 new MetadataSources(serviceRegistry);
 
+
+        metadata.addAnnotatedClass(CategoryEntity.class);
         metadata.addAnnotatedClass(ProductCategoryEntity.class);
         metadata.addAnnotatedClass(AddressEntity.class);
         metadata.addAnnotatedClass(CompanyEntity.class);

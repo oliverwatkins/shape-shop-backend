@@ -68,7 +68,7 @@ public class ProductController {
             e.printStackTrace();
             return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(s, HttpStatus.OK);
+        return new ResponseEntity<>(Converter.convertProductToDto(s), HttpStatus.OK);
     }
 
 

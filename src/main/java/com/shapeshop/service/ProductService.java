@@ -40,26 +40,6 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRep;
 
-//    public ProductEntity createProduct(ProductEntity product, String companyName, String category) throws ShapeShopException {
-////        ProductCategoryEntity categoryEntity = categoryRep.findByName(category);
-////        if (categoryEntity == null) {
-////            throw new ShapeShopException("Category does not exist ", ShapeShopException.ErrorType.CATEGORY_DOES_NOT_EXIST);
-////        }
-//
-//        CompanyEntity company = companyRep.findByName(companyName);
-//        if (company == null) {
-//            throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
-//        }
-//        product.setCompany(company);
-////        product.getCategories().add(categoryEntity);
-//        product.setId(0);
-//
-//        product = productRep.save(product);
-//        return product;
-//    }
-
-
-
     public ProductEntity createProduct(ProductEntity product, String companyName, String categoryName) throws ShapeShopException {
 
         CompanyEntity company = companyRep.findByName(companyName);

@@ -1,6 +1,5 @@
 package com.shapeshop.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

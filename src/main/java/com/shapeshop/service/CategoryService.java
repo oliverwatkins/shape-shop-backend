@@ -12,8 +12,14 @@ import com.shapeshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 @Service
 public class CategoryService {
+
+    @Autowired
+    EntityManager entitymanager;
 
     @Autowired
     CategoryRepository catRep;
@@ -23,10 +29,6 @@ public class CategoryService {
 
     @Autowired
     private CompanyRepository companyRep;
-
-//    @Autowired
-//    private ProductCategoryRepository prodCatRep;
-
 
     public CategoryEntity createCategory(CategoryEntity categoryEntity, String companyName) throws ShapeShopException {
 
@@ -44,9 +46,17 @@ public class CategoryService {
 
     public void deleteCategory(CategoryEntity categoryEntity, String companyName) {
 
-//        CompanyEntity company = companyRep.findByName(companyName);
         CategoryEntity category= catRep.findByName(categoryEntity.getName());
+
+//        CompanyEntity company = companyRep.findByName(companyName);
+        entitymanager.
+                createQuery("Delete from ProductCategoryEntity p where p.category = :catid").setParameter("catid", categoryEntity);
+
+
         catRep.delete(category);
+
+
+        System.out.println("");
 
 //        prodCatRep.findByProduct()
 //        prodCatRep.findByCat()
