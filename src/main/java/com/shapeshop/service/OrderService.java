@@ -55,11 +55,9 @@ public class OrderService {
 			ProductEntity pe = productRepository.findById(prodId);
 
 			if (pe == null) {
-				throw new ShapeShopException(" Product id is not associated with any company ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
+				throw new ShapeShopException(" Product id " + prodId + " is not associated with any company ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
 			}
 
-//			System.out.println("pe --> " + pe);
-//
 			if (!order.getCompany().getName().equals(pe.getCompany().getName())) {
 				throw new ShapeShopException(" Product id belongs to wrong company. Order company " +
 						order.getCompany().getName() + " Prod id company " +

@@ -4,6 +4,8 @@ import com.shapeshop.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Converter {
 
@@ -17,7 +19,20 @@ public class Converter {
     }
 
     public static ProductDto convertProductToDto(ProductEntity entity) {
-        return new ProductDto(entity.getId(), entity.getName(), entity.getPrice(), entity.getDescription(), entity.getImageFilename());
+
+        List<ProductCategoryEntity> c =  entity.getProductCategories();
+        List<CategoryEntity> cats =c.stream().map(x->x.getCategory()).collect(Collectors.toList());
+
+        List<CategoryDto> cats2 =convertCategoryToDto(cats);
+
+//        List<CategoryEntity> cats =
+        return new ProductDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getDescription(),
+                entity.getImageFilename(),
+                cats2);
     }
 
     public static List<CategoryDto> convertCategoryToDto(List<CategoryEntity> itemList) {
@@ -39,6 +54,7 @@ public class Converter {
         List<OrderDto> l = new ArrayList<>();
         for (OrderEntity entity : itemList) {
 
+//            entity.getAddressEntity()
             AddressDto add = Converter.convertAddressToDto(entity.getAddressEntity());
             CreditCardDto cc = Converter.convertCreditCardToDto(entity.getCreditCardEntity());
             List<OrderItemDto> oi = Converter.convertOrderItemsToDto(entity.getOrderItems());
@@ -72,20 +88,28 @@ public class Converter {
     }
 
     private static CreditCardDto convertCreditCardToDto(CreditCardEntity creditCardEntity) {
-        CreditCardDto od = new CreditCardDto(creditCardEntity.getNumber(),
-                creditCardEntity.getName(),
-                creditCardEntity.getId(),
-                creditCardEntity.getType(),
-                creditCardEntity.getExpDate());
-        return od;
+
+        if (creditCardEntity!=null) {
+
+            CreditCardDto od = new CreditCardDto(creditCardEntity.getNumber(),
+                    creditCardEntity.getName(),
+                    creditCardEntity.getId(),
+                    creditCardEntity.getType(),
+                    creditCardEntity.getExpDate());
+            return od;
+        }
+        return null;
     }
 
     private static AddressDto convertAddressToDto(AddressEntity addressEntity) {
-        AddressDto a = new AddressDto(addressEntity.getEmail(),
-                addressEntity.getStreet(),
-                addressEntity.getName(),
-                addressEntity.getTelephone(),
-                addressEntity.getPostcode());
-        return a;
+        if (addressEntity!=null) {
+            AddressDto a = new AddressDto(addressEntity.getEmail(),
+                    addressEntity.getStreet(),
+                    addressEntity.getName(),
+                    addressEntity.getTelephone(),
+                    addressEntity.getPostcode());
+            return a;
+        }
+        return null;
     }
 }
