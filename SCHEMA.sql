@@ -105,7 +105,8 @@ create table users
 create table product_category
 (
     id     bigint not null auto_increment,
-    cat_id bigint not null,
+    category_id bigint not null,
+    product_id bigint not null,
     primary key (id)
 ) engine = InnoDB;
 
@@ -126,5 +127,5 @@ alter table orders_item add constraint fk_orderitem_product foreign key (product
 # alter table orders_item add constraint fk_orderitem_product foreign key (id) references product (id);
 alter table orders_item add constraint fk_orderitem_order foreign key (order_id) references orders (order_id);
 alter table product add constraint fk_product_company foreign key (company_id) references company (id);
-alter table product_category add constraint fk_productcategory_category foreign key (cat_id) references category (cat_id);
-alter table product_category add constraint fk_productcategory_product foreign key (id) references product (id);
+alter table product_category add constraint fk_productcategory_category foreign key (category_id) references category (cat_id);
+alter table product_category add constraint fk_productcategory_product foreign key (product_id) references product (id);

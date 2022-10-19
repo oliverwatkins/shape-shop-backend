@@ -1,7 +1,8 @@
 
 START TRANSACTION;
 
-
+DELETE FROM product_category;
+DELETE FROM orders_item;
 DELETE FROM orders;
 DELETE FROM product;
 DELETE FROM users;
@@ -69,39 +70,39 @@ VALUES (1, 0, 123123123, 1, 1, 1, 1, 1);
 
 INSERT INTO orders_item (order_amount, orders_item_id, product_id) values (2, 1, 1);
 
-INSERT INTO product_category (id, cat_id) values (13, 1);
-INSERT INTO product_category (id, cat_id) values (14, 1);
-INSERT INTO product_category (id, cat_id) values (15, 1);
-INSERT INTO product_category (id, cat_id) values (16, 1);
-INSERT INTO product_category (id, cat_id) values (17, 1);
-INSERT INTO product_category (id, cat_id) values (18, 1);
-INSERT INTO product_category (id, cat_id) values (19, 1);
-INSERT INTO product_category (id, cat_id) values (20, 1);
-INSERT INTO product_category (id, cat_id) values (21, 1);
-INSERT INTO product_category (id, cat_id) values (22, 1);
-INSERT INTO product_category (id, cat_id) values (23, 1);
-INSERT INTO product_category (id, cat_id) values (24, 1);
-INSERT INTO product_category (id, cat_id) values (25, 1);
-INSERT INTO product_category (id, cat_id) values (26, 1);
-INSERT INTO product_category (id, cat_id) values (27, 1);
+INSERT INTO product_category (product_id, category_id) values (13, 1);
+INSERT INTO product_category (product_id, category_id) values (14, 1);
+INSERT INTO product_category (product_id, category_id) values (15, 1);
+INSERT INTO product_category (product_id, category_id) values (16, 1);
+INSERT INTO product_category (product_id, category_id) values (17, 1);
+INSERT INTO product_category (product_id, category_id) values (18, 1);
+INSERT INTO product_category (product_id, category_id) values (19, 1);
+INSERT INTO product_category (product_id, category_id) values (20, 1);
+INSERT INTO product_category (product_id, category_id) values (21, 1);
+INSERT INTO product_category (product_id, category_id) values (22, 1);
+INSERT INTO product_category (product_id, category_id) values (23, 1);
+INSERT INTO product_category (product_id, category_id) values (24, 1);
+INSERT INTO product_category (product_id, category_id) values (25, 1);
+INSERT INTO product_category (product_id, category_id) values (26, 1);
+INSERT INTO product_category (product_id, category_id) values (27, 1);
 
-INSERT INTO product_category (id, cat_id) values (28, 2);
-INSERT INTO product_category (id, cat_id) values (29, 2);
-INSERT INTO product_category (id, cat_id) values (30, 2);
-INSERT INTO product_category (id, cat_id) values (31, 2);
+INSERT INTO product_category (product_id, category_id) values (28, 2);
+INSERT INTO product_category (product_id, category_id) values (29, 2);
+INSERT INTO product_category (product_id, category_id) values (30, 2);
+INSERT INTO product_category (product_id, category_id) values (31, 2);
 
-INSERT INTO product_category (id, cat_id) values (1, 3);
-INSERT INTO product_category (id, cat_id) values (2, 3);
-INSERT INTO product_category (id, cat_id) values (3, 3);
-INSERT INTO product_category (id, cat_id) values (4, 3);
-INSERT INTO product_category (id, cat_id) values (5, 3);
-INSERT INTO product_category (id, cat_id) values (6, 3);
-INSERT INTO product_category (id, cat_id) values (7, 3);
-INSERT INTO product_category (id, cat_id) values (8, 3);
-INSERT INTO product_category (id, cat_id) values (9, 3);
-INSERT INTO product_category (id, cat_id) values (10, 3);
-INSERT INTO product_category (id, cat_id) values (11, 3);
-INSERT INTO product_category (id, cat_id) values (12, 3);
+INSERT INTO product_category (product_id, category_id) values (1, 3);
+INSERT INTO product_category (product_id, category_id) values (2, 3);
+INSERT INTO product_category (product_id, category_id) values (3, 3);
+INSERT INTO product_category (product_id, category_id) values (4, 3);
+INSERT INTO product_category (product_id, category_id) values (5, 3);
+INSERT INTO product_category (product_id, category_id) values (6, 3);
+INSERT INTO product_category (product_id, category_id) values (7, 3);
+INSERT INTO product_category (product_id, category_id) values (8, 3);
+INSERT INTO product_category (product_id, category_id) values (9, 3);
+INSERT INTO product_category (product_id, category_id) values (10, 3);
+INSERT INTO product_category (product_id, category_id) values (11, 3);
+INSERT INTO product_category (product_id, category_id) values (12, 3);
 COMMIT;
 
 
