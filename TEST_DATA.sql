@@ -14,9 +14,9 @@ DELETE FROM category;
 INSERT INTO company (id, name) VALUES (1, "alpenhof");
 INSERT INTO company (id, name) VALUES (2, "higgins");
 
-INSERT INTO category (cat_id, name, company_id) VALUES (1, "main", 1);
-INSERT INTO category (cat_id, name, company_id) VALUES (2, "drinks", 1);
-INSERT INTO category (cat_id, name, company_id) VALUES (3, "main", 2);
+INSERT INTO category (id, name, company_id) VALUES (1, "main", 1);
+INSERT INTO category (id, name, company_id) VALUES (2, "drinks", 1);
+INSERT INTO category (id, name, company_id) VALUES (3, "main", 2);
 # INSERT INTO category (cat_id, name, company_id) VALUES (4, "prodType2_", 2);
 
 INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");

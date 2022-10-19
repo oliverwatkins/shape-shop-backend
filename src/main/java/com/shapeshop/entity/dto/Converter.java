@@ -10,20 +10,20 @@ import java.util.stream.Collectors;
 public class Converter {
 
     //TODO factory pattern etc.
-    public static List<ProductDto> convertProductToDto(List<ProductEntity> itemList) {
-        List<ProductDto> l = new ArrayList<>();
-        for (ProductEntity entity : itemList) {
-            l.add(convertProductToDto(entity));
+    public static List<ProductDto> convertProductToDto(List<ProductEntity> products) {
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (ProductEntity product : products) {
+            productDtos.add(convertProductToDto(product));
         }
-        return l;
+        return productDtos;
     }
 
     public static ProductDto convertProductToDto(ProductEntity entity) {
 
-        List<ProductCategoryEntity> c =  entity.getProductCategories();
-        List<CategoryEntity> cats =c.stream().map(x->x.getCategory()).collect(Collectors.toList());
+        List<ProductCategoryEntity> productCategories =  entity.getProductCategories();
+        List<CategoryEntity> cats = productCategories.stream().map(x->x.getCategory()).collect(Collectors.toList());
 
-        List<CategoryDto> cats2 =convertCategoryToDto(cats);
+        List<CategoryDto> categoryDtos = convertCategoryToDto(cats);
 
         return new ProductDto(
                 entity.getId(),
@@ -31,27 +31,34 @@ public class Converter {
                 entity.getPrice(),
                 entity.getDescription(),
                 entity.getImageFilename(),
-                cats2);
+                categoryDtos);
     }
 
-    public static List<CategoryDto> convertCategoryToDto(List<CategoryEntity> itemList) {
-        List<CategoryDto> l = new ArrayList<>();
-        for (CategoryEntity entity : itemList) {
-            l.add(new CategoryDto(entity.getId(), entity.getName()));
+    public static List<CategoryDto> convertCategoryToDto(List<CategoryEntity> categoryEntities) {
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        for (CategoryEntity categoryEntity : categoryEntities) {
+
+            try {
+                categoryDtos.add(new CategoryDto(categoryEntity.getId(), categoryEntity.getName()));
+            }catch(Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+
         }
-        return l;
+        return categoryDtos;
     }
 
-    public static List<OrderDto> convertOrderToDto(List<OrderEntity> itemList) {
+    public static List<OrderDto> convertOrderToDto(List<OrderEntity> orderEntities) {
         List<OrderDto> orders = new ArrayList<>();
-        for (OrderEntity entity : itemList) {
+        for (OrderEntity orderEntity : orderEntities) {
 
-            AddressDto add = Converter.convertAddressToDto(entity.getAddressEntity());
-            CreditCardDto cc = Converter.convertCreditCardToDto(entity.getCreditCardEntity());
-            List<OrderItemDto> oi = Converter.convertOrderItemsToDto(entity.getOrderItems());
-            CompanyDto company = Converter.convertCompanyToDto(entity.getCompany());
+            AddressDto add = Converter.convertAddressToDto(orderEntity.getAddressEntity());
+            CreditCardDto cc = Converter.convertCreditCardToDto(orderEntity.getCreditCardEntity());
+            List<OrderItemDto> oi = Converter.convertOrderItemsToDto(orderEntity.getOrderItems());
+            CompanyDto company = Converter.convertCompanyToDto(orderEntity.getCompany());
 
-            OrderDto od = new OrderDto(entity.getId(), entity.getDate(), entity.getState(), entity.getPaymentType(), entity.getDeliveryType(), add, cc, oi, company);
+            OrderDto od = new OrderDto(orderEntity.getId(), orderEntity.getDate(), orderEntity.getState(), orderEntity.getPaymentType(), orderEntity.getDeliveryType(), add, cc, oi, company);
 
             orders.add(od);
         }

@@ -110,9 +110,9 @@ public class ProductController {
     public List<ProductDto> getProducts(@PathVariable("companyName") String companyName) {
 
         CompanyEntity c = companyR.findByName(companyName);
-        List<ProductEntity> itemList = productService.getProductsByCompany(c);
+        List<ProductEntity> products = productService.getProductsByCompany(c);
 
-        return Converter.convertProductToDto(itemList);
+        return Converter.convertProductToDto(products);
     }
 
     @CrossOrigin

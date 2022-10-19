@@ -42,11 +42,8 @@ public class ProductEntity {
 	private CompanyEntity company = new CompanyEntity();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id") //TODO this is wrong? should be category_id?
 	private List<OrderItemEntity> orders = new ArrayList<>();
-
-
-
 
 	@OneToMany
 	@JoinColumn(name = "product_id")
@@ -64,10 +61,6 @@ public class ProductEntity {
 
 	@Column(name = "price")
 	private BigDecimal price;
-
-//	@Deprecated //use category
-//	@Column(name = "type")
-//	private String type;
 
 	@Column(name = "img_filename")
 	private String imageFilename;

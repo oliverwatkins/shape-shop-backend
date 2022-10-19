@@ -24,10 +24,10 @@ drop table if exists company;
 
 create table category
 (
-    cat_id     bigint not null auto_increment,
+    id     bigint not null auto_increment,
     name       varchar(255),
     company_id bigint not null,
-    primary key (cat_id)
+    primary key (id)
 ) engine = InnoDB;
 
 create table address
@@ -120,6 +120,8 @@ alter table users add constraint UK_mmns67o5v4bfippoqitu4v3t6 unique (user_name)
 
 
 alter table category add constraint fk_category_company foreign key (company_id) references company (id);
+# alter table category add constraint fk_category_company foreign key (company_id) references company (id);
+
 alter table orders add constraint fk_orders_address foreign key (address_entity_id) references address (id);
 alter table orders add constraint fk_orders_company foreign key (company_id) references company (id);
 alter table orders add constraint fk_orders_creditcard foreign key (credit_card_entity_cc_id) references credit_card (cc_id);
@@ -127,5 +129,5 @@ alter table orders_item add constraint fk_orderitem_product foreign key (product
 # alter table orders_item add constraint fk_orderitem_product foreign key (id) references product (id);
 alter table orders_item add constraint fk_orderitem_order foreign key (order_id) references orders (order_id);
 alter table product add constraint fk_product_company foreign key (company_id) references company (id);
-alter table product_category add constraint fk_productcategory_category foreign key (category_id) references category (cat_id);
+alter table product_category add constraint fk_productcategory_category foreign key (category_id) references category (id);
 alter table product_category add constraint fk_productcategory_product foreign key (product_id) references product (id);

@@ -25,7 +25,7 @@ public class CategoryEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    private List<ProductCategoryEntity> productCategory = new ArrayList<>();
+    private List<ProductCategoryEntity> productCategory;
 
     @Column(name = "name")
     private String name;
@@ -36,6 +36,10 @@ public class CategoryEntity {
     public CategoryEntity(String name, CompanyEntity company) {
         this.name = name;
         this.company = company;
+    }
+
+    public String toString() {
+        return "testing testing";
     }
 
 }
