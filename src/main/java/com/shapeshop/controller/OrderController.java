@@ -43,8 +43,8 @@ public class OrderController {
 	@PostMapping(value = "/{companyName}/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
 
-		CompanyEntity c = companyRep.findByName(companyName);
-		order.setCompany(c);
+		CompanyEntity company = companyRep.findByName(companyName);
+		order.setCompany(company);
 		OrderEntity o;
 		try {
 			o = orderService.createOrder(order);
@@ -72,6 +72,5 @@ public class OrderController {
 		CompanyEntity c = companyRep.findByName(companyName);
 		List<OrderEntity> itemList = orderService.getOrdersByCompany(c);
 		return Converter.convertOrderToDto(itemList);
-//		return itemList.toArray(new OrderEntity[itemList.size()]);
 	}
 }

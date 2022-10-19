@@ -59,16 +59,14 @@ public class ProductController {
                                         @PathVariable("companyName") String companyName,
                                         @PathVariable("category") String category) {
 
-//        if(true)
-//            throw new RuntimeException("Im here");
-        ProductEntity s = null;
+        ProductEntity productEntity= null;
         try {
-            s = productService.createProduct(product, companyName, category);
+            productEntity = productService.createProduct(product, companyName, category);
         } catch (ShapeShopException e) {
             e.printStackTrace();
-            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(Converter.convertProductToDto(s), HttpStatus.OK);
+        return new ResponseEntity<>(Converter.convertProductToDto(productEntity), HttpStatus.OK);
     }
 
 
@@ -82,7 +80,6 @@ public class ProductController {
             productService.updateProduct(product, id, companyName);
         } catch (ShapeShopException e) {
             e.printStackTrace();
-
             ResponseEntity response = ErrorUtil.getResponseEntity(e);
             return response;
 

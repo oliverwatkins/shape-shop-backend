@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Getter
 @Setter
-//@Data
 @Entity
 @Table(name = "company")
 public class CompanyEntity {

@@ -9,5 +9,4 @@ public class CompanyDto {
         this.id = id;
         this.name = name;
     }
-
 }

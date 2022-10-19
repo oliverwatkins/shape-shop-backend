@@ -55,15 +55,7 @@ public class ProductService {
             throw new ShapeShopException("Category does not exist : " + categoryName, ShapeShopException.ErrorType.CATEGORY_DOES_NOT_EXIST);
         }
 
-
-//        try {
-            product = productRep.save(product); /////
-
-//        }catch(Exception e) {
-//            e.printStackTrace();
-//            System.out.println("error here");
-//        }
-
+        product = productRep.save(product);
 
         ArrayList<ProductCategoryEntity> al = new ArrayList<>();
         al.add(new ProductCategoryEntity(cat, product));
@@ -133,63 +125,13 @@ public class ProductService {
 
         List<ProductEntity> products2 = new ArrayList<>();
 
-//        List<ProductEntity> result = StreamSupport.stream(productRep.findByCompany(c).spliterator(), false)
-//                .collect(Collectors.toList());
-
-//        Query productsByCategory = entitymanager.
-//                createQuery("Select p from ProductEntity p LEFT JOIN p.categoryProduct cp wher cp..name = :compName").setParameter("compName", c.getName());
-
-//        "SELECT DISTINCT g FROM User u LEFT JOIN u.groupCollection g " +
-//                "WHERE u = :user", Group.class);
-
-        CompanyEntity company = companyRep.findByName("carlscafe");
-
-
-        //            Query query = entitymanager.
-//                    createQuery("Select o from OrderEntity o JOIN o.orderItems oi where oi.product.id = :pid").setParameter("pid", productEntity.getId());
-
-
         for (ProductEntity product : products) {
             var asdf = product.getProductCategories().stream().filter(pc -> pc.getCategory().getId() == cat.getId()).collect(Collectors.toList());
             if (asdf.size() > 0)
                 products2.add(product);
         }
 
-
-
         return products2;
-
-////        double[] d = {8, 7, -6, 5, -4};
-//        List<ProductEntity> p2 = products.stream().filter(p -> {
-//            p.getProductCategories().stream().filter(
-//                        x -> {
-//                            x.getCategory().getId() == cat.getId());
-//                            return true;
-//                            }
-//                    );
-//            return true;
-//        }).toArray();
-
-
-//        for (ProductEntity productEntity : products) {
-//
-//
-//            val orders = productEntity.getOrders();
-//            System.out.println("orders.size() " + orders.size());
-//
-////            select b.fname, b.lname from Users b JOIN b.groups c where c.groupName = :groupName
-//            Query query = entitymanager.
-//                    createQuery("Select o from OrderEntity o JOIN o.orderItems oi where oi.product.id = :pid").setParameter("pid", productEntity.getId());
-//
-//            final var resultList = query.getResultList();
-//        }
-//
-//        List<OrderEntity> orders = orderRep.findByCompany(company);
-//        for (OrderEntity order : orders) {
-//            System.out.println("order : " + order);
-//
-//        }
-//        return products;
     }
 
     public List<ProductEntity> getAllProducts() {
@@ -209,7 +151,4 @@ public class ProductService {
     public void deleteProduct(ProductEntity p) {
         productRep.delete(p);
     }
-
-
-
 }

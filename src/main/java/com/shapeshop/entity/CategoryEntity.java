@@ -23,7 +23,6 @@ public class CategoryEntity {
     @JoinColumn(name = "company_id", nullable = false, updatable = false)
     private CompanyEntity company = new CompanyEntity();
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private List<ProductCategoryEntity> productCategory = new ArrayList<>();

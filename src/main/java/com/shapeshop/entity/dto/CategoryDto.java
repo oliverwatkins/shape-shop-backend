@@ -1,7 +1,5 @@
 package com.shapeshop.entity.dto;
 
-import java.math.BigDecimal;
-
 public class CategoryDto {
 
     public long id;
@@ -11,5 +9,4 @@ public class CategoryDto {
         this.id = id;
         this.name = name;
     }
-
 }

@@ -21,6 +21,4 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Long>{
     @Modifying
     @Transactional
     void truncate();
-
-//    public List<OrderEntity> findByProduct(ProductEntity product);
 }

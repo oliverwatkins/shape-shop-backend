@@ -49,9 +49,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{companyName}/categories")
     public ResponseEntity<?> deleteCategory(@RequestBody CategoryEntity categoryEntity,
-                                         @PathVariable("companyName") String companyName
-                                            ) {
-//        CategoryEntity category;
+                                         @PathVariable("companyName") String companyName) {
         categoryService.deleteCategory(categoryEntity, companyName);
 
         return new ResponseEntity<>(categoryEntity, HttpStatus.OK);
@@ -66,8 +64,6 @@ public class CategoryController {
         List<CategoryEntity> itemList = catR.findByCompany(c);
 
         return Converter.convertCategoryToDto(itemList);
-
-//        return itemList.toArray(new CategoryEntity[itemList.size()]);
     }
 }
 

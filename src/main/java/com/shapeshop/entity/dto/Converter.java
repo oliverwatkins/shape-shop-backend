@@ -25,7 +25,6 @@ public class Converter {
 
         List<CategoryDto> cats2 =convertCategoryToDto(cats);
 
-//        List<CategoryEntity> cats =
         return new ProductDto(
                 entity.getId(),
                 entity.getName(),
@@ -42,33 +41,21 @@ public class Converter {
         }
         return l;
     }
-//    "date": 1639619535992,
-//            "paymentType": "CARD",
-//            "deliveryType": "DELIVERY",
-//            "company": {"name": "carlscafe", "id": 1},
-//            "id": 1,
-//            "state": "OPEN",
-
 
     public static List<OrderDto> convertOrderToDto(List<OrderEntity> itemList) {
-        List<OrderDto> l = new ArrayList<>();
+        List<OrderDto> orders = new ArrayList<>();
         for (OrderEntity entity : itemList) {
 
-//            entity.getAddressEntity()
             AddressDto add = Converter.convertAddressToDto(entity.getAddressEntity());
             CreditCardDto cc = Converter.convertCreditCardToDto(entity.getCreditCardEntity());
             List<OrderItemDto> oi = Converter.convertOrderItemsToDto(entity.getOrderItems());
             CompanyDto company = Converter.convertCompanyToDto(entity.getCompany());
 
-
-//            entity.getCreditCardEntity();
-//            entity.getOrderItems();
-//            OrderDto od2 = new OrderDto(
             OrderDto od = new OrderDto(entity.getId(), entity.getDate(), entity.getState(), entity.getPaymentType(), entity.getDeliveryType(), add, cc, oi, company);
 
-            l.add(od);
+            orders.add(od);
         }
-        return l;
+        return orders;
     }
 
     private static CompanyDto convertCompanyToDto(CompanyEntity company) {

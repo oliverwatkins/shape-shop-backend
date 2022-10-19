@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 @Service
 public class CategoryService {
@@ -57,58 +56,14 @@ public class CategoryService {
      * @param categoryEntity
      * @param companyName
      */
-
     public void deleteCategory(CategoryEntity categoryEntity, String companyName) {
 
         CategoryEntity category= catRep.findByName(categoryEntity.getName());
 
-//        CompanyEntity company = companyRep.findByName(companyName);
-//        entitymanager.
-//                createQuery("Delete from ProductCategoryEntity p where p.category = :catid").setParameter("catid", categoryEntity);
-
-
         prodCatRep.deleteAll(category.getProductCategory());
 
-//        prodCatRep.delete
-
-        try {
-            catRep.delete(category);
-
-        }catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("");
-        }
-
-
-        System.out.println("");
-
-//        prodCatRep.findByProduct()
-//        prodCatRep.findByCat()
-
-//        CompanyEntity company= companyRep.findByName(companyName);
-
-//        prodRep2.find
-
-//        List<ProductEntity> ps = prodRep.findByCompanyAndCategory(company, category);
-//
-////        for (ProductEntity p : ps) {
-////            p.setCategory(null);
-//////            prodRep.saveAndFlush(p);
-////            prodRep.save(p);
-////        }
-//
-//        List<ProductEntity> ps2 = prodRep.findByCompanyAndCategory(company, category);
-//
-//        for (ProductEntity p : ps2) {
-//            System.out.println("p " + p);
-////            p.setCategory(null);
-////            prodRep.save(p);
-//        }
-
-//        CategoryEntity category2= catRep.findByName(categoryEntity.getName());
+        catRep.delete(category);
     }
-
-
 
     public void updateCategory(ProductEntity product, Long id, String companyName) throws ShapeShopException {
         //TODO
@@ -120,17 +75,6 @@ public class CategoryService {
         if (company == null) {
             throw new ShapeShopException("Company does not exist ", ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
         }
-
-
-
-//        ProductCategoryEntity c = catRep.findByName(categoryEntity.getName());
-
-//        categoryEntity.setCompany(company);
-//        categoryEntity.setId(0);
-//
-//        categoryEntity = catRep.save(categoryEntity);
         return categoryEntity;
-
     }
-
 }

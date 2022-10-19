@@ -18,7 +18,4 @@ public interface ProductCategoryRepository extends CrudRepository<ProductCategor
     @Modifying
     @Transactional
     void truncate();
-//    public ProductCategoryEntity findByName(String lastName);
-
-//    public List<ProductCategoryEntity> findByCompany(CompanyEntity company);
 }
