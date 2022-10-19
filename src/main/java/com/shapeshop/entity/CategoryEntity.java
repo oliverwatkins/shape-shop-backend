@@ -15,7 +15,7 @@ import java.util.List;
 public class CategoryEntity {
 
     @Id
-    @Column(name = "cat_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -25,7 +25,7 @@ public class CategoryEntity {
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "category_id")
     private List<ProductCategoryEntity> productCategory = new ArrayList<>();
 
     @Column(name = "name")

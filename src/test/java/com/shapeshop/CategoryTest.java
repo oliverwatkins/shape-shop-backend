@@ -9,9 +9,12 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.logging.Level;
+
 
 public class CategoryTest extends ShapeShopTest {
 
+    //TODO inline this test fails
     @org.junit.Test
     public void getCategories() throws Exception {
 
@@ -19,6 +22,9 @@ public class CategoryTest extends ShapeShopTest {
 
         JSONArray recievedArray = extractJSONArrayFromResponse(resultActions);
         JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/categoriesList_carl.json");
+
+        System.out.println("recievedArray " + recievedArray);
+        System.out.println("expectedArray " + expectedArray);
 
         //expect biskits and teas
         JSONAssert.assertEquals(
@@ -35,13 +41,15 @@ public class CategoryTest extends ShapeShopTest {
         JSONArray expectedArray = extractJSONArrayFromFileName("src/test/resources/carl_products_for_category_main.json");
 
         System.out.println("recievedArray " + recievedArray);
-        System.out.println("expectedArray " + expectedArray);
+        System.out.println("expectedArray " + expectedArray);//3
 
         //expect biskits and teas
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
-
+    /**
+     * TODO inline this test fails
+     */
     @org.junit.Test
     public void createCategory() throws Exception {
 
@@ -61,6 +69,10 @@ public class CategoryTest extends ShapeShopTest {
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);
 
+//        recievedArray [{"name":"main","id":16},{"name":"drinks","id":17},{"name":"biskits","id":18},{"name":"teas","id":19},{"name":"scones","id":20}]
+//        expectedArray [{"name":"main","id":3},{"name":"drinks","id":4},{"name":"biskits","id":5},{"name":"teas","id":6},{"name":"scones","id":7}]
+
+
         //expect biskits and teas, amd scones
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
@@ -69,7 +81,7 @@ public class CategoryTest extends ShapeShopTest {
 
     @org.junit.Test
     public void deleteCategory() throws Exception {
-
+//        java.util.logging.Logger.getLogger("o.h.i.ExceptionMapperStandardImpl").setLevel(Level.OFF);
         //auth
         String token = authenticate("admin", "admin");
 
@@ -105,12 +117,20 @@ public class CategoryTest extends ShapeShopTest {
         }
 
 
-        //make sure prod is NOT there
+//        //make sure prod is NOT there
+//        productJSON = getProductsOverHTTP();
+//        System.out.println("*** productJSON --> " + productJSON);
+//        obj = findProduct(productJSON, "jam scone");
+//        if (obj != null) {
+//            throw new RuntimeException("product is there when it shouldnt be there");
+//        }
+
+        //prod should still be there but with no category
         productJSON = getProductsOverHTTP();
         System.out.println("*** productJSON --> " + productJSON);
         obj = findProduct(productJSON, "jam scone");
-        if (obj != null) {
-            throw new RuntimeException("product is there when it shouldnt be there");
+        if (obj == null) {
+            throw new RuntimeException("product is not there when it should be there");
         }
     }
 

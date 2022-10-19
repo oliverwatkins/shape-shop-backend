@@ -1,5 +1,15 @@
 package com.shapeshop.config;
 
+import com.shapeshop.config.mockdata.AnniesArtSupplies;
+import com.shapeshop.config.mockdata.Carlscafe;
+import com.shapeshop.entity.AddressEntity;
+import com.shapeshop.entity.CompanyEntity;
+import com.shapeshop.entity.CreditCardEntity;
+import com.shapeshop.entity.UserEntity;
+import com.shapeshop.model.UserRole;
+import com.shapeshop.repository.*;
+import com.shapeshop.security.PasswordUtils;
+import com.shapeshop.service.ProductService;
 import lombok.val;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,13 +27,18 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.result.StatusResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.persistence.EntityManager;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -35,6 +50,38 @@ import static org.junit.Assert.assertNotNull;
 @AutoConfigureMockMvc
 public abstract class ShapeShopTest {
 
+    @Autowired
+    OrderRepository oRep;
+
+    @Autowired
+    private PasswordUtils passwordValidationService;
+
+    @Autowired
+    ProductRepository pRep;
+
+    @Autowired
+    ProductCategoryRepository pCatRep;
+
+    @Autowired
+    OrderItemRepository oiRep;
+
+    @Autowired
+    CompanyRepository cRep;
+
+    @Autowired
+    CategoryRepository catRep;
+
+    @Autowired
+    CreditCardRepository ccRep;
+
+    @Autowired
+    AddressRepository aRep;
+
+    @Autowired
+    ProductService pSer;
+
+    @Autowired
+    UserRepository uRep;
 
     @Autowired
     protected MockMvc mvc;
@@ -43,50 +90,86 @@ public abstract class ShapeShopTest {
 
     @Before
     public void before() throws Exception{
-        System.out.println("is this before each??");
+
+
+        clearDatabase();
+
+        System.out.println("*************************");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("is this before each test?? or each class??");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("*************************");
+        System.out.println("-->>> create some companies ! ");
+
+        cRep.save(new CompanyEntity("carlscafe"));
+        cRep.save(new CompanyEntity("anniesart"));
+
+        AddressEntity a = new AddressEntity("Bob", "Bobby street 12", "41412", "+(09)928423444", "bob@gmail.com");
+        aRep.save(a);
+        AddressEntity a2 = new AddressEntity("Jane", "1 Baker st", "62344", "+(09)34534444", "jane@gmail.com");
+        aRep.save(a2);
+
+        CreditCardEntity cc = new CreditCardEntity("xxxx-xxxx-xxxx-1234", "22/22", "Bob", "VISA");
+        ccRep.save(cc);
+        CreditCardEntity cc2 = new CreditCardEntity("xxx-xxx-xxxx-6789", "12/24", "Jane", "MASTERCARD");
+        ccRep.save(cc2);
+
+        AnniesArtSupplies.createCategories(catRep, cRep);
+        Carlscafe.createCategories(catRep, cRep);
+        Carlscafe.createProducts(pRep, cRep, catRep, pSer);
+        AnniesArtSupplies.createProducts(pRep, cRep, catRep, pSer);
+        Carlscafe.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
+        AnniesArtSupplies.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
+
+        String fpasss = passwordValidationService.encryptPassword("foo");
+        String apasss = passwordValidationService.encryptPassword("admin");
+        String upasss = passwordValidationService.encryptPassword("user");
+
+        System.out.println("-->>> create some users ! admin password = " + apasss);
+        System.out.println("-->>> create some users ! user password = " + upasss);
+        System.out.println("-->>> create some users ! foo password = " + fpasss);
+
+//			TODO users should be bound to company
+        uRep.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", apasss));
+        uRep.save(new UserEntity(UserRole.ROLE_USER, "user", upasss));
+        uRep.save(new UserEntity(UserRole.ROLE_USER, "foo", fpasss));
     }
 
-    @After
-    public void tearDown() throws SQLException {
-        clearDatabase();
-    }
+
+    @Autowired
+    EntityManager entitymanager;
 
     /**
      * TODO reset database between all tests. Currently tests are not working if executed sequentially
      */
+    @Transactional
     public void clearDatabase() throws SQLException {
-//        Connection c = datasource.getConnection();
-//        Statement s = c.createStatement();
-//
-//        // Disable FK
-//        s.execute("SET REFERENTIAL_INTEGRITY FALSE");
-//
-//        // Find all tables and truncate them
-//        Set<String> tables = new HashSet<String>();
-//        ResultSet rs = s.executeQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES  where TABLE_SCHEMA='PUBLIC'");
-//        while (rs.next()) {
-//            tables.add(rs.getString(1));
-//        }
-//        rs.close();
-//        for (String table : tables) {
-//            s.executeUpdate("TRUNCATE TABLE " + table);
-//        }
-//
-//        // Idem for sequences
-//        Set<String> sequences = new HashSet<String>();
-//        rs = s.executeQuery("SELECT SEQUENCE_NAME FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_SCHEMA='PUBLIC'");
-//        while (rs.next()) {
-//            sequences.add(rs.getString(1));
-//        }
-//        rs.close();
-//        for (String seq : sequences) {
-//            s.executeUpdate("ALTER SEQUENCE " + seq + " RESTART WITH 1");
-//        }
-//
-//        // Enable FK
-//        s.execute("SET REFERENTIAL_INTEGRITY TRUE");
-//        s.close();
-//        c.close();
+
+        oiRep.deleteAll();
+        uRep.deleteAll();
+        oRep.deleteAll();
+        pCatRep.deleteAll();
+        catRep.deleteAll();
+        pRep.deleteAll();
+        ccRep.deleteAll();
+        aRep.deleteAll();
+        cRep.deleteAll();
+
+        //TODO truncate is not working. Use truncate instead of deleteAll because
+        // this resets the sequences
+//        oiRep.truncate();
+//        uRep.truncate();
+//        oRep.truncate();
+//        pCatRep.truncate();
+//        catRep.truncate();
+
+        System.out.println("****************************");
+        System.out.println("");
+        System.out.println("cleared database");
+        System.out.println("");
+        System.out.println("****************************");
     }
 
     /**
@@ -168,7 +251,6 @@ public abstract class ShapeShopTest {
         return jsonArray.toString();
     }
 
-
     protected String getProductsOverHTTP() throws Exception {
         ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/" + defaultCompany + "/products").contentType("application/json")
         ).andExpect(matcher.is(200));
@@ -177,11 +259,6 @@ public abstract class ShapeShopTest {
 
         return jsonArray.toString();
     }
-//    private String getProductsForCategoryOverHTTP(String createCategoryJSON) throws Exception {
-//        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/{" + defaultCompany + "}/products").contentType("application/json")
-//                .content(createProductJSON)).andExpect(matcher.is(200));
-//        return resultActions2;
-//    }
 
     protected void createCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/" + defaultCompany + "/categories")
@@ -199,10 +276,5 @@ public abstract class ShapeShopTest {
 
         MvcResult mvcResult = resultActions.andReturn();
         resultActions.andExpect(matcher.is(200));
-
-//        return resultActions.
     }
-
-
-
 }

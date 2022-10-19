@@ -16,12 +16,20 @@ public class ProductCategoryEntity {
     private long id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id", nullable = false, updatable = false)
+    @JoinColumn(name = "product_id", nullable = false, updatable = false)
+    private ProductEntity product = new ProductEntity();
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false, updatable = false)
     private CategoryEntity category = new CategoryEntity();
 
     public ProductCategoryEntity() {
     }
     public ProductCategoryEntity(CategoryEntity category) {
         this.category = category;
+    }
+    public ProductCategoryEntity(CategoryEntity category, ProductEntity product) {
+        this.category = category;
+        this.product = product;
     }
 }

@@ -1,27 +1,20 @@
 [
   {
     "name": "main",
-    "company": {
-      "name": "carlscafe"
-    }
+    "id": 3
   },
   {
     "name": "drinks",
-    "company": {
-      "name": "carlscafe"
-    }
+    "id": 4
   },
   {
     "name": "biskits",
-    "company": {
-      "name": "carlscafe"
-    }
+    "id": 5
   },
   {
     "name": "teas",
-    "company": {
-      "name": "carlscafe"
-    }
+    "id": 6
   }
 ]
+
 

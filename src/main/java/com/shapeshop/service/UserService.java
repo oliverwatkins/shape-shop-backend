@@ -25,7 +25,7 @@ public class UserService implements UserDetailsService {
 		UserEntity user = repository.findByUserNameIgnoreCase(userName);
 
 		if (user == null) {
-			throw new UsernameNotFoundException("User Not Found");
+			throw new UsernameNotFoundException("User Not Found " + userName + " ..");
 		}
 
 		SimpleGrantedAuthority a = new SimpleGrantedAuthority(user.getRole().toString());

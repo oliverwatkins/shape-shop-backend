@@ -16,11 +16,6 @@ import java.sql.SQLException;
 
 public class UpdateProductTest extends ShapeShopTest {
 
-
-
-
-
-
     @Test
     public void updateProductPrice() throws Exception {
 

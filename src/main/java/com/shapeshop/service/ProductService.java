@@ -21,6 +21,8 @@ import javax.persistence.Query;
 public class ProductService {
 
 
+    @Autowired
+    ProductCategoryRepository prodCatRep;
 
     @Autowired
     EntityManager entitymanager;
@@ -47,19 +49,25 @@ public class ProductService {
             throw new ShapeShopException("Company does not exist : " + companyName, ShapeShopException.ErrorType.COMPANY_DOES_NOT_EXIST);
         }
         product.setCompany(company);
-        product.setId(0);
 
         CategoryEntity cat = categoryRep.findByName(categoryName);
         if (cat == null) {
             throw new ShapeShopException("Category does not exist : " + categoryName, ShapeShopException.ErrorType.CATEGORY_DOES_NOT_EXIST);
         }
 
+
+//        try {
+            product = productRep.save(product); /////
+
+//        }catch(Exception e) {
+//            e.printStackTrace();
+//            System.out.println("error here");
+//        }
+
+
         ArrayList<ProductCategoryEntity> al = new ArrayList<>();
-        al.add(new ProductCategoryEntity(cat));
-
-        product.setProductCategories(al);
-
-        product = productRep.save(product);
+        al.add(new ProductCategoryEntity(cat, product));
+        prodCatRep.saveAll(al);
 
         return product;
     }
@@ -128,13 +136,26 @@ public class ProductService {
 //        List<ProductEntity> result = StreamSupport.stream(productRep.findByCompany(c).spliterator(), false)
 //                .collect(Collectors.toList());
 
+//        Query productsByCategory = entitymanager.
+//                createQuery("Select p from ProductEntity p LEFT JOIN p.categoryProduct cp wher cp..name = :compName").setParameter("compName", c.getName());
+
+//        "SELECT DISTINCT g FROM User u LEFT JOIN u.groupCollection g " +
+//                "WHERE u = :user", Group.class);
+
         CompanyEntity company = companyRep.findByName("carlscafe");
+
+
+        //            Query query = entitymanager.
+//                    createQuery("Select o from OrderEntity o JOIN o.orderItems oi where oi.product.id = :pid").setParameter("pid", productEntity.getId());
+
 
         for (ProductEntity product : products) {
             var asdf = product.getProductCategories().stream().filter(pc -> pc.getCategory().getId() == cat.getId()).collect(Collectors.toList());
             if (asdf.size() > 0)
                 products2.add(product);
         }
+
+
 
         return products2;
 

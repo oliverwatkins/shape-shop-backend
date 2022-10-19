@@ -1,5 +1,6 @@
 package com.shapeshop;
 
+import com.shapeshop.config.ShapeShopTest;
 import com.shapeshop.config.TestConfig;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthenticationHTTPTests {
+public class AuthenticationHTTPTests extends ShapeShopTest {
 
 	StatusResultMatchers matcher = MockMvcResultMatchers.status();
     @Autowired
@@ -37,13 +38,13 @@ public class AuthenticationHTTPTests {
     public void shouldNotAuth() throws Exception {
 
         // forbidden. 403 - private endpoint
-        mvc.perform(MockMvcRequestBuilders.get("/user")).andExpect(matcher.isForbidden());
+        mvc.perform(MockMvcRequestBuilders.get("/user")).andExpect(matcher.isForbidden()); //this url for testing purposes
     	mvc.perform(MockMvcRequestBuilders.get("/admin")).andExpect(matcher.isForbidden());
 
     	//OK. 200 - public endpoint
-    	mvc.perform(MockMvcRequestBuilders.get("/alpenhof/products")).andExpect(matcher.isOk());
+    	mvc.perform(MockMvcRequestBuilders.get("/carlscafe/products")).andExpect(matcher.isOk());
 
-        // unauthorized. 401 - authenticate nonexistant user
+        // unauthorized. 401 - authenticate a nonexistant user
     	String requestJson = "{\"username\": \"IDoNotExistInTheDB\",\"password\": \"foo\"}";
         mvc.perform(MockMvcRequestBuilders.post("/authenticate").contentType("application/json").content(requestJson)).andExpect(matcher.isUnauthorized());
     }

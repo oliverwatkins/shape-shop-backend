@@ -18,7 +18,7 @@ public class ProductEntity {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 
 //	//TODO change cascade to nullable. products can also exist without a category
@@ -45,9 +45,16 @@ public class ProductEntity {
 	@JoinColumn(name = "id")
 	private List<OrderItemEntity> orders = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+
+
+
+	@OneToMany
+	@JoinColumn(name = "product_id")
 	private List<ProductCategoryEntity> productCategories = new ArrayList<>();
+
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id")
+//	private List<ProductCategoryEntity> productCategories = new ArrayList<>();
 
 	@Column(name = "name")
 	private String name;

@@ -25,6 +25,10 @@ public class CategoryService {
     CategoryRepository catRep;
 
     @Autowired
+    ProductCategoryRepository prodCatRep;
+
+
+    @Autowired
     ProductRepository prodRep;
 
     @Autowired
@@ -44,16 +48,36 @@ public class CategoryService {
     }
 
 
+    /**
+     * TODO : Not working at the moemnt :
+     *
+     * could not execute statement; SQL [n/a]; constraint ["FK5N0VG2QTTW3G7ODMC3TIAL2N4: PUBLIC.PRODUCT_CATEGORY FOREIGN KEY(ID) REFERENCES PUBLIC.PRODUCT(ID) (12)"; SQL statement:
+     * update product_category set id=null where id=? [23506-193]]
+     *
+     * @param categoryEntity
+     * @param companyName
+     */
+
     public void deleteCategory(CategoryEntity categoryEntity, String companyName) {
 
         CategoryEntity category= catRep.findByName(categoryEntity.getName());
 
 //        CompanyEntity company = companyRep.findByName(companyName);
-        entitymanager.
-                createQuery("Delete from ProductCategoryEntity p where p.category = :catid").setParameter("catid", categoryEntity);
+//        entitymanager.
+//                createQuery("Delete from ProductCategoryEntity p where p.category = :catid").setParameter("catid", categoryEntity);
 
 
-        catRep.delete(category);
+        prodCatRep.deleteAll(category.getProductCategory());
+
+//        prodCatRep.delete
+
+        try {
+            catRep.delete(category);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("");
+        }
 
 
         System.out.println("");
