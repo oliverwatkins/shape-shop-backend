@@ -18,7 +18,7 @@ public class ProductEntity {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 //	//TODO change cascade to nullable. products can also exist without a category

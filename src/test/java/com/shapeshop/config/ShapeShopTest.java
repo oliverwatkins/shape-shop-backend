@@ -1,5 +1,6 @@
 package com.shapeshop.config;
 
+import com.shapeshop.DbTestUtil;
 import com.shapeshop.config.mockdata.AnniesArtSupplies;
 import com.shapeshop.config.mockdata.Carlscafe;
 import com.shapeshop.entity.AddressEntity;
@@ -19,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.persistence.EntityManager;
+import javax.sql.DataSource;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
@@ -49,6 +52,9 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest
 @AutoConfigureMockMvc
 public abstract class ShapeShopTest {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Autowired
     OrderRepository oRep;
@@ -157,13 +163,23 @@ public abstract class ShapeShopTest {
         aRep.deleteAll();
         cRep.deleteAll();
 
-        //TODO truncate is not working. Use truncate instead of deleteAll because
-        // this resets the sequences
-//        oiRep.truncate();
-//        uRep.truncate();
-//        oRep.truncate();
-//        pCatRep.truncate();
-//        catRep.truncate();
+
+        DataSource dataSource = applicationContext.getBean(DataSource.class);
+        try (Connection dbConnection = dataSource.getConnection()) {
+            try (Statement statement = dbConnection.createStatement()) {
+//                String resetSql = String.format(resetSqlTemplate, resetSqlArgument);
+                String s = "ALTER TABLE category ALTER COLUMN ID RESTART WITH 1";
+                statement.execute(s);
+                String s2 = "ALTER TABLE product ALTER COLUMN ID RESTART WITH 1";
+                statement.execute(s2);
+                String s3 = "ALTER TABLE credit_card ALTER COLUMN cc_id RESTART WITH 1";
+                statement.execute(s3);
+                String s4 = "ALTER TABLE company ALTER COLUMN id RESTART WITH 1";
+                statement.execute(s4);
+                String s5 = "ALTER TABLE orders ALTER COLUMN order_id RESTART WITH 1";
+                statement.execute(s5);
+            }
+        }
 
         System.out.println("****************************");
         System.out.println("");
