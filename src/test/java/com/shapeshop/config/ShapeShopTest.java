@@ -1,6 +1,5 @@
 package com.shapeshop.config;
 
-import com.shapeshop.DbTestUtil;
 import com.shapeshop.config.mockdata.AnniesArtSupplies;
 import com.shapeshop.config.mockdata.Carlscafe;
 import com.shapeshop.entity.AddressEntity;
@@ -11,17 +10,14 @@ import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
 import com.shapeshop.security.PasswordUtils;
 import com.shapeshop.service.ProductService;
-import lombok.val;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -41,53 +37,53 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-import java.util.logging.Level;
 
 import static org.junit.Assert.assertNotNull;
 
 
-@Import(TestConfig.class)
 @EnableWebMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public abstract class ShapeShopTest {
 
+    String defaultCompany = "carlscafe";
+
     @Autowired
     private ApplicationContext applicationContext;
 
     @Autowired
-    OrderRepository oRep;
+    OrderRepository orderRepository;
 
     @Autowired
     private PasswordUtils passwordValidationService;
 
     @Autowired
-    ProductRepository pRep;
+    ProductRepository productRepository;
 
     @Autowired
-    ProductCategoryRepository pCatRep;
+    ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    OrderItemRepository oiRep;
+    OrderItemRepository orderItemRepository;
 
     @Autowired
-    CompanyRepository cRep;
+    CompanyRepository companyRepository;
 
     @Autowired
-    CategoryRepository catRep;
+    CategoryRepository categoryRepository;
 
     @Autowired
-    CreditCardRepository ccRep;
+    CreditCardRepository creditCardRepository;
 
     @Autowired
-    AddressRepository aRep;
+    AddressRepository addressRepository;
 
     @Autowired
-    ProductService pSer;
+    ProductService productService;
 
     @Autowired
-    UserRepository uRep;
+    UserRepository userRepository;
 
     @Autowired
     protected MockMvc mvc;
@@ -96,7 +92,6 @@ public abstract class ShapeShopTest {
 
     @Before
     public void before() throws Exception{
-
 
         clearDatabase();
 
@@ -109,25 +104,25 @@ public abstract class ShapeShopTest {
         System.out.println("*************************");
         System.out.println("-->>> create some companies ! ");
 
-        cRep.save(new CompanyEntity("carlscafe"));
-        cRep.save(new CompanyEntity("anniesart"));
+        companyRepository.save(new CompanyEntity("carlscafe"));
+        companyRepository.save(new CompanyEntity("anniesart"));
 
         AddressEntity a = new AddressEntity("Bob", "Bobby street 12", "41412", "+(09)928423444", "bob@gmail.com");
-        aRep.save(a);
+        addressRepository.save(a);
         AddressEntity a2 = new AddressEntity("Jane", "1 Baker st", "62344", "+(09)34534444", "jane@gmail.com");
-        aRep.save(a2);
+        addressRepository.save(a2);
 
         CreditCardEntity cc = new CreditCardEntity("xxxx-xxxx-xxxx-1234", "22/22", "Bob", "VISA");
-        ccRep.save(cc);
+        creditCardRepository.save(cc);
         CreditCardEntity cc2 = new CreditCardEntity("xxx-xxx-xxxx-6789", "12/24", "Jane", "MASTERCARD");
-        ccRep.save(cc2);
+        creditCardRepository.save(cc2);
 
-        AnniesArtSupplies.createCategories(catRep, cRep);
-        Carlscafe.createCategories(catRep, cRep);
-        Carlscafe.createProducts(pRep, cRep, catRep, pSer);
-        AnniesArtSupplies.createProducts(pRep, cRep, catRep, pSer);
-        Carlscafe.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
-        AnniesArtSupplies.createOrders(oRep, cRep, pRep, ccRep, aRep, oiRep);
+        AnniesArtSupplies.createCategories(categoryRepository, companyRepository);
+        Carlscafe.createCategories(categoryRepository, companyRepository);
+        Carlscafe.createProducts(productRepository, companyRepository, categoryRepository, productService);
+        AnniesArtSupplies.createProducts(productRepository, companyRepository, categoryRepository, productService);
+        Carlscafe.createOrders(orderRepository, companyRepository, productRepository, creditCardRepository, addressRepository, orderItemRepository);
+        AnniesArtSupplies.createOrders(orderRepository, companyRepository, productRepository, creditCardRepository, addressRepository, orderItemRepository);
 
         String fpasss = passwordValidationService.encryptPassword("foo");
         String apasss = passwordValidationService.encryptPassword("admin");
@@ -138,36 +133,33 @@ public abstract class ShapeShopTest {
         System.out.println("-->>> create some users ! foo password = " + fpasss);
 
 //			TODO users should be bound to company
-        uRep.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", apasss));
-        uRep.save(new UserEntity(UserRole.ROLE_USER, "user", upasss));
-        uRep.save(new UserEntity(UserRole.ROLE_USER, "foo", fpasss));
+        userRepository.save(new UserEntity(UserRole.ROLE_ADMIN, "admin", apasss));
+        userRepository.save(new UserEntity(UserRole.ROLE_USER, "user", upasss));
+        userRepository.save(new UserEntity(UserRole.ROLE_USER, "foo", fpasss));
     }
 
 
     @Autowired
     EntityManager entitymanager;
 
-    /**
-     * TODO reset database between all tests. Currently tests are not working if executed sequentially
-     */
     @Transactional
     public void clearDatabase() throws SQLException {
 
-        oiRep.deleteAll();
-        uRep.deleteAll();
-        oRep.deleteAll();
-        pCatRep.deleteAll();
-        catRep.deleteAll();
-        pRep.deleteAll();
-        ccRep.deleteAll();
-        aRep.deleteAll();
-        cRep.deleteAll();
+        //clear out data
+        orderItemRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
+        productCategoryRepository.deleteAll();
+        categoryRepository.deleteAll();
+        productRepository.deleteAll();
+        creditCardRepository.deleteAll();
+        addressRepository.deleteAll();
+        companyRepository.deleteAll();
 
-
+        //reset sequences
         DataSource dataSource = applicationContext.getBean(DataSource.class);
         try (Connection dbConnection = dataSource.getConnection()) {
             try (Statement statement = dbConnection.createStatement()) {
-//                String resetSql = String.format(resetSqlTemplate, resetSqlArgument);
                 String s = "ALTER TABLE category ALTER COLUMN ID RESTART WITH 1";
                 statement.execute(s);
                 String s2 = "ALTER TABLE product ALTER COLUMN ID RESTART WITH 1";
@@ -178,6 +170,7 @@ public abstract class ShapeShopTest {
                 statement.execute(s4);
                 String s5 = "ALTER TABLE orders ALTER COLUMN order_id RESTART WITH 1";
                 statement.execute(s5);
+                //add as needed for other tables
             }
         }
 
@@ -247,16 +240,11 @@ public abstract class ShapeShopTest {
         return token;
     }
 
-
-    String defaultCompany = "carlscafe";
-
     protected void deleteCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/" + defaultCompany + "/categories")
                 .header("Authorization", "Bearer " + token).contentType("application/json")
                 .content(createCategoryJSON)).andExpect(matcher.is(200));
     }
-
-
 
     protected String getCategoriesOverHTTP() throws Exception {
         ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.get("/" + defaultCompany + "/categories").contentType("application/json")

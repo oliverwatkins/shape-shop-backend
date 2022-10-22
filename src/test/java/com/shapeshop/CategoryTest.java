@@ -4,6 +4,7 @@ import com.shapeshop.config.ShapeShopTest;
 import lombok.val;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.test.web.servlet.ResultActions;
@@ -14,7 +15,6 @@ import java.util.logging.Level;
 
 public class CategoryTest extends ShapeShopTest {
 
-    //TODO inline this test fails
     @org.junit.Test
     public void getCategories() throws Exception {
 
@@ -69,10 +69,6 @@ public class CategoryTest extends ShapeShopTest {
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);
 
-//        recievedArray [{"name":"main","id":16},{"name":"drinks","id":17},{"name":"biskits","id":18},{"name":"teas","id":19},{"name":"scones","id":20}]
-//        expectedArray [{"name":"main","id":3},{"name":"drinks","id":4},{"name":"biskits","id":5},{"name":"teas","id":6},{"name":"scones","id":7}]
-
-
         //expect biskits and teas, amd scones
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
@@ -81,7 +77,6 @@ public class CategoryTest extends ShapeShopTest {
 
     @org.junit.Test
     public void deleteCategory() throws Exception {
-//        java.util.logging.Logger.getLogger("o.h.i.ExceptionMapperStandardImpl").setLevel(Level.OFF);
         //auth
         String token = authenticate("admin", "admin");
 

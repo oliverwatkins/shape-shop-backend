@@ -1,7 +1,7 @@
 package com.shapeshop;
 
 import com.shapeshop.config.ShapeShopTest;
-import com.shapeshop.config.TestConfig;
+//import com.shapeshop.config.TestConfig;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Tests authentication and authorization.
  */
-@Import(TestConfig.class)
+//@Import(TestConfig.class)
 @EnableWebMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest
