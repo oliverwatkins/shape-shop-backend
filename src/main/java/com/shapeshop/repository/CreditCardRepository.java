@@ -10,9 +10,4 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CreditCardRepository extends CrudRepository<CreditCardEntity, Long>{
 
     public CreditCardEntity findById(long id);
-
-    @Query(value = "TRUNCATE TABLE credit_card", nativeQuery = true)
-    @Modifying
-    @Transactional
-    void truncate();
 }

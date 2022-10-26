@@ -60,7 +60,7 @@ create table credit_card
 
 create table orders
 (
-    order_id                 bigint not null auto_increment,
+    id                       bigint not null auto_increment,
     order_amout              varchar(255),
     order_date               datetime(6),
     order_delivery_type      integer,
@@ -69,17 +69,17 @@ create table orders
     address_entity_id        bigint,
     company_id               bigint,
     credit_card_entity_cc_id bigint,
-    primary key (order_id)
+    primary key (id)
 ) engine = InnoDB;
 
 create table orders_item
 (
-    orders_item_id bigint not null auto_increment,
+    id bigint not null auto_increment,
     order_amount   integer,
     product_id     bigint not null,
-    id             bigint,
+#     id             bigint,
     order_id       bigint,
-    primary key (orders_item_id)
+    primary key (id)
 ) engine = InnoDB;
 
 create table product
@@ -127,7 +127,7 @@ alter table orders add constraint fk_orders_company foreign key (company_id) ref
 alter table orders add constraint fk_orders_creditcard foreign key (credit_card_entity_cc_id) references credit_card (cc_id);
 alter table orders_item add constraint fk_orderitem_product foreign key (product_id) references product (id);
 # alter table orders_item add constraint fk_orderitem_product foreign key (id) references product (id);
-alter table orders_item add constraint fk_orderitem_order foreign key (order_id) references orders (order_id);
+alter table orders_item add constraint fk_orderitem_order foreign key (order_id) references orders (id);
 alter table product add constraint fk_product_company foreign key (company_id) references company (id);
 alter table product_category add constraint fk_productcategory_category foreign key (category_id) references category (id);
 alter table product_category add constraint fk_productcategory_product foreign key (product_id) references product (id);

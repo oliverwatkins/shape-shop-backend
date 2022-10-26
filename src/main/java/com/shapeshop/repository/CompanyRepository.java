@@ -12,9 +12,4 @@ public interface CompanyRepository extends CrudRepository<CompanyEntity, Long>{
     public CompanyEntity findById(long id);
     
     public CompanyEntity findByName(String lastName);
-
-    @Query(value = "TRUNCATE TABLE company", nativeQuery = true)
-    @Modifying
-    @Transactional
-    void truncate();
 }

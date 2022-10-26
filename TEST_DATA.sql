@@ -65,10 +65,10 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (30, "Grauburgunder Weingut", "Grauburgunder Weingut Braun, Pfalz 0,75 l", 22.70, "wine3.jpg", 1);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (31, "Lugana Villa", "Lugana Villa Trendi, Gardasee 0,75 l", 22.70, "wine4.jpg", 1);
 
-INSERT INTO orders (order_id, order_state, order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+INSERT INTO orders (id, order_state, order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
 VALUES (1, 0, 123123123, 1, 1, 1, 1, 1);
 
-INSERT INTO orders_item (order_amount, orders_item_id, product_id) values (2, 1, 1);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, 1, 1);
 
 INSERT INTO product_category (product_id, category_id) values (13, 1);
 INSERT INTO product_category (product_id, category_id) values (14, 1);
