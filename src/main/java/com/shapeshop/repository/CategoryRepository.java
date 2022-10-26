@@ -18,10 +18,4 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity, Long>
 
     public List<CategoryEntity> findByCompany(CompanyEntity company);
 
-    @Query(value = "TRUNCATE TABLE category", nativeQuery = true)
-    @Modifying
-    @Transactional
-    void truncate();
-
-
 }

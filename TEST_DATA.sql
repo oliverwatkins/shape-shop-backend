@@ -23,8 +23,8 @@ INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "J
 INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (2, "Luke Skywalker", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
 INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (3, "Darth Vader", null, null, "+(09)42344333", null);
 
-INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (1, "xxx-xxx-xxxx-6345", "22/22", "JJ Binks", "VISA");
-INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (2, "xxx-xxx-xxxx-6323", "12/24", "P Leah", "MASTERCARD");
+INSERT INTO credit_card (id, number, exp_date, name, type) VALUES (1, "xxx-xxx-xxxx-6345", "22/22", "JJ Binks", "VISA");
+INSERT INTO credit_card (id, number, exp_date, name, type) VALUES (2, "xxx-xxx-xxxx-6323", "12/24", "P Leah", "MASTERCARD");
 
 INSERT INTO users (id, user_name, password, role) VALUES (1, "admin", "8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918", "ROLE_ADMIN");
 INSERT INTO users (id, user_name, password, role) VALUES (2, "user", "04F8996DA763B7A969B1028EE3007569EAF3A635486DDAB211D512C85B9DF8FB", "ROLE_USER");
@@ -65,10 +65,10 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (30, "Grauburgunder Weingut", "Grauburgunder Weingut Braun, Pfalz 0,75 l", 22.70, "wine3.jpg", 1);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (31, "Lugana Villa", "Lugana Villa Trendi, Gardasee 0,75 l", 22.70, "wine4.jpg", 1);
 
-INSERT INTO orders (order_id, order_state, order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+INSERT INTO orders (id, order_state, order_date, order_delivery_type, order_payment_type, company_id, creditcard_id, address_entity_id)
 VALUES (1, 0, 123123123, 1, 1, 1, 1, 1);
 
-INSERT INTO orders_item (order_amount, orders_item_id, product_id) values (2, 1, 1);
+INSERT INTO orders_item (id, order_amount, order_id, product_id) values (1, 3, 1, 1);
 
 INSERT INTO product_category (product_id, category_id) values (13, 1);
 INSERT INTO product_category (product_id, category_id) values (14, 1);
@@ -109,7 +109,7 @@ COMMIT;
 #     OrderItemEntity oi1 = new OrderItemEntity(p1, 99);
 # OrderItemEntity oi2 = new OrderItemEntity(p2, 9);
 #
-# INSERT INTO orders (order_date, order_delivery_type, order_payment_type, company_id, credit_card_entity_cc_id, addressEntity_id)
+# INSERT INTO orders (order_date, order_delivery_type, order_payment_type, company_id, creditcard_id, addressEntity_id)
 # VALUES (123123123, "DELIVERY", "CARD", 1, 1, 1);
 
 

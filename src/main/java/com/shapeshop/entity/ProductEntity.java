@@ -42,16 +42,12 @@ public class ProductEntity {
 	private CompanyEntity company = new CompanyEntity();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id") //TODO this is wrong? should be category_id?
-	private List<OrderItemEntity> orders = new ArrayList<>();
+	@JoinColumn(name = "product_id")
+	private List<OrderItemEntity> orders = new ArrayList<>(); //todo rename ordersItems
 
 	@OneToMany
 	@JoinColumn(name = "product_id")
 	private List<ProductCategoryEntity> productCategories = new ArrayList<>();
-
-//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JoinColumn(name = "id")
-//	private List<ProductCategoryEntity> productCategories = new ArrayList<>();
 
 	@Column(name = "name")
 	private String name;
@@ -90,12 +86,4 @@ public class ProductEntity {
 		this.imageFilename = imageFilename;
 		this.company = company;
 	}
-//
-//	public ProductEntity(String name, BigDecimal price, String type, String imageFilename, CompanyEntity company, CategoryEntity categoryEntity) {
-//		this(name, price, type, imageFilename, company);
-//		this.cat
-//	}
-
-//	public ProductEntity(String hamburger, BigDecimal bigDecimal, String main, String s, CompanyEntity ce, String a_hamburger, CategoryEntity categoryEntity) {
-//	}
 }

@@ -164,7 +164,7 @@ public abstract class ShapeShopTest {
                 statement.execute(s);
                 String s2 = "ALTER TABLE product ALTER COLUMN ID RESTART WITH 1";
                 statement.execute(s2);
-                String s3 = "ALTER TABLE credit_card ALTER COLUMN cc_id RESTART WITH 1";
+                String s3 = "ALTER TABLE credit_card ALTER COLUMN id RESTART WITH 1";
                 statement.execute(s3);
                 String s4 = "ALTER TABLE company ALTER COLUMN id RESTART WITH 1";
                 statement.execute(s4);

@@ -54,8 +54,8 @@ public class Carlscafe {
 //		repository.save(new ProductEntity("water", new BigDecimal(4.50), "drinks", "na.png", ce, "a water", catE.get(0)));
 	}
 
-	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
-			CreditCardRepository ccRes, AddressRepository aRes, CrudRepository<OrderItemEntity, Long> oiRep) {
+	public static void createOrders(OrderRepository orderRepository, CompanyRepository cRes, ProductRepository pRes,
+			CreditCardRepository ccRes, AddressRepository aRes, OrderItemRepository orderItemRepository) {
 		
 		System.out.println("-->>> create some orders ");
 
@@ -76,17 +76,19 @@ public class Carlscafe {
 		OrderItemEntity orderItem2 = null;
 
 		{
-			OrderEntity o1 = new OrderEntity(new Date(1639619535992l), PaymentType.CARD, DeliveryType.DELIVERY, address_bob,
+			//create order
+			OrderEntity order = new OrderEntity(new Date(1639619535992l), PaymentType.CARD, DeliveryType.DELIVERY, address_bob,
 					paymentData.get(0), company);
 
+			//create order item
 			orderItem1 = new OrderItemEntity(product_hotdog, 1);
-			ArrayList<OrderItemEntity> oies = new ArrayList<OrderItemEntity>();
-			oies.add(orderItem1);
+			ArrayList<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
+			orderItems.add(orderItem1);
 
-			o1.setOrderItems(oies);
+			order.setOrderItems(orderItems);
 
-			oiRep.save(orderItem1);
-			oRep.save(o1);
+			orderItemRepository.saveAll(orderItems);
+			orderRepository.save(order);
 		}
 	}
 

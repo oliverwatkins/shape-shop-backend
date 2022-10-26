@@ -9,11 +9,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
-//@Data
 @Getter
 @Setter
 
 @Entity
+//TODO remove plurality. cannot rename to "order" because reserved word in SQL
 @Table(name = "orders")
 public class OrderEntity {
 
@@ -31,9 +31,13 @@ public class OrderEntity {
 	@OneToOne
 	private AddressEntity addressEntity;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderItemEntity> orderItems;
+
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "product_id")
+
 
 	@Column(name = "order_date")
 	private Date date;
