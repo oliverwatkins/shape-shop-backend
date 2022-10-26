@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class OrderEntity {
 
 	@Id
-	@Column(name = "order_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 

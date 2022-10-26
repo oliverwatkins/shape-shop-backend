@@ -47,9 +47,7 @@ public class CategoryTest extends ShapeShopTest {
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
-    /**
-     * TODO inline this test fails
-     */
+
     @org.junit.Test
     public void createCategory() throws Exception {
 

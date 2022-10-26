@@ -168,7 +168,7 @@ public abstract class ShapeShopTest {
                 statement.execute(s3);
                 String s4 = "ALTER TABLE company ALTER COLUMN id RESTART WITH 1";
                 statement.execute(s4);
-                String s5 = "ALTER TABLE orders ALTER COLUMN order_id RESTART WITH 1";
+                String s5 = "ALTER TABLE orders ALTER COLUMN id RESTART WITH 1";
                 statement.execute(s5);
                 //add as needed for other tables
             }
