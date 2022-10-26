@@ -1,6 +1,5 @@
 package com.shapeshop.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +12,7 @@ import javax.persistence.*;
 @Setter
 
 @Entity
+
 //TODO remove plurality. cannot rename to "order" because reserved word in SQL
 @Table(name = "orders")
 public class OrderEntity {
@@ -37,7 +37,6 @@ public class OrderEntity {
 
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "product_id")
-
 
 	@Column(name = "order_date")
 	private Date date;

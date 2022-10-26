@@ -25,9 +25,6 @@ public class ProductCategoryEntity {
 
     public ProductCategoryEntity() {
     }
-    public ProductCategoryEntity(CategoryEntity category) {
-        this.category = category;
-    }
     public ProductCategoryEntity(CategoryEntity category, ProductEntity product) {
         this.category = category;
         this.product = product;

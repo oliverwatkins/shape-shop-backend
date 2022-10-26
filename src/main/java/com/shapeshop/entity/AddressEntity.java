@@ -17,7 +17,6 @@ import javax.persistence.Table;
  */
 @Getter
 @Setter
-//@Data
 @Entity
 @Table(name = "address")
 public class AddressEntity {

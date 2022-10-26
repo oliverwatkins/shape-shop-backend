@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Getter
 @Setter
 @Entity
@@ -22,8 +23,7 @@ public class CompanyEntity {
 	@Column(name = "name")
 	private String name;
 
-	protected CompanyEntity() {
-	}
+	protected CompanyEntity() {}
 
 	public CompanyEntity(String name) {
 		this.name = name;
