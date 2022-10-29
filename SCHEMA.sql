@@ -60,12 +60,12 @@ create table credit_card
 
 create table orders
 (
-    id                       bigint not null auto_increment,
-    order_amout              varchar(255),
-    order_date               datetime(6),
-    order_delivery_type      integer,
-    order_payment_type       integer,
-    order_state              integer,
+    id                 bigint not null auto_increment,
+    amout              varchar(255),
+    date               datetime(6),
+    delivery_type      integer,
+    payment_type       integer,
+    state              integer,
     address_entity_id        bigint,
     company_id               bigint,
     credit_card_entity_cc_id bigint,

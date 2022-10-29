@@ -1,6 +1,5 @@
 package com.shapeshop.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 @Getter
 @Setter
-//@Data
 @Entity
 @Table(name = "product")
 public class ProductEntity {

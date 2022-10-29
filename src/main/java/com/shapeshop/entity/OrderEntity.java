@@ -38,13 +38,13 @@ public class OrderEntity {
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "product_id")
 
-	@Column(name = "order_date")
+	@Column(name = "date")
 	private Date date;
-	@Column(name = "order_payment_type")
+	@Column(name = "payment_type")
 	private PaymentType paymentType;
-	@Column(name = "order_delivery_type")
+	@Column(name = "delivery_type")
 	private DeliveryType deliveryType;
-	@Column(name = "order_state")
+	@Column(name = "state")
 	private OrderState state = OrderState.OPEN;
 
 	protected OrderEntity() {
@@ -60,7 +60,7 @@ public class OrderEntity {
 		this.company = company;
 	}
 
-	public void addOrderItem(OrderItemEntity item) {
-		orderItems.add(item);
-	}
+//	public void addOrderItem(OrderItemEntity item) {
+//		orderItems.add(item);
+//	}
 }
