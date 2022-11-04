@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Login/Logout endpoints.
  */
+@CrossOrigin
 @RestController
 public class AuthenticationController {
 
@@ -38,7 +39,7 @@ public class AuthenticationController {
      * @param authenticationRequest authentication request when logging in
      * @return HTTP response entity
      */
-    @CrossOrigin
+//    @CrossOrigin
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> loginAndCreateAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
@@ -65,7 +66,7 @@ public class AuthenticationController {
     }
 
     //TODO
-    @CrossOrigin
+//    @CrossOrigin
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseEntity<?> logout(@RequestBody AuthenticationRequest authenticationRequest)
             throws Exception {

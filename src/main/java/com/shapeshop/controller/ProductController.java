@@ -19,6 +19,7 @@ import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.service.ProductService;
 
+@CrossOrigin
 @RestController
 public class ProductController {
 
@@ -31,13 +32,13 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryR;
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping(value = "/test")
     public String test() {
         return "hello";
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/products")
     public ResponseEntity<?> newProduct(@RequestBody ProductEntity product,
@@ -52,7 +53,7 @@ public class ProductController {
         return new ResponseEntity<>(s, HttpStatus.OK);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/{category}/products")
     public ResponseEntity<?> newProduct(@RequestBody ProductEntity product,
@@ -70,7 +71,7 @@ public class ProductController {
     }
 
 
-    @CrossOrigin
+//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product,
@@ -90,7 +91,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> deleteProduct(
@@ -105,7 +106,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping(value = "/{companyName}/products")
     public List<ProductDto> getProducts(@PathVariable("companyName") String companyName) {
 
@@ -115,7 +116,7 @@ public class ProductController {
         return Converter.convertProductToDto(products);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping(value = "/{companyName}/{categoryName}/products")
     public List<ProductDto> getProductsByCategoryAndCompany(@PathVariable("companyName") String companyName, @PathVariable("categoryName") String categoryName) {
 

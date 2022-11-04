@@ -8,7 +8,6 @@ This README consists of three parts.
 
 ### 1. Running the application within the IDE against the DB in a docker container
 
-
 Run the database :
 
 (optional) run KILL.BAT
@@ -38,42 +37,26 @@ it should be possible to run the client side as well.
 
 
 
+### 2. Running the application and DB via two docker containers. TODO WIP
 
-
-
-### 2. Running the application and DB via two docker containers. TODO
-
+#create network
 docker network create shape-shop-network
-# create volume?
+# create volume maybe?
 
-docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
-
-
+# build db instance
 docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
-In IDE should be able to connect to the DB with this URL :
-jdbc:mysql://localhost:3306/shapeshop
+#application.properties
+change spring.datasource.url to point to shape-shop-db-container in application.properties. port should also point to port 8080
 
-The backend can be directly called like this :
-http://localhost:8080/alpenhof/products
+# docker (should build 'maven package')
+docker build -t shapeshop:1.0 .
+docker run --name shape-shop-server -p 8080:8080 shapeshop:1.0 --network shape-shop-network
 
-
-In spring properties add this :hibernate.dialect
-spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-
-it is now possible to start app in IDE and debug through the code.
-
-# App (TODO)
-3 things -
-- Maven package
-- docker build
-- docker run
-
-docker build -t shapeshop:1.0 . 
-docker run -p 8080:8080 shapeshop:1.0 --network shape-shop-network 
-
+currently not working
+https://stackoverflow.com/questions/74302861/cant-connect-app-server-to-mysql-database-in-a-docker-network
 
 
 
@@ -122,6 +105,13 @@ You can look at the database by doing this
 ``show databases;``
 ``use shapeshop;``
 
+
+
+
+docker hosting options :
+
+kamatera? $4 per month
+A2 hosting? some emails "unmanaged"/"managed"
 
 
 

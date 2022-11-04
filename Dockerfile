@@ -1,3 +1,8 @@
+
+
+## This does a MVN package
+
+
 #### Stage 1: Build the application
 FROM openjdk:11 as build
 

@@ -21,7 +21,7 @@ public class ImageController {
     @Autowired
     private ProductRepository productRepository;
 
-    @CrossOrigin
+//    @CrossOrigin
     @RequestMapping(value = "/{companyName}/uploadfile/{productId}", method = RequestMethod.POST)
     public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file,
                            HttpServletResponse responseX,

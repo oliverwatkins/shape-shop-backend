@@ -27,6 +27,7 @@ import com.shapeshop.service.OrderService;
 /**
  * Order Controller. Create orders, get list of orders etc.
  */
+@CrossOrigin
 @RestController
 public class OrderController {
 
@@ -39,7 +40,7 @@ public class OrderController {
 	/**
 	 * Create order
 	 */
-	@CrossOrigin
+//	@CrossOrigin
 	@PostMapping(value = "/{companyName}/orders")
 	public ResponseEntity<Object> order(@RequestBody OrderEntity order, @PathVariable("companyName") String companyName) {
 
@@ -64,7 +65,7 @@ public class OrderController {
 	/**
 	 * Get orders for company
 	 */
-	@CrossOrigin
+//	@CrossOrigin
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{companyName}/orders")
 	public List<OrderDto> getOrders(@PathVariable("companyName") String companyName) {

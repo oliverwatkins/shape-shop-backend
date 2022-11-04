@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class CategoryController {
 
@@ -30,7 +31,6 @@ public class CategoryController {
     @Autowired
     private CategoryRepository catR;
 
-    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/categories")
     public ResponseEntity<?> newCategory(@RequestBody CategoryEntity categoryEntity,
@@ -45,7 +45,7 @@ public class CategoryController {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{companyName}/categories")
     public ResponseEntity<?> deleteCategory(@RequestBody CategoryEntity categoryEntity,
@@ -55,7 +55,7 @@ public class CategoryController {
         return new ResponseEntity<>(categoryEntity, HttpStatus.OK);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping(value = "/{companyName}/categories")
     public List<CategoryDto> getCategories(@PathVariable("companyName") String companyName) {
 
