@@ -112,7 +112,7 @@ docker hosting options :
 
 kamatera? $4 per month
 A2 hosting? some emails "unmanaged"/"managed"
-
+azure
 
 
 
