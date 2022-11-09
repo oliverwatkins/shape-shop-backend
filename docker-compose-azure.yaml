@@ -1,0 +1,56 @@
+
+
+#based on the tutorial https://learn.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose
+
+
+version: '3.7'
+services:
+  app-server:
+    image: shapeshopregistry.azurecr.io/app-server:v1 #link to registry server on azure, OR can use a docker hub image
+    build:
+      context: . # same dir
+      dockerfile: Dockerfile
+    ports:
+      - "80:80" # Forward the exposed port 9090 on the container to port 90 on the host machine
+    depends_on:
+      - db # This service depends on mysql. Start that first.
+    environment: # Pass environment variables to the service
+      # this will override application.properties values as far as I can tell
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      #      jdbc:mysql://mysql-db2:3306/customer?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: shapeshop
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "db-data2:/var/lib/mysql"
+    #      - "db-data2:/SCHEMA.sql"
+    #      - "db-data2:/TEST_DATA.sql"
+
+    #      # Mount the schema file
+    #      - "./SCHEMA.sql:/docker-entrypoint-initdb.d/SCHEMA.sql"
+    #      # init data here :
+    #      - "./TEST_DATA.sql:/docker-entrypoint-initdb.d/TEST_DATA.sql"
+    networks:
+      - backend
+
+volumes:
+  db-data2:
+    driver: azure_file
+    driver_opts:
+      share_name: shapeshopfileshare
+      storage_account_name: shapeshopstorageaccount
+
+networks:
+  backend:
