@@ -71,11 +71,11 @@ KILL :
 There should be no volumes or processes associated with shapeshop.
 
 
-1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar
+1) delete jar files in /target/. Should be called shape-shop-backend-0.1.0.jar (dont think need to do this??)
 
-2) run maven : 'package'
+2) run maven : 'package' (dont think need to do this??)
 
-(TODO - incorporate Maven into the DockerFile)
+(TODO - incorporate Maven into the DockerFile) (already is??)
 
 3) docker-compose up
 
@@ -101,7 +101,7 @@ You can look at the database by doing this
 
 
 
-### 3. Running the application and DB via two docker containers. TODO WIP
+### 3. Running the application and DB via two docker containers. TODO WIP - not advised. use compose instead
 
 #create network
 docker network create shape-shop-network
@@ -117,7 +117,7 @@ change spring.datasource.url to point to shape-shop-db-container in application.
 
 # docker (should build 'maven package')
 docker build -t shapeshop:1.0 .
-docker run --name shape-shop-server -p 8080:8080 shapeshop:1.0 --network shape-shop-network
+docker run --name shape-shop-server --hostname shape-shop-server -p 8080:80 shapeshop:1.0 --network shape-shop-network
 
 currently not working
 https://stackoverflow.com/questions/74302861/cant-connect-app-server-to-mysql-database-in-a-docker-network
@@ -127,19 +127,66 @@ https://stackoverflow.com/questions/74302861/cant-connect-app-server-to-mysql-da
 
 
 
+### AZURE SPRING APPS and AZURE MYSQL
+
+
+##DB
+
+create MySQL flexible database as PULIC
+
+create a DB "shapeshop"
+
+add firewall rule to include all 0..255
+
+connection string from IDE :
+
+host: shape-shop-db.mysql.database.azure.com
+port: 3306
+user: oliverwatkins
+pswd: T...1
+db: shapeshop
+jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
+
+(DONE!!)
+
+
+
+- create a spring app in azure than deploy like this :
+
+az spring app deploy --resource-group shapeShopResourceGroup --service shapeshop --name shapeshop --artifact-path target/shape-shop-backend-0.1.0.jar
+
+use the FORAZURE application.properties to connect to jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
+
+TODO
+
+Problem :
+
+if deploying the localhost version of application properties it deploys OK. But is deployed as "failed"
+
+If I deploy using the FORAZURE application.properties then I get this error :
+
+# 112404: Exit code 1: application error, please refer to https://aka.ms/exitcode
 
 
 
 
 
 
-### AZURE
+
+
+
+
+
+
+
+
+### AZURE (deprecated)
 
 #first login to azure
 docker login azure
 
 #check context is myacicontext
-docker context show
+docker context show (or docker context ls)
 
 #if not create aci (azure container instance)
 docker context create aci myacicontext
@@ -151,7 +198,7 @@ https://portal.azure.com/#home
 login: gmail, t..1
 
 
-#run docker compuse up
+#run docker compose up
 docker compose up
 error message :
 'cannot use ACI volume, required driver is "azure_file", found ""'
@@ -166,7 +213,7 @@ volumes:
             share_name: shapeshopfileshare
             storage_account_name: shapeshopstorageaccount
 
-#run docker compuse up
+#run docker compose up
 
 host path ("C:\\dev\\shape-shop-back-end\\SCHEMA.sql") not allowed as volume source, you need to reference an Azure File Share defined in the 'volumes' section
 

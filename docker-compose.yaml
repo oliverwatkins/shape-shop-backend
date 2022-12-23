@@ -5,7 +5,7 @@ services:
       context: . # same dir
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # Forward the exposed port 9090 on the container to port 90 on the host machine
+      - "8080:8080"  #must match with server port
     depends_on:
       - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
@@ -14,6 +14,7 @@ services:
 #      jdbc:mysql://mysql-db2:3306/customer?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SERVER_PORT: 8080 # must match with ports
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
 
@@ -39,6 +40,10 @@ services:
 
 volumes:
   db-data2:
+#    driver: azure_file
+#    driver_opts:
+#      share_name: shapeshopfileshare2
+#      storage_account_name: shapeshopstorageaccount2
 
 networks:
   backend:

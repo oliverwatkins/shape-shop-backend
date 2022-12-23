@@ -1,0 +1,29 @@
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+#jdbc:mysql://localhost:3306/payphone?useSSL=false&useJDBCComplaintTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+
+# use this when running in IDE (localhost)
+# spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+# use this when running in 2 x contaienrs. remember you need to do mvn package to get changes from properties file
+#  spring.datasource.url=jdbc:mysql://shape-shop-db-container:3306/shapeshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+
+spring.datasource.url=jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+
+
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+
+spring.datasource.username=oliverwatkins
+spring.datasource.password=Tr1llion1
+#spring.datasource.username=root
+#spring.datasource.password=root
+
+
+spring.datasource.platform=mysql
+spring.datasource.initialization-mode=always
+
+#server.port=8080
+
