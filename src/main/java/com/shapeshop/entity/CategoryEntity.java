@@ -36,6 +36,10 @@ public class CategoryEntity {
         this.company = company;
     }
 
+    public CategoryEntity(String name) {
+        this.name = name;
+    }
+
     public String toString() {
         return "testing testing";
     }

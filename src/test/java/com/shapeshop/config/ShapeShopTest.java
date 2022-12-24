@@ -9,6 +9,7 @@ import com.shapeshop.entity.UserEntity;
 import com.shapeshop.model.UserRole;
 import com.shapeshop.repository.*;
 import com.shapeshop.security.PasswordUtils;
+import com.shapeshop.service.CategoryService;
 import com.shapeshop.service.ProductService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,6 +84,9 @@ public abstract class ShapeShopTest {
     ProductService productService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -118,7 +122,7 @@ public abstract class ShapeShopTest {
         creditCardRepository.save(cc2);
 
         AnniesArtSupplies.createCategories(categoryRepository, companyRepository);
-        Carlscafe.createCategories(categoryRepository, companyRepository);
+        Carlscafe.createCategories(categoryRepository, companyRepository, categoryService);
         Carlscafe.createProducts(productRepository, companyRepository, categoryRepository, productService);
         AnniesArtSupplies.createProducts(productRepository, companyRepository, categoryRepository, productService);
         Carlscafe.createOrders(orderRepository, companyRepository, productRepository, creditCardRepository, addressRepository, orderItemRepository);

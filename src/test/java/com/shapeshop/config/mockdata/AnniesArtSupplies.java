@@ -3,7 +3,6 @@ package com.shapeshop.config.mockdata;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.*;
@@ -12,7 +11,6 @@ import com.shapeshop.service.ProductService;
 import org.springframework.data.repository.CrudRepository;
 
 public class AnniesArtSupplies {
-
 
 	public static void createCategories(CategoryRepository repository, CompanyRepository cRes) {
 		System.out.println("-->>> create some cats  ! ");
@@ -28,12 +26,6 @@ public class AnniesArtSupplies {
 		System.out.println("-->>> create some products  ! ");
 
 		CompanyEntity ce = cRes.findByName("anniesart");
-
-
-//		List<CategoryEntity> cat = catRes.findByCompany(ce);
-
-
-//		ProductEntity pe = new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh");
 
 		pSer.createProduct(new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh"), "anniesart", "paints");
 		pSer.createProduct(new ProductEntity("paint", new BigDecimal(6.66), "na.png", "a paint duh"), "anniesart", "paints");
@@ -56,7 +48,6 @@ public class AnniesArtSupplies {
 
 		System.out.println("-->>> create some orders ");
 
-
 		CompanyEntity company = cRes.findByName("anniesart");
 
 		ArrayList<ProductEntity> al = (ArrayList<ProductEntity>) pRes.findByCompany(company);
@@ -65,7 +56,6 @@ public class AnniesArtSupplies {
 
 //		AddressEntity address_bob = contactData.get(0);
 		AddressEntity address_jane = contactData.get(1);
-
 
 		ProductEntity product_brush= al.get(1);
 		ProductEntity product_paint = al.get(2);

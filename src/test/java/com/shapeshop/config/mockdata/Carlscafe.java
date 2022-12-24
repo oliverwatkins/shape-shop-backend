@@ -8,50 +8,31 @@ import java.util.List;
 import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.*;
 import com.shapeshop.repository.*;
+import com.shapeshop.service.CategoryService;
 import com.shapeshop.service.ProductService;
 import org.springframework.data.repository.CrudRepository;
 
 public class Carlscafe {
 
 
-	public static void createCategories(CategoryRepository repository, CompanyRepository cRes) {
+	public static void createCategories(CategoryRepository repository, CompanyRepository cRes, CategoryService catSer) throws ShapeShopException {
 		System.out.println("-->>> create some cats  ! ");
 
-		CompanyEntity ce = cRes.findByName("carlscafe");
-
-		// save a few products
-
-//		repository.save(new CategoryEntity("paints" , ce));
-//		repository.save(new CategoryEntity("draw" , ce));
-		repository.save(new CategoryEntity("main" , ce));
-		repository.save(new CategoryEntity("drinks" , ce));
-		repository.save(new CategoryEntity("biskits" , ce));
-		repository.save(new CategoryEntity("teas" , ce));
+		catSer.createCategory(new CategoryEntity("main"), "carlscafe");
+		catSer.createCategory(new CategoryEntity("drinks"), "carlscafe");
+		catSer.createCategory(new CategoryEntity("biskits"), "carlscafe");
+		catSer.createCategory(new CategoryEntity("teas"), "carlscafe");
 	}
 
 	
 	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes, ProductService pSer) throws ShapeShopException {
 
 		System.out.println("-->>> create some products  ! ");
-
-		CompanyEntity ce = cRes.findByName("carlscafe");
-
-		List<CategoryEntity> catE = catRes.findByCompany(ce);
-
-
 		pSer.createProduct(new ProductEntity("hamburger", new BigDecimal(1.50),  "na.png", "a hambirger"), "carlscafe",  "main");
 		pSer.createProduct(new ProductEntity("hotdog", new BigDecimal(2.50),  "na.png", "a hotdog"), "carlscafe",  "main");
 		pSer.createProduct(new ProductEntity("donut", new BigDecimal(3.50),  "na.png", "a dougnut"), "carlscafe",  "main");
-
 		pSer.createProduct(new ProductEntity("coke", new BigDecimal(4.50),  "na.png", "a koke"), "carlscafe",  "drinks");
 		pSer.createProduct(new ProductEntity("water", new BigDecimal(6.50),  "na.png", "a water duh"), "carlscafe",  "drinks");
-		// save a few products
-//		repository.save(new ProductEntity("hamburger", new BigDecimal(1.50), "main", "na.png", "a hambirger"), "",  "");
-//		repository.save(new ProductEntity("hotdog", new BigDecimal(7.90), "main", "na.png", ce, "a hotdog", catE.get(0)));
-//		repository.save(new ProductEntity("donut", new BigDecimal(7.90), "main", "na.png", ce, "a donut", catE.get(0)));
-//
-//		repository.save(new ProductEntity("coke", new BigDecimal(4.50), "drinks", "na.png", ce, "a coke", catE.get(0)));
-//		repository.save(new ProductEntity("water", new BigDecimal(4.50), "drinks", "na.png", ce, "a water", catE.get(0)));
 	}
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
