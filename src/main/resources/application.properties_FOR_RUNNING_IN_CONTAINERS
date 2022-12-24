@@ -1,0 +1,17 @@
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+# use this when running in 2 x contaienrs. remember you need to do mvn package to get changes from properties file
+spring.datasource.url=jdbc:mysql://shape-shop-db-container:3306/shapeshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.platform=mysql
+spring.datasource.initialization-mode=always
+
+server.port=8080
+
+
+#TODO i dont think this is needed because docker compose file already overwride spring values.
+

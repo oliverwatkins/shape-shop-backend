@@ -35,7 +35,7 @@ public class App {
 	}
 
 	@Bean
-	public CommandLineRunner testDBConnectionWorks(UserRepository repository) {
+	public CommandLineRunner testDBConnectionWorks() {
 		return (args) -> {
 
 			CompanyEntity result = cRes.findByName("higgins");

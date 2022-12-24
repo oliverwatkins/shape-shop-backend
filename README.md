@@ -3,23 +3,27 @@
 This README consists of three parts.
 
 1. Running the spring application within the IDE against the DB in a docker container.
-2. Running everything using docker-compose
-3. Running the spring application and DB via two docker containers.
-4. Azure notes
+2. Running in two containers using docker-compose
+3. Starting/deploying in Azure
+4. Running the spring application and DB via two docker containers using command lines.
+5. Azure notes
+6. misc
 
-### 1. Running the application within the IDE against the DB in a docker container
+
+
+# 1. Running the application within the IDE against the DB in a docker container
 
 To run the database :
 
+kill of all old processes (optional) run : 
 
+> KILL.BAT
 
-(optional) run KILL.BAT
-
-## Step 1 - run mysql container
+### Step 1 - run mysql container instance
 
 > docker run -d -p 3306:3306 --name=shape-shop-db-container --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
 
-## Step 2 - setup the schema
+### Step 2 - setup the schema
 
 > docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
 
@@ -31,7 +35,7 @@ To run the database :
 * unknown shorthand flag: 'u' in -uroot
   * This is because using azure context. Reset to default context : **docker context use default**
 
-## Step 3 - setup the test data
+### Step 3 - setup the test data
 
 > docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
 
@@ -41,7 +45,7 @@ jdbc:mysql://localhost:3306/shapeshop
 In spring properties add this :hibernate.dialect
 spring.datasource.url=jdbc:mysql://localhost:3306/shapeshop?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
 
-## Step 4 - START BACKEND APP IN IDE
+### Step 4 - START BACKEND APP IN IDE
 
 * it is now possible to start app (server side - spring) in IDE and debug through the code. It should be possible to 
 access http://localhost:8080/alpenhof/products
@@ -54,19 +58,19 @@ it should be possible to run the client side as well.
 
 
 
-### 2. Running everything using docker-compose
+# 2. Running the application and DB via two docker containers, using docker-compose
 
 remove all containers and volumes and images
 
-`` docker-compose down ``
-`` docker container prune ``
-`` docker volume prune ``
+> docker-compose down
+> docker container prune 
+> docker volume prune 
 
 KILL :
 
-`` docker container stop shape-shop-back-end_db_1 ``
-`` docker container rm shape-shop-back-end_db_1 ``
-`` docker volume rm shape-shop-back-end_db-data2 ``
+> docker container stop shape-shop-back-end_db_1
+> docker container rm shape-shop-back-end_db_1
+> docker volume rm shape-shop-back-end_db-data2
 
 There should be no volumes or processes associated with shapeshop.
 
@@ -88,7 +92,6 @@ to shape-shop and try again.
 Should be able to access like so :
 http://localhost:8080/higgins/products
 
-
 You can look at the database by doing this
 
 ``docker exec -it shape-shop-back-end_db_1 bash ``
@@ -101,42 +104,13 @@ You can look at the database by doing this
 
 
 
-### 3. Running the application and DB via two docker containers. TODO WIP - not advised. use compose instead
+# 3. AZURE SPRING APPS and AZURE MYSQL
 
-#create network
-docker network create shape-shop-network
-# create volume maybe?
+### create DB first (this step has already been done)
 
-# build db instance
-docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
-docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
-docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
-
-#application.properties
-change spring.datasource.url to point to shape-shop-db-container in application.properties. port should also point to port 8080
-
-# docker (should build 'maven package')
-docker build -t shapeshop:1.0 .
-docker run --name shape-shop-server --hostname shape-shop-server -p 8080:80 shapeshop:1.0 --network shape-shop-network
-
-currently not working
-https://stackoverflow.com/questions/74302861/cant-connect-app-server-to-mysql-database-in-a-docker-network
-
-
-
-
-
-
-### AZURE SPRING APPS and AZURE MYSQL
-
-
-##DB
-
-create MySQL flexible database as PULIC
-
-create a DB "shapeshop"
-
-add firewall rule to include all 0..255
+- create MySQL flexible database as PULIC
+- create a DB "shapeshop"
+- add firewall rule to include all 0..255
 
 connection string from IDE :
 
@@ -149,23 +123,17 @@ jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
 
 (DONE!!)
 
+### deploy spring app
 
+- create a spring app in azure than deploy like this. Remember to **mvn clean package** first.
 
-- create a spring app in azure than deploy like this :
+> az spring app deploy --resource-group shapeShopResourceGroup --service shapeshop --name shapeshop --artifact-path target/shape-shop-backend-0.1.0.jar
 
-az spring app deploy --resource-group shapeShopResourceGroup --service shapeshop --name shapeshop --artifact-path target/shape-shop-backend-0.1.0.jar
+use the FOR_AZURE application.properties to connect to jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
 
-use the FORAZURE application.properties to connect to jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
+should be visible here :
 
-TODO
-
-Problem :
-
-if deploying the localhost version of application properties it deploys OK. But is deployed as "failed"
-
-If I deploy using the FORAZURE application.properties then I get this error :
-
-# 112404: Exit code 1: application error, please refer to https://aka.ms/exitcode
+> https://shapeshop-shapeshop.azuremicroservices.io/alpenhof/products
 
 
 
@@ -175,36 +143,79 @@ If I deploy using the FORAZURE application.properties then I get this error :
 
 
 
+# 4. Running the application and DB via two docker containers, using command line
+### TODO WIP - not advised and not working. use docker-compose (prev step) instead
+
+###create network
+docker network create shape-shop-network
+### create volume maybe?
+
+### build db instance
+docker run -d -p 3306:3306 --name=shape-shop-db-container --network shape-shop-network --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_PASSWORD=root" --env="MYSQL_DATABASE=shapeshop" mysql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < SCHEMA.sql
+docker exec -i shape-shop-db-container mysql -uroot -proot shapeshop < TEST_DATA.sql
+
+###application.properties
+change spring.datasource.url to point to shape-shop-db-container in application.properties. port should also point to port 8080
+
+### docker (should build 'maven package')
+docker build -t shapeshop:1.0 .
+docker run --name shape-shop-server --hostname shape-shop-server -p 8080:80 shapeshop:1.0 --network shape-shop-network
+
+currently not working
+https://stackoverflow.com/questions/74302861/cant-connect-app-server-to-mysql-database-in-a-docker-network
 
 
 
 
 
-### AZURE (deprecated)
 
-#first login to azure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# AZURE (deprecated)
+
+### first login to azure
 docker login azure
 
-#check context is myacicontext
+### check context is myacicontext
 docker context show (or docker context ls)
 
-#if not create aci (azure container instance)
+### if not create aci (azure container instance)
 docker context create aci myacicontext
 (hit enter)
 resource group "720-blahblah" created
 
-#website :
+### website :
 https://portal.azure.com/#home
 login: gmail, t..1
 
 
-#run docker compose up
+### run docker compose up
 docker compose up
 error message :
 'cannot use ACI volume, required driver is "azure_file", found ""'
 
-#add azure_file driver to compose file, and make sure there is "shapreshopfileshare" and "shapeshotstorageaccount"
-# setup in azure 
+### add azure_file driver to compose file, and make sure there is "shapreshopfileshare" and "shapeshotstorageaccount"
+###  setup in azure 
 
 volumes:
     db-data2:
@@ -213,7 +224,7 @@ volumes:
             share_name: shapeshopfileshare
             storage_account_name: shapeshopstorageaccount
 
-#run docker compose up
+### run docker compose up
 
 host path ("C:\\dev\\shape-shop-back-end\\SCHEMA.sql") not allowed as volume source, you need to reference an Azure File Share defined in the 'volumes' section
 
@@ -244,25 +255,25 @@ https://docs.docker.com/cloud/aci-integration/
 
 
 
-## tutorial docker compose
+### tutorial docker compose
 
 https://learn.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose
 
 
-#resource group and registry :
+### resource group and registry :
 az group create --name shapeShopResourceGroup --location eastus 
 az acr create --resource-group shapeShopResourceGroup --name shapeshopregistry --sku Basic
 
 az acr login --name shapeshopregistry
 
-# so RG contains the registry
+###  so RG contains the registry
 
 
-# see docker-compose-azure.yaml
+###  see docker-compose-azure.yaml
 
 
 
-# TODO do the tutorial with voting app (see project)
+### TODO do the tutorial with voting app (see project)
 
 
 
@@ -317,7 +328,7 @@ azure
 
 
 
-### DOCKER (simple setup) APP without DB
+### DOCKER (simple setup) APP without DB ????
 
 To run on Docker :
 
