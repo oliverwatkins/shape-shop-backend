@@ -62,15 +62,15 @@ it should be possible to run the client side as well.
 
 remove all containers and volumes and images
 
-> docker-compose down
-> docker container prune 
-> docker volume prune 
+- docker-compose down
+- docker container prune 
+- docker volume prune 
 
 KILL :
 
-> docker container stop shape-shop-back-end_db_1
-> docker container rm shape-shop-back-end_db_1
-> docker volume rm shape-shop-back-end_db-data2
+- docker container stop shape-shop-back-end_db_1
+- docker container rm shape-shop-back-end_db_1
+- docker volume rm shape-shop-back-end_db-data2
 
 There should be no volumes or processes associated with shapeshop.
 
@@ -114,12 +114,12 @@ You can look at the database by doing this
 
 connection string from IDE :
 
-host: shape-shop-db.mysql.database.azure.com
-port: 3306
-user: oliverwatkins
-pswd: T...1
-db: shapeshop
-jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
+- host: shape-shop-db.mysql.database.azure.com
+- port: 3306
+- user: oliverwatkins
+- pswd: T...1
+- db: shapeshop
+- jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
 
 (DONE!!)
 

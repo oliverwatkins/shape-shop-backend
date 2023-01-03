@@ -106,4 +106,16 @@ public class Converter {
         }
         return null;
     }
+
+    public static ProductEntity convertProductDtoToEntity(ProductDto product) {
+
+        if (product !=null) {
+            ProductEntity a = new ProductEntity(
+                    product.name, product.price, "todo", product.description
+            );
+            return a;
+        }
+        return null;
+
+    }
 }

@@ -37,20 +37,24 @@ public class ProductController {
     public String test() {
         return "hello";
     }
-
+    //                            @RequestBody ProductEntity product,
 //    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/products")
-    public ResponseEntity<?> newProduct(@RequestBody ProductEntity product,
-                                        @PathVariable("companyName") String companyName) {
-        ProductEntity s = null;
+    public ResponseEntity<?> newProduct(
+                        @RequestBody ProductDto product,
+                        @PathVariable("companyName") String companyName)  {
+
+        ProductEntity prod = Converter.convertProductDtoToEntity(product);
+
         try {
-            s = productService.createProduct(product, companyName);
+            prod  = productService.createProduct(prod, companyName, product.categories.get(0).name);
         } catch (ShapeShopException e) {
             e.printStackTrace();
-            return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(s, HttpStatus.OK);
+        System.out.println("successfully created product");
+        return new ResponseEntity<>(prod, HttpStatus.OK);
     }
 
 //    @CrossOrigin

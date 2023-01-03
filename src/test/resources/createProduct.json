@@ -1,0 +1,10 @@
+{
+  "imageFilename": "na.png",
+  "price": 5.5,
+  "name": "testy",
+  "description": "the best testy",
+  "categories": [
+    {"id":1, "name":"main"},
+    {"id":2, "name":"drinks"}
+  ]
+}
