@@ -1,0 +1,10 @@
+{
+  "imageFilename": "na.png",
+  "price": 5.5,
+  "name": "hotdog",
+  "description": "a hotdog",
+  "categories": [
+    {"id":1, "name":"idontexist"},
+    {"id":2, "name":"idontexist"}
+  ]
+}

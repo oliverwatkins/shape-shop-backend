@@ -57,6 +57,10 @@ public class ProductController {
         return new ResponseEntity<>(prod, HttpStatus.OK);
     }
 
+
+
+
+    //TODO remove. currentlz this is onlz being used in onetest
 //    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/{category}/products")
@@ -73,7 +77,6 @@ public class ProductController {
         }
         return new ResponseEntity<>(Converter.convertProductToDto(productEntity), HttpStatus.OK);
     }
-
 
 //    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")

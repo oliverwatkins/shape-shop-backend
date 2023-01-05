@@ -50,7 +50,14 @@ public class ProductService {
         }
         product.setCompany(company);
 
-        CategoryEntity cat = categoryRep.findByName(categoryName);
+        List<CategoryEntity> l = categoryRep.findByCompany(company);
+        CategoryEntity cat = null;
+        for (CategoryEntity categoryEntity : l) {
+            if (categoryEntity.getName().equals(categoryName)) {
+                cat = categoryEntity;
+            }
+        }
+
         if (cat == null) {
             throw new ShapeShopException("Category does not exist : " + categoryName, ShapeShopException.ErrorType.CATEGORY_DOES_NOT_EXIST);
         }
@@ -65,7 +72,7 @@ public class ProductService {
     }
 
     /**
-     * @deprecated can only create product with cat
+     * @deprecated can only create product with a cat
      */
     public ProductEntity createProduct(ProductEntity product, String companyName) throws ShapeShopException {
 
