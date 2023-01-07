@@ -12,24 +12,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
-public class CreateProductTest extends ShapeShopTest {
+public class DeleteProductTest extends ShapeShopTest {
 
-    @Test
-    public void createProduct() throws Exception {
-        JSONObject createProductJSON = extractJSONObjectFromFileName("src/test/resources/createProduct.json");
 
-        String token = authenticate("admin", "admin");
-
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.post("/carlscafe/products")
-                .header("Authorization", "Bearer " + token).contentType("application/json")
-                .content(createProductJSON.toString())).andExpect(matcher.is(200));
-
-        JSONObject ja = extractJSONObjectFromResponse(resultActions);
-
-        System.out.println("ja " + ja);
-        //TODO do some kind of compare. returned prod should have an id created.
-
-    }
 
     @org.junit.Test
     public void deleteProduct() throws Exception {
@@ -52,19 +37,6 @@ public class CreateProductTest extends ShapeShopTest {
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
-
-    @Test
-    public void createProduct_catDoesntExist() throws Exception {
-        JSONObject createProductJSON = extractJSONObjectFromFileName("src/test/resources/createProduct_catDoesntExist.json");
-
-        String token = authenticate("admin", "admin");
-
-        mvc.perform(MockMvcRequestBuilders.post("/carlscafe/products")
-                .header("Authorization", "Bearer " + token).contentType("application/json")
-                .content(createProductJSON.toString())).andExpect(matcher.is(500)); //category does not exist
-    }
-
-
 
 
 }

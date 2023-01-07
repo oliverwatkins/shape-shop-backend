@@ -152,6 +152,11 @@ public class ProductService {
     }
 
     public void deleteProduct(long id) {
+
+        ProductEntity prod = productRep.findById(id);
+
+        prodCatRep.deleteAll(prod.getProductCategories());
+
         productRep.deleteById(id);
     }
 
