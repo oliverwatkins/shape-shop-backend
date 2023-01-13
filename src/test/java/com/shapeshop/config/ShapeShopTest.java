@@ -285,4 +285,13 @@ public abstract class ShapeShopTest {
         MvcResult mvcResult = resultActions.andReturn();
         resultActions.andExpect(matcher.is(200));
     }
+
+    protected void updateCategoryOverHTTP(String token, String updateCategoryJSON, String catId) throws Exception {
+        mvc.perform(MockMvcRequestBuilders.put("/" + defaultCompany + "/categories/" + catId)
+                .header("Authorization", "Bearer " + token).contentType("application/json")
+                .content(updateCategoryJSON)).andExpect(matcher.is(200));
+
+    }
+
+
 }

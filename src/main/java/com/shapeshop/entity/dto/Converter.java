@@ -49,6 +49,12 @@ public class Converter {
         return categoryDtos;
     }
 
+    public static CategoryEntity convertCategoryDtoToEntity(CategoryDto cd) {
+        CategoryEntity ce = new CategoryEntity(cd.getName());
+        ce.setId(cd.getId());
+        return ce;
+    }
+
     public static List<OrderDto> convertOrderToDto(List<OrderEntity> orderEntities) {
         List<OrderDto> orders = new ArrayList<>();
         for (OrderEntity orderEntity : orderEntities) {

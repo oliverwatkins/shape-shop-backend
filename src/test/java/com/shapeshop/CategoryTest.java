@@ -72,6 +72,55 @@ public class CategoryTest extends ShapeShopTest {
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
 
+    @org.junit.Test
+    public void updateCategory() throws Exception {
+        //TODO
+        //auth
+        String token = authenticate("admin", "admin");
+
+        //create a cat
+        String createCategoryJSON =
+                "{\"name\": \"scones\" }";
+        createCategoryOverHTTP(token, createCategoryJSON);
+
+        //create a prod for new category
+        String createProductJSON =
+                "{\"name\": \"jam scone\" }";
+        createProductOverHTTP(token, createProductJSON, "scones");
+
+        //make sure prod is there
+        String productJSON = getProductsOverHTTP();
+        JSONObject obj = findProduct(productJSON, "jam scone");
+        if (obj == null) {
+            throw new RuntimeException("canny find product");
+        }
+
+        //make sure prod is there
+        String categoriesJSON = getCategoriesOverHTTP();
+        JSONObject cat = findCategory(categoriesJSON, "scones");
+        if (obj == null) {
+            throw new RuntimeException("canny find product");
+        }
+
+
+        //udpate cat
+        String updateCategoryJSON =
+                "{\"name\": \"scones2\"}";
+        updateCategoryOverHTTP(token, updateCategoryJSON, "7");
+
+
+        //make sure cat is not there
+        String categoryJSON = getCategoriesOverHTTP();
+        System.out.println("*** catJSON --> " + categoryJSON);
+        obj = findCategory(categoryJSON, "scones2");
+
+        if (obj == null) {
+            throw new RuntimeException("scones2 is there");
+        }
+
+    }
+
+
 
     @org.junit.Test
     public void deleteCategory() throws Exception {
