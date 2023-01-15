@@ -10,11 +10,14 @@ import com.shapeshop.repository.CategoryRepository;
 import com.shapeshop.repository.CompanyRepository;
 import com.shapeshop.repository.ProductCategoryRepository;
 import com.shapeshop.repository.ProductRepository;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CategoryService {
@@ -71,24 +74,16 @@ public class CategoryService {
 
         CompanyEntity company = companyRep.findByName(companyName);
 
-        List<CategoryEntity> categoryList = catRep.findByCompany(company);
-        CategoryEntity foundEntity = null;
+        List<CategoryEntity> categoryEntities = catRep.findByCompany(company);
 
-        for (CategoryEntity ce: categoryList) {
-            if (ce.getId() == id) {
-                foundEntity = ce;
-            }
-        }
+        val foundEntity = categoryEntities.stream().filter(e -> e.getId() == id).findFirst();
 
-        if (foundEntity != null) {
-            foundEntity.setName(categoryEntity.getName());
-            categoryEntity = catRep.save(foundEntity);
+        if (foundEntity.isPresent()) {
+            foundEntity.get().setName(categoryEntity.getName());
+            return catRep.save(foundEntity.get());
         }else {
             throw new ShapeShopException("Category does not exist " + categoryEntity.getName(), ShapeShopException.ErrorType.PROD_NOT_FOUND);
         }
-//        Converter.convertCategoryToDto();
-
-        return categoryEntity;
     }
 
     public ProductCategoryEntity getCategory(ProductCategoryEntity categoryEntity, String companyName) throws ShapeShopException {

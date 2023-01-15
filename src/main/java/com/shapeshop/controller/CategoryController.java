@@ -61,7 +61,7 @@ public class CategoryController {
             return new ResponseEntity<>("internal server error 2", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         //...ugh
-        ArrayList<CategoryEntity> al = new ArrayList<CategoryEntity>();
+        var al = new ArrayList<CategoryEntity>();
         al.add(category);
         return new ResponseEntity<>(Converter.convertCategoryToDto(al), HttpStatus.OK);
     }

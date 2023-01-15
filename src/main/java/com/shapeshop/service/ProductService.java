@@ -20,7 +20,6 @@ import javax.persistence.Query;
 @Service
 public class ProductService {
 
-
     @Autowired
     ProductCategoryRepository prodCatRep;
 
@@ -95,20 +94,15 @@ public class ProductService {
         }
 
         List<ProductEntity> prods = this.getProductsByCompany(company);
-        ProductEntity foundEntity = null;
 
-        for (ProductEntity p: prods) {
-            if (p.getId() == id) {
-                foundEntity = p;
-            }
-        }
+        val foundEntity = prods.stream().filter(e -> e.getId() == id).findFirst();
 
-        if (foundEntity != null) {
+        if (foundEntity.isPresent()) {
             if (product.getName() != null)
-                foundEntity.setName(product.getName());
+                foundEntity.get().setName(product.getName());
             if (product.getPrice() != null)
-                foundEntity.setPrice(product.getPrice());
-            productRep.save(foundEntity);
+                foundEntity.get().setPrice(product.getPrice());
+            productRep.save(foundEntity.get());
         }else {
             throw new ShapeShopException("Product does not exist ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
         }
@@ -133,8 +127,8 @@ public class ProductService {
         List<ProductEntity> products2 = new ArrayList<>();
 
         for (ProductEntity product : products) {
-            var asdf = product.getProductCategories().stream().filter(pc -> pc.getCategory().getId() == cat.getId()).collect(Collectors.toList());
-            if (asdf.size() > 0)
+            var prodCats = product.getProductCategories().stream().filter(pc -> pc.getCategory().getId() == cat.getId()).collect(Collectors.toList());
+            if (prodCats.size() > 0)
                 products2.add(product);
         }
 

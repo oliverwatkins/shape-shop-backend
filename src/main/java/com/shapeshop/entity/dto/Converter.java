@@ -36,15 +36,14 @@ public class Converter {
 
     public static List<CategoryDto> convertCategoryToDto(List<CategoryEntity> categoryEntities) {
         List<CategoryDto> categoryDtos = new ArrayList<>();
+        
         for (CategoryEntity categoryEntity : categoryEntities) {
-
             try {
                 categoryDtos.add(new CategoryDto(categoryEntity.getId(), categoryEntity.getName()));
             }catch(Exception e) {
                 e.printStackTrace();
                 throw e;
             }
-
         }
         return categoryDtos;
     }

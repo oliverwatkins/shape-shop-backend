@@ -78,18 +78,10 @@ public class OrderService {
 
 	public List<OrderEntity> getOrdersByCompany(CompanyEntity company) {
 
-		try {
-			List<OrderEntity> byCompany = orderRepository.findByCompany(company);
-			List<OrderEntity> result = StreamSupport.stream(byCompany.spliterator(), false)
-					.collect(Collectors.toList());
-			return result;
-
-		}catch(Exception e) {
-
-			System.out.println(" " + e);
-
-			throw e;
-		}
+		List<OrderEntity> byCompany = orderRepository.findByCompany(company);
+		List<OrderEntity> result = StreamSupport.stream(byCompany.spliterator(), false)
+				.collect(Collectors.toList());
+		return result;
 	}
 
 	public void deleteOrder(long id) {
