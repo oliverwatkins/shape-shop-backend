@@ -4,6 +4,7 @@ import com.shapeshop.ShapeShopException;
 import com.shapeshop.entity.CategoryEntity;
 import com.shapeshop.entity.ProductCategoryEntity;
 import com.shapeshop.entity.CompanyEntity;
+import com.shapeshop.entity.ProductEntity;
 import com.shapeshop.entity.dto.CategoryDto;
 import com.shapeshop.entity.dto.Converter;
 import com.shapeshop.repository.CategoryRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,16 +60,18 @@ public class CategoryService {
      * could not execute statement; SQL [n/a]; constraint ["FK5N0VG2QTTW3G7ODMC3TIAL2N4: PUBLIC.PRODUCT_CATEGORY FOREIGN KEY(ID) REFERENCES PUBLIC.PRODUCT(ID) (12)"; SQL statement:
      * update product_category set id=null where id=? [23506-193]]
      *
-     * @param categoryEntity
+     * @param id
      * @param companyName
      */
-    public void deleteCategory(CategoryEntity categoryEntity, String companyName) {
+    public void deleteCategory(Long id, String companyName) {
 
-        CategoryEntity category= catRep.findByName(categoryEntity.getName());
+        CompanyEntity company = companyRep.findByName(companyName);
 
-        prodCatRep.deleteAll(category.getProductCategory());
+        List<CategoryEntity> cats = catRep.findByCompany(company);
 
-        catRep.delete(category);
+        final val first = cats.stream().filter(c -> c.getId() == id).findFirst();
+
+        catRep.delete(first.get());
     }
 
     public CategoryEntity updateCategory(CategoryEntity categoryEntity, String companyName, Long id) throws ShapeShopException {

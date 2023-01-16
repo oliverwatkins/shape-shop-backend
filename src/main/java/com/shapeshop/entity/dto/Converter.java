@@ -4,7 +4,6 @@ import com.shapeshop.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Converter {
@@ -23,7 +22,7 @@ public class Converter {
         List<ProductCategoryEntity> productCategories =  entity.getProductCategories();
         List<CategoryEntity> cats = productCategories.stream().map(x->x.getCategory()).collect(Collectors.toList());
 
-        List<CategoryDto> categoryDtos = convertCategoryToDto(cats);
+        List<CategoryDto> categoryDtos = convertCategoryListToDtoList(cats);
 
         return new ProductDto(
                 entity.getId(),
@@ -34,7 +33,7 @@ public class Converter {
                 categoryDtos);
     }
 
-    public static List<CategoryDto> convertCategoryToDto(List<CategoryEntity> categoryEntities) {
+    public static List<CategoryDto> convertCategoryListToDtoList(List<CategoryEntity> categoryEntities) {
         List<CategoryDto> categoryDtos = new ArrayList<>();
         
         for (CategoryEntity categoryEntity : categoryEntities) {
@@ -47,6 +46,14 @@ public class Converter {
         }
         return categoryDtos;
     }
+
+    public static CategoryDto convertCategoryEntityToDto(CategoryEntity cd) {
+        CategoryDto ce = new CategoryDto();
+        ce.setId(cd.getId());
+        ce.setName(cd.getName());
+        return ce;
+    }
+
 
     public static CategoryEntity convertCategoryDtoToEntity(CategoryDto cd) {
         CategoryEntity ce = new CategoryEntity(cd.getName());
