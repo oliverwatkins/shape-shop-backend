@@ -16,7 +16,10 @@ INSERT INTO company (id, name) VALUES (2, "higgins");
 
 INSERT INTO category (id, name, company_id) VALUES (1, "main", 1);
 INSERT INTO category (id, name, company_id) VALUES (2, "drinks", 1);
-INSERT INTO category (id, name, company_id) VALUES (3, "main", 2);
+INSERT INTO category (id, name, company_id) VALUES (3, "beers", 2);
+INSERT INTO category (id, name, company_id) VALUES (4, "accessories", 2);
+
+
 # INSERT INTO category (cat_id, name, company_id) VALUES (4, "prodType2_", 2);
 
 INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
@@ -39,9 +42,9 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (7, "Peak Seeker IPA", "Peak Seeker IPA", 8.50, "beer.png", 2);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (8, "Pioneer Cream Ale", "Pioneer Cream Ale", 4.50, "beer.png", 2);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (9, "Pumpkin Ale", "Pumpkin Ale", 4.50,  "beer.png", 2);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (10, "growlers", "2L stainless steel growlers", 12.50, "beer.png", 2);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (11, "T-Shirt", "T-Shirt", 12.50, "beer.png", 2);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (12, "Beer Mats", "Beer Mats", 12.50, "beer.png", 2);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (10, "growlers", "2L stainless steel growlers", 12.50, "growler.png", 2);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (11, "T-Shirt", "T-Shirt", 12.50, "tshirt.jpg", 2);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (12, "Beer Mats", "Beer Mats", 12.50, "beermat.png", 2);
 
 # // save a few products 2
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (13, "Lachs-Lasagne", "Lachs-Spinat-Lasagne", 10.90, "lachs_spinat.jpg", 1);
@@ -100,9 +103,9 @@ INSERT INTO product_category (product_id, category_id) values (6, 3);
 INSERT INTO product_category (product_id, category_id) values (7, 3);
 INSERT INTO product_category (product_id, category_id) values (8, 3);
 INSERT INTO product_category (product_id, category_id) values (9, 3);
-INSERT INTO product_category (product_id, category_id) values (10, 3);
-INSERT INTO product_category (product_id, category_id) values (11, 3);
-INSERT INTO product_category (product_id, category_id) values (12, 3);
+INSERT INTO product_category (product_id, category_id) values (10, 4);
+INSERT INTO product_category (product_id, category_id) values (11, 4);
+INSERT INTO product_category (product_id, category_id) values (12, 4);
 COMMIT;
 
 
