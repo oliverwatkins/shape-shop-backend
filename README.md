@@ -58,6 +58,12 @@ it should be possible to run the client side as well.
 
 
 
+
+
+
+
+
+
 # 2. Running the application and DB via two docker containers, using docker-compose
 
 remove all containers and volumes and images
@@ -103,37 +109,6 @@ You can look at the database by doing this
 
 
 
-
-# 3. AZURE SPRING APPS and AZURE MYSQL
-
-### create DB first (this step has already been done)
-
-- create MySQL flexible database as PULIC
-- create a DB "shapeshop"
-- add firewall rule to include all 0..255
-
-connection string from IDE :
-
-- host: shape-shop-db.mysql.database.azure.com
-- port: 3306
-- user: oliverwatkins
-- pswd: T...1
-- db: shapeshop
-- jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
-
-(DONE!!)
-
-### deploy spring app
-
-- create a spring app in azure than deploy like this. Remember to **mvn clean package** first.
-
-> az spring app deploy --resource-group shapeShopResourceGroup --service shapeshop --name shapeshop --artifact-path target/shape-shop-backend-0.1.0.jar
-
-use the FOR_AZURE application.properties to connect to jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
-
-should be visible here :
-
-> https://shapeshop-shapeshop.azuremicroservices.io/alpenhof/products
 
 
 
