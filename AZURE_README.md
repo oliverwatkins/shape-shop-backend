@@ -1,8 +1,5 @@
 
 
-
-
-
 # AZURE SPRING APPS and AZURE MYSQL
 
 ### create DB first (this step has already been done)
@@ -19,6 +16,11 @@ connection string from IDE :
 - pswd: T...1
 - db: shapeshop
 - jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
+
+then modify, run schema, run test data etc in intellij console
+
+
+
 
 (DONE!!)
 
@@ -55,16 +57,11 @@ should be visible here :
 
 
 
-name
-service
+????????????????
 
 > az spring app deployment create --resource-group shapeShopResourceGroup --service shapeshop2 --app demo --name green --runtime-version Java_17 --artifact-path target/shape-shop-backend-0.1.0.jar
 
-
 > az spring app create --resource-group shapeShopResourceGroup --service shapeshop2 --name demo --runtime-version Java_17 --assign-endpoint
-
-
-
 
 > az spring app deploy -s shapeshop2 -g shapeShopResourceGroup -n shapeshop2instance --artifact-path target/shape-shop-backend-0.1.0.jar
 
