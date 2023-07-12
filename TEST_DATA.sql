@@ -18,8 +18,10 @@ INSERT INTO company (id, name) VALUES (3, "shapeshop");
 
 INSERT INTO category (id, name, company_id) VALUES (1, "main", 1);
 INSERT INTO category (id, name, company_id) VALUES (2, "drinks", 1);
+
 INSERT INTO category (id, name, company_id) VALUES (3, "beers", 2);
 INSERT INTO category (id, name, company_id) VALUES (4, "accessories", 2);
+
 INSERT INTO category (id, name, company_id) VALUES (5, "squares", 3);
 INSERT INTO category (id, name, company_id) VALUES (6, "triangles", 3);
 INSERT INTO category (id, name, company_id) VALUES (7, "3D", 3);
@@ -82,7 +84,6 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (37, "Rounded pink square", "pink square but rounded", 12.50, "pink_rounded_square.png", 3);
 
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (38, "brown triangle", "a brown triangle done in an arty style", 12.50, "triangle.png", 3);
-
 
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (39, "3d_box", "a 3d box", 12.50, "3d_box.png", 3);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (40, "cylinder", "a nice cylinder", 12.50, "cylinder_bluepng.png", 3);

@@ -50,12 +50,26 @@ should be visible here :
 
 
 
+LOGS
+
+az spring app logs --resource-group shapeShopResourceGroup --service shapeshop2 --name shape-shop-app --follow
+
+az spring app log tail -n shape-shop-app -s shapeshop2 -g shapeShopResourceGroup --subscription 8cdb50cb-ede8-4eac-80df-55afadf861cd --lines 200
 
 
 
+use this query :
+
+AppEnvSpringAppConsoleLogs_CL
+| where ContainerAppName_s == "shape-shop-app"
+
+AppEnvSpringAppConsoleLogs_CL
+| where ContainerAppName_s == "shape-shop-app" and RevisionName_s has "YourDeploymentName" and ContainerGroupName_s == "YourInstanceName"
+| limit 50
 
 
-
+see
+https://stackoverflow.com/questions/76663560/spring-boot-apps-in-azure-cannot-view-logs-of-running-app?noredirect=1#comment135170932_76663560
 
 ????????????????
 
