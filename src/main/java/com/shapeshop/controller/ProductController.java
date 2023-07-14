@@ -35,7 +35,7 @@ public class ProductController {
 //    @CrossOrigin
     @GetMapping(value = "/test")
     public String test() {
-        return "hello";
+        return "hello2";
     }
     //                            @RequestBody ProductEntity product,
 //    @CrossOrigin

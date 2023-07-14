@@ -17,10 +17,7 @@ connection string from IDE :
 - db: shapeshop
 - jdbc: jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
 
-then modify, run schema, run test data etc in intellij console
-
-
-
+then modify, run schema, run test data etc into IntelliJ console
 
 (DONE!!)
 
@@ -29,21 +26,21 @@ then modify, run schema, run test data etc in intellij console
 - create a spring app in azure than deploy like this. Remember to **mvn clean package** first, and make sure you are using use the FOR_AZURE 
 application.properties to connect to jdbc:mysql://shape-shop-db.mysql.database.azure.com:3306/shapeshop
 
+[mvn clean package -DskipTests=true]
+
 - Spring app must have a deployment associated with it.
 Create a deployment with the default settings. Do not change memory/instance etc when creating.
 
 > az spring app deploy --resource-group shapeShopResourceGroup --service shapeshop2 --name shape-shop-app --artifact-path target/shape-shop-backend-0.1.0.jar
 
-shapeshop2 = Azure Spring Apps service (blue cross with green white circle in it)
-shape-shop-app = Spring App (three green cubes)
+[shapeshop2 = Azure Spring Apps service (blue cross with green white circle in it)
+shape-shop-app = Spring App (three green cubes) ]
 
 
 should be visible here :
 
 > https://shape-shop-app.happywave-c1a7da5f.westeurope.azurecontainerapps.io/actuator
-
 > https://shape-shop-app.happywave-c1a7da5f.westeurope.azurecontainerapps.io/test
-
 > https://shape-shop-app.happywave-c1a7da5f.westeurope.azurecontainerapps.io/alpenhof/products
 
 
