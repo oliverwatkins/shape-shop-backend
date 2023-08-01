@@ -24,7 +24,7 @@ INSERT INTO category (id, name, company_id) VALUES (4, "accessories", 2);
 
 INSERT INTO category (id, name, company_id) VALUES (5, "squares", 3);
 INSERT INTO category (id, name, company_id) VALUES (6, "triangles", 3);
-INSERT INTO category (id, name, company_id) VALUES (7, "3D", 3);
+INSERT INTO category (id, name, company_id) VALUES (7, "circle", 3);
 
 
 # INSERT INTO category (cat_id, name, company_id) VALUES (4, "prodType2_", 2);
@@ -76,18 +76,33 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (31, "Lugana Villa", "Lugana Villa Trendi, Gardasee 0,75 l", 22.70, "wine4.jpg", 1);
 
 # shapeshop
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (32, "Blue Square", "A nice blue square", 12.50, "blue_square.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (33, "Dark Green Square", "A green square", 12.50, "darkgreen_square.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (34, "Ligh Green Square", "A green square, but very light", 12.50, "lightgreen_square.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (35, "Orange Square", "an orange square", 12.50, "orange_square.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (36, "Rounded green square", "green square but rounded", 12.50, "green_rounded_square.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (37, "Rounded pink square", "pink square but rounded", 12.50, "pink_rounded_square.png", 3);
+#squares (32 - 39)
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (32, "Yellow Square", "Calm cool yellow square", 12.50, "square1.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (33, "Blue Square", "A green square", 12.50, "square2.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (34, "Green square", "Thoughtful and inquisitive, but has a shadow side", 12.50, "square3.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (35, "Brown Square", "Big hearted and always center of attention", 12.50, "square4.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (36, "Orange Square ", "Bordered", 12.50, "square5.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (37, "Rounded Blue Square", "blue", 12.50, "square6.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (38, "Pink rounde dsquare", "pink square but rounded pink square but rounded", 12.50, "square7.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (39, "Pink rounde dsquare", "pink square but rounded pink square but rounded", 12.50, "square8.png", 3);
 
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (38, "brown triangle", "a brown triangle done in an arty style", 12.50, "triangle.png", 3);
+#triangles (40 - 45)
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (40, "brown triangle", "a brown triangle done in an arty style", 12.50, "triangle1.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (41, "brown triangle2", "a brown triangle done in an arty style", 12.50, "triangle2.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (42, "brown triangle3", "a brown triangle done in an arty style", 12.50, "triangle3.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (43, "brown triangle4", "a brown triangle done in an arty style", 12.50, "triangle4.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (44, "brown triangle5", "a brown triangle done in an arty style", 12.50, "triangle5.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (45, "brown triangle6", "a brown triangle done in an arty style", 12.50, "triangle6.png", 3);
 
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (39, "3d_box", "a 3d box", 12.50, "3d_box.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (40, "cylinder", "a nice cylinder", 12.50, "cylinder_bluepng.png", 3);
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (41, "purple pyramid", "a striking purple pyramid", 12.50, "purple_pyramid.png", 3);
+# circles (46 - 53)
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (46, "circle ", "a 3d box", 12.50, "circle1.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (47, "cylinder", "a nice cylinder", 12.50, "circle2.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (48, "purple pyramid", "a striking purple pyramid", 12.51, "circle3.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (49, "purple pyramid", "a striking purple pyramid", 13.50, "circle4.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (50, "purple pyramid", "a striking purple pyramid", 14.50, "circle5.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (51, "purple pyramid", "a striking purple pyramid", 1.50, "circle6.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (52, "purple pyramid", "a striking purple pyramid", 2.50, "circle7.png", 3);
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (53, "purple pyramid", "a striking purple pyramid", 3.50, "circle8.png", 3);
 
 
 
@@ -97,18 +112,12 @@ VALUES (1, 0, 123123123, 1, 1, 1, 1, 1);
 
 INSERT INTO orders_item (order_amount, order_id, product_id) values (2, 1, 1);
 
-INSERT INTO product_category (product_id, category_id) values (1, 3);
-INSERT INTO product_category (product_id, category_id) values (2, 3);
-INSERT INTO product_category (product_id, category_id) values (3, 3);
-INSERT INTO product_category (product_id, category_id) values (4, 3);
-INSERT INTO product_category (product_id, category_id) values (5, 3);
-INSERT INTO product_category (product_id, category_id) values (6, 3);
-INSERT INTO product_category (product_id, category_id) values (7, 3);
-INSERT INTO product_category (product_id, category_id) values (8, 3);
-INSERT INTO product_category (product_id, category_id) values (9, 3);
-INSERT INTO product_category (product_id, category_id) values (10, 4);
-INSERT INTO product_category (product_id, category_id) values (11, 4);
-INSERT INTO product_category (product_id, category_id) values (12, 4);
+
+# INSERT INTO category (id, name, company_id) VALUES (5, "squares", 3);
+# INSERT INTO category (id, name, company_id) VALUES (6, "triangles", 3);
+# INSERT INTO category (id, name, company_id) VALUES (7, "3D", 3);
+
+
 
 INSERT INTO product_category (product_id, category_id) values (13, 1);
 INSERT INTO product_category (product_id, category_id) values (14, 1);
@@ -131,19 +140,34 @@ INSERT INTO product_category (product_id, category_id) values (29, 2);
 INSERT INTO product_category (product_id, category_id) values (30, 2);
 INSERT INTO product_category (product_id, category_id) values (31, 2);
 
-#shape shop
+#shape shop (5 = squares)
+#squares (32 -39)
 INSERT INTO product_category (product_id, category_id) values (32, 5);
 INSERT INTO product_category (product_id, category_id) values (33, 5);
 INSERT INTO product_category (product_id, category_id) values (34, 5);
 INSERT INTO product_category (product_id, category_id) values (35, 5);
 INSERT INTO product_category (product_id, category_id) values (36, 5);
 INSERT INTO product_category (product_id, category_id) values (37, 5);
+INSERT INTO product_category (product_id, category_id) values (38, 5);
+INSERT INTO product_category (product_id, category_id) values (39, 5);
 
-INSERT INTO product_category (product_id, category_id) values (38, 6);
+#triangles (40 - 45) (6 = triangles)
+INSERT INTO product_category (product_id, category_id) values (40, 6);
+INSERT INTO product_category (product_id, category_id) values (41, 6);
+INSERT INTO product_category (product_id, category_id) values (42, 6);
+INSERT INTO product_category (product_id, category_id) values (43, 6);
+INSERT INTO product_category (product_id, category_id) values (44, 6);
+INSERT INTO product_category (product_id, category_id) values (45, 6);
 
-INSERT INTO product_category (product_id, category_id) values (39, 7);
-INSERT INTO product_category (product_id, category_id) values (40, 7);
-INSERT INTO product_category (product_id, category_id) values (41, 7);
+# circles (46 - 53) (7 = circle)
+INSERT INTO product_category (product_id, category_id) values (46, 7);
+INSERT INTO product_category (product_id, category_id) values (47, 7);
+INSERT INTO product_category (product_id, category_id) values (48, 7);
+INSERT INTO product_category (product_id, category_id) values (49, 7);
+INSERT INTO product_category (product_id, category_id) values (50, 7);
+INSERT INTO product_category (product_id, category_id) values (51, 7);
+INSERT INTO product_category (product_id, category_id) values (52, 7);
+INSERT INTO product_category (product_id, category_id) values (53, 7);
 
 COMMIT;
 
