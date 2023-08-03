@@ -15,7 +15,7 @@ This README consists of three parts.
 
 To run the database :
 
-kill of all old processes (optional - but highly recommended) run : 
+kill off all old processes (optional - but highly recommended) run : 
 
 > KILL.BAT
 

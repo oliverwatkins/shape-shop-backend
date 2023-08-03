@@ -44,9 +44,17 @@ INSERT INTO category (id, name, company_id) VALUES (@shapeshop_circles, "circle"
 
 # INSERT INTO category (cat_id, name, company_id) VALUES (4, "prodType2_", 2);
 
-INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "Jar Jar Binks", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
-INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (2, "Luke Skywalker", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
-INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (3, "Darth Vader", null, null, "+(09)42344333", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (1, "Ethan Walker", "Bluw Lane Hwy 12", "41412", "+(09)928423444", "jj@gmail.com");
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (2, "Ava Martinez", "1 Baker st", "62344", "+(09)34534444", "ls@gmail.com");
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (4, "Oliver Johnson", "Bluw Lane Hwy 12", "62344", "+(09)234234234", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (5, "Mia Patel", "12 Green st", "62344", "+(09)34234234234", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (6, "Liam Anderson", "533 Maroondah Hwy", "62344", "+(09)45345345", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (7, "Sophia Williams", null, null, "+(09)4234234", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (8, "Lucas Nguyen", null, null, "+(09)34234234", null);
+INSERT INTO address (id, name, street, postcode, telephone, email) VALUES (9, "Isabella Robinson", null, null, "+(09)412341234", null);
+
+
+
 
 INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (1, "xxx-xxx-xxxx-6345", "22/22", "JJ Binks", "VISA");
 INSERT INTO credit_card (cc_id, number, exp_date, name, type) VALUES (2, "xxx-xxx-xxxx-6323", "12/24", "P Leah", "MASTERCARD");
@@ -164,15 +172,7 @@ VALUES (200, 0, 123123123, 1, 1, @alpenhofid, 1, 1);
 INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
 VALUES (201, 0, 123123123, 1, 1, @alpenhofid, 1, 1);
 
-
-
-
-
-
-
 INSERT INTO orders_item (order_amount, order_id, product_id) values (2, 200, 213);
-
-
 
 
 #alpenhof
