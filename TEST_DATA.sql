@@ -1,4 +1,4 @@
-
+UNLOCK TABLES;
 START TRANSACTION;
 
 DELETE FROM product_category;
@@ -10,6 +10,8 @@ DELETE FROM credit_card;
 DELETE FROM address;
 DELETE FROM category;
 DELETE FROM company;
+
+#SOURCE /path/to/table_creation.sql;
 
 SET @shapeshopid = 10;
 SET @alpenhofid = 20;
@@ -63,6 +65,7 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (307, "Peak Seeker IPA", "Peak Seeker IPA", 8.50, "beer.png", @higginsid);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (308, "Pioneer Cream Ale", "Pioneer Cream Ale", 4.50, "beer.png", @higginsid);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (309, "Pumpkin Ale", "Pumpkin Ale", 4.50,  "beer.png", @higginsid);
+
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (310, "growlers", "2L stainless steel growlers", 12.50, "growler.png", @higginsid);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (311, "T-Shirt", "T-Shirt", 12.50, "tshirt.jpg", @higginsid);
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (312, "Beer Mats", "Beer Mats", 12.50, "beermat.png", @higginsid);
@@ -90,22 +93,22 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 
 # shapeshop
 #squares (32 - 39)
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (132, "Yellow Square", "Calm cool yellow square", 12.50, "square1.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (132, "Yellow SquareX", "Calm cool yellow square", 12.50, "square1.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (133, "Blue Square", "A green square", 12.50, "square2.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (134, "Green square", "Thoughtful and inquisitive, but has a shadow side", 12.50, "square3.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (135, "Brown Square", "Big hearted and always center of attention", 12.50, "square4.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (136, "Orange Square ", "Bordered", 12.50, "square5.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (137, "Rounded Blue Square", "blue", 12.50, "square6.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (138, "Pink rounde dsquare", "pink square but rounded pink square but rounded", 12.50, "square7.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (139, "Pink rounde dsquare", "pink square but rounded pink square but rounded", 12.50, "square8.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (138, "Pink rounded square", "pink square but rounded pink square but rounded", 12.50, "square7.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (139, "Pink rounded square", "pink square but rounded pink square but rounded", 12.50, "square8.png", @shapeshopid );
 
 #triangles (40 - 45)
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (140, "brown triangle", "a brown triangle done in an arty style", 12.50, "triangle1.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (141, "brown triangle2", "a brown triangle done in an arty style", 12.50, "triangle2.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (142, "brown triangle3", "a brown triangle done in an arty style", 12.50, "triangle3.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (143, "brown triangle4", "a brown triangle done in an arty style", 12.50, "triangle4.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (144, "brown triangle5", "a brown triangle done in an arty style", 12.50, "triangle5.png", @shapeshopid );
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (145, "brown triangle6", "a brown triangle done in an arty style", 12.50, "triangle6.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (140, "Yellow triangle", "a brown triangle done in an arty style", 12.50, "triangle1.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (141, "Purple triangle", "a brown triangle done in an arty style", 12.50, "triangle2.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (142, "Rouned blue triangle", "a brown triangle done in an arty style", 12.50, "triangle3.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (143, "green triangle", "may seem a little confused at first but is cuddly", 12.50, "triangle4.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (144, "orange triangle", "friendly reliable, and has great stories to tell", 12.50, "triangle5.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (145, "Gray triangle", "inquisitive triangle that dreams of being an astronoaut", 12.50, "triangle6.png", @shapeshopid );
 
 # circles (46 - 53)
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (146, "circle ", "a 3d box", 12.50, "circle1.png", @shapeshopid );
@@ -118,12 +121,59 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (153, "purple pyramid", "a striking purple pyramid", 3.50, "circle8.png", @shapeshopid );
 
 
+#ORDERS
+SET @ss_order1 = 100;
+SET @ss_order2 = 101;
+SET @ss_order3= 102;
+SET @ss_order4 = 103;
+SET @ss_order5 = 104;
+SET @ss_order6 = 105;
 
-
+#shapeshop
 INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
-VALUES (1, 0, 123123123, 1, 1, @alpenhofid, 1, 1);
+VALUES (@ss_order1, 0, 123123123, 1, 1, @shapeshopid, 1, 1);
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (@ss_order2, 0, 123123123, 1, 1, @shapeshopid, 1, 1);
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (@ss_order3, 0, 123123123, 1, 1, @shapeshopid, 1, 1);
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (@ss_order4, 0, 123123123, 1, 1, @shapeshopid, 1, 1);
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (@ss_order5, 0, 123123123, 1, 1, @shapeshopid, 1, 1);
+#prods start at 132
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, @ss_order1, 132);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, @ss_order1, 133);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, @ss_order1, 134);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (1, @ss_order2, 136);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, @ss_order2, 137);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (5, @ss_order2, 138);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (11, @ss_order3, 138);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (1, @ss_order4, 143);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (4, @ss_order5, 141);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (4, @ss_order5, 142);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (4, @ss_order5, 143);
+INSERT INTO orders_item (order_amount, order_id, product_id) values (4, @ss_order5, 144);
 
-INSERT INTO orders_item (order_amount, order_id, product_id) values (2, 1, 213);
+
+
+
+
+#alpenhof
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (200, 0, 123123123, 1, 1, @alpenhofid, 1, 1);
+INSERT INTO orders (id, state, date, delivery_type, payment_type, company_id, credit_card_entity_cc_id, address_entity_id)
+VALUES (201, 0, 123123123, 1, 1, @alpenhofid, 1, 1);
+
+
+
+
+
+
+
+INSERT INTO orders_item (order_amount, order_id, product_id) values (2, 200, 213);
+
+
+
 
 #alpenhof
 INSERT INTO product_category (product_id, category_id) values (213, @alpenhof_main);
@@ -173,6 +223,22 @@ INSERT INTO product_category (product_id, category_id) values (150, @shapeshop_c
 INSERT INTO product_category (product_id, category_id) values (151, @shapeshop_circles);
 INSERT INTO product_category (product_id, category_id) values (152, @shapeshop_circles);
 INSERT INTO product_category (product_id, category_id) values (153, @shapeshop_circles);
+
+#higgins
+# 201 -309 and 310 -312
+INSERT INTO product_category (product_id, category_id) values (301, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (302, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (303, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (304, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (305, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (306, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (307, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (308, @higgins_beer);
+INSERT INTO product_category (product_id, category_id) values (309, @higgins_beer);
+
+INSERT INTO product_category (product_id, category_id) values (310, @higgins_accessories);
+INSERT INTO product_category (product_id, category_id) values (311, @higgins_accessories);
+INSERT INTO product_category (product_id, category_id) values (312, @higgins_accessories);
 
 COMMIT;
 

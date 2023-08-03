@@ -85,7 +85,7 @@ create table orders_item
 create table product
 (
     id           bigint not null auto_increment,
-    description  varchar(255),
+    description  varchar(655),
     img_filename varchar(255),
     name         varchar(255),
     price        decimal(19, 2),
