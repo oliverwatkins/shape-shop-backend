@@ -101,7 +101,7 @@ INSERT INTO product (id, name, description, price, img_filename, company_id) VAL
 
 # shapeshop
 #squares (32 - 39)
-INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (132, "Yellow SquareX", "Calm cool yellow square", 12.50, "square1.png", @shapeshopid );
+INSERT INTO product (id, name, description, price, img_filename, company_id, sash_text) VALUES (132, "Yellow SquareX", "Calm cool yellow square", 12.50, "square1.png", @shapeshopid, "Special Offer!!" );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (133, "Blue Square", "A green square", 12.50, "square2.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (134, "Green square", "Thoughtful and inquisitive, but has a shadow side", 12.50, "square3.png", @shapeshopid );
 INSERT INTO product (id, name, description, price, img_filename, company_id) VALUES (135, "Brown Square", "Big hearted and always center of attention", 12.50, "square4.png", @shapeshopid );

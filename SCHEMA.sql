@@ -89,6 +89,7 @@ create table product
     img_filename varchar(255),
     name         varchar(255),
     price        decimal(19, 2),
+    sash_text     varchar(50),
     company_id   bigint not null,
     primary key (id)
 ) engine = InnoDB;

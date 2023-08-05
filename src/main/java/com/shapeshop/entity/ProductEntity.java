@@ -19,22 +19,6 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-//	//TODO change cascade to nullable. products can also exist without a category
-//	@ManyToOne
-//	@JoinColumn(name = "category", nullable = true, updatable = false)
-//	private CategoryEntity category = new CategoryEntity();
-
-
-//	@ManyToMany(fetch = FetchType.LAZY)
-////	@JoinTable(
-////			name = "product_category",
-////			joinColumns = @JoinColumn(name = "id"),
-////			inverseJoinColumns = @JoinColumn(name = "cat_id"))
-////	@JsonManagedReference
-//	List<ProductCategoryEntity> categories = new ArrayList<>();
-
-
-
 	@ManyToOne
 	@JoinColumn(name = "company_id", nullable = false, updatable = false)
 	private CompanyEntity company = new CompanyEntity();
@@ -53,6 +37,9 @@ public class ProductEntity {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "sash_text")
+	private String sashText;
+
 	@Column(name = "price")
 	private BigDecimal price;
 
@@ -67,21 +54,22 @@ public class ProductEntity {
 		this.company = company;
 	}
 
-	public ProductEntity(String name, BigDecimal price, String imageFilename, String description) {
+	public ProductEntity(String name, BigDecimal price, String imageFilename, String description, String sashText) {
 		this.name = name;
 		this.price = price;
+		this.sashText = sashText;
 		this.imageFilename = imageFilename;
 		this.description = description;
 	}
 
-	public ProductEntity(String name, BigDecimal price, String imageFilename, CompanyEntity company, String description) {
-		this(name, price, imageFilename, company);
-		this.description = description;
-	}
-	public ProductEntity(String name, BigDecimal price, String imageFilename, CompanyEntity company) {
-		this.name = name;
-		this.price = price;
-		this.imageFilename = imageFilename;
-		this.company = company;
-	}
+//	public ProductEntity(String name, BigDecimal price, String imageFilename, CompanyEntity company, String description) {
+//		this(name, price, imageFilename, company);
+//		this.description = description;
+	//}
+//	public ProductEntity(String name, BigDecimal price, String imageFilename, CompanyEntity company) {
+//		this.name = name;
+//		this.price = price;
+//		this.imageFilename = imageFilename;
+//		this.company = company;
+//	}
 }

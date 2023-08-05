@@ -30,6 +30,7 @@ public class Converter {
                 entity.getPrice(),
                 entity.getDescription(),
                 entity.getImageFilename(),
+                entity.getSashText(),
                 categoryDtos);
     }
 
@@ -123,7 +124,7 @@ public class Converter {
 
         if (product !=null) {
             ProductEntity a = new ProductEntity(
-                    product.name, product.price, "todo", product.description
+                    product.name, product.price, "todo", product.description, product.sashText
             );
             return a;
         }

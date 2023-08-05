@@ -26,21 +26,16 @@ public class AnniesArtSupplies {
 		System.out.println("-->>> create some products  ! ");
 
 		CompanyEntity ce = cRes.findByName("anniesart");
-
-		pSer.createProduct(new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh"), "anniesart", "paints");
-		pSer.createProduct(new ProductEntity("paint", new BigDecimal(6.66), "na.png", "a paint duh"), "anniesart", "paints");
-		pSer.createProduct(new ProductEntity("canvas", new BigDecimal(7.60), "na.png", "a canvas duh"), "anniesart", "paints");
-
-		pSer.createProduct(new ProductEntity("pencil", new BigDecimal(9.60), "na.png", "a pencil duh"), "anniesart", "draw");
-		pSer.createProduct(new ProductEntity("charcoal", new BigDecimal(16.60), "na.png", "a charoal duh"), "anniesart", "draw");
-
 		// save a few products
-//		repository.save(new ProductEntity("brush", new BigDecimal(6.60), "painting", "na.png", ce));
-//		repository.save(new ProductEntity("paint", new BigDecimal(6.66), "painting", "na.png", ce));
-//		repository.save(new ProductEntity("canvas", new BigDecimal(8.80), "painting", "na.png", ce));
-//
-//		repository.save(new ProductEntity("pencil", new BigDecimal(9.90), "drawing", "na.png", ce));
-//		repository.save(new ProductEntity("charcoal", new BigDecimal(14.50), "drawing", "na.png", ce));
+		pSer.createProduct(new ProductEntity("brush", new BigDecimal(6.60), "na.png", "a brush duh", null), "anniesart", "paints");
+		pSer.createProduct(new ProductEntity("paint", new BigDecimal(6.66), "na.png", "a paint duh", null), "anniesart", "paints");
+		pSer.createProduct(new ProductEntity("canvas", new BigDecimal(7.60), "na.png", "a canvas duh", null), "anniesart", "paints");
+
+		pSer.createProduct(new ProductEntity("pencil", new BigDecimal(9.60), "na.png", "a pencil duh", null), "anniesart", "draw");
+		pSer.createProduct(new ProductEntity("charcoal", new BigDecimal(16.60), "na.png", "a charoal duh", null), "anniesart", "draw");
+
+
+
 	}
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,

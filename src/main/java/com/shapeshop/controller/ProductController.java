@@ -78,7 +78,7 @@ public class ProductController {
         return new ResponseEntity<>(Converter.convertProductToDto(productEntity), HttpStatus.OK);
     }
 
-//    @CrossOrigin
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody ProductEntity product,
@@ -98,7 +98,6 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{companyName}/products/{id}")
     public ResponseEntity<?> deleteProduct(
@@ -113,7 +112,6 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @CrossOrigin
     @GetMapping(value = "/{companyName}/products")
     public List<ProductDto> getProducts(@PathVariable("companyName") String companyName) {
 
@@ -123,7 +121,6 @@ public class ProductController {
         return Converter.convertProductToDto(products);
     }
 
-//    @CrossOrigin
     @GetMapping(value = "/{companyName}/{categoryName}/products")
     public List<ProductDto> getProductsByCategoryAndCompany(@PathVariable("companyName") String companyName, @PathVariable("categoryName") String categoryName) {
 

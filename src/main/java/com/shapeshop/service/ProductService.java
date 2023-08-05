@@ -102,6 +102,8 @@ public class ProductService {
                 foundEntity.get().setName(product.getName());
             if (product.getPrice() != null)
                 foundEntity.get().setPrice(product.getPrice());
+            if (product.getSashText() != null)
+                foundEntity.get().setSashText(product.getSashText());
             productRep.save(foundEntity.get());
         }else {
             throw new ShapeShopException("Product does not exist ", ShapeShopException.ErrorType.PROD_NOT_FOUND);
