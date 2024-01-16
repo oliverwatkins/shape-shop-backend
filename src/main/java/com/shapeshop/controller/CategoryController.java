@@ -78,13 +78,19 @@ public class CategoryController {
 //
 
 
+
 //    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{companyName}/categories/{id}")
     public ResponseEntity<?> deleteCategory(
-                                            @PathVariable("id") Long id,
-                                            @PathVariable("companyName") String companyName) {
-        categoryService.deleteCategory(id, companyName);
+                                            @PathVariable("id") String id,
+                                            @PathVariable("companyName") String companyName)  {
+        try {
+            categoryService.deleteCategory(new Long(id), companyName);
+        } catch (ShapeShopException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("delete category error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

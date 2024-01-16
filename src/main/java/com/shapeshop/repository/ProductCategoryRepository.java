@@ -7,4 +7,8 @@ public interface ProductCategoryRepository extends CrudRepository<ProductCategor
 
     public ProductCategoryEntity findById(long id);
 
+
+
+    public void deleteByCategoryId(Long id);
+
 }

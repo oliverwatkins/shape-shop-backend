@@ -102,12 +102,10 @@ public class CategoryTest extends ShapeShopTest {
             throw new RuntimeException("canny find product");
         }
 
-
-        //udpate cat
+        //update cat
         String updateCategoryJSON =
                 "{\"name\": \"scones2\"}";
         updateCategoryOverHTTP(token, updateCategoryJSON, "7");
-
 
         //make sure cat is not there
         String categoryJSON = getCategoriesOverHTTP();
@@ -117,7 +115,6 @@ public class CategoryTest extends ShapeShopTest {
         if (obj == null) {
             throw new RuntimeException("scones2 is there");
         }
-
     }
 
 
@@ -144,11 +141,14 @@ public class CategoryTest extends ShapeShopTest {
             throw new RuntimeException("canny find product");
         }
 
+        //make sure prod is there
+        String catsJSON = getCategoriesOverHTTP();
+        JSONObject objCat = findCategory(catsJSON, "scones");
+
         //delete cat
         String deleteCategoryJSON =
                 "{\"name\": \"scones\" }";
-        deleteCategoryOverHTTP(token, deleteCategoryJSON);
-
+        deleteCategoryOverHTTP(token, "7");
 
         //make sure cat is not there
         String categoryJSON = getCategoriesOverHTTP();

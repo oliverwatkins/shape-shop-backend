@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +33,6 @@ public class CategoryService {
 
     @Autowired
     ProductCategoryRepository prodCatRep;
-
 
     @Autowired
     ProductRepository prodRep;
@@ -53,25 +53,21 @@ public class CategoryService {
         return categoryEntity;
     }
 
+    public void deleteCategory(long id, String companyName) throws ShapeShopException {
 
-    /**
-     * TODO : Not working at the moemnt :
-     *
-     * could not execute statement; SQL [n/a]; constraint ["FK5N0VG2QTTW3G7ODMC3TIAL2N4: PUBLIC.PRODUCT_CATEGORY FOREIGN KEY(ID) REFERENCES PUBLIC.PRODUCT(ID) (12)"; SQL statement:
-     * update product_category set id=null where id=? [23506-193]]
-     *
-     * @param id
-     * @param companyName
-     */
-    public void deleteCategory(Long id, String companyName) {
 
-        CompanyEntity company = companyRep.findByName(companyName);
+//        List<CategoryEntity> cats = catRep.findByCompany(new CompanyEntity(companyName));
 
-        List<CategoryEntity> cats = catRep.findByCompany(company);
+//        cats = cats.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
+//
+//        if (cats.size() != 1)
+//            throw new ShapeShopException("should be only on category, but found " + cats.size());
 
-        final val first = cats.stream().filter(c -> c.getId() == id).findFirst();
+        var cat = catRep.findById(id);
 
-        catRep.delete(first.get());
+        prodCatRep.deleteAll(cat.getProductCategory());
+
+        catRep.deleteById(id);
     }
 
     public CategoryEntity updateCategory(CategoryEntity categoryEntity, String companyName, Long id) throws ShapeShopException {

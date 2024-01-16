@@ -3,18 +3,13 @@ package com.shapeshop;
 
 import com.shapeshop.config.ShapeShopTest;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 public class DeleteProductTest extends ShapeShopTest {
-
-
 
     @org.junit.Test
     public void deleteProduct() throws Exception {
@@ -28,15 +23,12 @@ public class DeleteProductTest extends ShapeShopTest {
         System.out.println("recievedArray " + recievedArray);
         System.out.println("expectedArray " + expectedArray);
 
-
-        ResultActions resultActions2 = mvc.perform(MockMvcRequestBuilders.delete("/carlscafe/products/4")
-                .header("Authorization", "Bearer " + token).contentType("application/json")).andExpect(matcher.is(200));
-//        ).andExpect(matcher.isOk());
-
+        deleteProductOverHTTP(token, "4");
 
         JSONAssert.assertEquals(
                 expectedArray, recievedArray, JSONCompareMode.LENIENT);
     }
+
 
 
 }

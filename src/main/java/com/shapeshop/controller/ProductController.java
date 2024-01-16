@@ -32,13 +32,11 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryR;
 
-//    @CrossOrigin
     @GetMapping(value = "/test")
     public String test() {
         return "hello2";
     }
-    //                            @RequestBody ProductEntity product,
-//    @CrossOrigin
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/products")
     public ResponseEntity<?> newProduct(
@@ -57,11 +55,6 @@ public class ProductController {
         return new ResponseEntity<>(prod, HttpStatus.OK);
     }
 
-
-
-
-    //TODO remove. currentlz this is onlz being used in onetest
-//    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{companyName}/{category}/products")
     public ResponseEntity<?> newProduct(@RequestBody ProductEntity product,

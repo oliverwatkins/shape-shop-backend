@@ -244,10 +244,20 @@ public abstract class ShapeShopTest {
         return token;
     }
 
-    protected void deleteCategoryOverHTTP(String token, String createCategoryJSON) throws Exception {
-        mvc.perform(MockMvcRequestBuilders.delete("/" + defaultCompany + "/categories")
-                .header("Authorization", "Bearer " + token).contentType("application/json")
-                .content(createCategoryJSON)).andExpect(matcher.is(200));
+//            mvc.perform(MockMvcRequestBuilders.delete("/carlscafe/products/4")
+//                    .header("Authorization", "Bearer " + token).contentType("application/json")).andExpect(matcher.is(200));
+
+
+    protected void deleteProductOverHTTP(String token, String productId) throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/" + defaultCompany + "/products/" + productId)
+                .header("Authorization", "Bearer " + token).contentType("application/json")).andExpect(matcher.is(200));
+    }
+
+    protected void deleteCategoryOverHTTP(String token, String id) throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/" + defaultCompany + "/categories/" + id )
+                .header("Authorization", "Bearer " + token).contentType("application/json")).andExpect(matcher.is(200));
+//                .content(createCategoryJSON))
+
     }
 
     protected String getCategoriesOverHTTP() throws Exception {
