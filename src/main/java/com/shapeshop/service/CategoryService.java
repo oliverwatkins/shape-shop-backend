@@ -55,14 +55,6 @@ public class CategoryService {
 
     public void deleteCategory(long id, String companyName) throws ShapeShopException {
 
-
-//        List<CategoryEntity> cats = catRep.findByCompany(new CompanyEntity(companyName));
-
-//        cats = cats.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
-//
-//        if (cats.size() != 1)
-//            throw new ShapeShopException("should be only on category, but found " + cats.size());
-
         var cat = catRep.findById(id);
 
         prodCatRep.deleteAll(cat.getProductCategory());

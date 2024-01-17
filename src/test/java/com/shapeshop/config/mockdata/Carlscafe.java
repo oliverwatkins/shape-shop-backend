@@ -28,11 +28,11 @@ public class Carlscafe {
 	public static void createProducts(ProductRepository repository, CompanyRepository cRes, CategoryRepository catRes, ProductService pSer) throws ShapeShopException {
 
 		System.out.println("-->>> create some products  ! ");
-		pSer.createProduct(new ProductEntity("hamburger", new BigDecimal(1.50),  "na.png", "a hambirger", null), "carlscafe",  "main");
-		pSer.createProduct(new ProductEntity("hotdog", new BigDecimal(2.50),  "na.png", "a hotdog", null), "carlscafe",  "main");
-		pSer.createProduct(new ProductEntity("donut", new BigDecimal(3.50),  "na.png", "a dougnut", null), "carlscafe",  "main");
-		pSer.createProduct(new ProductEntity("coke", new BigDecimal(4.50),  "na.png", "a koke", null), "carlscafe",  "drinks");
-		pSer.createProduct(new ProductEntity("water", new BigDecimal(6.50),  "na.png", "a water duh", null), "carlscafe",  "drinks");
+		pSer.createProduct(new ProductEntity("hamburger", new BigDecimal(1.50),  "na.png", "a hambirger", ""), "carlscafe",  "main");
+		pSer.createProduct(new ProductEntity("hotdog", new BigDecimal(2.50),  "na.png", "a hotdog", ""), "carlscafe",  "main");
+		pSer.createProduct(new ProductEntity("donut", new BigDecimal(3.50),  "na.png", "a dougnut", ""), "carlscafe",  "main");
+		pSer.createProduct(new ProductEntity("coke", new BigDecimal(4.50),  "na.png", "a koke", ""), "carlscafe",  "drinks");
+		pSer.createProduct(new ProductEntity("water", new BigDecimal(6.50),  "na.png", "a water duh", ""), "carlscafe",  "drinks");
 	}
 
 	public static void createOrders(OrderRepository oRep, CompanyRepository cRes, ProductRepository pRes,
